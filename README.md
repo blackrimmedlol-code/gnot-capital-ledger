@@ -1,22 +1,24 @@
-# 川普资本台账 · 公开脱敏版
+# 川普资本台账 · 交易复盘页
 
-本仓库托管「投资台账复盘」页面的**公开零暴露版**（GitHub Pages 站点）。
+本仓库托管「投资台账复盘」页面的 GitHub Pages 站点，**源码含完整交易数据**。
 
-**页面链接**：`https://<owner>.github.io/<repo>/`
+**页面链接**：`https://blackrimmedlol-code.github.io/gnot-capital-ledger/`
 
-## 隐私说明（设计前提）
-此处是**脱敏后**的公开副本，遵循约定：页面/源码**不出现股数、美元金额、隐含市值**，仅保留价格、张数、收益率%、仓位%。内部完整数据（股数/成本等）保留在 Agent 本地主文件 `投资台账复盘_20260920.html`，**不进本仓库**。
+## 隐私设计（2026-10-03 定调）
+- **源码（DATA）保留完整字段**：股数 `qty`、每股成本 `cost`、期权张数 `mult`/行权价 `strike`、平仓记录等全部保留，方便其他 Agent 抓取仓库里的交易记录做表现回顾。
+- **页面渲染层不显示**：`renderHoldings` / `renderClosed` 等渲染函数不把 `qty`（股数）输出到可见 DOM，只显示价格、张数、收益率%、仓位%、覆盖率%。公布页面（浏览器可见内容）仍无股数、无美元总金额、无隐含市值。
 
 ## 如何更新
-每次复盘/交易登记后，从内部主文件重新生成公开版并推送，GitHub Actions 会自动更新 Pages：
+每次复盘/交易登记后，从内部主文件重新生成并推送，GitHub Actions 自动更新 Pages：
 
 ```bash
 node build_public.js <内部主文件.html> index.html
-# 提交并推送，触发 workflow
+git add . && git commit -m "复盘更新" && git push origin main
 ```
 
-`build_public.js` 会自动：剔除所有 `qty` 股数字段、预计算期权覆盖%（`_cov`）并注入、保留价格/张数/收益率/仓位，生成可在纯静态 GitHub Pages 上正常渲染的零暴露页面。
+`build_public.js` 会：①渲染层零股数自检（拼接 HTML 的行不得出现 qty）；②原样复制源文件（保留完整 qty/cost）；③打印数据完整性摘要。
 
 ## 文件
-- `index.html`：公开脱敏页面（由 `build_public.js` 生成，请勿手改）
-- `build_public.js`：脱敏构建脚本
+- `index.html`：发布页面（由 `build_public.js` 生成，请勿手改）
+- `build_public.js`：发布脚本
+- `.github/workflows/pages.yml`：GitHub Pages 自动部署

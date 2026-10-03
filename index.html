@@ -1489,7 +1489,7 @@
         nav: null, navNote: "USD · 仓位为估算",
         holdings: [
           {
-            sym: "RAM", name: "2x DRAM (Roundhill T-Rex)", _cov: {"totalCallShares":800,"coveredShares":800,"nakedShares":0,"settledShares":0,"coveragePct":100,"shareCoveragePct":89,"status":"covered"}, cost: 13.31, costDate: "分批（9/23+9/24+9/28 加仓；9/29 减仓摊薄；9/30 13.66 埋伏财报；10/1 14.35 止盈摊薄；10/2 14.5 止盈摊薄）", stop: null,
+            sym: "RAM", name: "2x DRAM (Roundhill T-Rex)", qty: 900, cost: 13.31, costDate: "分批（9/23+9/24+9/28 加仓；9/29 减仓摊薄；9/30 13.66 埋伏财报；10/1 14.35 止盈摊薄；10/2 14.5 止盈摊薄）", stop: null,
             lastPrice: 14.31, lastPriceDate: "2026-10-02 收盘",
             wtPct: 48, strategy: ["核心仓", "CC收租"],
             options: [
@@ -1515,7 +1515,7 @@
             strategyNote: "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。"
           },
           {
-            sym: "CRWG", name: "2x CoreWeave (Leverage Shares)", _cov: {"totalCallShares":100,"coveredShares":100,"nakedShares":0,"settledShares":0,"coveragePct":100,"shareCoveragePct":99,"status":"covered"}, cost: 15.75, costDate: "2026-09-17",
+            sym: "CRWG", name: "2x CoreWeave (Leverage Shares)", qty: 101, cost: 15.75, costDate: "2026-09-17",
             lastPrice: 19.21, lastPriceDate: "2026-10-02 收盘",
             wtPct: 7, strategy: ["核心仓", "CC收租"],
             options: [
@@ -1526,7 +1526,7 @@
             tags: ["hold"], status: ["持有"]
           },
           {
-            sym: "CRDU", name: "2x Credo (Tradr)", _cov: {"totalCallShares":300,"coveredShares":300,"nakedShares":0,"settledShares":0,"coveragePct":100,"shareCoveragePct":100,"status":"covered"}, cost: 6.66,
+            sym: "CRDU", name: "2x Credo (Tradr)", qty: 300, cost: 6.66,
             lastPrice: 11.30, lastPriceDate: "2026-10-02 收盘",
             wtPct: 13, strategy: ["核心仓", "CC收租"],
             options: [
@@ -1538,7 +1538,7 @@
             strategyNote: "10/16 7C 深度实值，正股+权利金接受 @7 行权落袋；若趋势观点延续，可评估买回部分 call 解锁上行（O5）。"
           },
           {
-            sym: "IRE", name: "Defiance 2x IREN · 2x AI云", cost: 7.79, costDate: "9/30建底仓 / 10/1 8.58+8.81补底仓 / 10/2 9.9 止盈摊薄 / 10/2 10.38 止盈摊薄 / 10/2 9.23 回调接回",
+            sym: "IRE", name: "Defiance 2x IREN · 2x AI云", qty: 200, cost: 7.79, costDate: "9/30建底仓 / 10/1 8.58+8.81补底仓 / 10/2 9.9 止盈摊薄 / 10/2 10.38 止盈摊薄 / 10/2 9.23 回调接回",
             lastPrice: 9.50, lastPriceDate: "2026-10-02 收盘",
             wtPct: 7, strategy: ["卫星仓·AI云"],
             options: [],
@@ -1558,7 +1558,7 @@
         nav: null, navNote: "USD · 满仓",
         holdings: [
           {
-            sym: "AVGX", name: "Defiance 2x AVGO · 2x博通", cost: 38.95, costDate: "2026-09-23",
+            sym: "AVGX", name: "Defiance 2x AVGO · 2x博通", qty: 53, cost: 38.95, costDate: "2026-09-23",
             lastPrice: 38.48, lastPriceDate: "2026-10-02 收盘",
             wtPct: 100, strategy: ["卫星仓·2x博通博弈"],
             options: [],
@@ -1578,7 +1578,7 @@
         nav: null, navNote: "USD · 满仓",
         holdings: [
           {
-            sym: "SNXX", name: "Tradr 2X Long SNDK · 2x 闪迪", cost: 18.32, costDate: "2026-09-23",
+            sym: "SNXX", name: "Tradr 2X Long SNDK · 2x 闪迪", qty: 67, cost: 18.32, costDate: "2026-09-23",
             lastPrice: 16.33, lastPriceDate: "2026-10-02 收盘",
             wtPct: 100, strategy: ["卫星仓·存储杠杆博弈"],
             options: [],
@@ -1597,21 +1597,21 @@
         nav: null, navNote: "CNY · 满仓",
         holdings: [
           {
-            sym: "杰瑞股份", code: "002353", name: "油气装备", cost: 123.90,
+            sym: "杰瑞股份", code: "002353", name: "油气装备", qty: 300, cost: 123.90,
             lastPrice: 110.22, lastPriceDate: "2026-09-30 收盘",
             wtPct: 66, strategy: ["周期配置"], isCN: true,
             options: [],
             tags: ["hold"], status: ["持有"]
           },
           {
-            sym: "兴业银锡", code: "000426", name: "白银/有色金属", cost: 34.67,
+            sym: "兴业银锡", code: "000426", name: "白银/有色金属", qty: 400, cost: 34.67,
             lastPrice: 31.50, lastPriceDate: "2026-09-30 收盘",
             wtPct: 25, strategy: ["贵金属"], isCN: true,
             options: [],
             tags: ["hold"], status: ["持有"]
           },
           {
-            sym: "科达制造", code: "600499", name: "陶瓷装备/锂电", cost: 13.48,
+            sym: "科达制造", code: "600499", name: "陶瓷装备/锂电", qty: 400, cost: 13.48,
             lastPrice: 11.19, lastPriceDate: "2026-09-30 收盘",
             wtPct: 9, strategy: ["价值"], isCN: true,
             options: [],
@@ -1628,7 +1628,7 @@
         trades: [
           {
             tradeId: "MSTU-SELL", sym: "MSTU", name: "2x MicroStrategy · 比特币", acct: "主账号",
-            cost: 36.53,
+            qty: null, cost: 36.53,
             legs: [
               { time: "10/1 冲高", price: 43.5, retPct: 19.1, note: "@42.23 分批止盈后，剩余全数清仓（相对摊薄成本）" }
             ],
@@ -1645,9 +1645,9 @@
         trades: [
           {
             tradeId: "UGL-SELL", sym: "UGL", name: "ProShares Ultra Gold · 2x黄金", acct: "主账号",
-            cost: 48.70,
+            qty: 30, cost: 48.70,
             legs: [
-              { time: "9/25", price: 48.50, retPct: -0.4, note: "低资金利用率清仓换标的" }
+              { time: "9/25", qty: 30, price: 48.50, retPct: -0.4, note: "低资金利用率清仓换标的" }
             ],
             totalRetPct: -0.4, totalRetNote: "-0.4%（毛）",
             reason: "UGL 小仓资金利用率过低，48.5 清仓回笼换网投 MSTU",
@@ -1662,9 +1662,9 @@
         trades: [
           {
             tradeId: "IRE-SELL", sym: "IRE", name: "Defiance 2x IREN · 2x AI云", acct: "主账号",
-            cost: 11.80,
+            qty: 100, cost: 11.80,
             legs: [
-              { time: "9/24 盘中", price: 12.30, retPct: 4.2, note: "预设止盈位到价全清" }
+              { time: "9/24 盘中", qty: 100, price: 12.30, retPct: 4.2, note: "预设止盈位到价全清" }
             ],
             totalRetPct: 4.2, totalRetNote: "+4.2%（毛）",
             reason: "建仓当日观察点位预设 12.3 止盈，盘中到价全部卖出",
@@ -1674,9 +1674,9 @@
           },
           {
             tradeId: "RKLX-SELL", sym: "RKLX", name: "Defiance 2X RKLB · 2x 火箭实验室", acct: "主账号",
-            cost: 16.77,
+            qty: 86, cost: 16.77,
             legs: [
-              { time: "9/24 盘中", price: 17.78, retPct: 6.0, note: "预设止盈位到价全清" }
+              { time: "9/24 盘中", qty: 86, price: 17.78, retPct: 6.0, note: "预设止盈位到价全清" }
             ],
             totalRetPct: 6.0, totalRetNote: "+6.0%（毛）",
             reason: "建仓后设 17.78 止盈，观察点位到价全部卖出",
@@ -1686,9 +1686,9 @@
           },
           {
             tradeId: "ASTX-MAIN-SELL", sym: "ASTX", name: "2x AST SpaceMobile · 卫星通信", acct: "主账号",
-            cost: 9.529,
+            qty: 150, cost: 9.529,
             legs: [
-              { time: "9/24 盘中", price: 9.855, retPct: 3.4, note: "冲高失败止盈全清" }
+              { time: "9/24 盘中", qty: 150, price: 9.855, retPct: 3.4, note: "冲高失败止盈全清" }
             ],
             totalRetPct: 3.4, totalRetNote: "+3.4%（毛）",
             reason: "观察冲高失败，9.855 清仓并转身补 RAM",
@@ -1703,10 +1703,10 @@
         trades: [
           {
             tradeId: "SOXS-MAIN", sym: "SOXS", name: "3x Inverse Semiconductor · 做空半导体", acct: "主账号",
-            cost: 33.25,
+            qty: 180, cost: 33.25,
             legs: [
-              { time: "反弹一", price: 34.10, retPct: 2.6, note: "第一批兑现" },
-              { time: "上涨乏力", price: 34.60, retPct: 4.1, note: "识别乏力·全清" }
+              { time: "反弹一", qty: 100, price: 34.10, retPct: 2.6, note: "第一批兑现" },
+              { time: "上涨乏力", qty: 80, price: 34.60, retPct: 4.1, note: "识别乏力·全清" }
             ],
             totalRetPct: 3.2, totalRetNote: "加权≈+3.2%（毛）",
             reason: "反弹兑现·识别上涨乏力后果断全清",
@@ -1716,9 +1716,9 @@
           },
           {
             tradeId: "SOXS-1", sym: "SOXS", name: "3x Inverse Semiconductor · 做空半导体", acct: "1号小账号",
-            cost: 35.95,
+            qty: 59, cost: 35.95,
             legs: [
-              { time: "盘中", price: 34.73, retPct: -3.4, note: "认错止损全清" }
+              { time: "盘中", qty: 59, price: 34.73, retPct: -3.4, note: "认错止损全清" }
             ],
             totalRetPct: -3.4, totalRetNote: "-3.4%（毛）",
             reason: "原定 36.2 兑现未及·跟随观察认错离场",
@@ -1733,9 +1733,9 @@
         trades: [
           {
             tradeId: "RAM-SELL", sym: "RAM", name: "2x DRAM · 存储", acct: "主账号",
-            cost: 13.564,
+            qty: 100, cost: 13.564,
             legs: [
-              { time: "09-22", price: 14.55, retPct: 7.3, note: "减仓锁定利润" }
+              { time: "09-22", qty: 100, price: 14.55, retPct: 7.3, note: "减仓锁定利润" }
             ],
             totalRetPct: 7.3, totalRetNote: "+7.3%（毛）",
             reason: "冲高减仓·卖回部分套利call",
@@ -1745,9 +1745,9 @@
           },
           {
             tradeId: "CRWG-SELL", sym: "CRWG", name: "2x CoreWeave · AI云计算", acct: "主账号",
-            cost: 15.75,
+            qty: 100, cost: 15.75,
             legs: [
-              { time: "09-22", price: 17.26, retPct: 9.6, note: "减仓止盈" }
+              { time: "09-22", qty: 100, price: 17.26, retPct: 9.6, note: "减仓止盈" }
             ],
             totalRetPct: 9.6, totalRetNote: "+9.6%（毛）",
             reason: "AI硬件链冲高·部分止盈（保留剩余仓位+17C备兑）",
@@ -1757,9 +1757,9 @@
           },
           {
             tradeId: "RAM-SCALP", sym: "RAM", name: "2x DRAM · 存储", acct: "主账号",
-            cost: 13.70,
+            qty: 100, cost: 13.70,
             legs: [
-              { time: "09-22", price: 14.08, retPct: 2.8, note: "买回后快进快出 scalp" }
+              { time: "09-22", qty: 100, price: 14.08, retPct: 2.8, note: "买回后快进快出 scalp" }
             ],
             totalRetPct: 2.8, totalRetNote: "+2.8%（毛）",
             reason: "伊朗海峡消息不及预期·scalp减仓落袋",
@@ -1769,10 +1769,10 @@
           },
           {
             tradeId: "ASTX-DONE", sym: "ASTX", name: "2x AST SpaceMobile · 卫星通信", acct: "1号小账号",
-            cost: 9.50,
+            qty: 202, cost: 9.50,
             legs: [
-              { time: "第一波", price: 10.55, retPct: 11.1, note: "反弹先落" },
-              { time: "第二波", price: 10.74, retPct: 13.1, note: "全清" }
+              { time: "第一波", qty: 101, price: 10.55, retPct: 11.1, note: "反弹先落" },
+              { time: "第二波", qty: 101, price: 10.74, retPct: 13.1, note: "全清" }
             ],
             totalRetPct: 12.1, totalRetNote: "加权≈+12.1%（毛）",
             reason: "接飞刀反弹止盈清仓",
@@ -1787,11 +1787,11 @@
         trades: [
           {
             tradeId: "SNDK-1", sym: "SNDK", name: "Sandisk · 存储", acct: "主账号",
-            cost: 1640,
+            qty: 3, cost: 1640,
             legs: [
-              { time: "盘前", price: 1649.18, retPct: 0.6, note: "第一笔减仓" },
-              { time: "盘中", price: 1662, retPct: 1.3, note: "第二笔顺势减" },
-              { time: "盘中", price: 1714, retPct: 4.5, note: "最后一笔·当日高点" }
+              { time: "盘前", qty: 1, price: 1649.18, retPct: 0.6, note: "第一笔减仓" },
+              { time: "盘中", qty: 1, price: 1662, retPct: 1.3, note: "第二笔顺势减" },
+              { time: "盘中", qty: 1, price: 1714, retPct: 4.5, note: "最后一笔·当日高点" }
             ],
             totalRetPct: 2.1, totalRetNote: "加权平均≈+2.1%（毛，未扣费用）",
             reason: "AI 硬件链冲高，释放集中度",
@@ -1801,9 +1801,9 @@
           },
           {
             tradeId: "LITX-1", sym: "LITX", name: "2x Lumentum · 光通信", acct: "1号小账号",
-            cost: 30.09,
+            qty: 58, cost: 30.09,
             legs: [
-              { time: "盘前", price: 32.70, retPct: 8.7, note: "一笔清仓" }
+              { time: "盘前", qty: 58, price: 32.70, retPct: 8.7, note: "一笔清仓" }
             ],
             totalRetPct: 8.7, totalRetNote: "+8.7%（毛）",
             reason: "卫星仓止盈，光通信板块冲高",
@@ -1813,9 +1813,9 @@
           },
           {
             tradeId: "CRDU-2", sym: "CRDU", name: "2x Credo · 连接", acct: "2号小账号",
-            cost: 6.71,
+            qty: 168, cost: 6.71,
             legs: [
-              { time: "盘中", price: 7.40, retPct: 10.3, note: "一笔清仓" }
+              { time: "盘中", qty: 168, price: 7.40, retPct: 10.3, note: "一笔清仓" }
             ],
             totalRetPct: 10.3, totalRetNote: "+10.3%（毛）",
             reason: "冲高止盈，账号清空",
@@ -1831,10 +1831,10 @@
         trades: [
           {
             tradeId: "RKLX-1", sym: "RKLX", name: "2x Rocket Lab", acct: "1号小账号",
-            cost: 14.95,
+            qty: 111, cost: 14.95,
             legs: [
-              { time: "第一波", price: 15.70, retPct: 5.0, note: "先落一半" },
-              { time: "第二波", price: 16.40, retPct: 9.7, note: "第二波拉升全清" }
+              { time: "第一波", qty: 55, price: 15.70, retPct: 5.0, note: "先落一半" },
+              { time: "第二波", qty: 56, price: 16.40, retPct: 9.7, note: "第二波拉升全清" }
             ],
             totalRetPct: 7.4, totalRetNote: "加权平均≈+7.4%（毛）",
             reason: "冲高分批止盈",
@@ -1851,7 +1851,6 @@
   // COMPUTED HELPERS
   // ============================================================
   function computeCoverage(h) {
-    if (h._cov) { return h._cov; }
     // 返回 { coveredCalls, nakedCalls, coveredShares, nakedShares, coveragePct, status }
     var shares = h.qty || 0;
     var totalCallShares = 0;
