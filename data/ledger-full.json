@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "2026-10-02",
-  "asOfLabel": "2026-10-02 收盘",
+  "asOf": "2026-10-02 收盘（RAM 冲高连续兑现 · IRE 两次兑现一次回调接回）· 美股 2026-10-02 收盘 · A股 9/30 收盘（国庆休市）",
+  "asOfLabel": "2026-10-02 收盘（RAM 冲高连续兑现 · IRE 两次兑现一次回调接回）",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
