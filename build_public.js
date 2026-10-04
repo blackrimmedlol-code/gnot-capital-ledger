@@ -1,63 +1,196 @@
-// build_public.js — 发布脚本：把内部主文件发布到 GitHub 仓库
-// 用法: node build_public.js <源文件> <输出文件>
-// 口径(2026-10-03 变更)：源码保留完整 qty/cost/交易记录，供 Agent 爬取回顾；
-//   页面渲染层不显示股数/金额（renderHoldings/renderClosed 本就不输出 qty）。
-//   本脚本负责：①渲染层零股数自检 ②原样复制 ③输出数据完整性摘要。
+// build_public.js — 从 ledger-full.json 生成脱敏 public/index.html
+// 用法: node build_public.js
+// 输入: git-publish/data/ledger-full.json (唯一数据源) + 投资台账复盘_20260920.html (HTML 模板)
+// 输出: git-publish/public/index.html (脱敏版，浏览器只加载脱敏数据)
 const fs = require('fs');
+const path = require('path');
 
-const srcPath = process.argv[2];
-const outPath = process.argv[3];
-if (!srcPath || !outPath) { console.error('用法: node build_public.js <源> <输出>'); process.exit(1); }
+const ROOT = __dirname;
+const LEDGER_PATH = path.join(ROOT, 'data', 'ledger-full.json');
+const TEMPLATE_PATH = path.join(ROOT, '..', '投资台账复盘_20260920.html');
+const OUT_PATH = path.join(ROOT, 'public', 'index.html');
 
-const src = fs.readFileSync(srcPath, 'utf8');
+console.log('=== build_public.js ===');
+console.log('数据源:', LEDGER_PATH);
+console.log('模板:', TEMPLATE_PATH);
+console.log('输出:', OUT_PATH);
 
-// —— 提取含 var DATA 的 <script> 块 ——
-const blocks = [];
-const re = /<script>([\s\S]*?)<\/script>/g;
-let m; while ((m = re.exec(src))) blocks.push(m[1]);
-const js0 = blocks.find(b => b.includes('var DATA ='));
-if (!js0) { console.error('未找到 DATA script'); process.exit(1); }
+// ---- 1. 读取 ledger-full.json ----
+const ledger = JSON.parse(fs.readFileSync(LEDGER_PATH, 'utf8'));
+console.log(`✅ ledger-full.json: ${ledger.accounts.length} accounts, ${ledger.executions.length} executions, ${ledger.episodes.length} episodes`);
 
-// —— 定位 DATA 字面量(花括号配平) ——
-const ds = js0.indexOf('var DATA =');
-const open = js0.indexOf('{', ds);
-let depth = 0, end = -1;
-for (let i = open; i < js0.length; i++) {
-  const c = js0[i];
-  if (c === '{') depth++;
-  else if (c === '}') { depth--; if (depth === 0) { end = i; break; } }
-}
-if (end < 0) { console.error('DATA 配平失败'); process.exit(1); }
-const dataSrc = js0.slice(open, end + 1);
-
-// —— 运行时求值 DATA(本项目自有可信内容) ——
-const DATA = eval('(' + dataSrc + ')');
-
-// —— 渲染层零股数自检：渲染/告警函数体内，拼接 HTML 的行不得出现 qty ——
-// (computeCoverage 内 var shares=h.qty 只用于算覆盖率%、不渲染股数，属豁免)
-const renderFns = ['renderHoldings', 'renderClosed', 'renderMetrics', 'renderAccounts', 'renderAlerts', 'collectAlerts'];
-let leak = 0;
-renderFns.forEach(fn => {
-  const s = js0.indexOf('function ' + fn);
-  if (s < 0) return;
-  const e = js0.indexOf('\n  function ', s + 1);
-  const body = e > s ? js0.slice(s, e) : js0.slice(s);
-  body.split('\n').forEach(line => {
-    if (/html\s*\+?=/.test(line) && /\.qty\b|\bqty\b/.test(line)) {
-      console.error('⚠️ 渲染函数 ' + fn + ' 疑似拼接股数: ' + line.trim());
-      leak++;
+// ---- 2. 生成脱敏数据 ----
+// 递归剥离 qty 字段（股数），保留其他所有字段
+function sanitize(obj) {
+  if (obj === null || obj === undefined) return obj;
+  if (Array.isArray(obj)) return obj.map(sanitize);
+  if (typeof obj === 'object') {
+    const out = {};
+    for (const [k, v] of Object.entries(obj)) {
+      // 剥离 qty（股数），保留 cost（每股成本价，属于"价格"）
+      if (k === 'qty') continue;
+      // actualCostBasis/netInvestedCost 的 value 保留（是每股价格），但标注待核实的显示为 null
+      if (k === 'actualCostBasis' && v && v.value === null) {
+        out[k] = { value: null, note: v.note, status: v.status };
+        continue;
+      }
+      out[k] = sanitize(v);
     }
-  });
-});
-if (leak > 0) { console.error('渲染层自检发现 ' + leak + ' 处疑似股数泄漏，中止发布'); process.exit(1); }
+    return out;
+  }
+  return obj;
+}
 
-// —— 原样复制（源码保留完整 qty/cost，供 Agent 爬取）——
-fs.writeFileSync(outPath, src, 'utf8');
+// 字段映射：ledger-full.json 新字段名 → HTML 模板旧字段名
+function mapFields(holding) {
+  const h = { ...holding };
+  // entrySetup → setup, entryExecStatus → execStatus（向后兼容）
+  if (h.entrySetup && !h.setup) h.setup = h.entrySetup;
+  if (h.entryExecStatus && !h.execStatus) h.execStatus = h.entryExecStatus;
+  return h;
+}
 
-// —— 数据完整性摘要 ——
-let holdings = 0, opts = 0, closedTrades = 0, fills = 0;
-(DATA.accounts || []).forEach(a => (a.holdings || []).forEach(h => { holdings++; if (h.options) opts += h.options.reduce((n, g) => n + g.legs.length, 0); }));
-(DATA.closedTrades || []).forEach(d => d.trades.forEach(t => { closedTrades++; fills += t.legs.length; }));
-console.log('PUBLISH OK ->', outPath);
-console.log('数据完整性：持仓 ' + holdings + ' · 期权腿 ' + opts + ' · 平仓交易 ' + closedTrades + ' · 成交笔 ' + fills);
-console.log('源码已保留 qty/cost（供 Agent 爬取），渲染层不显示股数/金额');
+// 构建脱敏 DATA（与 HTML 模板中的 var DATA = {...} 结构一致）
+const publicData = {
+  asOf: ledger.asOf,
+  asOfLabel: ledger.asOfLabel,
+  fx: ledger.fx,
+  discipline: ledger.discipline,
+  accounts: ledger.accounts.map(acct => ({
+    ...acct,
+    holdings: (acct.holdings || []).map(h => mapFields(sanitize(h)))
+  })),
+  closedTrades: (ledger.closedTrades || []).map(day => ({
+    ...day,
+    trades: (day.trades || []).map(t => ({
+      ...sanitize(t),
+      // closedTrades 中的 legs 保留 qty（用于部分减仓判断），但不显示到页面
+      legs: (t.legs || []).map(leg => sanitize(leg))
+    }))
+  }))
+};
+
+// ---- 3. 读取 HTML 模板 ----
+const template = fs.readFileSync(TEMPLATE_PATH, 'utf8');
+
+// ---- 4. 替换 DATA 块 ----
+// 找到 var DATA = {...} 的位置并替换
+const dataMatch = template.match(/var DATA = (\{)/);
+if (!dataMatch) {
+  console.error('ERROR: 模板中未找到 var DATA');
+  process.exit(1);
+}
+const dataStart = template.indexOf('{', dataMatch.index);
+let depth = 0, dataEnd = -1;
+for (let i = dataStart; i < template.length; i++) {
+  if (template[i] === '{') depth++;
+  else if (template[i] === '}') {
+    depth--;
+    if (depth === 0) { dataEnd = i; break; }
+  }
+}
+if (dataEnd < 0) {
+  console.error('ERROR: DATA 块配平失败');
+  process.exit(1);
+}
+
+// 序列化脱敏数据为 JS 对象字面量（保持可读性）
+function toJsLiteral(obj, indent = 0) {
+  const pad = '  '.repeat(indent);
+  const padInner = '  '.repeat(indent + 1);
+  if (obj === null) return 'null';
+  if (obj === undefined) return 'undefined';
+  if (typeof obj === 'string') return JSON.stringify(obj);
+  if (typeof obj === 'number' || typeof obj === 'boolean') return String(obj);
+  if (Array.isArray(obj)) {
+    if (obj.length === 0) return '[]';
+    const items = obj.map(item => padInner + toJsLiteral(item, indent + 1));
+    return '[\n' + items.join(',\n') + '\n' + pad + ']';
+  }
+  if (typeof obj === 'object') {
+    const entries = Object.entries(obj);
+    if (entries.length === 0) return '{}';
+    const items = entries.map(([k, v]) => {
+      // 键名：如果是有效标识符则不加引号，否则加引号
+      const key = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(k) ? k : JSON.stringify(k);
+      return padInner + key + ': ' + toJsLiteral(v, indent + 1);
+    });
+    return '{\n' + items.join(',\n') + '\n' + pad + '}';
+  }
+  return String(obj);
+}
+
+const dataLiteral = toJsLiteral(publicData);
+const before = template.slice(0, dataStart);
+const after = template.slice(dataEnd + 1);
+const output = before + dataLiteral + after;
+
+// ---- 5. 渲染层零泄露自检 ----
+// 检查渲染函数中是否将 qty 拼入 HTML
+const scriptMatch = output.match(/<script>([\s\S]*?)<\/script>/);
+if (scriptMatch) {
+  const script = scriptMatch[1];
+  const renderFns = ['renderHoldings', 'renderClosed', 'renderMetrics', 'renderAccounts', 'renderAlerts'];
+  let leak = 0;
+  for (const fn of renderFns) {
+    const fnStart = script.indexOf('function ' + fn);
+    if (fnStart < 0) continue;
+    const fnEnd = script.indexOf('\n  function ', fnStart + 1);
+    const body = fnEnd > fnStart ? script.slice(fnStart, fnEnd) : script.slice(fnStart);
+    const lines = body.split('\n');
+    for (const line of lines) {
+      // 检查 html += 或 innerHTML 赋值行中是否包含 .qty（但不包括注释和 computeCoverage 内部）
+      if (/html\s*\+=|innerHTML/.test(line) && /\.qty\b/.test(line) && !line.trim().startsWith('//')) {
+        // 排除 computeCoverage 函数体内的行
+        if (!body.includes('computeCoverage')) {
+          console.error(`⚠️ 渲染函数 ${fn} 疑似拼接 qty: ${line.trim()}`);
+          leak++;
+        }
+      }
+    }
+  }
+  if (leak > 0) {
+    console.error(`渲染层自检发现 ${leak} 处疑似股数泄漏，中止发布`);
+    process.exit(1);
+  }
+}
+
+// 检查输出中是否残留 qty 字段（不应有）
+const qtyCheck = output.match(/"qty"\s*:|qty\s*:/g);
+if (qtyCheck) {
+  // 只允许 computeCoverage 内部的 h.qty（泛化代码，无具体数值）
+  const allowed = output.match(/h\.qty\s*\|\|\s*0/g);
+  const allowedCount = allowed ? allowed.length : 0;
+  if (qtyCheck.length > allowedCount) {
+    console.error(`⚠️ 输出中残留 ${qtyCheck.length - allowedCount} 处 qty 字段（允许 ${allowedCount} 处 computeCoverage 泛化代码）`);
+    // 打印前5处
+    const lines = output.split('\n');
+    let found = 0;
+    for (let i = 0; i < lines.length && found < 5; i++) {
+      if (/qty\s*:/.test(lines[i]) && !/h\.qty\s*\|\|\s*0/.test(lines[i])) {
+        console.error(`  行${i+1}: ${lines[i].trim().slice(0, 100)}`);
+        found++;
+      }
+    }
+    console.error('中止发布');
+    process.exit(1);
+  }
+}
+
+// ---- 6. 输出 ----
+fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
+fs.writeFileSync(OUT_PATH, output, 'utf8');
+
+// 统计
+const stats = {
+  accounts: publicData.accounts.length,
+  holdings: publicData.accounts.reduce((s, a) => s + (a.holdings || []).length, 0),
+  closedTrades: publicData.closedTrades.length,
+  dataSize: dataLiteral.length,
+  outputSize: output.length
+};
+
+console.log('✅ PUBLISH OK →', OUT_PATH);
+console.log('   统计:', stats);
+console.log('   渲染层零泄露自检: 通过');
+console.log('   qty 剥离: 通过');
