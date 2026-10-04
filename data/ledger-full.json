@@ -8,7 +8,7 @@
     "fxNote": "美股/ A 股分开统计，不做汇率折算"
   },
   "methodology": {
-    "costBasis": "actualCostBasis=真实买入均价（减仓不改变）；netInvestedCost=净投入/剩余股数（摊薄口径，已实现利润抵扣成本）。页面展示每股成本价时标注口径。",
+    "costBasis": "actualCostBasis 统一按移动加权平均法（卖出不改变剩余均价，仅适用该口径）；netInvestedCost 按正股买卖现金流摊薄（不含期权）；含期权现金流的另记为 compositeNetInvested（组合净投入），两者不得混用；券商采用 FIFO 或指定批次时保留券商口径。历史数据不足标待核实。",
     "pending": [
       "RAM 真实买入成本待核实（分批买入，减仓批次无法对应）",
       "IRE 真实买入成本待核实（分批买入+日内高抛低吸）",
@@ -16,7 +16,37 @@
       "CRDU 3张10/16 7C 权利金待补",
       "部分成交费用待补",
       "部分成交数量待核实"
-    ]
+    ],
+    "costAlgorithm": {
+      "primary": "移动加权平均法",
+      "scope": "内部复盘统一口径，用于 actualCostBasis（真实持仓每股均价）",
+      "rules": [
+        {
+          "rule": "移动加权平均",
+          "detail": "买入时新均价 =（原持仓成本总额 + 本次买入金额 + 对应费用）÷ 新总股数"
+        },
+        {
+          "rule": "卖出不改变剩余均价",
+          "detail": "卖出仅减少总股数，成本总额按移动加权均价等比减少，剩余每股均价不变。此性质仅适用于移动加权平均口径，不适用于净投入摊薄口径"
+        },
+        {
+          "rule": "券商口径保留",
+          "detail": "券商若采用 FIFO 或指定批次（specific lots）计成本，保留券商成本及口径，不强行覆盖为内部复盘移动加权平均成本"
+        },
+        {
+          "rule": "正股净投入摊薄",
+          "detail": "netInvestedCost =（Σ正股买入金额 + Σ买入费用 − Σ正股卖出回款 + Σ卖出费用）÷ 剩余股数。只含正股买卖现金流与对应费用，不含期权现金流"
+        },
+        {
+          "rule": "组合净投入",
+          "detail": "compositeNetInvested 在上述正股现金流基础上，额外计入期权现金流（权利金收入、期权买卖盈亏）。与正股净投入分开记录，不得混用"
+        },
+        {
+          "rule": "历史数据不足",
+          "detail": "批次、费用或权利金缺失时，对应成本口径保留待核实状态（value=null），不倒推、不编造"
+        }
+      ]
+    }
   },
   "discipline": {
     "issues": [
@@ -136,7 +166,12 @@
           "entryExecStatus": "adhoc",
           "actionExecStatus": null,
           "exitReason": null,
-          "episodeId": "EP-RAM-2026Q3"
+          "episodeId": "EP-RAM-2026Q3",
+          "compositeNetInvested": {
+            "value": null,
+            "note": "组合净投入（含期权现金流：权利金收入与期权盈亏），与正股净投入分开记录；权利金/期权现金流待核实后确认",
+            "status": "待核实"
+          }
         },
         {
           "sym": "CRWG",
@@ -186,7 +221,12 @@
           "entryExecStatus": "unknown",
           "actionExecStatus": null,
           "exitReason": null,
-          "episodeId": "EP-CRWG-2026Q3"
+          "episodeId": "EP-CRWG-2026Q3",
+          "compositeNetInvested": {
+            "value": null,
+            "note": "组合净投入（含期权现金流：权利金收入与期权盈亏），与正股净投入分开记录；权利金/期权现金流待核实后确认",
+            "status": "待核实"
+          }
         },
         {
           "sym": "CRDU",
@@ -235,7 +275,12 @@
           "entryExecStatus": "unknown",
           "actionExecStatus": null,
           "exitReason": null,
-          "episodeId": "EP-CRDU-2026Q3"
+          "episodeId": "EP-CRDU-2026Q3",
+          "compositeNetInvested": {
+            "value": null,
+            "note": "组合净投入（含期权现金流：权利金收入与期权盈亏），与正股净投入分开记录；权利金/期权现金流待核实后确认",
+            "status": "待核实"
+          }
         },
         {
           "sym": "IRE",

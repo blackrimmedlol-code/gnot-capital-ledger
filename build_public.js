@@ -47,6 +47,11 @@ function mapFields(holding) {
   // entrySetup → setup, entryExecStatus → execStatus（向后兼容）
   if (h.entrySetup && !h.setup) h.setup = h.entrySetup;
   if (h.entryExecStatus && !h.execStatus) h.execStatus = h.entryExecStatus;
+  // costDisplay → costNote（持仓成本口径标注：渲染层用 costNote 显示"摊薄口径/实际成本"）
+  if (h.costDisplay && !h.costNote) {
+    h.costNote = h.costDisplay;
+    delete h.costDisplay;
+  }
   return h;
 }
 
