@@ -1,13 +1,13 @@
 // build_public.js — 从 ledger-full.json 生成脱敏 public/index.html
 // 用法: node build_public.js
-// 输入: git-publish/data/ledger-full.json (唯一数据源) + 投资台账复盘_20260920.html (HTML 模板)
+// 输入: git-publish/data/ledger-full.json (唯一数据源) + git-publish/template.html (HTML 模板，已纳入仓库)
 // 输出: git-publish/public/index.html (脱敏版，浏览器只加载脱敏数据)
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
 const LEDGER_PATH = path.join(ROOT, 'data', 'ledger-full.json');
-const TEMPLATE_PATH = path.join(ROOT, '..', '投资台账复盘_20260920.html');
+const TEMPLATE_PATH = path.join(ROOT, 'template.html');
 const OUT_PATH = path.join(ROOT, 'public', 'index.html');
 
 console.log('=== build_public.js ===');
@@ -41,6 +41,48 @@ function sanitize(obj) {
   return obj;
 }
 
+// 用完整台账（含 qty）计算期权覆盖，返回脱敏字段（不含任何股数）
+// 修复：公开数据删 qty 后 computeCoverage 把缺失当 0 导致 RAM/CRWG/CRDU 误判
+function computeCoverageFromFull(h) {
+  const shares = h.qty;
+  const sharesUnknown = (shares === null || shares === undefined);
+  let totalCallContracts = 0; // 未结算卖 call 张数
+  if (h.options) {
+    h.options.forEach(function (g) {
+      (g.legs || []).forEach(function (leg) {
+        if (leg.type !== 'C') return; // 仅统计 call
+        if (g.settled) return;        // 仅统计尚未结算
+        totalCallContracts += (leg.mult || 0);
+      });
+    });
+  }
+  const totalCallShares = totalCallContracts * 100;
+  const sharesNum = sharesUnknown ? 0 : shares;
+  const uncoveredShares = Math.max(0, totalCallShares - sharesNum); // 裸卖缺口
+  const uncappedShares = Math.max(0, sharesNum - totalCallShares);   // 自由仓（非风险）
+  let status, statusText;
+  if (totalCallContracts === 0) { status = 'none'; statusText = '无备兑'; }
+  else if (sharesUnknown) { status = 'unknown'; statusText = '待核实'; }
+  else if (uncoveredShares > 0) { status = 'insufficient'; statusText = '覆盖不足'; }
+  else if (uncappedShares > 0) { status = 'partial'; statusText = '部分覆盖'; }
+  else { status = 'covered'; statusText = '全部覆盖'; }
+  // 仅输出脱敏字段；股数字段（totalCallShares/uncoveredShares/uncappedShares）一律不外泄
+  return {
+    status: status,
+    statusText: statusText,
+    isFullyBacked: !sharesUnknown && totalCallContracts > 0 && uncoveredShares === 0,
+    hasFreeShares: !sharesUnknown && uncappedShares > 0,
+    sharesUnknown: sharesUnknown,
+    coveragePct: (totalCallContracts > 0 && !sharesUnknown) ? Math.round(Math.min(sharesNum, totalCallShares) / totalCallShares * 100) : null,
+    shareCoveragePct: (!sharesUnknown && sharesNum > 0) ? (totalCallShares > 0 ? Math.round(Math.min(sharesNum, totalCallShares) / sharesNum * 100) : 0) : null
+  };
+}
+
+// 给完整 holding 附加预计算的覆盖结果（脱敏字段），供公开页面直接读取
+function attachCoverage(h) {
+  return { ...h, coverage: computeCoverageFromFull(h) };
+}
+
 // 字段映射：ledger-full.json 新字段名 → HTML 模板旧字段名
 function mapFields(holding) {
   const h = { ...holding };
@@ -63,7 +105,7 @@ const publicData = {
   discipline: ledger.discipline,
   accounts: ledger.accounts.map(acct => ({
     ...acct,
-    holdings: (acct.holdings || []).map(h => mapFields(sanitize(h)))
+    holdings: (acct.holdings || []).map(h => mapFields(sanitize(attachCoverage(h))))
   })),
   closedTrades: (ledger.closedTrades || []).map(day => ({
     ...day,

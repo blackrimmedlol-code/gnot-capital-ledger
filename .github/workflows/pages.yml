@@ -19,6 +19,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # 1. 数据校验（executionId/episodeId 去重、引用关系、疑似重复、持仓对账、成本一致性、成本口径）
+      #    失败返回非零退出码，阻止后续步骤与部署
+      - name: 数据校验
+        run: node verify.js
+      # 2. 生成公开页面（从 data/ledger-full.json + template.html 脱敏生成 public/index.html，含期权覆盖预计算 + 零泄露自检）
+      - name: 生成公开页面
+        run: node build_public.js
+      # 3. 检查发布产物（允许期权张数、禁止股票数量与资金金额）
+      - name: 检查发布产物
+        run: node check_public.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

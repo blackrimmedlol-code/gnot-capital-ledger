@@ -16,11 +16,15 @@
 
 | 确定性工作 | 脚本 |
 |-----------|------|
-| 成交去重 | `verify.js`（executionId 唯一） |
+| 成交去重 | `verify.js`（executionId 唯一 + 疑似重复成交） |
+| 周期关联去重 | `verify.js`（episodeId 唯一 + 引用关系） |
+| 持仓对账 | `verify.js`（期初+买-卖=当前，缺项标待核实） |
+| 成本一致性核对 | `verify.js`（流水完整者重算 netInvestedCost） |
 | 成本与盈亏计算 | 移动加权平均 / 净投入摊薄（数据字段） |
-| 期权覆盖计算 | 页面 JS `computeCoverage` |
+| 期权覆盖计算 | `build_public.js` 构建阶段预计算（完整台账），页面只读计算结果 |
 | 统计（兑现条目/胜率） | `computeMetrics` |
 | 脱敏导出 + 页面生成 | `build_public.js` |
+| 发布产物检查 | `check_public.js`（允许期权张数、禁止股数/金额） |
 | 数据校验 + 内容哈希 | `verify.js` |
 
 **模型只负责**：理解用户操作、识别缺项、判断计划一致性、撰写必要复盘。不反复用自然语言手算同一组数据。
@@ -35,19 +39,20 @@
 ## 四、核心口径（必须遵守）
 
 - **成本三轨**：`actualCostBasis`（移动加权平均，卖出不改变剩余均价，仅适用该口径）/ `netInvestedCost`（正股净投入摊薄，只含正股现金流）/ `compositeNetInvested`（组合净投入，含期权现金流）。三者**不得混用**。券商采用 FIFO 或指定批次时保留券商口径。
-- **脱敏**：渲染层零股数零金额，源码保留完整 qty/cost。
+- **脱敏**：渲染层零股数零金额，源码保留完整 qty/cost；期权张数（call/put 张数，如 ×8）允许显示。
 - **标签**：`entrySetup`/`entryExecStatus`/`actionExecStatus`/`exitReason` 分开；计划需事前依据，未知标 `unknown`，不因盈亏改写标签。
-- **覆盖**：分别算备兑是否足额、正股覆盖比例、未封顶正股、覆盖缺口；未覆盖 >0 必须提示。
+- **覆盖**：构建阶段用完整台账算好，页面只读预计算结果（不依赖已删 qty）；仅统计未结算卖出 call（合约乘数 ×100）；分别算担保是否足额、正股覆盖比例、未封顶正股（自由仓）；未知数量标「待核实」不按 0；保留自由仓≠担保不足，仅「卖 call 超出可担保正股」告警。
 
 ## 五、日常更新流程
 
 1. 记录起始提交版本 + 跑 `node verify.js` 核对哈希与去重。
-2. 改 `data/ledger-full.json`（数据）或 `投资台账复盘_20260920.html`（模板文字），用**局部补丁**保留无关内容。
-3. `node build_public.js` 生成脱敏 `public/index.html`（不重生成整份 HTML/CSS）。
-4. `node verify.js` 校验（executionId 去重 + 成本口径 + 内容哈希）。
-5. `git fetch` 核对远程最新；有新增记录则合并（按 executionId 去重，冲突保留来源标待核实），**不用旧台账覆盖**。
-6. `git add -A && git commit && git push`，Actions 自动部署 `public/`。
-7. 校验线上 200 + 渲染层零泄露。
+2. 改 `data/ledger-full.json`（数据）或 `template.html`（模板），用**局部补丁**保留无关内容。
+3. `node build_public.js` 生成脱敏 `public/index.html`（构建阶段预计算期权覆盖，不重生成整份 HTML/CSS）。
+4. `node check_public.js` 检查发布产物（允许期权张数、禁止股数/金额）。
+5. `node verify.js` 校验（executionId/episodeId 去重、引用关系、疑似重复、持仓对账、成本一致性、成本口径、内容哈希）。
+6. `git fetch` 核对远程最新；有新增记录则合并（按 executionId 去重，冲突保留来源标待核实），**不用旧台账覆盖**。
+7. `git add -A && git commit && git push`，Actions 顺序执行「校验→生成→检查→部署」。
+8. 校验线上 200 + 渲染层零泄露。
 
 ## 六、回复格式（日常）
 

@@ -212,8 +212,8 @@
             "status": "确认"
           },
           "netInvestedCost": {
-            "value": 15.75,
-            "note": "与真实成本一致（无减仓摊薄）",
+            "value": 14.25495,
+            "note": "正股净投入摊薄=(201×15.75-100×17.26)÷101，含减仓回款、未计费用、未含期权现金流",
             "status": "确认"
           },
           "costDisplay": "实际成本",
@@ -859,7 +859,7 @@
     },
     {
       "executionId": "EX-20260925-MSTU-BUY-020",
-      "episodeId": "EP-MSTU-2026Q3",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
       "account": "main",
       "sym": "MSTU",
       "side": "buy",
@@ -874,7 +874,7 @@
     },
     {
       "executionId": "EX-20260925-MSTU-BUY-021",
-      "episodeId": "EP-MSTU-2026Q3",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
       "account": "main",
       "sym": "MSTU",
       "side": "buy",
@@ -889,7 +889,7 @@
     },
     {
       "executionId": "EX-20260929-MSTU-BUY-022",
-      "episodeId": "EP-MSTU-2026Q3",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
       "account": "main",
       "sym": "MSTU",
       "side": "buy",
@@ -904,7 +904,7 @@
     },
     {
       "executionId": "EX-20260930-MSTU-SELL-023",
-      "episodeId": "EP-MSTU-2026Q3",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
       "account": "main",
       "sym": "MSTU",
       "side": "sell",
@@ -919,7 +919,7 @@
     },
     {
       "executionId": "EX-20260930-MSTU-BUY-024",
-      "episodeId": "EP-MSTU-2026Q3",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
       "account": "main",
       "sym": "MSTU",
       "side": "buy",
@@ -934,7 +934,7 @@
     },
     {
       "executionId": "EX-20261001-MSTU-SELL-025",
-      "episodeId": "EP-MSTU-2026Q3",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
       "account": "main",
       "sym": "MSTU",
       "side": "sell",
@@ -948,23 +948,8 @@
       "status": "partial"
     },
     {
-      "executionId": "EX-20261001-MSTU-SELL-026",
-      "episodeId": "EP-MSTU-2026Q3",
-      "account": "main",
-      "sym": "MSTU",
-      "side": "sell",
-      "qty": null,
-      "price": 43.5,
-      "date": "2026-10-01",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "清仓（数量待核实）",
-      "status": "partial"
-    },
-    {
       "executionId": "EX-20260923-UGL-BUY-027",
-      "episodeId": "EP-UGL-2026Q3",
+      "episodeId": "EP-UGL-CLOSED-20260925",
       "account": "main",
       "sym": "UGL",
       "side": "buy",
@@ -975,21 +960,6 @@
       "timezone": "America/New_York",
       "fee": null,
       "note": "建仓",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260925-UGL-SELL-028",
-      "episodeId": "EP-UGL-2026Q3",
-      "account": "main",
-      "sym": "UGL",
-      "side": "sell",
-      "qty": 30,
-      "price": 48.5,
-      "date": "2026-09-25",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "清仓",
       "status": "confirmed"
     },
     {
@@ -1098,7 +1068,7 @@
     },
     {
       "executionId": "EX-20260923-SOXS-SELL-036",
-      "episodeId": "EP-SOXS-CLOSED-20260923",
+      "episodeId": "EP-SOXS1-CLOSED-20260923",
       "account": "sat1",
       "sym": "SOXS",
       "side": "sell",
@@ -1127,23 +1097,8 @@
       "status": "confirmed"
     },
     {
-      "executionId": "EX-20260922-CRWG-SELL-038",
-      "episodeId": "EP-CRWG-CLOSED-20260922",
-      "account": "main",
-      "sym": "CRWG",
-      "side": "sell",
-      "qty": 100,
-      "price": 17.26,
-      "date": "2026-09-22",
-      "time": "09-22",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "减仓止盈",
-      "status": "confirmed"
-    },
-    {
       "executionId": "EX-20260922-RAM-SELL-039",
-      "episodeId": "EP-RAM-CLOSED-20260922",
+      "episodeId": "EP-RAM-SCALP-20260922",
       "account": "main",
       "sym": "RAM",
       "side": "sell",
@@ -1500,7 +1455,7 @@
       "exitDate": "2026-09-23"
     },
     {
-      "episodeId": "EP-SOXS-CLOSED-20260923",
+      "episodeId": "EP-SOXS1-CLOSED-20260923",
       "sym": "SOXS",
       "account": "sat1",
       "status": "closed",
@@ -1529,22 +1484,7 @@
       "exitDate": "2026-09-22"
     },
     {
-      "episodeId": "EP-CRWG-CLOSED-20260922",
-      "sym": "CRWG",
-      "account": "main",
-      "status": "closed",
-      "entryDate": null,
-      "entrySetup": [
-        "趋势波段",
-        "仓位管理"
-      ],
-      "entryExecStatus": "plan",
-      "currentQty": 0,
-      "exitReason": "AI硬件链冲高·部分止盈（保留剩余仓位+17C备兑）",
-      "exitDate": "2026-09-22"
-    },
-    {
-      "episodeId": "EP-RAM-CLOSED-20260922",
+      "episodeId": "EP-RAM-SCALP-20260922",
       "sym": "RAM",
       "account": "main",
       "status": "closed",
@@ -1899,7 +1839,7 @@
           ],
           "execStatus": "adhoc",
           "oneLiner": "原定 36.2 兑现未等到，跟随主号观察接受小亏认错，没有硬扛等反弹，执行果断。",
-          "episodeId": "EP-SOXS-CLOSED-20260923",
+          "episodeId": "EP-SOXS1-CLOSED-20260923",
           "entrySetup": [
             "对冲 / 逆向博弈"
           ],
@@ -1976,7 +1916,7 @@
           ],
           "execStatus": "plan",
           "oneLiner": "+9.6% 部分兑现合理，保留剩余仓位比一次性全清更符合趋势交易。",
-          "episodeId": "EP-CRWG-CLOSED-20260922",
+          "episodeId": "EP-CRWG-2026Q3",
           "entrySetup": [
             "趋势波段",
             "仓位管理"
@@ -2011,7 +1951,7 @@
           ],
           "execStatus": "adhoc",
           "oneLiner": "消息驱动下快进快出并成功盈利，但属于临时战术交易，不应和核心仓逻辑混在一起。",
-          "episodeId": "EP-RAM-CLOSED-20260922",
+          "episodeId": "EP-RAM-SCALP-20260922",
           "entrySetup": [
             "日内 Scalp"
           ],
@@ -2248,5 +2188,47 @@
     "incompleteEvents": 21,
     "winEntries": 13,
     "lossEntries": 2
-  }
+  },
+  "corrections": [
+    {
+      "date": "2026-10-04",
+      "item": "CRWG重复成交",
+      "detail": "删除 EX-20260922-CRWG-SELL-038（与 SELL-010 同一笔 100@17.26），保留 SELL-010"
+    },
+    {
+      "date": "2026-10-04",
+      "item": "EP-CRWG错误周期",
+      "detail": "删除 EP-CRWG-CLOSED-20260922（部分减仓非清仓），CRWG-SELL 归属 EP-CRWG-2026Q3"
+    },
+    {
+      "date": "2026-10-04",
+      "item": "SOXS episodeId",
+      "detail": "sat1 账号拆分 EP-SOXS1-CLOSED-20260923"
+    },
+    {
+      "date": "2026-10-04",
+      "item": "RAM episodeId",
+      "detail": "日内Scalp减仓拆分 EP-RAM-SCALP-20260922（区分锁定利润减仓）"
+    },
+    {
+      "date": "2026-10-04",
+      "item": "CRWG成本",
+      "detail": "netInvestedCost 重算为 14.25495（正股净投入摊薄，含减仓回款）"
+    },
+    {
+      "date": "2026-10-04",
+      "item": "UGL重复成交",
+      "detail": "删除 EX-20260925-UGL-SELL-028（与 SELL-030 同一笔 30@48.5）"
+    },
+    {
+      "date": "2026-10-04",
+      "item": "MSTU重复成交",
+      "detail": "删除 EX-20261001-MSTU-SELL-026（与 SELL-029 同一清仓腿 43.5）"
+    },
+    {
+      "date": "2026-10-04",
+      "item": "MSTU/UGL引用",
+      "detail": "executions episodeId 统一到 CLOSED 周期（修复 open→closed 迁移遗留断裂）"
+    }
+  ]
 }

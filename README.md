@@ -6,9 +6,11 @@
 
 - **唯一数据源**：`data/ledger-full.json`（完整台账，含股数/成本/成交/周期，raw 可爬取）
 - **公开页面**：`public/index.html`（脱敏版，浏览器只加载脱敏数据）
-- **构建脚本**：`build_public.js`（从 ledger-full.json 生成脱敏 public/index.html）
-- **校验脚本**：`verify.js`（executionId 去重 + 成本口径合规 + 内容哈希）
-- **部署**：GitHub Actions 自动部署 `public/` 目录到 Pages
+- **HTML 模板**：`template.html`（已纳入仓库，构建用仓库内相对路径，全新检出即可构建）
+- **构建脚本**：`build_public.js`（从 ledger-full.json + template.html 脱敏生成 public/index.html，构建阶段用完整台账预计算期权覆盖）
+- **校验脚本**：`verify.js`（executionId/episodeId 去重、引用关系、疑似重复成交、持仓对账、成本一致性、成本口径合规、内容哈希）
+- **发布检查**：`check_public.js`（允许期权张数、禁止股数与资金金额）
+- **部署**：GitHub Actions 顺序执行「数据校验 → 生成公开页面 → 检查发布产物 → 部署 public/」，任一步失败即中止
 
 ## 数据口径
 
@@ -25,18 +27,20 @@
 
 ## 隐私
 
-- 页面不显示：股数、成交股数、期权张数、未覆盖股票数量、投入金额、市值、盈亏金额、权利金总额、现金、NAV
+- 页面不显示：股数、成交股数、未覆盖股票数量、投入金额、市值、盈亏金额、权利金总额、现金、NAV
+- 页面允许显示：期权张数（call/put 张数，如 ×8）；实际持股股数与资金金额仍禁止
 - 源码保留完整数据（供 Agent 爬取），但渲染层不显示
 
 ## 更新（日常）
 
 ```bash
 # 1. 记录起始版本 + 校验
-node verify.js            # 确认 executionId 无重复、成本口径分记正确、记录内容哈希
+node verify.js            # executionId/episodeId 去重、引用关系、疑似重复、持仓对账、成本一致性、成本口径
 git fetch origin main     # 核对远程最新，有新增记录先合并（勿用旧台账覆盖）
-# 2. 修改 data/ledger-full.json（数据）或 投资台账复盘_20260920.html（模板文字），局部补丁
-# 3. 构建脱敏页
-node build_public.js
+# 2. 修改 data/ledger-full.json（数据）或 template.html（模板），局部补丁
+# 3. 构建脱敏页 + 检查产物
+node build_public.js      # 构建阶段用完整台账预计算期权覆盖，脱敏生成 public/index.html
+node check_public.js      # 检查产物（允许期权张数、禁止股数与资金金额）
 # 4. 再校验 + 提交
 node verify.js
 git add -A && git commit -m "更新" && git push
@@ -47,9 +51,11 @@ git add -A && git commit -m "更新" && git push
 ## 文件说明
 
 - `data/ledger-full.json` — 完整台账（唯一数据源，含完整 qty/cost/executions/episodes）
+- `template.html` — HTML 模板（已纳入仓库；构建用完整台账预计算期权覆盖，页面只读预计算结果）
 - `public/index.html` — 公开脱敏版（自动生成，勿手动编辑）
-- `build_public.js` — 构建脚本（脱敏 + 渲染层零泄露自检）
-- `verify.js` — 校验脚本（去重 + 成本口径 + 哈希）
+- `build_public.js` — 构建脚本（脱敏 + 构建阶段预计算期权覆盖 + 渲染层零泄露自检）
+- `verify.js` — 校验脚本（executionId/episodeId 去重、引用关系、疑似重复、持仓对账、成本一致性、成本口径、哈希）
+- `check_public.js` — 发布产物检查（允许期权张数、禁止股数与资金金额）
 - `RULES_日常更新.md` — 日常更新规则（三种模式 + 程序化边界 + token 优化）
 - `.hashes.json` — 内容哈希记录（数据/模板/规则/脚本，用于判断是否有变化）
-- `.github/workflows/pages.yml` — Pages 部署配置
+- `.github/workflows/pages.yml` — Pages 部署配置（校验→生成→检查→部署）
