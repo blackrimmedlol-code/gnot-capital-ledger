@@ -1,24 +1,39 @@
-# 川普资本台账 · 交易复盘页
+# 川普资本台账 · 公开脱敏版
 
-本仓库托管「投资台账复盘」页面的 GitHub Pages 站点，**源码含完整交易数据**。
+公开页面：https://blackrimmedlol-code.github.io/gnot-capital-ledger/
 
-**页面链接**：`https://blackrimmedlol-code.github.io/gnot-capital-ledger/`
+## 架构
 
-## 隐私设计（2026-10-03 定调）
-- **源码（DATA）保留完整字段**：股数 `qty`、每股成本 `cost`、期权张数 `mult`/行权价 `strike`、平仓记录等全部保留，方便其他 Agent 抓取仓库里的交易记录做表现回顾。
-- **页面渲染层不显示**：`renderHoldings` / `renderClosed` 等渲染函数不把 `qty`（股数）输出到可见 DOM，只显示价格、张数、收益率%、仓位%、覆盖率%。公布页面（浏览器可见内容）仍无股数、无美元总金额、无隐含市值。
+- **唯一数据源**：`data/ledger-full.json`（完整台账，含股数/成本/成交/周期，raw 可爬取）
+- **公开页面**：`public/index.html`（脱敏版，浏览器只加载脱敏数据）
+- **构建脚本**：`build_public.js`（从 ledger-full.json 生成脱敏 public/index.html）
+- **部署**：GitHub Actions 自动部署 `public/` 目录到 Pages
 
-## 如何更新
-每次复盘/交易登记后，从内部主文件重新生成并推送，GitHub Actions 自动更新 Pages：
+## 数据口径
+
+- **成本**：分开 `actualCostBasis`（真实买入均价）与 `netInvestedCost`（净投入摊薄）。RAM/IRE/MSTU 为摊薄口径，真实成本待核实
+- **统计**："已登记兑现条目"（含部分减仓）≠"完整交易"；胜率仅为条目胜率，样本小不具统计意义
+- **覆盖**：分开计算备兑是否足额、正股覆盖比例、未封顶正股、覆盖缺口
+- **仓位**：显示等级（轻/中/重/空仓），不显示精确百分比
+
+## 隐私
+
+- 页面不显示：股数、成交股数、期权张数、未覆盖股票数量、投入金额、市值、盈亏金额、权利金总额、现金、NAV
+- 源码保留完整数据（供 Agent 爬取），但渲染层不显示
+
+## 更新
 
 ```bash
-node build_public.js <内部主文件.html> index.html
-git add . && git commit -m "复盘更新" && git push origin main
+# 1. 修改 data/ledger-full.json（数据）或 投资台账复盘_20260920.html（模板）
+# 2. 构建
+node build_public.js
+# 3. 提交
+git add -A && git commit -m "更新" && git push
 ```
 
-`build_public.js` 会：①渲染层零股数自检（拼接 HTML 的行不得出现 qty）；②原样复制源文件（保留完整 qty/cost）；③打印数据完整性摘要。
+## 文件说明
 
-## 文件
-- `index.html`：发布页面（由 `build_public.js` 生成，请勿手改）
-- `build_public.js`：发布脚本
-- `.github/workflows/pages.yml`：GitHub Pages 自动部署
+- `data/ledger-full.json` — 完整台账（唯一数据源）
+- `public/index.html` — 公开脱敏版（自动生成，勿手动编辑）
+- `build_public.js` — 构建脚本
+- `.github/workflows/pages.yml` — Pages 部署配置
