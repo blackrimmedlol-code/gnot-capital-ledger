@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "2026-10-05 登记（主号 IRE 补仓 / GDXU 高抛清仓；1号号 AVGX/LABU 清仓后于 1号号新开 SNXX）· 美股行情仍 10/2 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
-  "asOfLabel": "2026-10-05 登记（1号号新开 SNXX / 主号 GDXU 高抛了结、IRE 补仓）",
+  "asOf": "2026-10-06 刷新 10/5 收盘价：RAM 14.24（-0.49%）/ CRWG 18.29（-4.79%）/ CRDU 10.68（-5.49%）/ IRE 8.90（-6.32%）/ 1号 SNXX 15.98（-2.14%）· A股国庆休市至 10/8",
+  "asOfLabel": "10/5 收盘价刷新（10/6）· 全线下挫",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -59,7 +59,7 @@
       "name": "主账号",
       "market": "US",
       "color": "#a33a21",
-      "positionPct": 74,
+      "positionPct": 80,
       "role": "核心仓 · CC 收租为主 · 美股",
       "tag": "核心仓·收租",
       "nav": null,
@@ -72,8 +72,8 @@
           "cost": 13.31,
           "costDate": "分批（9/23+9/24+9/28 加仓；9/29 减仓摊薄；9/30 13.66 埋伏财报；10/1 14.35 止盈摊薄；10/2 14.5 止盈摊薄）",
           "stop": null,
-          "lastPrice": 14.31,
-          "lastPriceDate": "2026-10-02 收盘",
+          "lastPrice": 14.24,
+          "lastPriceDate": "2026-10-05 收盘",
           "wtPct": 48,
           "strategy": [
             "核心仓",
@@ -179,8 +179,8 @@
           "qty": 101,
           "cost": 15.75,
           "costDate": "2026-09-17",
-          "lastPrice": 19.21,
-          "lastPriceDate": "2026-10-02 收盘",
+          "lastPrice": 18.29,
+          "lastPriceDate": "2026-10-05 收盘",
           "wtPct": 7,
           "strategy": [
             "核心仓",
@@ -233,9 +233,9 @@
           "name": "2x Credo (Tradr)",
           "qty": 300,
           "cost": 6.66,
-          "lastPrice": 11.3,
-          "lastPriceDate": "2026-10-02 收盘",
-          "wtPct": 13,
+          "lastPrice": 10.68,
+          "lastPriceDate": "2026-10-05 收盘",
+          "wtPct": 12,
           "strategy": [
             "核心仓",
             "CC收租"
@@ -288,9 +288,9 @@
           "qty": 400,
           "cost": 8.32,
           "costDate": "9/30建底仓 / 10/1 8.58+8.81补底仓 / 10/2 9.9 止盈摊薄 / 10/2 10.38 止盈摊薄 / 10/2 9.23 回调接回 / 10/5 8.93 加仓 / 10/5 8.77 再加仓",
-          "lastPrice": 9.5,
-          "lastPriceDate": "2026-10-02 收盘",
-          "wtPct": 14,
+          "lastPrice": 8.9,
+          "lastPriceDate": "2026-10-05 收盘",
+          "wtPct": 13,
           "strategy": [
             "卫星仓·AI云"
           ],
@@ -307,7 +307,7 @@
             "支撑低吸"
           ],
           "execStatus": "adhoc",
-          "oneLiner": "IRE 10/5 两档补仓（@8.93/@8.77 各 100）摊薄 8.32；观望 1 周能否回升至 10。",
+          "oneLiner": "IRE 10/5 两档补仓（@8.93/@8.77）摊薄 8.32；观望 1 周能否回升至 10。",
           "actualCostBasis": {
             "value": null,
             "note": "分批买入（9/30+10/1）+日内高抛低吸（10/2）+10/5 加仓，真实均价待核实",
@@ -346,8 +346,8 @@
           "qty": 143,
           "cost": 15.695,
           "costDate": "10/5 首建（1号小账户新开）",
-          "lastPrice": 15.695,
-          "lastPriceDate": "2026-10-05 买入价（10/5 收盘待 10/6 刷新）",
+          "lastPrice": 15.98,
+          "lastPriceDate": "2026-10-05 收盘",
           "wtPct": 100,
           "strategy": [
             "卫星仓·存储杠杆博弈"
@@ -403,8 +403,8 @@
           "qty": 67,
           "cost": 18.32,
           "costDate": "2026-09-23",
-          "lastPrice": 16.33,
-          "lastPriceDate": "2026-10-02 收盘",
+          "lastPrice": 15.98,
+          "lastPriceDate": "2026-10-05 收盘",
           "wtPct": 100,
           "strategy": [
             "卫星仓·存储杠杆博弈"

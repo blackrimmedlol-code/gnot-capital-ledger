@@ -632,7 +632,7 @@
     <div class="sec-head">
       <span class="n">01</span>
       <h2>持仓监测</h2>
-      <span class="note">占比=账户内市值权重 · 美股 10/2 收盘 · A股 9/30 收盘</span>
+      <span class="note">占比=账户内市值权重 · 美股 10/5 收盘 · A股 9/30 收盘（国庆休市）</span>
     </div>
     <div id="holdingsBox"></div>
   </section>
@@ -648,6 +648,60 @@
 
       <article class="entry">
         <details open>
+          <summary>
+            <span class="date">2026-10-05</span>
+            <span class="title">IRE 两档补仓 · GDXU 日内高抛 · 1号 AVGX 清仓 / LABU 快进快出 / 新开 SNXX</span>
+          </summary>
+          <div class="entry-body">
+
+          <div class="plan-exec">
+            <div class="plan-col">
+              <h4>📋 原计划</h4>
+              <ul>
+                <li>承 10/2“下次调整”：IRE 明确退出边界、不再频繁加减</li>
+                <li>卫星仓 AVGX/SNXX 到止盈一次清、认错位果断离场</li>
+                <li>回笼现金默认观望，仅用户明确目标才动用</li>
+              </ul>
+            </div>
+            <div class="exec-col">
+              <h4>✅ 实际执行</h4>
+              <ul>
+                <li>主号 IRE：@8.93、@8.77 两档补仓（10/5），净投入摊薄 7.79 → 8.17 → 8.32，观望 1 周能否回升至 10</li>
+                <li>主号 GDXU：当日 @99.7 首建、盘中 @104 高抛清仓（日内波段落袋约 +4.3%）</li>
+                <li>1号 AVGX：@39.8 全数清仓（+2.2%），缩量上涨日离场、转空仓观望</li>
+                <li>1号 LABU：@240.65 建、@255 当日全清（快进快出约 +6%）</li>
+                <li>1号新开 SNXX：@15.695 建仓（2x 闪迪全仓，plan）——清 AVGX 后回笼资金按既定观察支撑位反弹迹象建仓</li>
+                <li>行情（10/5 收盘）：RAM 14.24（-0.49%）/ CRWG 18.29（-4.79%）/ CRDU 10.68（-5.49%）/ IRE 8.90（-6.32%）/ SNXX 15.98（-2.14%）——AI 硬件链全线下挫</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="good"><span>✅</span>做对的</h3>
+          <ul>
+            <li><span class="fact">左侧分批补 IRE：</span>等回调至 8 字头后两档补仓摊薄至 8.32，符合“等回调接回后加码”的左侧节奏，未追高。</li>
+            <li><span class="fact">GDXU 日内高抛：</span>当日建仓 @99.7、@104 高抛了结 +4.3%，缩量上涨日拿日内波段即走，不留隔夜风险。</li>
+            <li><span class="fact">1号带逻辑离场：</span>AVGX @39.8 全清（+2.2%）、LABU 快进快出 +6%，都在缩量上涨日锁定利润、转空仓观望；后按观察建 SNXX 属计划内（plan）。</li>
+          </ul>
+
+          <h3 class="bad"><span>⚠️</span>偏差与问题</h3>
+          <ul>
+            <li><span class="fact">IRE 补仓与“不再频繁加减”的边界：</span>10/5 两档补仓后净投入摊薄 8.32，但 IRE 仍处财报密集期、当日收盘 8.90（-6.32%）已低于补仓成本；补仓节奏与退出边界需在下一次明确锁定。</li>
+            <li><span class="fact">当日高抛的仓位性质：</span>GDXU 建仓-清仓为当日完成，属临时战术操作；留不留趋势 runner 需按“核心/博弈仓”口径定性，勿让临时仓干扰核心逻辑。</li>
+          </ul>
+
+          <h3><span>🔄</span>下次调整</h3>
+          <ul>
+            <li>IRE：净投入摊薄 8.32、10/5 收盘 8.90，观望 1 周能否修复回升至 10；明确退出边界，避免财报密集期继续加仓</li>
+            <li>1号 SNXX：观察支撑位反弹成色，用结果验证建仓逻辑；到止盈位按博弈仓一次清、不留 runner</li>
+            <li>回笼/观望：仍以核心仓 CC 收租为主，卫星仓小步快跑、带逻辑进出</li>
+          </ul>
+
+          </div>
+        </details>
+      </article>
+
+      <article class="entry">
+        <details>
           <summary>
             <span class="date">2026-10-02</span>
             <span class="title">RAM @14.5 止盈 · IRE 两次兑现一次回调接回（9.9 先兑现 / 10.38 高抛 / 9.23 回调接回）</span>
@@ -1475,8 +1529,8 @@
   // UNIFIED DATA SOURCE — 所有展示数据从这里生成，避免手写不同步
   // ============================================================
   var DATA = {
-  asOf: "2026-10-05 登记（主号 IRE 补仓 / GDXU 高抛清仓；1号号 AVGX/LABU 清仓后于 1号号新开 SNXX）· 美股行情仍 10/2 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
-  asOfLabel: "2026-10-05 登记（1号号新开 SNXX / 主号 GDXU 高抛了结、IRE 补仓）",
+  asOf: "2026-10-06 刷新 10/5 收盘价：RAM 14.24（-0.49%）/ CRWG 18.29（-4.79%）/ CRDU 10.68（-5.49%）/ IRE 8.90（-6.32%）/ 1号 SNXX 15.98（-2.14%）· A股国庆休市至 10/8",
+  asOfLabel: "10/5 收盘价刷新（10/6）· 全线下挫",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1492,7 +1546,7 @@
       name: "主账号",
       market: "US",
       color: "#a33a21",
-      positionPct: 74,
+      positionPct: 80,
       role: "核心仓 · CC 收租为主 · 美股",
       tag: "核心仓·收租",
       nav: null,
@@ -1504,8 +1558,8 @@
           cost: 13.31,
           costDate: "分批（9/23+9/24+9/28 加仓；9/29 减仓摊薄；9/30 13.66 埋伏财报；10/1 14.35 止盈摊薄；10/2 14.5 止盈摊薄）",
           stop: null,
-          lastPrice: 14.31,
-          lastPriceDate: "2026-10-02 收盘",
+          lastPrice: 14.24,
+          lastPriceDate: "2026-10-05 收盘",
           wtPct: 48,
           strategy: [
             "核心仓",
@@ -1619,8 +1673,8 @@
           name: "2x CoreWeave (Leverage Shares)",
           cost: 15.75,
           costDate: "2026-09-17",
-          lastPrice: 19.21,
-          lastPriceDate: "2026-10-02 收盘",
+          lastPrice: 18.29,
+          lastPriceDate: "2026-10-05 收盘",
           wtPct: 7,
           strategy: [
             "核心仓",
@@ -1683,9 +1737,9 @@
           sym: "CRDU",
           name: "2x Credo (Tradr)",
           cost: 6.66,
-          lastPrice: 11.3,
-          lastPriceDate: "2026-10-02 收盘",
-          wtPct: 13,
+          lastPrice: 10.68,
+          lastPriceDate: "2026-10-05 收盘",
+          wtPct: 12,
           strategy: [
             "核心仓",
             "CC收租"
@@ -1748,9 +1802,9 @@
           name: "Defiance 2x IREN · 2x AI云",
           cost: 8.32,
           costDate: "9/30建底仓 / 10/1 8.58+8.81补底仓 / 10/2 9.9 止盈摊薄 / 10/2 10.38 止盈摊薄 / 10/2 9.23 回调接回 / 10/5 8.93 加仓 / 10/5 8.77 再加仓",
-          lastPrice: 9.5,
-          lastPriceDate: "2026-10-02 收盘",
-          wtPct: 14,
+          lastPrice: 8.9,
+          lastPriceDate: "2026-10-05 收盘",
+          wtPct: 13,
           strategy: [
             "卫星仓·AI云"
           ],
@@ -1767,7 +1821,7 @@
             "支撑低吸"
           ],
           execStatus: "adhoc",
-          oneLiner: "IRE 10/5 两档补仓（@8.93/@8.77 各 100）摊薄 8.32；观望 1 周能否回升至 10。",
+          oneLiner: "IRE 10/5 两档补仓（@8.93/@8.77）摊薄 8.32；观望 1 周能否回升至 10。",
           actualCostBasis: {
             value: null,
             note: "分批买入（9/30+10/1）+日内高抛低吸（10/2）+10/5 加仓，真实均价待核实",
@@ -1814,8 +1868,8 @@
           name: "Tradr 2X Long SNDK · 2x 闪迪",
           cost: 15.695,
           costDate: "10/5 首建（1号小账户新开）",
-          lastPrice: 15.695,
-          lastPriceDate: "2026-10-05 买入价（10/5 收盘待 10/6 刷新）",
+          lastPrice: 15.98,
+          lastPriceDate: "2026-10-05 收盘",
           wtPct: 100,
           strategy: [
             "卫星仓·存储杠杆博弈"
@@ -1879,8 +1933,8 @@
           name: "Tradr 2X Long SNDK · 2x 闪迪",
           cost: 18.32,
           costDate: "2026-09-23",
-          lastPrice: 16.33,
-          lastPriceDate: "2026-10-02 收盘",
+          lastPrice: 15.98,
+          lastPriceDate: "2026-10-05 收盘",
           wtPct: 100,
           strategy: [
             "卫星仓·存储杠杆博弈"
