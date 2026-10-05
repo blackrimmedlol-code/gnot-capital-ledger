@@ -1475,8 +1475,8 @@
   // UNIFIED DATA SOURCE — 所有展示数据从这里生成，避免手写不同步
   // ============================================================
   var DATA = {
-  asOf: "2026-10-02 收盘（RAM 冲高连续兑现 · IRE 两次兑现一次回调接回）· 美股 2026-10-02 收盘 · A股 9/30 收盘（国庆休市）",
-  asOfLabel: "2026-10-02 收盘（RAM 冲高连续兑现 · IRE 两次兑现一次回调接回）",
+  asOf: "2026-10-05 登记（主号新增 IRE+100@8.93、GDXU 首建 20@99.7）· 美股行情仍 2026-10-02 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
+  asOfLabel: "2026-10-05 登记新增买入（IRE 加仓 / GDXU 首建）",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1746,11 +1746,11 @@
         {
           sym: "IRE",
           name: "Defiance 2x IREN · 2x AI云",
-          cost: 7.79,
-          costDate: "9/30建底仓 / 10/1 8.58+8.81补底仓 / 10/2 9.9 止盈摊薄 / 10/2 10.38 止盈摊薄 / 10/2 9.23 回调接回",
+          cost: 8.17,
+          costDate: "9/30建底仓 / 10/1 8.58+8.81补底仓 / 10/2 9.9 止盈摊薄 / 10/2 10.38 止盈摊薄 / 10/2 9.23 回调接回 / 10/5 8.93 加仓",
           lastPrice: 9.5,
           lastPriceDate: "2026-10-02 收盘",
-          wtPct: 7,
+          wtPct: 11,
           strategy: [
             "卫星仓·AI云"
           ],
@@ -1762,20 +1762,20 @@
             "持有"
           ],
           alertSub: "2x 每日重置 · 高波动",
-          note: "9/30 @9.23 建底仓；10/1 @8.58、@8.81 两档补、摊薄 8.87；10/2 @9.9、@10.38 分批止盈、@9.23 回调接回，摊薄 7.79——冲高两档兑现后等回调接回，持有观察",
+          note: "9/30 @9.23 建底仓；10/1 @8.58、@8.81 两档补、摊薄 8.87；10/2 @9.9、@10.38 分批止盈、@9.23 回调接回，摊薄 7.79——冲高两档兑现后等回调接回，持有观察；10/5 @8.93 加仓 100、摊薄 8.17——等回调接回后加码，持有多观",
           setup: [
             "支撑低吸"
           ],
           execStatus: "adhoc",
-          oneLiner: "IRE 10/2 日内三连：@9.9 先兑现 +11.6%、@10.38 高抛 +24.2%、@9.23 回调接回，摊薄 7.79；冲高两档锁住反弹浮盈、回落接回后持有观察。",
+          oneLiner: "IRE 10/2 日内三连：@9.9 先兑现 +11.6%、@10.38 高抛 +24.2%、@9.23 回调接回，摊薄 7.79；冲高两档锁住反弹浮盈、回落接回后持有观察。；10/5 @8.93 加仓、摊薄 8.17。",
           actualCostBasis: {
             value: null,
-            note: "分批买入（9/30+10/1）+日内高抛低吸（10/2），真实均价待核实",
+            note: "分批买入（9/30+10/1）+日内高抛低吸（10/2）+10/5 加仓，真实均价待核实",
             status: "待核实"
           },
           netInvestedCost: {
-            value: 7.79,
-            note: "净投入摊薄口径（10/2 @9.23 接回后）",
+            value: 8.17,
+            note: "净投入摊薄口径（10/2 @9.23 接回后 + 10/5 @8.93 加仓100）",
             status: "确认"
           },
           entrySetup: [
@@ -1784,7 +1784,59 @@
           entryExecStatus: "adhoc",
           actionExecStatus: null,
           exitReason: null,
-          episodeId: "EP-IRE-2026Q3",
+          episodeId: "EP-IRE-2026Q4",
+          coverage: {
+            status: "none",
+            statusText: "无备兑",
+            isFullyBacked: false,
+            hasFreeShares: true,
+            sharesUnknown: false,
+            coveragePct: null,
+            shareCoveragePct: 0
+          },
+          costNote: "摊薄口径"
+        },
+        {
+          sym: "GDXU",
+          name: "Direxion Daily Gold Miners Bull 2X",
+          cost: 99.7,
+          costDate: "10/5 首建",
+          lastPrice: 99.7,
+          lastPriceDate: "2026-10-05 买入价（10/5 收盘待 10/6 刷新）",
+          wtPct: 7,
+          strategy: [
+            "卫星仓·2x金矿"
+          ],
+          options: [],
+          tags: [
+            "hold"
+          ],
+          status: [
+            "持有"
+          ],
+          alertSub: "2x 每日重置 · 高波动",
+          setup: [
+            "新标的建仓"
+          ],
+          execStatus: "adhoc",
+          oneLiner: "GDXU 10/5 首建底仓 20@99.7（2x 做多金矿股 ETF）；建仓逻辑待补。",
+          actualCostBasis: {
+            value: 99.7,
+            note: "2026-10-05 首建成本",
+            status: "确认"
+          },
+          netInvestedCost: {
+            value: 99.7,
+            note: "与真实成本一致（无减仓摊薄）",
+            status: "确认"
+          },
+          entrySetup: [
+            "新标的建仓"
+          ],
+          entryExecStatus: "adhoc",
+          actionExecStatus: null,
+          exitReason: null,
+          episodeId: "EP-GDXU-2026Q4",
           coverage: {
             status: "none",
             statusText: "无备兑",
