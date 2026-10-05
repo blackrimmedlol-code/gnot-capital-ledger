@@ -361,10 +361,10 @@
           ],
           "alertSub": "2x 每日重置 · 高波动标的",
           "setup": [
-            "其他"
+            "支撑位反弹"
           ],
-          "execStatus": "unknown",
-          "oneLiner": "1号小账户 10/5 新开 SNXX（2x 闪迪）；建仓逻辑待补。",
+          "execStatus": "plan",
+          "oneLiner": "既定观察支撑位出现反弹迹象，10/5 建仓（2x 闪迪高波动博弈）；用结果验证反弹成色。",
           "actualCostBasis": {
             "value": 15.695,
             "note": "2026-10-05 首建（1号小账户）",
@@ -377,9 +377,9 @@
           },
           "costDisplay": "实际成本",
           "entrySetup": [
-            "其他"
+            "支撑位反弹"
           ],
-          "entryExecStatus": "unknown",
+          "entryExecStatus": "plan",
           "actionExecStatus": null,
           "exitReason": null,
           "episodeId": "EP-SNXX1-2026Q4"
@@ -1736,9 +1736,9 @@
       "status": "open",
       "entryDate": "2026-10-05",
       "entrySetup": [
-        "其他"
+        "支撑位反弹"
       ],
-      "entryExecStatus": "unknown",
+      "entryExecStatus": "plan",
       "currentQty": 143,
       "exitReason": null,
       "exitDate": null
@@ -2528,7 +2528,7 @@
     {
       "date": "2026-10-06",
       "item": "1号小账户新开 SNXX",
-      "detail": "1号小账户 10/5 新开 SNXX（2x 闪迪），EP-SNXX1-2026Q4；2号小账户 SNXX 不受影响。建仓逻辑待补（execStatus=unknown）。"
+      "detail": "1号小账户 10/5 新开 SNXX（2x 闪迪），EP-SNXX1-2026Q4；2号小账户 SNXX 不受影响。建仓逻辑=既定观察支撑位出现反弹迹象（execStatus=plan）。"
     }
   ]
 }
