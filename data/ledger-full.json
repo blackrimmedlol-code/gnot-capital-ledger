@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "2026-10-05 登记（主号 IRE +200@8.93/8.77 摊薄 8.32、GDXU 首建 20@99.7）· 美股行情仍 2026-10-02 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
-  "asOfLabel": "2026-10-05 登记（IRE 加仓 200 / GDXU 首建）· 观望 IRE 回升至 10",
+  "asOf": "2026-10-05 登记（主号 IRE 补仓摊薄8.32 / GDXU 日内高抛清仓；1号号清仓 AVGX+LABU，转空仓观望）· 美股行情仍 10/2 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
+  "asOfLabel": "2026-10-05 登记（1号号清仓转空仓观望 / 主号 GDXU 高抛了结、IRE 补仓）",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -326,50 +326,6 @@
           "actionExecStatus": null,
           "exitReason": null,
           "episodeId": "EP-IRE-2026Q4"
-        },
-        {
-          "sym": "GDXU",
-          "name": "Direxion Daily Gold Miners Bull 2X",
-          "qty": 20,
-          "cost": 99.7,
-          "costDate": "10/5 首建",
-          "lastPrice": 99.7,
-          "lastPriceDate": "2026-10-05 买入价（10/5 收盘待 10/6 刷新）",
-          "wtPct": 7,
-          "strategy": [
-            "卫星仓·2x金矿"
-          ],
-          "options": [],
-          "tags": [
-            "hold"
-          ],
-          "status": [
-            "持有"
-          ],
-          "alertSub": "2x 每日重置 · 高波动",
-          "setup": [
-            "新标的建仓"
-          ],
-          "execStatus": "adhoc",
-          "oneLiner": "GDXU 10/5 首建底仓 20@99.7（2x 做多金矿股 ETF）；建仓逻辑待补。",
-          "actualCostBasis": {
-            "value": 99.7,
-            "note": "2026-10-05 首建成本",
-            "status": "确认"
-          },
-          "netInvestedCost": {
-            "value": 99.7,
-            "note": "与真实成本一致（无减仓摊薄）",
-            "status": "确认"
-          },
-          "costDisplay": "摊薄口径",
-          "entrySetup": [
-            "新标的建仓"
-          ],
-          "entryExecStatus": "adhoc",
-          "actionExecStatus": null,
-          "exitReason": null,
-          "episodeId": "EP-GDXU-2026Q4"
         }
       ]
     },
@@ -383,55 +339,7 @@
       "tag": "卫星博弈",
       "nav": null,
       "navNote": "USD · 满仓",
-      "holdings": [
-        {
-          "sym": "AVGX",
-          "name": "Defiance 2x AVGO · 2x博通",
-          "qty": 53,
-          "cost": 38.95,
-          "costDate": "2026-09-23",
-          "lastPrice": 38.48,
-          "lastPriceDate": "2026-10-02 收盘",
-          "wtPct": 100,
-          "strategy": [
-            "卫星仓·2x博通博弈"
-          ],
-          "options": [],
-          "tags": [
-            "hold"
-          ],
-          "status": [
-            "持有"
-          ],
-          "alertSub": "2x 每日重置 · 高波动",
-          "note": "9/23 38.95 低位反手建仓，预期持有至 10 月",
-          "setup": [
-            "超跌反弹",
-            "趋势波段"
-          ],
-          "execStatus": "adhoc",
-          "oneLiner": "止损后果断换向，逻辑独立（大盘上行+个股补涨+持有至10月），非单纯补偿交易。",
-          "actualCostBasis": {
-            "value": 38.95,
-            "note": "2026-09-23 建仓",
-            "status": "确认"
-          },
-          "netInvestedCost": {
-            "value": 38.95,
-            "note": "与真实成本一致（无减仓摊薄）",
-            "status": "确认"
-          },
-          "costDisplay": "实际成本",
-          "entrySetup": [
-            "超跌反弹",
-            "趋势波段"
-          ],
-          "entryExecStatus": "adhoc",
-          "actionExecStatus": null,
-          "exitReason": null,
-          "episodeId": "EP-AVGX-2026Q3"
-        }
-      ]
+      "holdings": []
     },
     {
       "id": "sat2",
@@ -1307,7 +1215,7 @@
     },
     {
       "executionId": "EX-20261005-GDXU-BUY-050",
-      "episodeId": "EP-GDXU-2026Q4",
+      "episodeId": "EP-GDXU-CLOSED-20261005",
       "account": "main",
       "sym": "GDXU",
       "side": "buy",
@@ -1333,6 +1241,66 @@
       "timezone": "America/New_York",
       "fee": null,
       "note": "10/5 再补仓 100@8.77（用户确认）；观望 1 周能否回升至 10",
+      "status": "confirmed"
+    },
+    {
+      "executionId": "EX-20261005-AVGX-SELL-052",
+      "episodeId": "EP-AVGX-2026Q3",
+      "account": "sat1",
+      "sym": "AVGX",
+      "side": "sell",
+      "qty": 53,
+      "price": 39.8,
+      "date": "2026-10-05",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "1号小账户缩量上涨日 @39.8 全数清仓，转空仓观望",
+      "status": "confirmed"
+    },
+    {
+      "executionId": "EX-20261005-LABU-BUY-053",
+      "episodeId": "EP-LABU-CLOSED-20261005",
+      "account": "sat1",
+      "sym": "LABU",
+      "side": "buy",
+      "qty": 8,
+      "price": 240.65,
+      "date": "2026-10-05",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "3x 做多生物科技 ETF 快进建仓 8@240.65",
+      "status": "confirmed"
+    },
+    {
+      "executionId": "EX-20261005-LABU-SELL-054",
+      "episodeId": "EP-LABU-CLOSED-20261005",
+      "account": "sat1",
+      "sym": "LABU",
+      "side": "sell",
+      "qty": 8,
+      "price": 255,
+      "date": "2026-10-05",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "当日 255 全数清仓（快进快出）",
+      "status": "confirmed"
+    },
+    {
+      "executionId": "EX-20261005-GDXU-SELL-055",
+      "episodeId": "EP-GDXU-CLOSED-20261005",
+      "account": "main",
+      "sym": "GDXU",
+      "side": "sell",
+      "qty": 20,
+      "price": 104,
+      "date": "2026-10-05",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "主号 10/5 当日建（99.7）→104 高抛清仓",
       "status": "confirmed"
     }
   ],
@@ -1393,16 +1361,16 @@
       "episodeId": "EP-AVGX-2026Q3",
       "sym": "AVGX",
       "account": "sat1",
-      "status": "open",
+      "status": "closed",
       "entryDate": null,
       "entrySetup": [
         "超跌反弹",
         "趋势波段"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 53,
-      "exitReason": null,
-      "exitDate": null
+      "currentQty": 0,
+      "exitReason": "1号小账户缩量上涨日清仓：AVGX @39.8 全清，转空仓观望",
+      "exitDate": "2026-10-05"
     },
     {
       "episodeId": "EP-SNXX-2026Q3",
@@ -1669,23 +1637,37 @@
         "支撑低吸"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 100,
+      "currentQty": 200,
       "exitReason": null,
       "exitDate": null
     },
     {
-      "episodeId": "EP-GDXU-2026Q4",
       "sym": "GDXU",
       "account": "main",
-      "status": "open",
+      "status": "closed",
       "entryDate": "2026-10-05",
       "entrySetup": [
-        "新标的建仓"
+        "日内高抛"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 20,
-      "exitReason": null,
-      "exitDate": null
+      "currentQty": 0,
+      "exitReason": "10/5 当日建仓（99.7）→104 高抛清仓",
+      "exitDate": "2026-10-05",
+      "episodeId": "EP-GDXU-CLOSED-20261005"
+    },
+    {
+      "episodeId": "EP-LABU-CLOSED-20261005",
+      "sym": "LABU",
+      "account": "sat1",
+      "status": "closed",
+      "entryDate": "2026-10-05",
+      "entrySetup": [
+        "快进快出"
+      ],
+      "entryExecStatus": "adhoc",
+      "currentQty": 0,
+      "exitReason": "当日建当日清：240.65 建 →255 清",
+      "exitDate": "2026-10-05"
     }
   ],
   "closedTrades": [
@@ -2295,13 +2277,120 @@
           "costNote": "实际成本"
         }
       ]
+    },
+    {
+      "date": "2026-10-05",
+      "dateLabel": "2026-10-05",
+      "trades": [
+        {
+          "tradeId": "AVGX-SELL",
+          "sym": "AVGX",
+          "name": "Defiance 2x AVGO · 2x博通",
+          "acct": "1号小账号",
+          "qty": null,
+          "cost": 38.95,
+          "legs": [
+            {
+              "time": "10/5 缩量上涨日",
+              "price": 39.8,
+              "retPct": 2.2,
+              "note": "@39.8 全数清仓"
+            }
+          ],
+          "totalRetPct": 2.2,
+          "totalRetNote": "+2.2%（清仓·相对建仓成本）",
+          "result": "win",
+          "reason": "1号小账户缩量上涨日离场：AVGX @39.8 全清，当日转空仓观望",
+          "setup": [
+            "超跌反弹",
+            "趋势波段"
+          ],
+          "execStatus": "adhoc",
+          "oneLiner": "AVGX 缩量上涨日 @39.8 全清离场、1号小账户转空仓观望；落袋为安。",
+          "episodeId": "EP-AVGX-2026Q3",
+          "entrySetup": [
+            "超跌反弹",
+            "趋势波段"
+          ],
+          "entryExecStatus": "adhoc",
+          "exitReason": "1号小账户缩量上涨日清仓，转空仓观望",
+          "costBasisType": "actual",
+          "costNote": "建仓成本口径"
+        },
+        {
+          "tradeId": "LABU-SELL",
+          "sym": "LABU",
+          "name": "3x 做多生物科技ETF",
+          "acct": "1号小账号",
+          "qty": null,
+          "cost": 240.65,
+          "legs": [
+            {
+              "time": "10/5 快进快出",
+              "price": 255,
+              "retPct": 6,
+              "note": "当日 240.65 建 →255 全清"
+            }
+          ],
+          "totalRetPct": 6,
+          "totalRetNote": "+6%（清仓·相对建仓成本）",
+          "result": "win",
+          "reason": "1号小账户日内快进快出：LABU 240.65 建、255 全清，缩量上涨日轻仓博弈后离场",
+          "setup": [
+            "快进快出"
+          ],
+          "execStatus": "adhoc",
+          "oneLiner": "LABU 当日快进快出 +6%：240.65 建、255 全清，缩量上涨日打一枪就走。",
+          "episodeId": "EP-LABU-CLOSED-20261005",
+          "entrySetup": [
+            "快进快出"
+          ],
+          "entryExecStatus": "adhoc",
+          "exitReason": "日内快进快出全清",
+          "costBasisType": "actual",
+          "costNote": "当日建仓成本口径"
+        },
+        {
+          "tradeId": "GDXU-SELL",
+          "sym": "GDXU",
+          "name": "Direxion Daily Gold Miners Bull 2X",
+          "acct": "主账号",
+          "qty": null,
+          "cost": 99.7,
+          "legs": [
+            {
+              "time": "10/5 日内",
+              "price": 104,
+              "retPct": 4.3,
+              "note": "当日 99.7 建 →104 高抛清仓"
+            }
+          ],
+          "totalRetPct": 4.3,
+          "totalRetNote": "+4.3%（清仓·相对建仓成本）",
+          "result": "win",
+          "reason": "主号 10/5 当日建仓 GDXU（99.7）、盘中 @104 高抛了结，日内波段落袋",
+          "setup": [
+            "日内高抛"
+          ],
+          "execStatus": "adhoc",
+          "oneLiner": "GDXU 当日建仓 @99.7、@104 高抛清仓 +4.3%；缩量上涨日日内了结。",
+          "episodeId": "EP-GDXU-CLOSED-20261005",
+          "entrySetup": [
+            "日内高抛"
+          ],
+          "entryExecStatus": "adhoc",
+          "exitReason": "10/5 当日高抛清仓",
+          "costBasisType": "actual",
+          "costNote": "当日建仓成本口径"
+        }
+      ]
     }
   ],
   "stats": {
-    "registeredEntries": 16,
-    "confirmedFills": 23,
-    "completedEpisodes": 15,
-    "openEpisodes": 11,
+    "registeredEntries": 17,
+    "confirmedFills": 27,
+    "completedEpisodes": 18,
+    "openEpisodes": 9,
     "incompleteEvents": 21,
     "winEntries": 13,
     "lossEntries": 2
@@ -2356,6 +2445,11 @@
       "date": "2026-10-06",
       "item": "IRE 再补仓登记",
       "detail": "主号 IRE 再补 100@8.77（10/5 美东盘中），净投入摊薄 8.17→8.32，qty 300→400；观望 1 周（约至 10/13）能否回升至 10。"
+    },
+    {
+      "date": "2026-10-06",
+      "item": "清仓与快进快出登记",
+      "detail": "主号 GDXU 当日建当日清（99.7→104），EP-GDXU-2026Q4 改名 EP-GDXU-CLOSED-20261005；1号号 AVGX @39.8 全清（EP-AVGX-2026Q3 转 closed）、LABU 当日 240.65→255 快进快出（EP-LABU-CLOSED-20261005）；1号小账户转空仓观望。IE Q4 currentQty 同步 200。"
     }
   ]
 }
