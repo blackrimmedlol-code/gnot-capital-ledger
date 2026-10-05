@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "asOf": "2026-10-05 登记（主号 IRE 补仓 / GDXU 高抛清仓；1号号 AVGX/LABU 清仓后新开 SNXX 143@15.695）· 美股行情仍 10/2 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
+  "asOf": "2026-10-05 登记（主号 IRE 补仓 / GDXU 高抛清仓；1号号 AVGX/LABU 清仓后于 1号号新开 SNXX）· 美股行情仍 10/2 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
   "asOfLabel": "2026-10-05 登记（1号号新开 SNXX / 主号 GDXU 高抛了结、IRE 补仓）",
   "timezone": "America/New_York",
   "fx": {
@@ -364,7 +364,7 @@
             "其他"
           ],
           "execStatus": "unknown",
-          "oneLiner": "1号小账户 10/5 新开 SNXX 143@15.695（2x 闪迪）；建仓逻辑待补。",
+          "oneLiner": "1号小账户 10/5 新开 SNXX（2x 闪迪）；建仓逻辑待补。",
           "actualCostBasis": {
             "value": 15.695,
             "note": "2026-10-05 首建（1号小账户）",
@@ -2528,7 +2528,7 @@
     {
       "date": "2026-10-06",
       "item": "1号小账户新开 SNXX",
-      "detail": "1号小账户 10/5 新开 SNXX 143@15.695（2x 闪迪），EP-SNXX1-2026Q4；2号小账户 67 股 SNXX 不受影响。建仓逻辑待补（execStatus=unknown）。"
+      "detail": "1号小账户 10/5 新开 SNXX（2x 闪迪），EP-SNXX1-2026Q4；2号小账户 SNXX 不受影响。建仓逻辑待补（execStatus=unknown）。"
     }
   ]
 }
