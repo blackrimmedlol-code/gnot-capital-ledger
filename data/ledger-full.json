@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "2026-10-05 登记（主号 IRE 补仓摊薄8.32 / GDXU 日内高抛清仓；1号号清仓 AVGX+LABU，转空仓观望）· 美股行情仍 10/2 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
-  "asOfLabel": "2026-10-05 登记（1号号清仓转空仓观望 / 主号 GDXU 高抛了结、IRE 补仓）",
+  "asOf": "2026-10-05 登记（主号 IRE 补仓 / GDXU 高抛清仓；1号号 AVGX/LABU 清仓后新开 SNXX 143@15.695）· 美股行情仍 10/2 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
+  "asOfLabel": "2026-10-05 登记（1号号新开 SNXX / 主号 GDXU 高抛了结、IRE 补仓）",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -339,7 +339,52 @@
       "tag": "卫星博弈",
       "nav": null,
       "navNote": "USD · 满仓",
-      "holdings": []
+      "holdings": [
+        {
+          "sym": "SNXX",
+          "name": "Tradr 2X Long SNDK · 2x 闪迪",
+          "qty": 143,
+          "cost": 15.695,
+          "costDate": "10/5 首建（1号小账户新开）",
+          "lastPrice": 15.695,
+          "lastPriceDate": "2026-10-05 买入价（10/5 收盘待 10/6 刷新）",
+          "wtPct": 100,
+          "strategy": [
+            "卫星仓·存储杠杆博弈"
+          ],
+          "options": [],
+          "tags": [
+            "hold"
+          ],
+          "status": [
+            "持有"
+          ],
+          "alertSub": "2x 每日重置 · 高波动标的",
+          "setup": [
+            "其他"
+          ],
+          "execStatus": "unknown",
+          "oneLiner": "1号小账户 10/5 新开 SNXX 143@15.695（2x 闪迪）；建仓逻辑待补。",
+          "actualCostBasis": {
+            "value": 15.695,
+            "note": "2026-10-05 首建（1号小账户）",
+            "status": "确认"
+          },
+          "netInvestedCost": {
+            "value": 15.695,
+            "note": "与真实成本一致（无减仓摊薄）",
+            "status": "确认"
+          },
+          "costDisplay": "实际成本",
+          "entrySetup": [
+            "其他"
+          ],
+          "entryExecStatus": "unknown",
+          "actionExecStatus": null,
+          "exitReason": null,
+          "episodeId": "EP-SNXX1-2026Q4"
+        }
+      ]
     },
     {
       "id": "sat2",
@@ -1302,6 +1347,21 @@
       "fee": null,
       "note": "主号 10/5 当日建（99.7）→104 高抛清仓",
       "status": "confirmed"
+    },
+    {
+      "executionId": "EX-20261005-SNXX-BUY-056",
+      "episodeId": "EP-SNXX1-2026Q4",
+      "account": "sat1",
+      "sym": "SNXX",
+      "side": "buy",
+      "qty": 143,
+      "price": 15.695,
+      "date": "2026-10-05",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "1号小账户新开 SNXX 143@15.695（2x 闪迪）",
+      "status": "confirmed"
     }
   ],
   "episodes": [
@@ -1668,6 +1728,20 @@
       "currentQty": 0,
       "exitReason": "当日建当日清：240.65 建 →255 清",
       "exitDate": "2026-10-05"
+    },
+    {
+      "episodeId": "EP-SNXX1-2026Q4",
+      "sym": "SNXX",
+      "account": "sat1",
+      "status": "open",
+      "entryDate": "2026-10-05",
+      "entrySetup": [
+        "其他"
+      ],
+      "entryExecStatus": "unknown",
+      "currentQty": 143,
+      "exitReason": null,
+      "exitDate": null
     }
   ],
   "closedTrades": [
@@ -2387,10 +2461,10 @@
     }
   ],
   "stats": {
-    "registeredEntries": 17,
-    "confirmedFills": 27,
+    "registeredEntries": 18,
+    "confirmedFills": 28,
     "completedEpisodes": 18,
-    "openEpisodes": 9,
+    "openEpisodes": 10,
     "incompleteEvents": 21,
     "winEntries": 13,
     "lossEntries": 2
@@ -2450,6 +2524,11 @@
       "date": "2026-10-06",
       "item": "清仓与快进快出登记",
       "detail": "主号 GDXU 当日建当日清（99.7→104），EP-GDXU-2026Q4 改名 EP-GDXU-CLOSED-20261005；1号号 AVGX @39.8 全清（EP-AVGX-2026Q3 转 closed）、LABU 当日 240.65→255 快进快出（EP-LABU-CLOSED-20261005）；1号小账户转空仓观望。IE Q4 currentQty 同步 200。"
+    },
+    {
+      "date": "2026-10-06",
+      "item": "1号小账户新开 SNXX",
+      "detail": "1号小账户 10/5 新开 SNXX 143@15.695（2x 闪迪），EP-SNXX1-2026Q4；2号小账户 67 股 SNXX 不受影响。建仓逻辑待补（execStatus=unknown）。"
     }
   ]
 }

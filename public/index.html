@@ -1475,8 +1475,8 @@
   // UNIFIED DATA SOURCE — 所有展示数据从这里生成，避免手写不同步
   // ============================================================
   var DATA = {
-  asOf: "2026-10-05 登记（主号 IRE 补仓摊薄8.32 / GDXU 日内高抛清仓；1号号清仓 AVGX+LABU，转空仓观望）· 美股行情仍 10/2 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
-  asOfLabel: "2026-10-05 登记（1号号清仓转空仓观望 / 主号 GDXU 高抛了结、IRE 补仓）",
+  asOf: "2026-10-05 登记（主号 IRE 补仓 / GDXU 高抛清仓；1号号 AVGX/LABU 清仓后新开 SNXX 143@15.695）· 美股行情仍 10/2 收盘（10/6 刷新 10/5）· A股 9/30 收盘（国庆休市）",
+  asOfLabel: "2026-10-05 登记（1号号新开 SNXX / 主号 GDXU 高抛了结、IRE 补仓）",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1808,7 +1808,60 @@
       tag: "卫星博弈",
       nav: null,
       navNote: "USD · 满仓",
-      holdings: []
+      holdings: [
+        {
+          sym: "SNXX",
+          name: "Tradr 2X Long SNDK · 2x 闪迪",
+          cost: 15.695,
+          costDate: "10/5 首建（1号小账户新开）",
+          lastPrice: 15.695,
+          lastPriceDate: "2026-10-05 买入价（10/5 收盘待 10/6 刷新）",
+          wtPct: 100,
+          strategy: [
+            "卫星仓·存储杠杆博弈"
+          ],
+          options: [],
+          tags: [
+            "hold"
+          ],
+          status: [
+            "持有"
+          ],
+          alertSub: "2x 每日重置 · 高波动标的",
+          setup: [
+            "其他"
+          ],
+          execStatus: "unknown",
+          oneLiner: "1号小账户 10/5 新开 SNXX 143@15.695（2x 闪迪）；建仓逻辑待补。",
+          actualCostBasis: {
+            value: 15.695,
+            note: "2026-10-05 首建（1号小账户）",
+            status: "确认"
+          },
+          netInvestedCost: {
+            value: 15.695,
+            note: "与真实成本一致（无减仓摊薄）",
+            status: "确认"
+          },
+          entrySetup: [
+            "其他"
+          ],
+          entryExecStatus: "unknown",
+          actionExecStatus: null,
+          exitReason: null,
+          episodeId: "EP-SNXX1-2026Q4",
+          coverage: {
+            status: "none",
+            statusText: "无备兑",
+            isFullyBacked: false,
+            hasFreeShares: true,
+            sharesUnknown: false,
+            coveragePct: null,
+            shareCoveragePct: 0
+          },
+          costNote: "实际成本"
+        }
+      ]
     },
     {
       id: "sat2",
