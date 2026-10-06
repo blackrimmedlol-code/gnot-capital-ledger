@@ -53,6 +53,19 @@
       "reviewTimezone": "Asia/Shanghai",
       "missingValues": "保留null，页面显示待核实，不阻止事件渲染",
       "acceptanceCommand": "node check_update.js"
+    },
+    "optionsAnalysis": {
+      "scope": "coverage_only",
+      "confirmedBy": "user",
+      "confirmedDate": "2026-10-06",
+      "callsFullyBacked": true,
+      "note": "用户确认卖call百分百备兑；不要求补期权权利金/流水，不核算期权及组合收益；不等于全部正股均被call覆盖"
+    },
+    "observationPolicy": {
+      "scope": "exclude_from_trading_analysis",
+      "confirmedDate": "2026-10-06",
+      "note": "用户确认额外单股仅为观察价格；保留原始qty及成交，analysisQty排除观察份额，不计交易胜负、清仓状态、交易仓集中度。仅明确的额外观察股排除，不将所有qty=1的成交自动删除。",
+      "orderFeePolicy": "已保存费用为券商订单实际费用；当前收益仍为未扣费毛收益，未分摊混合订单费用"
     }
   },
   "discipline": {
@@ -77,7 +90,7 @@
           "name": "2x DRAM (Roundhill T-Rex)",
           "qty": 900,
           "cost": 13.31,
-          "costDate": "分批（9/23+9/24+9/28 加仓；9/29 减仓摊薄；9/30 13.66 埋伏财报；10/1 14.35 止盈摊薄；10/2 14.5 止盈摊薄）",
+          "costDate": "期初持续持仓，后续成交已按结单补录；10/2卖出数量待核实",
           "stop": null,
           "lastPrice": 14.24,
           "lastPriceDate": "2026-10-05 收盘",
@@ -158,7 +171,7 @@
           "strategyNote": "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。",
           "actualCostBasis": {
             "value": null,
-            "note": "分批买入（9/23+9/24+9/28+9/30），减仓批次无法对应，真实均价待核实",
+            "note": "真实期初买入成本缺失；已知成交数量不能代替期初成本",
             "status": "待核实"
           },
           "netInvestedCost": {
@@ -176,14 +189,14 @@
           "episodeId": "EP-RAM-2026Q3",
           "compositeNetInvested": {
             "value": null,
-            "note": "组合净投入（含期权现金流：权利金收入与期权盈亏），与正股净投入分开记录；权利金/期权现金流待核实后确认",
-            "status": "待核实"
+            "status": "本轮不核算",
+            "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           }
         },
         {
           "sym": "CRWG",
           "name": "2x CoreWeave (Leverage Shares)",
-          "qty": 101,
+          "qty": 100,
           "cost": 15.75,
           "costDate": "2026-09-17",
           "lastPrice": 18.29,
@@ -215,13 +228,13 @@
           ],
           "actualCostBasis": {
             "value": 15.75,
-            "note": "2026-09-17 建仓",
-            "status": "确认"
+            "status": "确认",
+            "note": "结单正股移动加权均价，排除用户确认的观察份额，未计费用"
           },
           "netInvestedCost": {
-            "value": 14.25495,
-            "note": "正股净投入摊薄=(201×15.75-100×17.26)÷101，含减仓回款、未计费用、未含期权现金流",
-            "status": "确认"
+            "value": 14.24,
+            "status": "确认",
+            "note": "交易仓正股净投入摊薄，排除观察份额，未计费用、未含期权"
           },
           "costDisplay": "实际成本",
           "entrySetup": [],
@@ -231,15 +244,15 @@
           "episodeId": "EP-CRWG-2026Q3",
           "compositeNetInvested": {
             "value": null,
-            "note": "组合净投入（含期权现金流：权利金收入与期权盈亏），与正股净投入分开记录；权利金/期权现金流待核实后确认",
-            "status": "待核实"
+            "status": "本轮不核算",
+            "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           }
         },
         {
           "sym": "CRDU",
           "name": "2x Credo (Tradr)",
           "qty": 300,
-          "cost": 6.66,
+          "cost": 6.71493,
           "lastPrice": 10.68,
           "lastPriceDate": "2026-10-05 收盘",
           "wtPct": 12,
@@ -255,7 +268,7 @@
                   "mult": 3,
                   "strike": 7,
                   "type": "C",
-                  "note": "权利金待补"
+                  "note": "备兑持有；期权盈亏不纳入本轮复盘"
                 }
               ]
             }
@@ -268,14 +281,14 @@
           ],
           "strategyNote": "10/16 7C 深度实值，正股+权利金接受 @7 行权落袋；若趋势观点延续，可评估买回部分 call 解锁上行（O5）。",
           "actualCostBasis": {
-            "value": 6.66,
-            "note": "建仓成本",
-            "status": "确认"
+            "value": 6.71493,
+            "status": "确认",
+            "note": "结单正股移动加权均价，排除用户确认的观察份额，未计费用"
           },
           "netInvestedCost": {
-            "value": 6.66,
-            "note": "与真实成本一致（无减仓摊薄）",
-            "status": "确认"
+            "value": 6.506,
+            "status": "确认",
+            "note": "交易仓正股净投入摊薄，排除观察份额，未计费用、未含期权"
           },
           "costDisplay": "实际成本",
           "entrySetup": [],
@@ -285,8 +298,8 @@
           "episodeId": "EP-CRDU-2026Q3",
           "compositeNetInvested": {
             "value": null,
-            "note": "组合净投入（含期权现金流：权利金收入与期权盈亏），与正股净投入分开记录；权利金/期权现金流待核实后确认",
-            "status": "待核实"
+            "status": "本轮不核算",
+            "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           }
         },
         {
@@ -317,7 +330,7 @@
           "oneLiner": "IRE 10/5 两档补仓（@8.93/@8.77）摊薄 8.32；观望 1 周能否回升至 10。",
           "actualCostBasis": {
             "value": null,
-            "note": "分批买入（9/30+10/1）+日内高抛低吸（10/2）+10/5 加仓，真实均价待核实",
+            "note": "结单已核实9/30、10/1买入；10/2卖出与回补数量仍缺失",
             "status": "待核实"
           },
           "netInvestedCost": {
@@ -577,124 +590,435 @@
   ],
   "executions": [
     {
-      "executionId": "EX-20260923-RAM-BUY-001",
-      "episodeId": "EP-RAM-2026Q3",
+      "executionId": "EX-20260917-CRDU-BUY-011",
+      "episodeId": "EP-CRDU-2026Q3",
       "account": "main",
-      "sym": "RAM",
+      "sym": "CRDU",
       "side": "buy",
-      "qty": null,
-      "price": null,
-      "date": "2026-09-23",
-      "time": "盘中",
+      "qty": 151,
+      "price": 7.15,
+      "date": "2026-09-08",
+      "time": "23:19:53",
       "timezone": "America/New_York",
-      "fee": null,
-      "note": "初始建仓（数量待核实）",
-      "status": "partial"
+      "fee": 2.44,
+      "note": "建仓",
+      "status": "confirmed",
+      "timestamp": "2026-09-08T23:19:53-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 11,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-09T11:19:53+08:00",
+        "settlementDate": "2026-09-10"
+      },
+      "brokerFills": [
+        {
+          "qty": 151,
+          "price": 7.15,
+          "timestamp": "2026-09-08T23:19:53-04:00",
+          "statementTime": "2026-09-09T11:19:53+08:00",
+          "settlementDate": "2026-09-10"
+        }
+      ],
+      "observationQty": 1,
+      "analysisQty": 150,
+      "allocationSource": {
+        "type": "user_confirmation",
+        "confirmedDate": "2026-10-06",
+        "note": "用户明确额外的一股为观察仓，保留实际成交但不计交易表现"
+      },
+      "role": "mixed",
+      "includeInPerformance": true
     },
     {
-      "executionId": "EX-20260924-RAM-BUY-002",
-      "episodeId": "EP-RAM-2026Q3",
+      "executionId": "EX-STMT-20260930-CRDU-BUY-P012-001",
+      "note": "券商结单补录",
       "account": "main",
-      "sym": "RAM",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
       "side": "buy",
-      "qty": null,
-      "price": 14.1,
-      "date": "2026-09-24",
-      "time": "盘前",
+      "qty": 150,
+      "price": 6.8,
+      "date": "2026-09-09",
+      "time": "06:09:56",
       "timezone": "America/New_York",
-      "fee": null,
-      "note": "盘前加仓",
-      "status": "partial"
+      "timestamp": "2026-09-09T06:09:56-04:00",
+      "fee": 2.44,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 12,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-09T18:09:56+08:00",
+        "settlementDate": "2026-09-10"
+      },
+      "brokerFills": [
+        {
+          "qty": 150,
+          "price": 6.8,
+          "timestamp": "2026-09-09T06:09:56-04:00",
+          "statementTime": "2026-09-09T18:09:56+08:00",
+          "settlementDate": "2026-09-10"
+        }
+      ]
     },
     {
-      "executionId": "EX-20260924-RAM-BUY-003",
-      "episodeId": "EP-RAM-2026Q3",
+      "executionId": "EX-STMT-20260930-CRDU-SELL-P012-002",
+      "note": "券商结单补录",
       "account": "main",
-      "sym": "RAM",
-      "side": "buy",
-      "qty": null,
-      "price": 13.82,
-      "date": "2026-09-24",
-      "time": "晚",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
+      "side": "sell",
+      "qty": 100,
+      "price": 7.2053,
+      "date": "2026-09-09",
+      "time": "10:07:36",
       "timezone": "America/New_York",
-      "fee": null,
-      "note": "晚间加仓",
-      "status": "partial"
+      "timestamp": "2026-09-09T10:07:36-04:00",
+      "fee": 2.32,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 12,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-09T22:07:36+08:00",
+        "settlementDate": "2026-09-10"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 7.2053,
+          "timestamp": "2026-09-09T10:07:36-04:00",
+          "statementTime": "2026-09-09T22:07:36+08:00",
+          "settlementDate": "2026-09-10"
+        }
+      ]
     },
     {
-      "executionId": "EX-20260928-RAM-BUY-004",
-      "episodeId": "EP-RAM-2026Q3",
+      "executionId": "EX-STMT-20260930-CRDU-SELL-P014-003",
+      "note": "券商结单补录",
       "account": "main",
-      "sym": "RAM",
-      "side": "buy",
-      "qty": 85,
-      "price": 13.13,
-      "date": "2026-09-28",
-      "time": "盘中",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
+      "side": "sell",
+      "qty": 100,
+      "price": 7.4,
+      "date": "2026-09-09",
+      "time": "10:13:30",
       "timezone": "America/New_York",
-      "fee": null,
-      "note": "超跌低吸+埋伏财报",
-      "status": "confirmed"
+      "timestamp": "2026-09-09T10:13:30-04:00",
+      "fee": 2.33,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 14,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-09T22:13:30+08:00",
+        "settlementDate": "2026-09-10"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 7.4,
+          "timestamp": "2026-09-09T10:13:30-04:00",
+          "statementTime": "2026-09-09T22:13:30+08:00",
+          "settlementDate": "2026-09-10"
+        }
+      ]
     },
     {
-      "executionId": "EX-20260929-RAM-SELL-005",
-      "episodeId": "EP-RAM-2026Q3",
+      "executionId": "EX-STMT-20260930-CRDU-BUY-P015-004",
+      "note": "券商结单补录",
       "account": "main",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
+      "side": "buy",
+      "qty": 100,
+      "price": 7.1,
+      "date": "2026-09-09",
+      "time": "13:16:36",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-09T13:16:36-04:00",
+      "fee": 2.29,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 15,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-10T01:16:36+08:00",
+        "settlementDate": "2026-09-10"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 7.1,
+          "timestamp": "2026-09-09T13:16:36-04:00",
+          "statementTime": "2026-09-10T01:16:36+08:00",
+          "settlementDate": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-CRDU-BUY-P016-005",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
+      "side": "buy",
+      "qty": 100,
+      "price": 6.93,
+      "date": "2026-09-09",
+      "time": "15:50:14",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-09T15:50:14-04:00",
+      "fee": 2.29,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 16,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-10T03:50:14+08:00",
+        "settlementDate": "2026-09-10"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 6.93,
+          "timestamp": "2026-09-09T15:50:14-04:00",
+          "statementTime": "2026-09-10T03:50:14+08:00",
+          "settlementDate": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-CRDU-BUY-P017-006",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
+      "side": "buy",
+      "qty": 100,
+      "price": 6.5,
+      "date": "2026-09-10",
+      "time": "09:21:45",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-10T09:21:45-04:00",
+      "fee": 2.29,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 17,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-10T21:21:45+08:00",
+        "settlementDate": "2026-09-11"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 6.5,
+          "timestamp": "2026-09-10T09:21:45-04:00",
+          "statementTime": "2026-09-10T21:21:45+08:00",
+          "settlementDate": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-CRDU-BUY-P018-007",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
+      "side": "buy",
+      "qty": 100,
+      "price": 6.3383,
+      "date": "2026-09-10",
+      "time": "09:53:43",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-10T09:53:43-04:00",
+      "fee": 2.29,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 18,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-10T21:53:43+08:00",
+        "settlementDate": "2026-09-11"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 6.3383,
+          "timestamp": "2026-09-10T09:53:43-04:00",
+          "statementTime": "2026-09-10T21:53:43+08:00",
+          "settlementDate": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-CRDU-SELL-P020-008",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
+      "side": "sell",
+      "qty": 100,
+      "price": 6.67,
+      "date": "2026-09-11",
+      "time": "08:51:04",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-11T08:51:04-04:00",
+      "fee": 2.32,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 20,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-11T20:51:04+08:00",
+        "settlementDate": "2026-09-14"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 6.67,
+          "timestamp": "2026-09-11T08:51:04-04:00",
+          "statementTime": "2026-09-11T20:51:04+08:00",
+          "settlementDate": "2026-09-14"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-CRDU-BUY-P020-009",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
+      "side": "buy",
+      "qty": 100,
+      "price": 6.5,
+      "date": "2026-09-11",
+      "time": "09:32:15",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-11T09:32:15-04:00",
+      "fee": 1.99,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 20,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-11T21:32:15+08:00",
+        "settlementDate": "2026-09-14"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 6.5,
+          "timestamp": "2026-09-11T09:32:15-04:00",
+          "statementTime": "2026-09-11T21:32:15+08:00",
+          "settlementDate": "2026-09-14"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-CRDU-SELL-P028-010",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
+      "side": "sell",
+      "qty": 200,
+      "price": 6.75,
+      "date": "2026-09-16",
+      "time": "19:53:02",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-16T19:53:02-04:00",
+      "fee": 2.68,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 28,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-17T07:53:02+08:00",
+        "settlementDate": "2026-09-17"
+      },
+      "brokerFills": [
+        {
+          "qty": 28,
+          "price": 6.75,
+          "timestamp": "2026-09-16T19:53:02-04:00",
+          "statementTime": "2026-09-17T07:53:02+08:00",
+          "settlementDate": "2026-09-17"
+        },
+        {
+          "qty": 15,
+          "price": 6.75,
+          "timestamp": "2026-09-16T19:53:08-04:00",
+          "statementTime": "2026-09-17T07:53:08+08:00",
+          "settlementDate": "2026-09-17"
+        },
+        {
+          "qty": 157,
+          "price": 6.75,
+          "timestamp": "2026-09-16T19:53:42-04:00",
+          "statementTime": "2026-09-17T07:53:42+08:00",
+          "settlementDate": "2026-09-17"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-RAM-SELL-P031-011",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-RAM-2026Q3",
       "sym": "RAM",
       "side": "sell",
-      "qty": null,
-      "price": 14.27,
-      "date": "2026-09-29",
-      "time": "盘中",
+      "qty": 80,
+      "price": 12.1102,
+      "date": "2026-09-17",
+      "time": "07:21:35",
       "timezone": "America/New_York",
-      "fee": null,
-      "note": "反弹止盈减仓（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20260930-RAM-BUY-006",
-      "episodeId": "EP-RAM-2026Q3",
-      "account": "main",
-      "sym": "RAM",
-      "side": "buy",
-      "qty": null,
-      "price": 13.66,
-      "date": "2026-09-30",
-      "time": "尾盘",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "埋伏美光财报",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20261001-RAM-SELL-007",
-      "episodeId": "EP-RAM-2026Q3",
-      "account": "main",
-      "sym": "RAM",
-      "side": "sell",
-      "qty": null,
-      "price": 14.35,
-      "date": "2026-10-01",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "财报冲高止盈（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20261002-RAM-SELL-008",
-      "episodeId": "EP-RAM-2026Q3",
-      "account": "main",
-      "sym": "RAM",
-      "side": "sell",
-      "qty": null,
-      "price": 14.5,
-      "date": "2026-10-02",
-      "time": "隔夜",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "连续第二日冲高止盈（数量待核实）",
-      "status": "partial"
+      "timestamp": "2026-09-17T07:21:35-04:00",
+      "fee": 2.27,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 31,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-17T19:21:35+08:00",
+        "settlementDate": "2026-09-18"
+      },
+      "brokerFills": [
+        {
+          "qty": 80,
+          "price": 12.1103,
+          "timestamp": "2026-09-17T07:21:35-04:00",
+          "statementTime": "2026-09-17T19:21:35+08:00",
+          "settlementDate": "2026-09-18"
+        }
+      ]
     },
     {
       "executionId": "EX-20260917-CRWG-BUY-009",
@@ -702,447 +1026,155 @@
       "account": "main",
       "sym": "CRWG",
       "side": "buy",
-      "qty": 201,
-      "price": 15.75,
+      "qty": 101,
+      "price": 16.4,
       "date": "2026-09-17",
-      "time": "盘中",
+      "time": "08:04:00",
       "timezone": "America/New_York",
-      "fee": null,
+      "fee": 2.29,
       "note": "建仓",
-      "status": "confirmed"
+      "status": "confirmed",
+      "timestamp": "2026-09-17T08:04:00-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 32,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-17T20:04:00+08:00",
+        "settlementDate": "2026-09-18"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 16.4,
+          "timestamp": "2026-09-17T08:04:00-04:00",
+          "statementTime": "2026-09-17T20:04:00+08:00",
+          "settlementDate": "2026-09-18"
+        },
+        {
+          "qty": 1,
+          "price": 16.4,
+          "timestamp": "2026-09-17T08:04:00-04:00",
+          "statementTime": "2026-09-17T20:04:00+08:00",
+          "settlementDate": "2026-09-18"
+        }
+      ],
+      "observationQty": 1,
+      "analysisQty": 100,
+      "allocationSource": {
+        "type": "user_confirmation",
+        "confirmedDate": "2026-10-06",
+        "note": "用户明确额外的一股为观察仓，保留实际成交但不计交易表现"
+      },
+      "role": "mixed",
+      "includeInPerformance": true
     },
     {
-      "executionId": "EX-20260922-CRWG-SELL-010",
+      "executionId": "EX-STMT-20260930-CRWG-BUY-P033-012",
+      "note": "券商结单补录",
+      "account": "main",
       "episodeId": "EP-CRWG-2026Q3",
-      "account": "main",
       "sym": "CRWG",
-      "side": "sell",
-      "qty": 100,
-      "price": 17.26,
-      "date": "2026-09-22",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "部分止盈",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260917-CRDU-BUY-011",
-      "episodeId": "EP-CRDU-2026Q3",
-      "account": "main",
-      "sym": "CRDU",
       "side": "buy",
-      "qty": 300,
-      "price": 6.66,
+      "qty": 100,
+      "price": 15.1,
       "date": "2026-09-17",
-      "time": "盘中",
+      "time": "10:10:36",
       "timezone": "America/New_York",
-      "fee": null,
-      "note": "建仓",
-      "status": "confirmed"
+      "timestamp": "2026-09-17T10:10:36-04:00",
+      "fee": 2.29,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 33,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-17T22:10:36+08:00",
+        "settlementDate": "2026-09-18"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 15.1,
+          "timestamp": "2026-09-17T10:10:36-04:00",
+          "statementTime": "2026-09-17T22:10:36+08:00",
+          "settlementDate": "2026-09-18"
+        }
+      ]
     },
     {
-      "executionId": "EX-20260930-IRE-BUY-012",
-      "episodeId": "EP-IRE-2026Q3",
+      "executionId": "EX-STMT-20260930-CRDU-SELL-P038-013",
+      "note": "券商结单补录",
       "account": "main",
-      "sym": "IRE",
-      "side": "buy",
-      "qty": null,
-      "price": 9.23,
-      "date": "2026-09-30",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "低位重建底仓（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20261001-IRE-BUY-013",
-      "episodeId": "EP-IRE-2026Q3",
-      "account": "main",
-      "sym": "IRE",
-      "side": "buy",
-      "qty": null,
-      "price": 8.58,
-      "date": "2026-10-01",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "补底仓（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20261001-IRE-BUY-014",
-      "episodeId": "EP-IRE-2026Q3",
-      "account": "main",
-      "sym": "IRE",
-      "side": "buy",
-      "qty": null,
-      "price": 8.81,
-      "date": "2026-10-01",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "补底仓（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20261002-IRE-SELL-015",
-      "episodeId": "EP-IRE-2026Q3",
-      "account": "main",
-      "sym": "IRE",
+      "episodeId": "EP-CRDU-2026Q3",
+      "sym": "CRDU",
       "side": "sell",
-      "qty": null,
-      "price": 9.9,
-      "date": "2026-10-02",
-      "time": "盘中",
+      "qty": 1,
+      "price": 7.5,
+      "date": "2026-09-18",
+      "time": "16:10:06",
       "timezone": "America/New_York",
-      "fee": null,
-      "note": "冲高先兑现（数量待核实）",
-      "status": "partial"
+      "timestamp": "2026-09-18T16:10:06-04:00",
+      "fee": 2.01,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 38,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-19T04:10:06+08:00",
+        "settlementDate": "2026-09-21"
+      },
+      "brokerFills": [
+        {
+          "qty": 1,
+          "price": 7.5,
+          "timestamp": "2026-09-18T16:10:06-04:00",
+          "statementTime": "2026-09-19T04:10:06+08:00",
+          "settlementDate": "2026-09-21"
+        }
+      ],
+      "observationQty": 1,
+      "analysisQty": 0,
+      "allocationSource": {
+        "type": "user_confirmation",
+        "confirmedDate": "2026-10-06",
+        "note": "用户明确额外的一股为观察仓，保留实际成交但不计交易表现"
+      },
+      "role": "observation",
+      "includeInPerformance": false
     },
     {
-      "executionId": "EX-20261002-IRE-SELL-016",
-      "episodeId": "EP-IRE-2026Q3",
-      "account": "main",
-      "sym": "IRE",
-      "side": "sell",
-      "qty": null,
-      "price": 10.38,
-      "date": "2026-10-02",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "高抛再兑现（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20261002-IRE-BUY-017",
-      "episodeId": "EP-IRE-2026Q3",
-      "account": "main",
-      "sym": "IRE",
-      "side": "buy",
-      "qty": null,
-      "price": 9.23,
-      "date": "2026-10-02",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "回调接回（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20260923-AVGX-BUY-018",
-      "episodeId": "EP-AVGX-2026Q3",
+      "executionId": "EX-20260918-RKLX-SELL-047",
+      "episodeId": "EP-RKLX-CLOSED-20260918",
       "account": "sat1",
-      "sym": "AVGX",
-      "side": "buy",
-      "qty": 53,
-      "price": 38.95,
-      "date": "2026-09-23",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "低位反手建仓",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260923-SNXX-BUY-019",
-      "episodeId": "EP-SNXX-2026Q3",
-      "account": "sat2",
-      "sym": "SNXX",
-      "side": "buy",
-      "qty": 67,
-      "price": 18.32,
-      "date": "2026-09-23",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "全仓情绪单",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260925-MSTU-BUY-020",
-      "episodeId": "EP-MSTU-CLOSED-20261001",
-      "account": "main",
-      "sym": "MSTU",
-      "side": "buy",
-      "qty": null,
-      "price": 44.29,
-      "date": "2026-09-25",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "建仓（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20260925-MSTU-BUY-021",
-      "episodeId": "EP-MSTU-CLOSED-20261001",
-      "account": "main",
-      "sym": "MSTU",
-      "side": "buy",
-      "qty": null,
-      "price": 42.42,
-      "date": "2026-09-25",
-      "time": "夜盘",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "夜盘加仓（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20260929-MSTU-BUY-022",
-      "episodeId": "EP-MSTU-CLOSED-20261001",
-      "account": "main",
-      "sym": "MSTU",
-      "side": "buy",
-      "qty": null,
-      "price": 41.08,
-      "date": "2026-09-29",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "最后加仓摊低（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20260930-MSTU-SELL-023",
-      "episodeId": "EP-MSTU-CLOSED-20261001",
-      "account": "main",
-      "sym": "MSTU",
-      "side": "sell",
-      "qty": null,
-      "price": 44.1,
-      "date": "2026-09-30",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "高位止盈（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20260930-MSTU-BUY-024",
-      "episodeId": "EP-MSTU-CLOSED-20261001",
-      "account": "main",
-      "sym": "MSTU",
-      "side": "buy",
-      "qty": null,
-      "price": 39.74,
-      "date": "2026-09-30",
-      "time": "尾盘",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "尾盘回补（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20261001-MSTU-SELL-025",
-      "episodeId": "EP-MSTU-CLOSED-20261001",
-      "account": "main",
-      "sym": "MSTU",
-      "side": "sell",
-      "qty": null,
-      "price": 42.23,
-      "date": "2026-10-01",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "分批止盈（数量待核实）",
-      "status": "partial"
-    },
-    {
-      "executionId": "EX-20260923-UGL-BUY-027",
-      "episodeId": "EP-UGL-CLOSED-20260925",
-      "account": "main",
-      "sym": "UGL",
-      "side": "buy",
-      "qty": 30,
-      "price": 48.7,
-      "date": "2026-09-23",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "建仓",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20261001-MSTU-SELL-029",
-      "episodeId": "EP-MSTU-CLOSED-20261001",
-      "account": "main",
-      "sym": "MSTU",
-      "side": "sell",
-      "price": 43.5,
-      "date": "2026-10-01",
-      "time": "10/1 冲高",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "@42.23 分批止盈后，剩余全数清仓（相对摊薄成本）",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260925-UGL-SELL-030",
-      "episodeId": "EP-UGL-CLOSED-20260925",
-      "account": "main",
-      "sym": "UGL",
-      "side": "sell",
-      "qty": 30,
-      "price": 48.5,
-      "date": "2026-09-25",
-      "time": "9/25",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "低资金利用率清仓换标的",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260924-IRE-SELL-031",
-      "episodeId": "EP-IRE-CLOSED-20260924",
-      "account": "main",
-      "sym": "IRE",
-      "side": "sell",
-      "qty": 100,
-      "price": 12.3,
-      "date": "2026-09-24",
-      "time": "9/24 盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "预设止盈位到价全清",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260924-RKLX-SELL-032",
-      "episodeId": "EP-RKLX-CLOSED-20260924",
-      "account": "main",
       "sym": "RKLX",
       "side": "sell",
-      "qty": 86,
-      "price": 17.78,
-      "date": "2026-09-24",
-      "time": "9/24 盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "预设止盈位到价全清",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260924-ASTX-SELL-033",
-      "episodeId": "EP-ASTX-CLOSED-20260924",
-      "account": "main",
-      "sym": "ASTX",
-      "side": "sell",
-      "qty": 150,
-      "price": 9.855,
-      "date": "2026-09-24",
-      "time": "9/24 盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "冲高失败止盈全清",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260923-SOXS-SELL-034",
-      "episodeId": "EP-SOXS-CLOSED-20260923",
-      "account": "main",
-      "sym": "SOXS",
-      "side": "sell",
-      "qty": 100,
-      "price": 34.1,
-      "date": "2026-09-23",
-      "time": "反弹一",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "第一批兑现",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260923-SOXS-SELL-035",
-      "episodeId": "EP-SOXS-CLOSED-20260923",
-      "account": "main",
-      "sym": "SOXS",
-      "side": "sell",
-      "qty": 80,
-      "price": 34.6,
-      "date": "2026-09-23",
-      "time": "上涨乏力",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "识别乏力·全清",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260923-SOXS-SELL-036",
-      "episodeId": "EP-SOXS1-CLOSED-20260923",
-      "account": "sat1",
-      "sym": "SOXS",
-      "side": "sell",
-      "qty": 59,
-      "price": 34.73,
-      "date": "2026-09-23",
-      "time": "盘中",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "认错止损全清",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260922-RAM-SELL-037",
-      "episodeId": "EP-RAM-CLOSED-20260922",
-      "account": "main",
-      "sym": "RAM",
-      "side": "sell",
-      "qty": 100,
-      "price": 14.55,
-      "date": "2026-09-22",
-      "time": "09-22",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "减仓锁定利润",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260922-RAM-SELL-039",
-      "episodeId": "EP-RAM-SCALP-20260922",
-      "account": "main",
-      "sym": "RAM",
-      "side": "sell",
-      "qty": 100,
-      "price": 14.08,
-      "date": "2026-09-22",
-      "time": "09-22",
-      "timezone": "America/New_York",
-      "fee": null,
-      "note": "买回后快进快出 scalp",
-      "status": "confirmed"
-    },
-    {
-      "executionId": "EX-20260922-ASTX-SELL-040",
-      "episodeId": "EP-ASTX-CLOSED-20260922",
-      "account": "sat1",
-      "sym": "ASTX",
-      "side": "sell",
-      "qty": 101,
-      "price": 10.55,
-      "date": "2026-09-22",
+      "qty": 55,
+      "price": 15.7,
+      "date": "2026-09-18",
       "time": "第一波",
       "timezone": "America/New_York",
       "fee": null,
-      "note": "反弹先落",
+      "note": "先落一半",
       "status": "confirmed"
     },
     {
-      "executionId": "EX-20260922-ASTX-SELL-041",
-      "episodeId": "EP-ASTX-CLOSED-20260922",
+      "executionId": "EX-20260918-RKLX-SELL-048",
+      "episodeId": "EP-RKLX-CLOSED-20260918",
       "account": "sat1",
-      "sym": "ASTX",
+      "sym": "RKLX",
       "side": "sell",
-      "qty": 101,
-      "price": 10.74,
-      "date": "2026-09-22",
+      "qty": 56,
+      "price": 16.4,
+      "date": "2026-09-18",
       "time": "第二波",
       "timezone": "America/New_York",
       "fee": null,
-      "note": "全清",
+      "note": "第二波拉升全清",
       "status": "confirmed"
     },
     {
@@ -1221,38 +1253,1463 @@
       "status": "confirmed"
     },
     {
-      "executionId": "EX-20260918-RKLX-SELL-047",
-      "episodeId": "EP-RKLX-CLOSED-20260918",
-      "account": "sat1",
-      "sym": "RKLX",
+      "executionId": "EX-20260922-RAM-SELL-037",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
       "side": "sell",
-      "qty": 55,
-      "price": 15.7,
-      "date": "2026-09-18",
+      "qty": 100,
+      "price": 14.55,
+      "date": "2026-09-21",
+      "time": "09:42:38",
+      "timezone": "America/New_York",
+      "fee": 2.34,
+      "note": "减仓锁定利润",
+      "status": "confirmed",
+      "timestamp": "2026-09-21T09:42:38-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 38,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-21T21:42:38+08:00",
+        "settlementDate": "2026-09-22"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 14.55,
+          "timestamp": "2026-09-21T09:42:38-04:00",
+          "statementTime": "2026-09-21T21:42:38+08:00",
+          "settlementDate": "2026-09-22"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260922-CRWG-SELL-010",
+      "episodeId": "EP-CRWG-2026Q3",
+      "account": "main",
+      "sym": "CRWG",
+      "side": "sell",
+      "qty": 100,
+      "price": 17.26,
+      "date": "2026-09-21",
+      "time": "09:46:46",
+      "timezone": "America/New_York",
+      "fee": 2.03,
+      "note": "部分止盈",
+      "status": "confirmed",
+      "timestamp": "2026-09-21T09:46:46-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 34,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-21T21:46:46+08:00",
+        "settlementDate": "2026-09-22"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 17.26,
+          "timestamp": "2026-09-21T09:46:46-04:00",
+          "statementTime": "2026-09-21T21:46:46+08:00",
+          "settlementDate": "2026-09-22"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-CRWG-SELL-P039-014",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-CRWG-2026Q3",
+      "sym": "CRWG",
+      "side": "sell",
+      "qty": 1,
+      "price": 17.21,
+      "date": "2026-09-21",
+      "time": "09:52:19",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-21T09:52:19-04:00",
+      "fee": 2.01,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 39,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-21T21:52:19+08:00",
+        "settlementDate": "2026-09-22"
+      },
+      "brokerFills": [
+        {
+          "qty": 1,
+          "price": 17.21,
+          "timestamp": "2026-09-21T09:52:19-04:00",
+          "statementTime": "2026-09-21T21:52:19+08:00",
+          "settlementDate": "2026-09-22"
+        }
+      ],
+      "observationQty": 1,
+      "analysisQty": 0,
+      "allocationSource": {
+        "type": "user_confirmation",
+        "confirmedDate": "2026-10-06",
+        "note": "用户明确额外的一股为观察仓，保留实际成交但不计交易表现"
+      },
+      "role": "observation",
+      "includeInPerformance": false
+    },
+    {
+      "executionId": "EX-STMT-20260930-RAM-BUY-P041-015",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-RAM-SCALP-20260922",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 100,
+      "price": 13.7,
+      "date": "2026-09-22",
+      "time": "04:27:10",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-22T04:27:10-04:00",
+      "fee": 2.29,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 41,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-22T16:27:10+08:00",
+        "settlementDate": "2026-09-23"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 13.7,
+          "timestamp": "2026-09-22T04:27:10-04:00",
+          "statementTime": "2026-09-22T16:27:10+08:00",
+          "settlementDate": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260922-RAM-SELL-039",
+      "episodeId": "EP-RAM-SCALP-20260922",
+      "account": "main",
+      "sym": "RAM",
+      "side": "sell",
+      "qty": 100,
+      "price": 14.0803,
+      "date": "2026-09-22",
+      "time": "05:18:41",
+      "timezone": "America/New_York",
+      "fee": 2.34,
+      "note": "买回后快进快出 scalp",
+      "status": "confirmed",
+      "timestamp": "2026-09-22T05:18:41-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 42,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-22T17:18:41+08:00",
+        "settlementDate": "2026-09-23"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 14.0803,
+          "timestamp": "2026-09-22T05:18:41-04:00",
+          "statementTime": "2026-09-22T17:18:41+08:00",
+          "settlementDate": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-SOXS-BUY-P042-016",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-SOXS-CLOSED-20260923",
+      "sym": "SOXS",
+      "side": "buy",
+      "qty": 60,
+      "price": 33.8971,
+      "date": "2026-09-22",
+      "time": "10:22:03",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-22T10:22:03-04:00",
+      "fee": 2.17,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 42,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-22T22:22:03+08:00",
+        "settlementDate": "2026-09-23"
+      },
+      "brokerFills": [
+        {
+          "qty": 60,
+          "price": 33.8971,
+          "timestamp": "2026-09-22T10:22:03-04:00",
+          "statementTime": "2026-09-22T22:22:03+08:00",
+          "settlementDate": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-SOXS-BUY-P044-017",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-SOXS-CLOSED-20260923",
+      "sym": "SOXS",
+      "side": "buy",
+      "qty": 60,
+      "price": 33.35,
+      "date": "2026-09-22",
+      "time": "12:58:42",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-22T12:58:42-04:00",
+      "fee": 2.17,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 44,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T00:58:42+08:00",
+        "settlementDate": "2026-09-23"
+      },
+      "brokerFills": [
+        {
+          "qty": 60,
+          "price": 33.35,
+          "timestamp": "2026-09-22T12:58:42-04:00",
+          "statementTime": "2026-09-23T00:58:42+08:00",
+          "settlementDate": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-SOXS-BUY-P045-018",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-SOXS-CLOSED-20260923",
+      "sym": "SOXS",
+      "side": "buy",
+      "qty": 60,
+      "price": 32.5,
+      "date": "2026-09-22",
+      "time": "15:49:17",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-22T15:49:17-04:00",
+      "fee": 2.17,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 45,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T03:49:17+08:00",
+        "settlementDate": "2026-09-23"
+      },
+      "brokerFills": [
+        {
+          "qty": 60,
+          "price": 32.5,
+          "timestamp": "2026-09-22T15:49:17-04:00",
+          "statementTime": "2026-09-23T03:49:17+08:00",
+          "settlementDate": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260922-ASTX-SELL-040",
+      "episodeId": "EP-ASTX-CLOSED-20260922",
+      "account": "sat1",
+      "sym": "ASTX",
+      "side": "sell",
+      "qty": 101,
+      "price": 10.55,
+      "date": "2026-09-22",
       "time": "第一波",
       "timezone": "America/New_York",
       "fee": null,
-      "note": "先落一半",
+      "note": "反弹先落",
       "status": "confirmed"
     },
     {
-      "executionId": "EX-20260918-RKLX-SELL-048",
-      "episodeId": "EP-RKLX-CLOSED-20260918",
+      "executionId": "EX-20260922-ASTX-SELL-041",
+      "episodeId": "EP-ASTX-CLOSED-20260922",
       "account": "sat1",
-      "sym": "RKLX",
+      "sym": "ASTX",
       "side": "sell",
-      "qty": 56,
-      "price": 16.4,
-      "date": "2026-09-18",
+      "qty": 101,
+      "price": 10.74,
+      "date": "2026-09-22",
       "time": "第二波",
       "timezone": "America/New_York",
       "fee": null,
-      "note": "第二波拉升全清",
+      "note": "全清",
       "status": "confirmed"
     },
     {
+      "executionId": "EX-DOC-20260922-SOXS1-BUY-001",
+      "episodeId": "EP-SOXS1-CLOSED-20260923",
+      "account": "sat1",
+      "sym": "SOXS",
+      "side": "buy",
+      "qty": 59,
+      "price": 35.95,
+      "date": "2026-09-22",
+      "time": null,
+      "timezone": "America/New_York",
+      "fee": null,
+      "status": "confirmed",
+      "note": "旧操作记录导出补录",
+      "source": {
+        "type": "historical_export",
+        "sourceId": "operations-export-20260923"
+      }
+    },
+    {
+      "executionId": "EX-20260923-SOXS-SELL-034",
+      "episodeId": "EP-SOXS-CLOSED-20260923",
+      "account": "main",
+      "sym": "SOXS",
+      "side": "sell",
+      "qty": 100,
+      "price": 34.1,
+      "date": "2026-09-23",
+      "time": "09:47:16",
+      "timezone": "America/New_York",
+      "fee": 2.38,
+      "note": "第一批兑现",
+      "status": "confirmed",
+      "timestamp": "2026-09-23T09:47:16-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 48,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T21:47:16+08:00",
+        "settlementDate": "2026-09-24"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 34.1,
+          "timestamp": "2026-09-23T09:47:16-04:00",
+          "statementTime": "2026-09-23T21:47:16+08:00",
+          "settlementDate": "2026-09-24"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260923-UGL-BUY-027",
+      "episodeId": "EP-UGL-CLOSED-20260925",
+      "account": "main",
+      "sym": "UGL",
+      "side": "buy",
+      "qty": 30,
+      "price": 48.7,
+      "date": "2026-09-23",
+      "time": "09:49:32",
+      "timezone": "America/New_York",
+      "fee": 2.08,
+      "note": "建仓",
+      "status": "confirmed",
+      "timestamp": "2026-09-23T09:49:32-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 49,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T21:49:32+08:00",
+        "settlementDate": "2026-09-24"
+      },
+      "brokerFills": [
+        {
+          "qty": 30,
+          "price": 48.7,
+          "timestamp": "2026-09-23T09:49:32-04:00",
+          "statementTime": "2026-09-23T21:49:32+08:00",
+          "settlementDate": "2026-09-24"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260923-SOXS-SELL-035",
+      "episodeId": "EP-SOXS-CLOSED-20260923",
+      "account": "main",
+      "sym": "SOXS",
+      "side": "sell",
+      "qty": 80,
+      "price": 34.615,
+      "date": "2026-09-23",
+      "time": "10:14:19",
+      "timezone": "America/New_York",
+      "fee": 2.31,
+      "note": "识别乏力·全清",
+      "status": "confirmed",
+      "timestamp": "2026-09-23T10:14:19-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 47,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T22:14:19+08:00",
+        "settlementDate": "2026-09-24"
+      },
+      "brokerFills": [
+        {
+          "qty": 80,
+          "price": 34.615,
+          "timestamp": "2026-09-23T10:14:19-04:00",
+          "statementTime": "2026-09-23T22:14:19+08:00",
+          "settlementDate": "2026-09-24"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260923-RAM-BUY-001",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 100,
+      "price": 14.665,
+      "date": "2026-09-23",
+      "time": "10:15:43",
+      "timezone": "America/New_York",
+      "fee": 2.29,
+      "note": "实际分批加仓；原初始建仓占位已由结单核实",
+      "status": "confirmed",
+      "timestamp": "2026-09-23T10:15:43-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 49,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T22:15:43+08:00",
+        "settlementDate": "2026-09-24"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 14.665,
+          "timestamp": "2026-09-23T10:15:43-04:00",
+          "statementTime": "2026-09-23T22:15:43+08:00",
+          "settlementDate": "2026-09-24"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-RAM-BUY-P050-019",
+      "note": "实际分批加仓；原初始建仓占位已由结单核实",
+      "account": "main",
+      "episodeId": "EP-RAM-2026Q3",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 100,
+      "price": 14.429,
+      "date": "2026-09-23",
+      "time": "10:24:00",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-23T10:24:00-04:00",
+      "fee": 2.29,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 50,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T22:24:00+08:00",
+        "settlementDate": "2026-09-24"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 14.429,
+          "timestamp": "2026-09-23T10:24:00-04:00",
+          "statementTime": "2026-09-23T22:24:00+08:00",
+          "settlementDate": "2026-09-24"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-IRE-BUY-P053-020",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-IRE-CLOSED-20260924",
+      "sym": "IRE",
+      "side": "buy",
+      "qty": 100,
+      "price": 11.8,
+      "date": "2026-09-23",
+      "time": "23:43:01",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-23T23:43:01-04:00",
+      "fee": 2.29,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 53,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T11:43:01+08:00",
+        "settlementDate": "2026-09-25"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 11.8,
+          "timestamp": "2026-09-23T23:43:01-04:00",
+          "statementTime": "2026-09-24T11:43:01+08:00",
+          "settlementDate": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260923-AVGX-BUY-018",
+      "episodeId": "EP-AVGX-2026Q3",
+      "account": "sat1",
+      "sym": "AVGX",
+      "side": "buy",
+      "qty": 53,
+      "price": 38.95,
+      "date": "2026-09-23",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "低位反手建仓",
+      "status": "confirmed"
+    },
+    {
+      "executionId": "EX-20260923-SNXX-BUY-019",
+      "episodeId": "EP-SNXX-2026Q3",
+      "account": "sat2",
+      "sym": "SNXX",
+      "side": "buy",
+      "qty": 67,
+      "price": 18.32,
+      "date": "2026-09-23",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "全仓情绪单",
+      "status": "confirmed"
+    },
+    {
+      "executionId": "EX-20260923-SOXS-SELL-036",
+      "episodeId": "EP-SOXS1-CLOSED-20260923",
+      "account": "sat1",
+      "sym": "SOXS",
+      "side": "sell",
+      "qty": 59,
+      "price": 34.73,
+      "date": "2026-09-23",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "认错止损全清",
+      "status": "confirmed"
+    },
+    {
+      "executionId": "EX-20260924-RAM-BUY-002",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 100,
+      "price": 14.1,
+      "date": "2026-09-24",
+      "time": "00:27:35",
+      "timezone": "America/New_York",
+      "fee": 2.29,
+      "note": "盘前加仓",
+      "status": "confirmed",
+      "timestamp": "2026-09-24T00:27:35-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 54,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T12:27:35+08:00",
+        "settlementDate": "2026-09-25"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 14.1,
+          "timestamp": "2026-09-24T00:27:35-04:00",
+          "statementTime": "2026-09-24T12:27:35+08:00",
+          "settlementDate": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-RKLX-BUY-P054-021",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-RKLX-CLOSED-20260924",
+      "sym": "RKLX",
+      "side": "buy",
+      "qty": 86,
+      "price": 16.77,
+      "date": "2026-09-24",
+      "time": "06:05:54",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-24T06:05:54-04:00",
+      "fee": 2.25,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 54,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T18:05:54+08:00",
+        "settlementDate": "2026-09-25"
+      },
+      "brokerFills": [
+        {
+          "qty": 86,
+          "price": 16.77,
+          "timestamp": "2026-09-24T06:05:54-04:00",
+          "statementTime": "2026-09-24T18:05:54+08:00",
+          "settlementDate": "2026-09-25"
+        }
+      ],
+      "observationQty": 1,
+      "analysisQty": 85,
+      "allocationSource": {
+        "type": "user_confirmation",
+        "confirmedDate": "2026-10-06",
+        "note": "用户明确额外的一股为观察仓，保留实际成交但不计交易表现"
+      },
+      "role": "mixed",
+      "includeInPerformance": true
+    },
+    {
+      "executionId": "EX-20260924-IRE-SELL-031",
+      "episodeId": "EP-IRE-CLOSED-20260924",
+      "account": "main",
+      "sym": "IRE",
+      "side": "sell",
+      "qty": 100,
+      "price": 12.2,
+      "date": "2026-09-24",
+      "time": "09:39:21",
+      "timezone": "America/New_York",
+      "fee": 2.35,
+      "note": "预设止盈位到价全清",
+      "status": "confirmed",
+      "timestamp": "2026-09-24T09:39:21-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 55,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T21:39:21+08:00",
+        "settlementDate": "2026-09-25"
+      },
+      "brokerFills": [
+        {
+          "qty": 23,
+          "price": 12.2,
+          "timestamp": "2026-09-24T09:39:21-04:00",
+          "statementTime": "2026-09-24T21:39:21+08:00",
+          "settlementDate": "2026-09-25"
+        },
+        {
+          "qty": 77,
+          "price": 12.2,
+          "timestamp": "2026-09-24T09:39:21-04:00",
+          "statementTime": "2026-09-24T21:39:21+08:00",
+          "settlementDate": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260924-RKLX-SELL-032",
+      "episodeId": "EP-RKLX-CLOSED-20260924",
+      "account": "main",
+      "sym": "RKLX",
+      "side": "sell",
+      "qty": 85,
+      "price": 17.78,
+      "date": "2026-09-24",
+      "time": "09:40:11",
+      "timezone": "America/New_York",
+      "fee": 2.3,
+      "note": "卖出主体仓；结单仍有观察仓，后续处理待核实",
+      "status": "confirmed",
+      "timestamp": "2026-09-24T09:40:11-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 54,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T21:40:11+08:00",
+        "settlementDate": "2026-09-25"
+      },
+      "brokerFills": [
+        {
+          "qty": 85,
+          "price": 17.78,
+          "timestamp": "2026-09-24T09:40:11-04:00",
+          "statementTime": "2026-09-24T21:40:11+08:00",
+          "settlementDate": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-STMT-20260930-ASTX-BUY-P055-022",
+      "note": "券商结单补录",
+      "account": "main",
+      "episodeId": "EP-ASTX-CLOSED-20260924",
+      "sym": "ASTX",
+      "side": "buy",
+      "qty": 150,
+      "price": 9.529,
+      "date": "2026-09-24",
+      "time": "09:59:30",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-24T09:59:30-04:00",
+      "fee": 2.44,
+      "status": "confirmed",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 55,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T21:59:30+08:00",
+        "settlementDate": "2026-09-25"
+      },
+      "brokerFills": [
+        {
+          "qty": 150,
+          "price": 9.529,
+          "timestamp": "2026-09-24T09:59:30-04:00",
+          "statementTime": "2026-09-24T21:59:30+08:00",
+          "settlementDate": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260924-ASTX-SELL-033",
+      "episodeId": "EP-ASTX-CLOSED-20260924",
+      "account": "main",
+      "sym": "ASTX",
+      "side": "sell",
+      "qty": 150,
+      "price": 9.855,
+      "date": "2026-09-24",
+      "time": "10:14:37",
+      "timezone": "America/New_York",
+      "fee": 2.5,
+      "note": "冲高失败止盈全清",
+      "status": "confirmed",
+      "timestamp": "2026-09-24T10:14:37-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 56,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T22:14:37+08:00",
+        "settlementDate": "2026-09-25"
+      },
+      "brokerFills": [
+        {
+          "qty": 150,
+          "price": 9.855,
+          "timestamp": "2026-09-24T10:14:37-04:00",
+          "statementTime": "2026-09-24T22:14:37+08:00",
+          "settlementDate": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260924-RAM-BUY-003",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 100,
+      "price": 13.819,
+      "date": "2026-09-24",
+      "time": "10:18:15",
+      "timezone": "America/New_York",
+      "fee": 2.29,
+      "note": "晚间加仓",
+      "status": "confirmed",
+      "timestamp": "2026-09-24T10:18:15-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 56,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T22:18:15+08:00",
+        "settlementDate": "2026-09-25"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 13.819,
+          "timestamp": "2026-09-24T10:18:15-04:00",
+          "statementTime": "2026-09-24T22:18:15+08:00",
+          "settlementDate": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260925-UGL-SELL-030",
+      "episodeId": "EP-UGL-CLOSED-20260925",
+      "account": "main",
+      "sym": "UGL",
+      "side": "sell",
+      "qty": 30,
+      "price": 48.5,
+      "date": "2026-09-25",
+      "time": "03:00:00",
+      "timezone": "America/New_York",
+      "fee": 2.12,
+      "note": "低资金利用率清仓换标的",
+      "status": "confirmed",
+      "timestamp": "2026-09-25T03:00:00-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 58,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-25T15:00:00+08:00",
+        "settlementDate": "2026-09-28"
+      },
+      "brokerFills": [
+        {
+          "qty": 30,
+          "price": 48.5,
+          "timestamp": "2026-09-25T03:00:00-04:00",
+          "statementTime": "2026-09-25T15:00:00+08:00",
+          "settlementDate": "2026-09-28"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260925-MSTU-BUY-020",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
+      "account": "main",
+      "sym": "MSTU",
+      "side": "buy",
+      "qty": 51,
+      "price": 44.29,
+      "date": "2026-09-25",
+      "time": "03:02:17",
+      "timezone": "America/New_York",
+      "fee": 2.14,
+      "note": "建仓（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-09-25T03:02:17-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 59,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-25T15:02:17+08:00",
+        "settlementDate": "2026-09-28"
+      },
+      "brokerFills": [
+        {
+          "qty": 51,
+          "price": 44.29,
+          "timestamp": "2026-09-25T03:02:17-04:00",
+          "statementTime": "2026-09-25T15:02:17+08:00",
+          "settlementDate": "2026-09-28"
+        }
+      ],
+      "observationQty": 1,
+      "analysisQty": 50,
+      "allocationSource": {
+        "type": "user_confirmation",
+        "confirmedDate": "2026-10-06",
+        "note": "用户明确额外的一股为观察仓，保留实际成交但不计交易表现"
+      },
+      "role": "mixed",
+      "includeInPerformance": true
+    },
+    {
+      "executionId": "EX-20260925-MSTU-BUY-021",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
+      "account": "main",
+      "sym": "MSTU",
+      "side": "buy",
+      "qty": 35,
+      "price": 42.42,
+      "date": "2026-09-25",
+      "time": "10:53:08",
+      "timezone": "America/New_York",
+      "fee": 2.1,
+      "note": "夜盘加仓（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-09-25T10:53:08-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 60,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-25T22:53:08+08:00",
+        "settlementDate": "2026-09-28"
+      },
+      "brokerFills": [
+        {
+          "qty": 35,
+          "price": 42.42,
+          "timestamp": "2026-09-25T10:53:08-04:00",
+          "statementTime": "2026-09-25T22:53:08+08:00",
+          "settlementDate": "2026-09-28"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260928-RAM-BUY-004",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 85,
+      "price": 13.13,
+      "date": "2026-09-28",
+      "time": "10:14:16",
+      "timezone": "America/New_York",
+      "fee": 2.25,
+      "note": "超跌低吸+埋伏财报",
+      "status": "confirmed",
+      "timestamp": "2026-09-28T10:14:16-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 61,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-28T22:14:16+08:00",
+        "settlementDate": "2026-09-29"
+      },
+      "brokerFills": [
+        {
+          "qty": 85,
+          "price": 13.13,
+          "timestamp": "2026-09-28T10:14:16-04:00",
+          "statementTime": "2026-09-28T22:14:16+08:00",
+          "settlementDate": "2026-09-29"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260929-RAM-SELL-005",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "sell",
+      "qty": 185,
+      "price": 14.27,
+      "date": "2026-09-29",
+      "time": "10:40:07",
+      "timezone": "America/New_York",
+      "fee": 2.63,
+      "note": "反弹止盈减仓（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-09-29T10:40:07-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 61,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-29T22:40:07+08:00",
+        "settlementDate": "2026-09-30"
+      },
+      "brokerFills": [
+        {
+          "qty": 75,
+          "price": 14.27,
+          "timestamp": "2026-09-29T10:40:07-04:00",
+          "statementTime": "2026-09-29T22:40:07+08:00",
+          "settlementDate": "2026-09-30"
+        },
+        {
+          "qty": 110,
+          "price": 14.27,
+          "timestamp": "2026-09-29T10:40:07-04:00",
+          "statementTime": "2026-09-29T22:40:07+08:00",
+          "settlementDate": "2026-09-30"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260929-MSTU-BUY-022",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
+      "account": "main",
+      "sym": "MSTU",
+      "side": "buy",
+      "qty": 60,
+      "price": 41.08,
+      "date": "2026-09-29",
+      "time": "10:40:42",
+      "timezone": "America/New_York",
+      "fee": 2.17,
+      "note": "最后加仓摊低（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-09-29T10:40:42-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 62,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-29T22:40:42+08:00",
+        "settlementDate": "2026-09-30"
+      },
+      "brokerFills": [
+        {
+          "qty": 42,
+          "price": 41.08,
+          "timestamp": "2026-09-29T10:40:42-04:00",
+          "statementTime": "2026-09-29T22:40:42+08:00",
+          "settlementDate": "2026-09-30"
+        },
+        {
+          "qty": 18,
+          "price": 41.08,
+          "timestamp": "2026-09-29T10:40:42-04:00",
+          "statementTime": "2026-09-29T22:40:42+08:00",
+          "settlementDate": "2026-09-30"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260930-MSTU-SELL-023",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
+      "account": "main",
+      "sym": "MSTU",
+      "side": "sell",
+      "qty": 100,
+      "price": 44.1,
+      "date": "2026-09-30",
+      "time": "09:09:19",
+      "timezone": "America/New_York",
+      "fee": 2.4,
+      "note": "高位止盈（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-09-30T09:09:19-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 62,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-30T21:09:19+08:00",
+        "settlementDate": "2026-10-01"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 44.1,
+          "timestamp": "2026-09-30T09:09:19-04:00",
+          "statementTime": "2026-09-30T21:09:19+08:00",
+          "settlementDate": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260930-IRE-BUY-012",
+      "episodeId": "EP-IRE-2026Q3",
+      "account": "main",
+      "sym": "IRE",
+      "side": "buy",
+      "qty": 100,
+      "price": 9.2264,
+      "date": "2026-09-30",
+      "time": "09:57:55",
+      "timezone": "America/New_York",
+      "fee": 2.29,
+      "note": "低位重建底仓（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-09-30T09:57:55-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 63,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-30T21:57:55+08:00",
+        "settlementDate": "2026-10-01"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 9.2264,
+          "timestamp": "2026-09-30T09:57:55-04:00",
+          "statementTime": "2026-09-30T21:57:55+08:00",
+          "settlementDate": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260930-MSTU-BUY-024",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
+      "account": "main",
+      "sym": "MSTU",
+      "side": "buy",
+      "qty": 25,
+      "price": 39.74,
+      "date": "2026-09-30",
+      "time": "10:29:31",
+      "timezone": "America/New_York",
+      "fee": 2.07,
+      "note": "尾盘回补（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-09-30T10:29:31-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 63,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-30T22:29:31+08:00",
+        "settlementDate": "2026-10-01"
+      },
+      "brokerFills": [
+        {
+          "qty": 25,
+          "price": 39.74,
+          "timestamp": "2026-09-30T10:29:31-04:00",
+          "statementTime": "2026-09-30T22:29:31+08:00",
+          "settlementDate": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20260930-RAM-BUY-006",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 100,
+      "price": 13.66,
+      "date": "2026-09-30",
+      "time": "14:22:38",
+      "timezone": "America/New_York",
+      "fee": 2.29,
+      "note": "埋伏美光财报",
+      "status": "confirmed",
+      "timestamp": "2026-09-30T14:22:38-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 64,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-01T02:22:38+08:00",
+        "settlementDate": "2026-10-01"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 13.66,
+          "timestamp": "2026-09-30T14:22:38-04:00",
+          "statementTime": "2026-10-01T02:22:38+08:00",
+          "settlementDate": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20261001-MSTU-SELL-025",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
+      "account": "main",
+      "sym": "MSTU",
+      "side": "sell",
+      "qty": 35,
+      "price": 42.23,
+      "date": "2026-10-01",
+      "time": "09:43:41",
+      "timezone": "America/New_York",
+      "fee": 2.13,
+      "note": "分批止盈（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-10-01T09:43:41-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20261001",
+        "page": 4,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-01T21:43:41+08:00",
+        "settlementDate": "2026-10-02"
+      },
+      "brokerFills": [
+        {
+          "qty": 35,
+          "price": 42.23,
+          "timestamp": "2026-10-01T09:43:41-04:00",
+          "statementTime": "2026-10-01T21:43:41+08:00",
+          "settlementDate": "2026-10-02"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20261001-IRE-BUY-014",
+      "episodeId": "EP-IRE-2026Q3",
+      "account": "main",
+      "sym": "IRE",
+      "side": "buy",
+      "qty": 100,
+      "price": 8.8071,
+      "date": "2026-10-01",
+      "time": "09:46:25",
+      "timezone": "America/New_York",
+      "fee": 2.29,
+      "note": "补底仓（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-10-01T09:46:25-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20261001",
+        "page": 4,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-01T21:46:25+08:00",
+        "settlementDate": "2026-10-02"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 8.8071,
+          "timestamp": "2026-10-01T09:46:25-04:00",
+          "statementTime": "2026-10-01T21:46:25+08:00",
+          "settlementDate": "2026-10-02"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20261001-IRE-BUY-013",
+      "episodeId": "EP-IRE-2026Q3",
+      "account": "main",
+      "sym": "IRE",
+      "side": "buy",
+      "qty": 100,
+      "price": 8.575,
+      "date": "2026-10-01",
+      "time": "10:12:30",
+      "timezone": "America/New_York",
+      "fee": 2.29,
+      "note": "补底仓（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-10-01T10:12:30-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20261001",
+        "page": 5,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-01T22:12:30+08:00",
+        "settlementDate": "2026-10-02"
+      },
+      "brokerFills": [
+        {
+          "qty": 100,
+          "price": 8.575,
+          "timestamp": "2026-10-01T10:12:30-04:00",
+          "statementTime": "2026-10-01T22:12:30+08:00",
+          "settlementDate": "2026-10-02"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20261001-MSTU-SELL-029",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
+      "account": "main",
+      "sym": "MSTU",
+      "side": "sell",
+      "price": 43.5,
+      "date": "2026-10-01",
+      "time": "13:27:22",
+      "timezone": "America/New_York",
+      "fee": 2.13,
+      "note": "分批止盈，结单仍有观察仓；最后观察仓于10/2另行卖出",
+      "status": "confirmed",
+      "qty": 35,
+      "timestamp": "2026-10-01T13:27:22-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20261001",
+        "page": 4,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-02T01:27:22+08:00",
+        "settlementDate": "2026-10-02"
+      },
+      "brokerFills": [
+        {
+          "qty": 35,
+          "price": 43.5,
+          "timestamp": "2026-10-01T13:27:22-04:00",
+          "statementTime": "2026-10-02T01:27:22+08:00",
+          "settlementDate": "2026-10-02"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20261001-RAM-SELL-007",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "sell",
+      "qty": 200,
+      "price": 14.35,
+      "date": "2026-10-01",
+      "time": "14:56:21",
+      "timezone": "America/New_York",
+      "fee": 2.65,
+      "note": "财报冲高止盈（数量待核实）",
+      "status": "confirmed",
+      "timestamp": "2026-10-01T14:56:21-04:00",
+      "currency": "USD",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20261001",
+        "page": 4,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-02T02:56:21+08:00",
+        "settlementDate": "2026-10-02"
+      },
+      "brokerFills": [
+        {
+          "qty": 200,
+          "price": 14.35,
+          "timestamp": "2026-10-01T14:56:21-04:00",
+          "statementTime": "2026-10-02T02:56:21+08:00",
+          "settlementDate": "2026-10-02"
+        }
+      ]
+    },
+    {
+      "executionId": "EX-20261002-RAM-SELL-008",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "sell",
+      "qty": null,
+      "price": 14.5,
+      "date": "2026-10-02",
+      "time": "隔夜",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "连续第二日冲高止盈（数量待核实）",
+      "status": "partial"
+    },
+    {
+      "executionId": "EX-20261002-IRE-SELL-015",
+      "episodeId": "EP-IRE-2026Q3",
+      "account": "main",
+      "sym": "IRE",
+      "side": "sell",
+      "qty": null,
+      "price": 9.9,
+      "date": "2026-10-02",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "冲高先兑现（数量待核实）",
+      "status": "partial"
+    },
+    {
+      "executionId": "EX-20261002-IRE-SELL-016",
+      "episodeId": "EP-IRE-2026Q3",
+      "account": "main",
+      "sym": "IRE",
+      "side": "sell",
+      "qty": null,
+      "price": 10.38,
+      "date": "2026-10-02",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "高抛再兑现（数量待核实）",
+      "status": "partial"
+    },
+    {
+      "executionId": "EX-20261002-IRE-BUY-017",
+      "episodeId": "EP-IRE-2026Q3",
+      "account": "main",
+      "sym": "IRE",
+      "side": "buy",
+      "qty": null,
+      "price": 9.23,
+      "date": "2026-10-02",
+      "time": "盘中",
+      "timezone": "America/New_York",
+      "fee": null,
+      "note": "回调接回（数量待核实）",
+      "status": "partial"
+    },
+    {
+      "executionId": "EX-USER-20261002-MSTU-SELL-LAST",
+      "episodeId": "EP-MSTU-CLOSED-20261001",
+      "account": "main",
+      "sym": "MSTU",
+      "side": "sell",
+      "qty": 1,
+      "price": 46.3,
+      "date": "2026-10-02",
+      "time": null,
+      "timezone": "America/New_York",
+      "fee": null,
+      "status": "confirmed",
+      "note": "最后观察仓卖出；日期、数量、价格经用户确认，费用与时刻未提供",
+      "source": {
+        "type": "user_confirmation",
+        "confirmedDate": "2026-10-06",
+        "timezone": "Asia/Shanghai"
+      },
+      "observationQty": 1,
+      "analysisQty": 0,
+      "allocationSource": {
+        "type": "user_confirmation",
+        "confirmedDate": "2026-10-06",
+        "note": "用户明确额外的一股为观察仓，保留实际成交但不计交易表现"
+      },
+      "role": "observation",
+      "includeInPerformance": false
+    },
+    {
       "executionId": "EX-20261005-IRE-BUY-049",
-      "episodeId": "EP-IRE-2026Q4",
+      "episodeId": "EP-IRE-2026Q3",
       "account": "main",
       "sym": "IRE",
       "side": "buy",
@@ -1282,7 +2739,7 @@
     },
     {
       "executionId": "EX-20261005-IRE-BUY-051",
-      "episodeId": "EP-IRE-2026Q4",
+      "episodeId": "EP-IRE-2026Q3",
       "account": "main",
       "sym": "IRE",
       "side": "buy",
@@ -1384,14 +2841,15 @@
       "entryExecStatus": "adhoc",
       "currentQty": 900,
       "exitReason": null,
-      "exitDate": null
+      "exitDate": null,
+      "entryDateNote": "期初已持有；真实首次建仓日未核实"
     },
     {
       "episodeId": "EP-CRWG-2026Q3",
       "sym": "CRWG",
       "account": "main",
       "status": "open",
-      "entryDate": null,
+      "entryDate": "2026-09-17",
       "entrySetup": [],
       "entryExecStatus": "unknown",
       "currentQty": 101,
@@ -1403,7 +2861,7 @@
       "sym": "CRDU",
       "account": "main",
       "status": "open",
-      "entryDate": null,
+      "entryDate": "2026-09-08",
       "entrySetup": [],
       "entryExecStatus": "unknown",
       "currentQty": 300,
@@ -1415,12 +2873,12 @@
       "sym": "IRE",
       "account": "main",
       "status": "open",
-      "entryDate": null,
+      "entryDate": "2026-09-30",
       "entrySetup": [
         "支撑低吸"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 200,
+      "currentQty": 400,
       "exitReason": null,
       "exitDate": null
     },
@@ -1429,7 +2887,7 @@
       "sym": "AVGX",
       "account": "sat1",
       "status": "closed",
-      "entryDate": null,
+      "entryDate": "2026-09-23",
       "entrySetup": [
         "超跌反弹",
         "趋势波段"
@@ -1444,7 +2902,7 @@
       "sym": "SNXX",
       "account": "sat2",
       "status": "open",
-      "entryDate": null,
+      "entryDate": "2026-09-23",
       "entrySetup": [
         "其他"
       ],
@@ -1494,14 +2952,14 @@
       "sym": "MSTU",
       "account": "main",
       "status": "closed",
-      "entryDate": null,
+      "entryDate": "2026-09-25",
       "entrySetup": [
         "趋势波段",
         "仓位管理"
       ],
       "entryExecStatus": "plan",
       "currentQty": 0,
-      "exitReason": "2x 比特币杠杆仓全部退出：9/25 建仓 → 9/30 高位止盈+低位回补 → 10/1 反弹分批兑现后全清，低吸+回补+反弹三段浮盈落袋",
+      "exitReason": "主体交易仓10/1分批退出；额外观察仓按用户要求不计周期与绩效",
       "exitDate": "2026-10-01"
     },
     {
@@ -1509,7 +2967,7 @@
       "sym": "UGL",
       "account": "main",
       "status": "closed",
-      "entryDate": null,
+      "entryDate": "2026-09-23",
       "entrySetup": [
         "仓位管理"
       ],
@@ -1523,14 +2981,14 @@
       "sym": "IRE",
       "account": "main",
       "status": "closed",
-      "entryDate": null,
+      "entryDate": "2026-09-23",
       "entrySetup": [
         "支撑低吸",
         "趋势波段"
       ],
       "entryExecStatus": "plan",
       "currentQty": 0,
-      "exitReason": "建仓当日观察点位预设 12.3 止盈，盘中到价全部卖出",
+      "exitReason": "原止盈目标12.30；券商结单实际成交12.20，已核实该轮卖出",
       "exitDate": "2026-09-24"
     },
     {
@@ -1538,22 +2996,23 @@
       "sym": "RKLX",
       "account": "main",
       "status": "closed",
-      "entryDate": null,
+      "entryDate": "2026-09-24",
       "entrySetup": [
         "超跌反弹",
         "趋势波段"
       ],
       "entryExecStatus": "adhoc",
       "currentQty": 0,
-      "exitReason": "建仓后设 17.78 止盈，观察点位到价全部卖出",
-      "exitDate": "2026-09-24"
+      "exitReason": "交易仓按17.78退出；额外观察仓按用户要求排除",
+      "exitDate": "2026-09-24",
+      "reconciliationNote": "结单余单股为观察用途，不影响交易仓已清仓状态"
     },
     {
       "episodeId": "EP-ASTX-CLOSED-20260924",
       "sym": "ASTX",
       "account": "main",
       "status": "closed",
-      "entryDate": null,
+      "entryDate": "2026-09-24",
       "entrySetup": [
         "支撑低吸",
         "趋势波段"
@@ -1568,7 +3027,7 @@
       "sym": "SOXS",
       "account": "main",
       "status": "closed",
-      "entryDate": null,
+      "entryDate": "2026-09-22",
       "entrySetup": [
         "支撑低吸",
         "对冲 / 逆向博弈"
@@ -1583,7 +3042,7 @@
       "sym": "SOXS",
       "account": "sat1",
       "status": "closed",
-      "entryDate": null,
+      "entryDate": "2026-09-22",
       "entrySetup": [
         "对冲 / 逆向博弈"
       ],
@@ -1596,7 +3055,7 @@
       "episodeId": "EP-RAM-CLOSED-20260922",
       "sym": "RAM",
       "account": "main",
-      "status": "closed",
+      "status": "merged",
       "entryDate": null,
       "entrySetup": [
         "趋势波段",
@@ -1605,14 +3064,16 @@
       "entryExecStatus": "plan",
       "currentQty": 0,
       "exitReason": "冲高减仓·卖回部分套利call",
-      "exitDate": "2026-09-22"
+      "exitDate": null,
+      "mergedInto": "EP-RAM-2026Q3",
+      "reconciliationNote": "此条为持续持仓的部分减仓，结单实际日期9/21，非独立清仓周期"
     },
     {
       "episodeId": "EP-RAM-SCALP-20260922",
       "sym": "RAM",
       "account": "main",
       "status": "closed",
-      "entryDate": null,
+      "entryDate": "2026-09-22",
       "entrySetup": [
         "日内 Scalp"
       ],
@@ -1698,15 +3159,17 @@
       "episodeId": "EP-IRE-2026Q4",
       "sym": "IRE",
       "account": "main",
-      "status": "open",
+      "status": "merged",
       "entryDate": "2026-10-05",
       "entrySetup": [
         "支撑低吸"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 200,
+      "currentQty": 0,
       "exitReason": null,
-      "exitDate": null
+      "exitDate": null,
+      "mergedInto": "EP-IRE-2026Q3",
+      "reconciliationNote": "10/5为同一未结束持仓的加仓，原标签与计划保留"
     },
     {
       "sym": "GDXU",
@@ -1773,14 +3236,14 @@
           ],
           "totalRetPct": 19.1,
           "totalRetNote": "+19.1%（清仓腿·相对摊薄成本）",
-          "reason": "2x 比特币杠杆仓全部退出：9/25 建仓 → 9/30 高位止盈+低位回补 → 10/1 反弹分批兑现后全清，低吸+回补+反弹三段浮盈落袋",
+          "reason": "交易仓10/1分批兑现完毕；额外观察仓独立排除",
           "result": "win",
           "setup": [
             "趋势波段",
             "仓位管理"
           ],
           "execStatus": "plan",
-          "oneLiner": "反弹分批兑现后全清、卖在当日高位附近；到止盈一次清不留 runner 的卫星仓纪律执行到位。",
+          "oneLiner": "按真实股票流水核算交易仓；观察股不计本轮盈亏，历史摊薄成本不冒充真实买入成本。",
           "episodeId": "EP-MSTU-CLOSED-20261001",
           "entrySetup": [
             "趋势波段",
@@ -1855,14 +3318,14 @@
           ],
           "totalRetPct": 4.2,
           "totalRetNote": "+4.2%（毛）",
-          "reason": "建仓当日观察点位预设 12.3 止盈，盘中到价全部卖出",
+          "reason": "原止盈目标12.30；结单核实实际成交12.20，已结束该轮交易",
           "result": "win",
           "setup": [
             "支撑低吸",
             "趋势波段"
           ],
           "execStatus": "plan",
-          "oneLiner": "左侧支撑建仓后设 12.3 目标，当日到价落袋；2x 结构不贪，按点位执行。",
+          "oneLiner": "保留原左侧支撑与止盈计划；实际成交12.20，与目标12.30分别记录。",
           "episodeId": "EP-IRE-CLOSED-20260924",
           "entrySetup": [
             "支撑低吸",
@@ -1891,14 +3354,14 @@
           ],
           "totalRetPct": 6,
           "totalRetNote": "+6.0%（毛）",
-          "reason": "建仓后设 17.78 止盈，观察点位到价全部卖出",
+          "reason": "交易仓按原17.78目标退出，额外观察仓排除",
           "result": "win",
           "setup": [
             "超跌反弹",
             "趋势波段"
           ],
           "execStatus": "adhoc",
-          "oneLiner": "RAM 二波撤单转进的替补仓，当日 17.78 到价落袋；超跌反弹兑现不恋战。",
+          "oneLiner": "止盈目标与成交价一致；额外观察仓不改变本轮交易已清仓状态。",
           "episodeId": "EP-RKLX-CLOSED-20260924",
           "entrySetup": [
             "超跌反弹",
@@ -2476,7 +3939,8 @@
     "winEntries": 13,
     "lossEntries": 2,
     "snapshotStatus": "legacy_snapshot",
-    "note": "旧手工缓存，不作为当前统计；兑现与周期统计由derive.js和页面computeMetrics按各自口径实时计算。"
+    "note": "旧手工缓存，不作为当前统计；兑现与周期统计由derive.js和页面computeMetrics按各自口径实时计算。",
+    "snapshotNote": "历史缓存，不是当前完整周期统计；页面按最新已核实执行流水派生。"
   },
   "corrections": [
     {
@@ -2543,6 +4007,16 @@
       "date": "2026-10-06",
       "item": "复盘与兑现卡片渲染修复",
       "detail": "修复缺失收益null.toFixed导致兑现卡片和后续复盘一起中断；保留原成交与历史复盘。复盘日期按北京时间10/6显示，美东成交日仍10/5；修正8.90已低于补仓成本的错误比较。"
+    },
+    {
+      "date": "2026-10-06",
+      "item": "券商结单正股核对",
+      "detail": "按主账号9月月结单及10/1日结单补齐相关数量、真实价格、费用和香港/美东日期；MSTU最后观察仓10/2按46.30卖出经用户确认。保留历史原值与来源；后续结单缺项不倒推。期权按用户确认仅记录足额备兑。"
+    },
+    {
+      "date": "2026-10-06",
+      "item": "观察仓排除",
+      "detail": "用户确认额外一股均为观察用途；原始成交股数不删除，使用analysisQty排除观察份额。MSTU交易仓10/1已清仓，RKLX交易仓9/24已清仓。"
     }
   ],
   "reviews": [
@@ -2592,6 +4066,985 @@
       "execStatus": "plan",
       "reviewDate": "2026-10-06",
       "reviewTimezone": "Asia/Shanghai"
+    },
+    {
+      "reviewId": "RV-RECONCILE-20261006",
+      "date": "2026-10-02",
+      "reviewDate": "2026-10-06",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "历史结单核对 · 核对日2026-10-06",
+      "title": "补齐正股成交；观察仓独立排除",
+      "executionIds": [
+        "EX-20260917-CRDU-BUY-011",
+        "EX-20260917-CRWG-BUY-009",
+        "EX-20260922-RAM-SELL-037",
+        "EX-20260922-CRWG-SELL-010",
+        "EX-20260922-RAM-SELL-039",
+        "EX-20260923-SOXS-SELL-034",
+        "EX-20260923-UGL-BUY-027",
+        "EX-20260923-SOXS-SELL-035",
+        "EX-20260923-RAM-BUY-001",
+        "EX-20260924-RAM-BUY-002",
+        "EX-20260924-IRE-SELL-031",
+        "EX-20260924-RKLX-SELL-032",
+        "EX-20260924-ASTX-SELL-033",
+        "EX-20260924-RAM-BUY-003",
+        "EX-20260925-UGL-SELL-030",
+        "EX-20260925-MSTU-BUY-020",
+        "EX-20260925-MSTU-BUY-021",
+        "EX-20260928-RAM-BUY-004",
+        "EX-20260929-RAM-SELL-005",
+        "EX-20260929-MSTU-BUY-022",
+        "EX-20260930-MSTU-SELL-023",
+        "EX-20260930-IRE-BUY-012",
+        "EX-20260930-MSTU-BUY-024",
+        "EX-20260930-RAM-BUY-006",
+        "EX-20261001-MSTU-SELL-025",
+        "EX-20261001-IRE-BUY-014",
+        "EX-20261001-IRE-BUY-013",
+        "EX-20261001-MSTU-SELL-029",
+        "EX-20261001-RAM-SELL-007",
+        "EX-STMT-20260930-CRDU-BUY-P012-001",
+        "EX-STMT-20260930-CRDU-SELL-P012-002",
+        "EX-STMT-20260930-CRDU-SELL-P014-003",
+        "EX-STMT-20260930-CRDU-BUY-P015-004",
+        "EX-STMT-20260930-CRDU-BUY-P016-005",
+        "EX-STMT-20260930-CRDU-BUY-P017-006",
+        "EX-STMT-20260930-CRDU-BUY-P018-007",
+        "EX-STMT-20260930-CRDU-SELL-P020-008",
+        "EX-STMT-20260930-CRDU-BUY-P020-009",
+        "EX-STMT-20260930-CRDU-SELL-P028-010",
+        "EX-STMT-20260930-RAM-SELL-P031-011",
+        "EX-STMT-20260930-CRWG-BUY-P033-012",
+        "EX-STMT-20260930-CRDU-SELL-P038-013",
+        "EX-STMT-20260930-CRWG-SELL-P039-014",
+        "EX-STMT-20260930-RAM-BUY-P041-015",
+        "EX-STMT-20260930-SOXS-BUY-P042-016",
+        "EX-STMT-20260930-SOXS-BUY-P044-017",
+        "EX-STMT-20260930-SOXS-BUY-P045-018",
+        "EX-STMT-20260930-RAM-BUY-P050-019",
+        "EX-STMT-20260930-IRE-BUY-P053-020",
+        "EX-STMT-20260930-RKLX-BUY-P054-021",
+        "EX-STMT-20260930-ASTX-BUY-P055-022",
+        "EX-DOC-20260922-SOXS1-BUY-001",
+        "EX-USER-20261002-MSTU-SELL-LAST"
+      ],
+      "plan": [
+        "保留原始事前计划与标签；结单只能证明成交，不能追溯证明计划内。"
+      ],
+      "execution": [
+        "按券商结单核对相关股票的数量、实际价格、费用和日期，香港时间转换为美东时间。",
+        "MSTU：交易仓10/1分批退出；最后观察仓10/2按46.30卖出保留底层，但按用户要求不计本轮交易表现。",
+        "IRE：9/24原止盈目标12.30，实际成交12.20；成交与计划目标分别保留。",
+        "CRDU：真实剩余成本已按完整正股流水重算，与净投入摊薄分开。"
+      ],
+      "good": [],
+      "issues": [],
+      "todo": [
+        "RAM 10/2卖出、IRE 10/2两次卖出及回补的数量，仍待后续结单核实。"
+      ],
+      "observation": [
+        "当前核对结单覆盖主账号至10/1；未覆盖的其他账户及后续成交继续保留原记录。",
+        "期权按用户确认保留足额备兑状态，不再要求补权利金，不计算含期权组合收益。",
+        "用户确认额外单股为价格观察仓；实际成交保留，对分析、交易仓集中度与清仓状态排除。"
+      ],
+      "execStatus": "unknown"
+    }
+  ],
+  "openingPositions": [
+    {
+      "account": "main",
+      "sym": "RAM",
+      "asOf": "2026-09-17",
+      "qty": 981,
+      "actualCostBasis": null,
+      "costBasisStatus": "unknown",
+      "sourceId": "futu-main-20260930",
+      "note": "由月初1587及9/17前已知流水衔接得到期初股数；不是9/23新买入，缺期初买入成本",
+      "observationQty": 1,
+      "analysisQty": 980
+    },
+    {
+      "account": "main",
+      "sym": "IRE",
+      "asOf": "2026-09-17",
+      "qty": 1,
+      "actualCostBasis": null,
+      "costBasisStatus": "unknown",
+      "sourceId": "futu-main-20260930",
+      "note": "月初持有的观察仓，未倒推买入成交",
+      "observationQty": 1,
+      "analysisQty": 0
+    }
+  ],
+  "reconciliations": [
+    {
+      "account": "main",
+      "sym": "CRWG",
+      "status": "observation_excluded",
+      "knownQuantity": 100,
+      "reportedQuantity": 101,
+      "statementAsOf": "2026-09-30",
+      "sourceId": "futu-main-20260930",
+      "note": "结单补录遗漏的1股卖出后余额100；较新台账写101，保留较新记录，缺后续买入或数量确认，不编造差额成交；用户确认额外单股为观察仓，不计交易持仓。"
+    },
+    {
+      "account": "main",
+      "sym": "RAM",
+      "status": "pending",
+      "statementAsOf": "2026-10-01",
+      "statementQuantity": 1001,
+      "reportedQuantity": 900,
+      "sourceId": "futu-main-20261001",
+      "note": "10/2卖出数量未知，不能用较新余额倒推该笔成交"
+    },
+    {
+      "account": "main",
+      "sym": "IRE",
+      "status": "pending",
+      "statementAsOf": "2026-10-01",
+      "statementQuantity": 301,
+      "reportedQuantity": 400,
+      "sourceId": "futu-main-20261001",
+      "note": "10/2三笔数量未知，且含观察仓；不能由期末余额倒推流水"
+    },
+    {
+      "account": "main",
+      "sym": "RKLX",
+      "status": "observation_excluded",
+      "statementAsOf": "2026-09-30",
+      "statementQuantity": 1,
+      "sourceId": "futu-main-20260930",
+      "note": "主体仓卖出后仍有观察仓，后续是否清空未知；用户确认额外单股为观察仓，不计交易持仓。"
+    }
+  ],
+  "sourceDocuments": [
+    {
+      "sourceId": "futu-main-20260930",
+      "label": "主账号2026年9月月结单",
+      "statementTimezone": "Asia/Hong_Kong",
+      "period": "2026-09",
+      "note": "只补录相关正股；不导入期权、大盘期权、账户身份与地址"
+    },
+    {
+      "sourceId": "futu-main-20261001",
+      "label": "主账号2026年10月1日日结单",
+      "statementTimezone": "Asia/Hong_Kong",
+      "period": "2026-10-01"
+    },
+    {
+      "sourceId": "operations-export-20260923",
+      "label": "旧操作记录导出20260923",
+      "statementTimezone": "America/New_York"
+    }
+  ],
+  "statementPositions": [
+    {
+      "sourceId": "futu-main-20260930",
+      "asOf": "2026-09-30",
+      "account": "main",
+      "holdings": {
+        "RAM": 1201,
+        "IRE": 101,
+        "CRDU": 300,
+        "CRWG": 100,
+        "MSTU": 71,
+        "RKLX": 1
+      }
+    },
+    {
+      "sourceId": "futu-main-20261001",
+      "asOf": "2026-10-01",
+      "account": "main",
+      "holdings": {
+        "RAM": 1001,
+        "IRE": 301,
+        "CRDU": 300,
+        "CRWG": 100,
+        "MSTU": 1,
+        "RKLX": 1
+      }
+    }
+  ],
+  "sourceCorrections": [
+    {
+      "executionId": "EX-20260917-CRDU-BUY-011",
+      "previous": {
+        "executionId": "EX-20260917-CRDU-BUY-011",
+        "episodeId": "EP-CRDU-2026Q3",
+        "account": "main",
+        "sym": "CRDU",
+        "side": "buy",
+        "qty": 300,
+        "price": 6.66,
+        "date": "2026-09-17",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "建仓",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 11,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-09T11:19:53+08:00",
+        "settlementDate": "2026-09-10"
+      }
+    },
+    {
+      "executionId": "EX-20260917-CRWG-BUY-009",
+      "previous": {
+        "executionId": "EX-20260917-CRWG-BUY-009",
+        "episodeId": "EP-CRWG-2026Q3",
+        "account": "main",
+        "sym": "CRWG",
+        "side": "buy",
+        "qty": 201,
+        "price": 15.75,
+        "date": "2026-09-17",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "建仓",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 32,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-17T20:04:00+08:00",
+        "settlementDate": "2026-09-18"
+      }
+    },
+    {
+      "executionId": "EX-20260922-RAM-SELL-037",
+      "previous": {
+        "executionId": "EX-20260922-RAM-SELL-037",
+        "episodeId": "EP-RAM-CLOSED-20260922",
+        "account": "main",
+        "sym": "RAM",
+        "side": "sell",
+        "qty": 100,
+        "price": 14.55,
+        "date": "2026-09-22",
+        "time": "09-22",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "减仓锁定利润",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 38,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-21T21:42:38+08:00",
+        "settlementDate": "2026-09-22"
+      }
+    },
+    {
+      "executionId": "EX-20260922-CRWG-SELL-010",
+      "previous": {
+        "executionId": "EX-20260922-CRWG-SELL-010",
+        "episodeId": "EP-CRWG-2026Q3",
+        "account": "main",
+        "sym": "CRWG",
+        "side": "sell",
+        "qty": 100,
+        "price": 17.26,
+        "date": "2026-09-22",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "部分止盈",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 34,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-21T21:46:46+08:00",
+        "settlementDate": "2026-09-22"
+      }
+    },
+    {
+      "executionId": "EX-20260922-RAM-SELL-039",
+      "previous": {
+        "executionId": "EX-20260922-RAM-SELL-039",
+        "episodeId": "EP-RAM-SCALP-20260922",
+        "account": "main",
+        "sym": "RAM",
+        "side": "sell",
+        "qty": 100,
+        "price": 14.08,
+        "date": "2026-09-22",
+        "time": "09-22",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "买回后快进快出 scalp",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 42,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-22T17:18:41+08:00",
+        "settlementDate": "2026-09-23"
+      }
+    },
+    {
+      "executionId": "EX-20260923-SOXS-SELL-034",
+      "previous": {
+        "executionId": "EX-20260923-SOXS-SELL-034",
+        "episodeId": "EP-SOXS-CLOSED-20260923",
+        "account": "main",
+        "sym": "SOXS",
+        "side": "sell",
+        "qty": 100,
+        "price": 34.1,
+        "date": "2026-09-23",
+        "time": "反弹一",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "第一批兑现",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 48,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T21:47:16+08:00",
+        "settlementDate": "2026-09-24"
+      }
+    },
+    {
+      "executionId": "EX-20260923-UGL-BUY-027",
+      "previous": {
+        "executionId": "EX-20260923-UGL-BUY-027",
+        "episodeId": "EP-UGL-CLOSED-20260925",
+        "account": "main",
+        "sym": "UGL",
+        "side": "buy",
+        "qty": 30,
+        "price": 48.7,
+        "date": "2026-09-23",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "建仓",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 49,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T21:49:32+08:00",
+        "settlementDate": "2026-09-24"
+      }
+    },
+    {
+      "executionId": "EX-20260923-SOXS-SELL-035",
+      "previous": {
+        "executionId": "EX-20260923-SOXS-SELL-035",
+        "episodeId": "EP-SOXS-CLOSED-20260923",
+        "account": "main",
+        "sym": "SOXS",
+        "side": "sell",
+        "qty": 80,
+        "price": 34.6,
+        "date": "2026-09-23",
+        "time": "上涨乏力",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "识别乏力·全清",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 47,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T22:14:19+08:00",
+        "settlementDate": "2026-09-24"
+      }
+    },
+    {
+      "executionId": "EX-20260923-RAM-BUY-001",
+      "previous": {
+        "executionId": "EX-20260923-RAM-BUY-001",
+        "episodeId": "EP-RAM-2026Q3",
+        "account": "main",
+        "sym": "RAM",
+        "side": "buy",
+        "qty": null,
+        "price": null,
+        "date": "2026-09-23",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "初始建仓（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 49,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-23T22:15:43+08:00",
+        "settlementDate": "2026-09-24"
+      }
+    },
+    {
+      "executionId": "EX-20260924-RAM-BUY-002",
+      "previous": {
+        "executionId": "EX-20260924-RAM-BUY-002",
+        "episodeId": "EP-RAM-2026Q3",
+        "account": "main",
+        "sym": "RAM",
+        "side": "buy",
+        "qty": null,
+        "price": 14.1,
+        "date": "2026-09-24",
+        "time": "盘前",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "盘前加仓",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 54,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T12:27:35+08:00",
+        "settlementDate": "2026-09-25"
+      }
+    },
+    {
+      "executionId": "EX-20260924-IRE-SELL-031",
+      "previous": {
+        "executionId": "EX-20260924-IRE-SELL-031",
+        "episodeId": "EP-IRE-CLOSED-20260924",
+        "account": "main",
+        "sym": "IRE",
+        "side": "sell",
+        "qty": 100,
+        "price": 12.3,
+        "date": "2026-09-24",
+        "time": "9/24 盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "预设止盈位到价全清",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 55,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T21:39:21+08:00",
+        "settlementDate": "2026-09-25"
+      }
+    },
+    {
+      "executionId": "EX-20260924-RKLX-SELL-032",
+      "previous": {
+        "executionId": "EX-20260924-RKLX-SELL-032",
+        "episodeId": "EP-RKLX-CLOSED-20260924",
+        "account": "main",
+        "sym": "RKLX",
+        "side": "sell",
+        "qty": 86,
+        "price": 17.78,
+        "date": "2026-09-24",
+        "time": "9/24 盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "预设止盈位到价全清",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 54,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T21:40:11+08:00",
+        "settlementDate": "2026-09-25"
+      }
+    },
+    {
+      "executionId": "EX-20260924-ASTX-SELL-033",
+      "previous": {
+        "executionId": "EX-20260924-ASTX-SELL-033",
+        "episodeId": "EP-ASTX-CLOSED-20260924",
+        "account": "main",
+        "sym": "ASTX",
+        "side": "sell",
+        "qty": 150,
+        "price": 9.855,
+        "date": "2026-09-24",
+        "time": "9/24 盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "冲高失败止盈全清",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 56,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T22:14:37+08:00",
+        "settlementDate": "2026-09-25"
+      }
+    },
+    {
+      "executionId": "EX-20260924-RAM-BUY-003",
+      "previous": {
+        "executionId": "EX-20260924-RAM-BUY-003",
+        "episodeId": "EP-RAM-2026Q3",
+        "account": "main",
+        "sym": "RAM",
+        "side": "buy",
+        "qty": null,
+        "price": 13.82,
+        "date": "2026-09-24",
+        "time": "晚",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "晚间加仓",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 56,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-24T22:18:15+08:00",
+        "settlementDate": "2026-09-25"
+      }
+    },
+    {
+      "executionId": "EX-20260925-UGL-SELL-030",
+      "previous": {
+        "executionId": "EX-20260925-UGL-SELL-030",
+        "episodeId": "EP-UGL-CLOSED-20260925",
+        "account": "main",
+        "sym": "UGL",
+        "side": "sell",
+        "qty": 30,
+        "price": 48.5,
+        "date": "2026-09-25",
+        "time": "9/25",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "低资金利用率清仓换标的",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 58,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-25T15:00:00+08:00",
+        "settlementDate": "2026-09-28"
+      }
+    },
+    {
+      "executionId": "EX-20260925-MSTU-BUY-020",
+      "previous": {
+        "executionId": "EX-20260925-MSTU-BUY-020",
+        "episodeId": "EP-MSTU-CLOSED-20261001",
+        "account": "main",
+        "sym": "MSTU",
+        "side": "buy",
+        "qty": null,
+        "price": 44.29,
+        "date": "2026-09-25",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "建仓（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 59,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-25T15:02:17+08:00",
+        "settlementDate": "2026-09-28"
+      }
+    },
+    {
+      "executionId": "EX-20260925-MSTU-BUY-021",
+      "previous": {
+        "executionId": "EX-20260925-MSTU-BUY-021",
+        "episodeId": "EP-MSTU-CLOSED-20261001",
+        "account": "main",
+        "sym": "MSTU",
+        "side": "buy",
+        "qty": null,
+        "price": 42.42,
+        "date": "2026-09-25",
+        "time": "夜盘",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "夜盘加仓（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 60,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-25T22:53:08+08:00",
+        "settlementDate": "2026-09-28"
+      }
+    },
+    {
+      "executionId": "EX-20260928-RAM-BUY-004",
+      "previous": {
+        "executionId": "EX-20260928-RAM-BUY-004",
+        "episodeId": "EP-RAM-2026Q3",
+        "account": "main",
+        "sym": "RAM",
+        "side": "buy",
+        "qty": 85,
+        "price": 13.13,
+        "date": "2026-09-28",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "超跌低吸+埋伏财报",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 61,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-28T22:14:16+08:00",
+        "settlementDate": "2026-09-29"
+      }
+    },
+    {
+      "executionId": "EX-20260929-RAM-SELL-005",
+      "previous": {
+        "executionId": "EX-20260929-RAM-SELL-005",
+        "episodeId": "EP-RAM-2026Q3",
+        "account": "main",
+        "sym": "RAM",
+        "side": "sell",
+        "qty": null,
+        "price": 14.27,
+        "date": "2026-09-29",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "反弹止盈减仓（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 61,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-29T22:40:07+08:00",
+        "settlementDate": "2026-09-30"
+      }
+    },
+    {
+      "executionId": "EX-20260929-MSTU-BUY-022",
+      "previous": {
+        "executionId": "EX-20260929-MSTU-BUY-022",
+        "episodeId": "EP-MSTU-CLOSED-20261001",
+        "account": "main",
+        "sym": "MSTU",
+        "side": "buy",
+        "qty": null,
+        "price": 41.08,
+        "date": "2026-09-29",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "最后加仓摊低（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 62,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-29T22:40:42+08:00",
+        "settlementDate": "2026-09-30"
+      }
+    },
+    {
+      "executionId": "EX-20260930-MSTU-SELL-023",
+      "previous": {
+        "executionId": "EX-20260930-MSTU-SELL-023",
+        "episodeId": "EP-MSTU-CLOSED-20261001",
+        "account": "main",
+        "sym": "MSTU",
+        "side": "sell",
+        "qty": null,
+        "price": 44.1,
+        "date": "2026-09-30",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "高位止盈（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 62,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-30T21:09:19+08:00",
+        "settlementDate": "2026-10-01"
+      }
+    },
+    {
+      "executionId": "EX-20260930-IRE-BUY-012",
+      "previous": {
+        "executionId": "EX-20260930-IRE-BUY-012",
+        "episodeId": "EP-IRE-2026Q3",
+        "account": "main",
+        "sym": "IRE",
+        "side": "buy",
+        "qty": null,
+        "price": 9.23,
+        "date": "2026-09-30",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "低位重建底仓（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 63,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-30T21:57:55+08:00",
+        "settlementDate": "2026-10-01"
+      }
+    },
+    {
+      "executionId": "EX-20260930-MSTU-BUY-024",
+      "previous": {
+        "executionId": "EX-20260930-MSTU-BUY-024",
+        "episodeId": "EP-MSTU-CLOSED-20261001",
+        "account": "main",
+        "sym": "MSTU",
+        "side": "buy",
+        "qty": null,
+        "price": 39.74,
+        "date": "2026-09-30",
+        "time": "尾盘",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "尾盘回补（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 63,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-30T22:29:31+08:00",
+        "settlementDate": "2026-10-01"
+      }
+    },
+    {
+      "executionId": "EX-20260930-RAM-BUY-006",
+      "previous": {
+        "executionId": "EX-20260930-RAM-BUY-006",
+        "episodeId": "EP-RAM-2026Q3",
+        "account": "main",
+        "sym": "RAM",
+        "side": "buy",
+        "qty": null,
+        "price": 13.66,
+        "date": "2026-09-30",
+        "time": "尾盘",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "埋伏美光财报",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 64,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-01T02:22:38+08:00",
+        "settlementDate": "2026-10-01"
+      }
+    },
+    {
+      "executionId": "EX-20261001-MSTU-SELL-025",
+      "previous": {
+        "executionId": "EX-20261001-MSTU-SELL-025",
+        "episodeId": "EP-MSTU-CLOSED-20261001",
+        "account": "main",
+        "sym": "MSTU",
+        "side": "sell",
+        "qty": null,
+        "price": 42.23,
+        "date": "2026-10-01",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "分批止盈（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20261001",
+        "page": 4,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-01T21:43:41+08:00",
+        "settlementDate": "2026-10-02"
+      }
+    },
+    {
+      "executionId": "EX-20261001-IRE-BUY-014",
+      "previous": {
+        "executionId": "EX-20261001-IRE-BUY-014",
+        "episodeId": "EP-IRE-2026Q3",
+        "account": "main",
+        "sym": "IRE",
+        "side": "buy",
+        "qty": null,
+        "price": 8.81,
+        "date": "2026-10-01",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "补底仓（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20261001",
+        "page": 4,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-01T21:46:25+08:00",
+        "settlementDate": "2026-10-02"
+      }
+    },
+    {
+      "executionId": "EX-20261001-IRE-BUY-013",
+      "previous": {
+        "executionId": "EX-20261001-IRE-BUY-013",
+        "episodeId": "EP-IRE-2026Q3",
+        "account": "main",
+        "sym": "IRE",
+        "side": "buy",
+        "qty": null,
+        "price": 8.58,
+        "date": "2026-10-01",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "补底仓（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20261001",
+        "page": 5,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-01T22:12:30+08:00",
+        "settlementDate": "2026-10-02"
+      }
+    },
+    {
+      "executionId": "EX-20261001-MSTU-SELL-029",
+      "previous": {
+        "executionId": "EX-20261001-MSTU-SELL-029",
+        "episodeId": "EP-MSTU-CLOSED-20261001",
+        "account": "main",
+        "sym": "MSTU",
+        "side": "sell",
+        "price": 43.5,
+        "date": "2026-10-01",
+        "time": "10/1 冲高",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "@42.23 分批止盈后，剩余全数清仓（相对摊薄成本）",
+        "status": "confirmed"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20261001",
+        "page": 4,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-02T01:27:22+08:00",
+        "settlementDate": "2026-10-02"
+      }
+    },
+    {
+      "executionId": "EX-20261001-RAM-SELL-007",
+      "previous": {
+        "executionId": "EX-20261001-RAM-SELL-007",
+        "episodeId": "EP-RAM-2026Q3",
+        "account": "main",
+        "sym": "RAM",
+        "side": "sell",
+        "qty": null,
+        "price": 14.35,
+        "date": "2026-10-01",
+        "time": "盘中",
+        "timezone": "America/New_York",
+        "fee": null,
+        "note": "财报冲高止盈（数量待核实）",
+        "status": "partial"
+      },
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20261001",
+        "page": 4,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-10-02T02:56:21+08:00",
+        "settlementDate": "2026-10-02"
+      }
+    }
+  ],
+  "historicalNarrativeCorrections": [
+    {
+      "tradeId": "MSTU-SELL",
+      "reason": "2x 比特币杠杆仓全部退出：9/25 建仓 → 9/30 高位止盈+低位回补 → 10/1 反弹分批兑现后全清，低吸+回补+反弹三段浮盈落袋",
+      "oneLiner": "反弹分批兑现后全清、卖在当日高位附近；到止盈一次清不留 runner 的卫星仓纪律执行到位。"
+    },
+    {
+      "tradeId": "IRE-SELL",
+      "reason": "建仓当日观察点位预设 12.3 止盈，盘中到价全部卖出",
+      "oneLiner": "左侧支撑建仓后设 12.3 目标，当日到价落袋；2x 结构不贪，按点位执行。"
+    },
+    {
+      "tradeId": "RKLX-SELL",
+      "reason": "建仓后设 17.78 止盈，观察点位到价全部卖出",
+      "oneLiner": "RAM 二波撤单转进的替补仓，当日 17.78 到价落袋；超跌反弹兑现不恋战。"
+    }
+  ],
+  "holdingCorrections": [
+    {
+      "account": "main",
+      "sym": "CRWG",
+      "previousQty": 101,
+      "updatedQty": 100,
+      "reason": "排除用户明确的额外观察股；交易流水余额已核对"
     }
   ]
 }

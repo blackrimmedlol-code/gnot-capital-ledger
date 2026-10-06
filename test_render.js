@@ -33,7 +33,7 @@ function runPage(html) {
 function check(html, ledger) {
   const { api, nodes, errors } = runPage(html);
   for (const id of ['holdingsBox', 'closedDays', 'reviewsBox']) assert.ok(nodes[id], '缺页面容器 ' + id);
-  const sales = ledger.executions.filter(e => e.side === 'sell');
+  const sales = ledger.executions.filter(e => e.side === 'sell' && e.includeInPerformance !== false && e.analysisQty !== 0);
   const renderedIds = [...nodes.closedDays.innerHTML.matchAll(/data-execution-id="([^"]+)"/g)].map(m => m[1]);
   assert.deepEqual(renderedIds.slice().sort(), sales.map(e => e.executionId).sort(), '卖出卡片缺失或重复');
   for (const d of api.DATA.closedTrades) for (const t of d.trades) for (const l of t.legs) {

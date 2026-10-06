@@ -36,6 +36,8 @@ jobs:
         run: node check_public.js
       - name: 兑现日期与成本回归
         run: node test_derive.js
+      - name: 结单核对与观察仓回归
+        run: node test_reconciliation.js
       - name: 实际页面渲染回归（含空值卡片）
         run: node test_render.js
       - uses: actions/configure-pages@v5

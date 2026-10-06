@@ -15,13 +15,15 @@ function derive(ledger) {
   (ledger.accounts || []).forEach(a => (a.holdings || []).forEach(h => names.set(h.sym, h.name)));
   const byEpisode = new Map();
   (ledger.executions || []).forEach((e, index) => {
+    if (e.includeInPerformance === false || e.analysisQty === 0) return;
     if (!byEpisode.has(e.episodeId)) byEpisode.set(e.episodeId, []);
-    byEpisode.get(e.episodeId).push({ ...e, index });
+    byEpisode.get(e.episodeId).push({ ...e, qty: e.analysisQty === undefined ? e.qty : e.analysisQty, index });
   });
   const trades = [];
   byEpisode.forEach((events, episodeId) => {
     // 同日无精确时间时保留原始录入顺序；后续买入不能改变此前卖出成本。
-    events.sort((a, b) => a.date.localeCompare(b.date) || a.index - b.index);
+    events.sort((a, b) => a.date.localeCompare(b.date) ||
+      (a.timestamp && b.timestamp ? a.timestamp.localeCompare(b.timestamp) : a.index - b.index));
     const sells = events.filter(e => e.side === 'sell');
     if (!sells.length) return;
     const ep = (ledger.episodes || []).find(e => e.episodeId === episodeId);

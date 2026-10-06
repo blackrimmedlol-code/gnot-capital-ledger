@@ -70,6 +70,24 @@ if (!dupErr && !dupWarn) console.log('✅ 疑似重复成交: 无');
 
 // ---- 5. 持仓余额对账（期初0 + 买入 - 卖出 = 当前持仓；qty 缺失标注无法完整对账） ----
 function acctIdOf(acct) { return acct.id || acct.name; }
+function analysisQty(e) { return e.analysisQty === undefined ? e.qty : e.analysisQty; }
+// Allocations preserve actual broker quantities; observations cannot become fake sells.
+j.executions.forEach(e => {
+  if (e.analysisQty !== undefined && (!Number.isFinite(e.analysisQty) || e.analysisQty < 0 ||
+      e.analysisQty + (e.observationQty || 0) !== e.qty || !e.allocationSource)) {
+    errors++; console.error('❌ 观察仓分配无效: ' + e.executionId);
+  }
+});
+// A newer user-reported balance can conflict with an older broker snapshot.
+// Preserve both as evidence; never invent the missing trade to force equality.
+function pendingBalance(acct, sym, calculated, reported) {
+  return (j.reconciliations || []).find(r => r.account === acct && r.sym === sym &&
+    r.status === 'pending' && r.knownQuantity === calculated && r.reportedQuantity === reported &&
+    r.statementAsOf && r.sourceId && r.note &&
+    (j.sourceDocuments || []).some(s => s.sourceId === r.sourceId) &&
+    (j.statementPositions || []).some(s => s.sourceId === r.sourceId && s.asOf === r.statementAsOf &&
+      s.account === acct && s.holdings && s.holdings[sym] === calculated));
+}
 j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const acctId = acctIdOf(a);
   const ex = j.executions.filter(e => e.sym === h.sym && e.account === acctId);
@@ -82,10 +100,17 @@ j.accounts.forEach(a => (a.holdings || []).forEach(h => {
     warnings++; console.warn(`⚠️ ${h.sym}(${acctId}) 有 ${missing.length}/${ex.length} 条流水缺 qty，无法完整对账`);
     return;
   }
-  const buys = ex.filter(e => e.side === 'buy').reduce((s, e) => s + e.qty, 0);
-  const sells = ex.filter(e => e.side === 'sell').reduce((s, e) => s + e.qty, 0);
-  if (buys - sells !== h.qty) {
-    errors++; console.error(`❌ ${h.sym}(${acctId}) 持仓对账失败: 买${buys} - 卖${sells} = ${buys - sells} ≠ 当前${h.qty}`);
+  const buys = ex.filter(e => e.side === 'buy').reduce((s, e) => s + analysisQty(e), 0);
+  const sells = ex.filter(e => e.side === 'sell').reduce((s, e) => s + analysisQty(e), 0);
+  const openings = (j.openingPositions || []).filter(o => o.account === acctId && o.sym === h.sym);
+  const openingQty = openings.reduce((s, o) => s + analysisQty(o), 0);
+  const calculated = openingQty + buys - sells;
+  if (calculated !== h.qty) {
+    if (pendingBalance(acctId, h.sym, calculated, h.qty)) {
+      warnings++; console.warn(`⚠️ ${h.sym}(${acctId}) 已留痕的余额差异: 结单/已知流水${calculated}，较新记录${h.qty}；后续成交待补`);
+    } else {
+      errors++; console.error(`❌ ${h.sym}(${acctId}) 持仓对账失败: 期初${openingQty} + 买${buys} - 卖${sells} = ${calculated} ≠ 当前${h.qty}`);
+    }
   }
 }));
 console.log('✅ 持仓对账: 流水完整者已核对（买卖差=当前持仓），缺失者已标注');
@@ -97,9 +122,19 @@ j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const ex = j.executions.filter(e => e.sym === h.sym && e.account === acctIdOf(a));
   const allKnown = ex.length > 0 && ex.every(e => e.qty !== null && e.qty !== undefined);
   if (!allKnown || !h.qty) return; // 流水不完整跳过硬核对
-  const buyAmt = ex.filter(e => e.side === 'buy').reduce((s, e) => s + e.qty * e.price, 0);
-  const sellAmt = ex.filter(e => e.side === 'sell').reduce((s, e) => s + e.qty * e.price, 0);
-  const recomputed = Math.round((buyAmt - sellAmt) / h.qty * 100000) / 100000;
+  const calculated = ex.reduce((s, e) => s + (e.side === 'buy' ? analysisQty(e) : -analysisQty(e)), 0);
+  if (pendingBalance(acctIdOf(a), h.sym, calculated, h.qty)) {
+    if (ni.status === '确认' || (h.actualCostBasis && h.actualCostBasis.status === '确认')) {
+      errors++; console.error(`❌ ${h.sym} 余额差异未解决，不能将最新成本标为确认`);
+    }
+    return;
+  }
+  const openings = (j.openingPositions || []).filter(o => o.account === acctIdOf(a) && o.sym === h.sym);
+  if (openings.some(o => o.actualCostBasis === null)) return;
+  const buyAmt = ex.filter(e => e.side === 'buy').reduce((s, e) => s + analysisQty(e) * e.price, 0);
+  const sellAmt = ex.filter(e => e.side === 'sell').reduce((s, e) => s + analysisQty(e) * e.price, 0);
+  const openingAmt = openings.reduce((s, o) => s + analysisQty(o) * o.actualCostBasis, 0);
+  const recomputed = Math.round((openingAmt + buyAmt - sellAmt) / h.qty * 100000) / 100000;
   if (Math.abs(recomputed - ni.value) > 0.001) {
     errors++; console.error(`❌ ${h.sym} netInvestedCost=${ni.value} 与流水重算 ${recomputed} 不一致`);
   }
@@ -152,7 +187,7 @@ if (j.reviews) {
 // 同步验收：每条卖出必须派生一次；新交易必须被对应交易日复盘引用。
 const derived = require('./derive').derive(j);
 const viewIds = derived.trades.flatMap(t => t.legs.map(l => l.executionId));
-const sales = j.executions.filter(e => e.side === 'sell');
+const sales = j.executions.filter(e => e.side === 'sell' && e.includeInPerformance !== false && e.analysisQty !== 0);
 sales.forEach(e => {
   if (viewIds.filter(id => id === e.executionId).length !== 1) {
     errors++; console.error('❌ 卖出视图缺失或重复: ' + e.executionId);

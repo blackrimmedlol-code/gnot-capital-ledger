@@ -84,7 +84,15 @@ function computeCoverageFromFull(h) {
 
 // 给完整 holding 附加预计算的覆盖结果（脱敏字段），供公开页面直接读取
 function attachCoverage(h) {
-  return { ...h, coverage: computeCoverageFromFull(h) };
+  const c = computeCoverageFromFull(h);
+  // Public call counts are allowed, but precise coverage or equality would reveal shares.
+  // Publish collateral sufficiency only; keep stock coverage/free-share ratios internal.
+  return { ...h, coverage: {
+    status: c.isFullyBacked ? 'covered' : c.status,
+    statusText: c.isFullyBacked ? '足额备兑' : c.statusText,
+    isFullyBacked: c.isFullyBacked,
+    sharesUnknown: c.sharesUnknown
+  } };
 }
 
 // 字段映射：ledger-full.json 新字段名 → HTML 模板旧字段名
@@ -103,6 +111,7 @@ function mapFields(holding) {
 
 // 构建脱敏 DATA（与 HTML 模板中的 var DATA = {...} 结构一致）
 const publicData = {
+  optionsAnalysisScope: (ledger.methodology.optionsAnalysis || {}).scope || 'full',
   asOf: ledger.asOf,
   asOfLabel: ledger.asOfLabel,
   fx: ledger.fx,
