@@ -354,7 +354,7 @@
   .trade-summary-row td { border-top: 1px dashed var(--line); background: var(--surface-2); font-weight: 600; padding-top: 8px; padding-bottom: 8px; }
 
   /* ========== Journal ========== */
-  .journal { display: grid; gap: 12px; }
+  .journal, .reviews-list { display: grid; gap: 12px; }
   .entry { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
   .entry details { border: none; }
   .entry summary {
@@ -646,7 +646,7 @@
     </div>
     <div class="journal">
 
-      
+
       <div id="reviewsBox" class="reviews-list"></div>
 
 <article class="entry">
@@ -1918,18 +1918,23 @@
     });
     // 统计兑现条目：完整清仓单独计（用于平仓胜率），部分减仓单列为 partial
     // 事实与数量来自派生 closedTrades；缺数量/成本 → 收益待核实、不计入胜率
-    var registeredEntries = 0, clearedTrades = 0, winTrades = 0, partialEntries = 0, mm = null, mx = null;
+    var registeredEntries = 0, clearedTrades = 0, winTrades = 0, partialEntries = 0, completedEpisodes = 0, unknownEntries = 0, mm = null, mx = null;
     DATA.closedTrades.forEach(function(d){
       var tMin = d.date, tMax = d.date;
       if (mm === null || tMin < mm) mm = tMin;
       if (mx === null || tMax > mx) mx = tMax;
       d.trades.forEach(function(t){
         registeredEntries++;
-        if (t.isPartial) { partialEntries++; }
-        else if (t.result === "win" || t.result === "loss") { clearedTrades++; if (t.result === "win") winTrades++; }
+        if (t.isPartial) partialEntries++;
+        if (t.closesEpisode) completedEpisodes++;
+        if (!knownNumber(t.totalRetPct)) unknownEntries++;
+        if (t.performanceEligible && (t.cycleResult === "win" || t.cycleResult === "loss" || t.cycleResult === "flat")) {
+          clearedTrades++;
+          if (t.cycleResult === "win") winTrades++;
+        }
       });
     });
-    // 成交笔数（legs，仅计有明确数量的卖出腿）
+    // 已登记卖出事件（含缺项记录），与完整成交/完整周期分开。
     var totalFills = 0;
     DATA.closedTrades.forEach(function(d){
       d.trades.forEach(function(t){ totalFills += t.legs.length; });
@@ -1940,13 +1945,29 @@
       ccCount: ccTargets.length, ccTargets: ccTargets,
       winRate: clearedTrades > 0 ? Math.round(winTrades / clearedTrades * 100) : null,
       registeredEntries: registeredEntries, clearedTrades: clearedTrades,
-      partialEntries: partialEntries, totalFills: totalFills, sampleNote: sampleNote
+      partialEntries: partialEntries, completedEpisodes: completedEpisodes, unknownEntries: unknownEntries,
+      totalFills: totalFills, sampleNote: sampleNote
     };
   }
 
   // ============================================================
   // RENDERERS
   // ============================================================
+  function knownNumber(value) { return typeof value === "number" && isFinite(value); }
+  function percentText(value) {
+    return knownNumber(value) ? (value > 0 ? "+" : "") + value.toFixed(1) + "%" : "待核实";
+  }
+  function priceText(value, ccy) {
+    return knownNumber(value) ? (ccy || "") + value.toFixed(2) : "待核实";
+  }
+  function returnClass(value) {
+    return !knownNumber(value) || value === 0 ? "muted" : (value > 0 ? "up" : "down");
+  }
+  function htmlText(value) {
+    return String(value === null || value === undefined ? "" : value)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
   function renderAlerts() {
     var box = document.getElementById("alertBox");
     var alerts = collectAlerts();
@@ -2017,7 +2038,7 @@
           '</tr></thead><tbody>';
         var sortedH = acct.holdings.slice().sort(function(a, b) { return (b.wtPct || 0) - (a.wtPct || 0); });
         sortedH.forEach(function(h) {
-          var costStr = (acct.market === "CN" ? "¥" : "$") + h.cost.toFixed(h.cost < 20 ? 3 : 2);
+          var costStr = knownNumber(h.cost) ? (acct.market === "CN" ? "¥" : "$") + h.cost.toFixed(h.cost < 20 ? 3 : 2) : "待核实";
           if (h.costNote) costStr += '<div class="subcell" style="font-size:10px; color:var(--muted);">' + h.costNote + '</div>';
           var symCell = '<span class="sym">' + h.sym + '</span>';
           if (h.wtPct !== null && h.wtPct !== undefined) symCell += '<span class="wt">≈' + h.wtPct + '%</span>';
@@ -2038,7 +2059,7 @@
                 var pCls = leg.naked ? " naked-opt" : "";
                 pCls += g.settled ? " settled" : "";
                 optCell += '<span class="opt-pill' + pCls + '"><span class="mult">×' + leg.mult + '</span> <span class="strike">' + leg.strike + leg.type + '</span>';
-                if (leg.premium !== undefined) optCell += ' <span class="premium">@' + leg.premium.toFixed(2) + '</span>';
+                if (knownNumber(leg.premium)) optCell += ' <span class="premium">@' + leg.premium.toFixed(2) + '</span>';
                 optCell += '</span>';
               });
               optCell += '</div>';
@@ -2082,21 +2103,26 @@
     var summary = document.getElementById("closedSummary");
     var days = document.getElementById("closedDays");
     var m = computeMetrics();
-    var winPct = m.registeredEntries > 0 ? Math.round(m.winRate||0) : 0;
+    var winPct = knownNumber(m.winRate) ? m.winRate + "%" : "待核实";
     summary.innerHTML =
       '<span>已登记兑现条目：<strong>' + m.registeredEntries + '</strong> 条</span>' +
-      '<span>已确认成交：<strong>' + m.totalFills + '</strong> 笔</span>' +
-      '<span>条目胜率：<strong class="up">' + (m.registeredEntries > 0 ? winPct + "%" : "—") + '</strong></span>' +
+      '<span>已登记卖出事件：<strong>' + m.totalFills + '</strong> 笔（含缺项）</span>' +
+      '<span>清仓登记：<strong>' + m.completedEpisodes + '</strong> 个周期 · 可核算毛收益：' + m.clearedTrades + ' 个</span>' +
+      '<span>可核算清仓周期胜率：<strong>' + winPct + '</strong></span>' +
       '<span>样本期：<strong>' + (m.sampleNote || "待核实") + '</strong></span>' +
-      '<span style="color:var(--warn);">缺数量/成本者收益待核实 · 平仓胜率仅计完整清仓</span>';
+      '<span style="color:var(--warn);">' + m.unknownEntries + ' 条加权收益待核实 · 未计费用 · 非账户收益</span>';
 
     var html = "";
     DATA.closedTrades.forEach(function(day, idx) {
-      var dayWinCount = 0, dayLossCount = 0, dayFills = 0;
-      day.trades.forEach(function(t){ if(t.result==="win") dayWinCount++; else dayLossCount++; dayFills += t.legs.length; });
+      var dayWinCount = 0, dayLossCount = 0, dayFills = 0, dayUnknown = 0;
+      day.trades.forEach(function(t){
+        if (!knownNumber(t.totalRetPct)) dayUnknown++;
+        else if (t.totalRetPct > 0) dayWinCount++;
+        else if (t.totalRetPct < 0) dayLossCount++;
+        dayFills += t.legs.length;
+      });
       var tagCls = day.isOld ? " old" : "";
-      var tagText = dayWinCount + " 笔交易 · " + dayFills + " 次成交";
-      if (dayLossCount === 0 && dayWinCount > 0) tagText = dayWinCount + " 笔全盈 · " + dayFills + "次成交";
+      var tagText = day.trades.length + " 条兑现 · " + dayFills + " 笔卖出" + (dayUnknown ? " · " + dayUnknown + " 条收益待核实" : "");
       html += '<article class="closed-day"><details' + ((day.isOld || idx > 0) ? "" : " open") + '>' +
         '<summary>' +
           '<span class="day-date">' + day.dateLabel + '</span>' +
@@ -2111,32 +2137,32 @@
         var isMultiLeg = t.legs.length > 1;
         var ccy = t.acct.indexOf("A") !== -1 ? "¥" : "$";
         t.legs.forEach(function(leg, li) {
-          var retCls = leg.retPct >= 0 ? "up" : "down";
-          var retStr = (leg.retPct >= 0 ? "+" : "") + leg.retPct.toFixed(1) + "%";
-          html += '<tr' + (isMultiLeg && li === 0 ? ' class="trade-group"' : '') + '>';
+          var retCls = returnClass(leg.retPct);
+          var retStr = percentText(leg.retPct);
+          html += '<tr data-execution-id="' + htmlText(leg.executionId) + '"' + (isMultiLeg && li === 0 ? ' class="trade-group"' : '') + '>';
           if (li === 0) {
             html += '<td rowspan="' + t.legs.length + '"><span class="time">' + (isMultiLeg ? "分批" : leg.time) + '</span></td>';
             html += '<td rowspan="' + t.legs.length + '"><span class="sym">' + t.sym + '</span><div class="desc">' + t.name + '</div><div class="subcell">' + t.acct + '</div></td>';
             html += '<td rowspan="' + t.legs.length + '">' + t.acct + '</td>';
-            html += '<td rowspan="' + t.legs.length + '" class="num price">' + ccy + (t.cost||"—") + (t.costNote ? '<div class="subcell" style="font-size:10px; color:var(--muted);">' + t.costNote + '</div>' : '') + '</td>';
+            html += '<td rowspan="' + t.legs.length + '" class="num price">' + priceText(t.cost, ccy) + (t.costNote ? '<div class="subcell" style="font-size:10px; color:var(--muted);">' + htmlText(t.costNote) + '</div>' : '') + '</td>';
           }
           if (isMultiLeg) {
-            html += '<td class="num price" style="font-size:12px;">' + ccy + leg.price.toFixed(2) + '</td>';
+            html += '<td class="num price" style="font-size:12px;">' + priceText(leg.price, ccy) + '</td>';
             html += '<td class="num ' + retCls + '" style="font-size:12px;">' + retStr + '</td>';
-            html += '<td><span class="leg-tag">' + leg.time + ' · ' + leg.note + '</span></td>';
+            html += '<td><span class="leg-tag">' + htmlText(leg.time) + ' · ' + htmlText(leg.note) + '</span>' + (leg.costBasisType === "netInvested" ? '<div class="subcell">涨幅相对历史摊薄成本，非真实盈亏</div>' : '') + '</td>';
           } else {
-            html += '<td class="num price">' + ccy + leg.price.toFixed(2) + '</td>';
+            html += '<td class="num price">' + priceText(leg.price, ccy) + '</td>';
             html += '<td class="num ' + retCls + '">' + retStr + '</td>';
-            html += '<td><span class="tag reason">' + leg.note + '</span></td>';
+            html += '<td><span class="tag reason">' + htmlText(leg.note) + '</span>' + (leg.costBasisType === "netInvested" ? '<div class="subcell">涨幅相对历史摊薄成本，非真实盈亏</div>' : '') + '</td>';
           }
           html += '</tr>';
         });
         // 汇总行
-        var totCls = t.totalRetPct >= 0 ? "up" : "down";
+        var totCls = returnClass(t.totalRetPct);
         html += '<tr class="trade-summary-row">' +
           '<td colspan="3" style="text-align:right;font-size:12px;">加权合计：</td>' +
           '<td class="num" style="font-size:12px;">—</td>' +
-          '<td class="num ' + totCls + '" style="font-size:13px;">' + (t.totalRetPct>=0?"+":"") + t.totalRetPct.toFixed(1) + '%</td>' +
+          '<td class="num ' + totCls + '" style="font-size:13px;">' + percentText(t.totalRetPct) + '</td>' +
           '<td colspan="2" style="font-size:11.5px;color:var(--muted);">' + (t.reason||"") + ' · ' + (t.totalRetNote||"毛盈亏，未扣费用") + '</td>' +
           '</tr>';
         if (t.setup || t.execStatus || t.oneLiner) {
@@ -2162,8 +2188,8 @@
     if (!DATA.reviews || DATA.reviews.length === 0) { box.style.display = "none"; return; }
     var html = "";
     DATA.reviews.forEach(function(r, idx) {
-      html += '<article class="entry"><details' + (idx === 0 ? " open" : "") + '>' +
-        '<summary><span class="date">' + r.dateLabel + '</span><span class="title">' + r.title + '</span></summary>' +
+      html += '<article class="entry" data-review-id="' + htmlText(r.reviewId) + '"><details' + (idx === 0 ? " open" : "") + '>' +
+        '<summary><span class="date">' + htmlText(r.dateLabel || r.date) + '</span><span class="title">' + htmlText(r.title) + '</span></summary>' +
         '<div class="entry-body">';
       html += '<div class="plan-exec">' +
         '<div class="plan-col"><h4>📋 原计划</h4><ul>' +
@@ -2206,13 +2232,19 @@
   // INIT
   // ============================================================
   function init() {
-    renderAlerts();
-    renderMetrics();
-    renderDiscipline();
-    renderAccounts();
-    renderHoldings();
-    renderClosed();
-    renderReviews();
+    [
+      [renderAlerts, "alertBox"], [renderMetrics, "metricsBox"],
+      [renderDiscipline, "discCounts"], [renderAccounts, "acctGrid"],
+      [renderHoldings, "holdingsBox"], [renderClosed, "closedDays"],
+      [renderReviews, "reviewsBox"]
+    ].forEach(function(item) {
+      try { item[0](); }
+      catch (err) {
+        console.error("页面模块渲染失败：" + item[1], err);
+        var box = document.getElementById(item[1]);
+        if (box) box.innerHTML = '<div class="alert warn">该模块暂时无法显示，请检查更新记录。</div>';
+      }
+    });
   }
 
   // TOC smooth scroll

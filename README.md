@@ -2,6 +2,8 @@
 
 公开页面：https://blackrimmedlol-code.github.io/gnot-capital-ledger/
 
+记录 Agent 先读 `AGENTS.md` 和 `RULES_日常更新.md`。日常提交前运行 `node check_update.js`；程序完成数据校验、构建、脱敏检查、派生与实际渲染回归。新交易必须同步持仓、兑现卡片和当日复盘；源码包含标题或部署成功不等于页面已正常显示。
+
 ## 架构
 
 - **唯一数据源**：`data/ledger-full.json`（完整台账，含股数/成本/成交/周期，raw 可爬取）

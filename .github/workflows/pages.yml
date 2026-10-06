@@ -17,7 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # 显式超时：本地全链路 <1s，正常应在数分钟内完成；超时即为环境卡死，加快失败暴露并避免 cancel 竞争引起的长悬挂
+    # 时间上限用于暴露悬挂；没有日志时，不据此推断失败原因。
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
@@ -34,6 +34,10 @@ jobs:
       # 3. 检查发布产物（允许期权张数、禁止股票数量与资金金额）
       - name: 检查发布产物
         run: node check_public.js
+      - name: 兑现日期与成本回归
+        run: node test_derive.js
+      - name: 实际页面渲染回归（含空值卡片）
+        run: node test_render.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

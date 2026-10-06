@@ -1,99 +1,98 @@
-// derive.js — 从 ledger 派生成交兑现视图（closedTrades）
-// 原则：事实字段（价格/数量/日期/收益）全部来自 executions，不重新手填；
-//      评语字段（name/cost注记/reason/result/setup/execStatus/oneLiner）继承历史 closedTrades（按 episodeId 关联），兼容历史；
-//      缺 qty/成本 → 缺项保留 null、收益显示「待核实」，不参与无法计算的绩效统计；
-//      部分卖出进兑现记录但不算完整清仓；只有 episode closed 才关闭周期。
-//      按真实卖出日期倒序，最新置顶。
-// 用法: const { derive } = require('./derive.js');
-const ACCT_NAME = { main: '主账号', sat1: '1 号小账号', sat2: '2 号小账号', cn: 'A 股账户' };
+// 一条卖出只出现一次，按实际成交日分组；缺项保留 null。
+// closedTrades 仅保留历史文字/成本来源，不作为另一套成交流水。
+const ACCT_NAME = { main: '主账号', sat1: '1号小账号', sat2: '2号小账号', cn: 'A股账户' };
+const number = v => typeof v === 'number' && Number.isFinite(v);
+const positive = v => number(v) && v > 0;
+const round = v => Math.round(v * 100000) / 100000;
+const resultOf = v => !number(v) ? null : v > 0 ? 'win' : v < 0 ? 'loss' : 'flat';
 
 function derive(ledger) {
-  // 历史 closedTrades 评语（按 episodeId 关联，仅继承文字，不覆盖事实）
-  const legacyByEp = {};
-  (ledger.closedTrades || []).forEach(d => (d.trades || []).forEach(t => { legacyByEp[t.episodeId] = t; }));
-
-  // sym → 名称（来自当前 holdings，兼 A 股）
-  const symName = {};
-  (ledger.accounts || []).forEach(a => (a.holdings || []).forEach(h => { if (h.sym && h.name) symName[h.sym] = h.name; }));
-
-  // executions 按 episode 聚合
-  const exByEp = {};
-  ledger.executions.forEach(e => { (exByEp[e.episodeId] = exByEp[e.episodeId] || []).push(e); });
-
+  const legacyByEp = new Map();
+  (ledger.closedTrades || []).forEach(d => (d.trades || []).forEach(t => {
+    if (t.episodeId) legacyByEp.set(t.episodeId, t);
+  }));
+  const names = new Map();
+  (ledger.accounts || []).forEach(a => (a.holdings || []).forEach(h => names.set(h.sym, h.name)));
+  const byEpisode = new Map();
+  (ledger.executions || []).forEach((e, index) => {
+    if (!byEpisode.has(e.episodeId)) byEpisode.set(e.episodeId, []);
+    byEpisode.get(e.episodeId).push({ ...e, index });
+  });
   const trades = [];
-  Object.entries(exByEp).forEach(([epId, exs]) => {
-    const sells = exs.filter(e => e.side === 'sell');
-    if (sells.length === 0) return; // 无卖出 → 无兑现记录
-    const ep = ledger.episodes.find(x => x.episodeId === epId);
-    const buys = exs.filter(e => e.side === 'buy');
-    const leg0 = legacyByEp[epId] || {};
-
-    // 买入成本：仅当该 episode 所有买入腿 qty 完整才加权（避免用部分流水当全部成本，违规高估）；否则待核实
-    const allBuysKnown = buys.length > 0 && buys.every(b => b.qty !== null && b.qty !== undefined && b.qty > 0);
-    let avgCost = null, costNote = '待核实';
-    if (allBuysKnown) {
-      const qty = buys.reduce((s, b) => s + b.qty, 0);
-      const amt = buys.reduce((s, b) => s + b.qty * (b.price || 0), 0);
-      if (qty > 0) { avgCost = Math.round(amt / qty * 100000) / 100000; costNote = '摊薄成本'; }
+  byEpisode.forEach((events, episodeId) => {
+    // 同日无精确时间时保留原始录入顺序；后续买入不能改变此前卖出成本。
+    events.sort((a, b) => a.date.localeCompare(b.date) || a.index - b.index);
+    const sells = events.filter(e => e.side === 'sell');
+    if (!sells.length) return;
+    const ep = (ledger.episodes || []).find(e => e.episodeId === episodeId);
+    const legacy = legacyByEp.get(episodeId) || {};
+    const buys = events.filter(e => e.side === 'buy');
+    const complete = buys.length > 0 && events.every(e => positive(e.qty) && positive(e.price));
+    let balance = 0, avg = null, known = true;
+    const legs = [];
+    for (const e of events) {
+      if (e.side === 'buy') {
+        if (!positive(e.qty) || !positive(e.price)) { known = false; continue; }
+        if (known) {
+          avg = balance === 0 ? e.price : (balance * avg + e.qty * e.price) / (balance + e.qty);
+          balance += e.qty;
+        }
+        continue;
+      }
+      if (e.side !== 'sell') continue;
+      const fromFlow = known && positive(avg) && balance > 0 && (!positive(e.qty) || e.qty <= balance);
+      const cost = fromFlow ? avg : positive(legacy.cost) ? legacy.cost : null;
+      const basis = fromFlow ? 'actual' : (legacy.costBasisType || 'unknown');
+      const ret = positive(cost) && positive(e.price) ? round((e.price - cost) / cost * 100) : null;
+      legs.push({
+        executionId: e.executionId, date: e.date, time: e.time || '时间待核实',
+        price: number(e.price) ? e.price : null, qty: positive(e.qty) ? e.qty : null,
+        cost: cost === null ? null : round(cost), costBasisType: basis,
+        retPct: ret, note: e.note || '',
+        costNote: fromFlow ? '移动加权均价，未计费用' : (legacy.costNote || '成本待核实')
+      });
+      if (known && fromFlow && positive(e.qty)) {
+        balance -= e.qty;
+        if (balance === 0) avg = null;
+      } else known = false;
     }
-    let costRef = avgCost;
-    if (costRef === null && leg0.cost !== null && leg0.cost !== undefined) { costRef = leg0.cost; costNote = leg0.costNote || '历史成本口径'; }
-
-    // 卖出 legs（事实来自 execution；单腿收益率相对成本价，仅需成本+价格，不需 qty）
-    const legs = sells.map(s => {
-      const ret = (costRef !== null && s.price !== null && s.price !== undefined)
-        ? Math.round((s.price - costRef) / costRef * 1000) / 10
-        : null;
-      return {
-        executionId: s.executionId,
-        date: s.date, time: s.time || s.date, price: s.price,
-        qty: (s.qty === null || s.qty === undefined) ? null : s.qty,
-        retPct: ret,
-        note: (ret === null && !s.note) ? '收益待核实（缺成本或数量）' : (s.note || '')
-      };
-    });
-
-    const soldQty = sells.every(s => s.qty !== null && s.qty !== undefined)
-      ? sells.reduce((x, s) => x + s.qty, 0) : null;
-    const initialQty = buys.length && buys.every(b => b.qty !== null && b.qty !== undefined && b.qty > 0)
-      ? buys.reduce((x, b) => x + b.qty, 0)
-      : (leg0.qty !== null && leg0.qty !== undefined ? leg0.qty : null);
-
-    const lastSellDate = sells.map(s => s.date).sort().pop();
-    const isFullClose = !!(ep && ep.status === 'closed');
-
-    // 加权总回报：仅当数量完整 + 成本已知
-    let totalRet = null;
-    if (sells.every(s => s.qty !== null && s.qty > 0) && costRef !== null) {
-      const denom = sells.reduce((x, s) => x + s.qty, 0);
-      totalRet = denom > 0
-        ? Math.round(sells.reduce((x, s) => x + s.qty * ((s.price - costRef) / costRef) * 100, 0) / denom * 10) / 10
-        : null;
-    }
-    const totalRetOK = totalRet !== null;
-    const result = (leg0.result === 'win' || leg0.result === 'loss') ? leg0.result : (isFullClose ? (totalRetOK ? (totalRet >= 0 ? 'win' : 'loss') : null) : null);
-
-    trades.push({
-      tradeId: epId, sym: exs[0].sym, name: leg0.name || symName[exs[0].sym] || exs[0].sym,
-      acct: ACCT_NAME[exs[0].account] || exs[0].account,
-      episodeId: epId, qty: initialQty, cost: costRef, costNote: costNote,
-      legs: legs,
-      soldDate: lastSellDate, isPartial: !isFullClose,
-      totalRetPct: totalRet,
-      totalRetNote: totalRetOK ? '毛盈亏，未扣费用' : '收益待核实（缺数量/成本）',
-      reason: leg0.reason || (isFullClose ? (ep && ep.exitReason ? ep.exitReason : '完整清仓') : '部分减仓兑现'),
-      result: result, setup: leg0.setup || [], execStatus: leg0.execStatus || (isFullClose ? null : 'partial'),
-      oneLiner: leg0.oneLiner
+    const lastDate = sells.map(e => e.date).sort().pop();
+    const closed = !!ep && ep.status === 'closed';
+    const cycleKnown = closed && complete && known && balance === 0 && legs.every(l => positive(l.cost) && l.costBasisType === 'actual');
+    const cycleCapital = cycleKnown ? legs.reduce((s, l) => s + l.qty * l.cost, 0) : null;
+    const cyclePnl = cycleKnown ? legs.reduce((s, l) => s + l.qty * (l.price - l.cost), 0) : null;
+    const cycleResult = cycleKnown ? resultOf(cyclePnl) : null;
+    const byDate = new Map();
+    legs.forEach(l => { if (!byDate.has(l.date)) byDate.set(l.date, []); byDate.get(l.date).push(l); });
+    byDate.forEach((dayLegs, date) => {
+      const quantitiesKnown = dayLegs.every(l => positive(l.qty));
+      const costsKnown = dayLegs.every(l => positive(l.cost) && positive(l.price) && l.costBasisType === 'actual');
+      const capital = quantitiesKnown && costsKnown ? dayLegs.reduce((s, l) => s + l.qty * l.cost, 0) : null;
+      const pnl = capital === null ? null : dayLegs.reduce((s, l) => s + l.qty * (l.price - l.cost), 0);
+      const totalRet = positive(capital) ? round(pnl / capital * 100) : null;
+      const sameCost = dayLegs.every(l => l.cost === dayLegs[0].cost);
+      const closesEpisode = closed && date === lastDate;
+      trades.push({
+        tradeId: episodeId + ':' + date, episodeId, sym: sells[0].sym,
+        name: legacy.name || names.get(sells[0].sym) || sells[0].sym,
+        acct: ACCT_NAME[sells[0].account] || sells[0].account,
+        cost: sameCost ? dayLegs[0].cost : null,
+        costNote: sameCost ? dayLegs[0].costNote : '分批成本见成交备注',
+        legs: dayLegs, soldDate: date, isPartial: !closesEpisode, closesEpisode,
+        totalRetPct: totalRet, result: resultOf(pnl),
+        totalRetNote: totalRet === null ? '加权收益待核实；相对摊薄成本的涨幅不代表真实盈亏' : '当日卖出成本收益率，未计费用，非账户收益',
+        cycleRetPct: closesEpisode && positive(cycleCapital) ? round(cyclePnl / cycleCapital * 100) : null,
+        cycleResult: closesEpisode ? cycleResult : null,
+        performanceEligible: closesEpisode && cycleKnown,
+        reason: legacy.reason || (closesEpisode ? ep.exitReason || '清仓登记' : '部分减仓兑现'),
+        setup: legacy.setup || [], execStatus: legacy.execStatus || 'unknown', oneLiner: legacy.oneLiner || ''
+      });
     });
   });
-
-  // 按真实卖出日期倒序分组
-  const byDate = {};
-  trades.forEach(t => { const d = t.soldDate; (byDate[d] = byDate[d] || []).push(t); });
-  const groups = Object.entries(byDate).map(([date, ts]) => ({ date: date, dateLabel: date, trades: ts }))
-    .sort((a, b) => (a.date < b.date ? 1 : (a.date > b.date ? -1 : 0)));
-
+  const byDate = new Map();
+  trades.forEach(t => { if (!byDate.has(t.soldDate)) byDate.set(t.soldDate, []); byDate.get(t.soldDate).push(t); });
+  const groups = [...byDate].map(([date, ts]) => ({ date, dateLabel: date, trades: ts }))
+    .sort((a, b) => b.date.localeCompare(a.date));
   return { groups, trades };
 }
-
 module.exports = { derive };

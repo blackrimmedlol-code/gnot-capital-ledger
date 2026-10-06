@@ -46,6 +46,13 @@
           "detail": "批次、费用或权利金缺失时，对应成本口径保留待核实状态（value=null），不倒推、不编造"
         }
       ]
+    },
+    "updatePolicy": {
+      "reviewRequiredFrom": "2026-10-05",
+      "tradeTimezone": "America/New_York",
+      "reviewTimezone": "Asia/Shanghai",
+      "missingValues": "保留null，页面显示待核实，不阻止事件渲染",
+      "acceptanceCommand": "node check_update.js"
     }
   },
   "discipline": {
@@ -2467,7 +2474,9 @@
     "openEpisodes": 10,
     "incompleteEvents": 21,
     "winEntries": 13,
-    "lossEntries": 2
+    "lossEntries": 2,
+    "snapshotStatus": "legacy_snapshot",
+    "note": "旧手工缓存，不作为当前统计；兑现与周期统计由derive.js和页面computeMetrics按各自口径实时计算。"
   },
   "corrections": [
     {
@@ -2529,13 +2538,18 @@
       "date": "2026-10-06",
       "item": "1号小账户新开 SNXX",
       "detail": "1号小账户 10/5 新开 SNXX（2x 闪迪），EP-SNXX1-2026Q4；2号小账户 SNXX 不受影响。建仓逻辑=既定观察支撑位出现反弹迹象（execStatus=plan）。"
+    },
+    {
+      "date": "2026-10-06",
+      "item": "复盘与兑现卡片渲染修复",
+      "detail": "修复缺失收益null.toFixed导致兑现卡片和后续复盘一起中断；保留原成交与历史复盘。复盘日期按北京时间10/6显示，美东成交日仍10/5；修正8.90已低于补仓成本的错误比较。"
     }
   ],
   "reviews": [
     {
       "reviewId": "RV-20261005",
       "date": "2026-10-05",
-      "dateLabel": "2026-10-05",
+      "dateLabel": "2026-10-06 复盘 · 美东交易日 10/05",
       "title": "IRE 两档补仓 · GDXU 日内高抛 · 1号 AVGX 清仓 / LABU 快进快出 / 新开 SNXX",
       "executionIds": [
         "EX-20261005-IRE-BUY-049",
@@ -2566,7 +2580,7 @@
         "1号带逻辑离场：AVGX @39.8 全清（+2.2%）、LABU 快进快出 +6%，都在缩量上涨日锁定利润、转空仓观望；后按观察建 SNXX 属计划内（plan）"
       ],
       "issues": [
-        "IRE 补仓与不再频繁加减的边界：10/5 两档补仓后净投入摊薄 8.32，但 IRE 仍处财报密集期、当日收盘 8.90（-6.32%）已低于补仓成本；补仓节奏与退出边界需在下一次明确锁定",
+        "IRE 补仓与此前不再频繁加减约定的边界需核对事前依据。收盘8.90介于两档补仓价8.77与8.93之间，高于这两笔等数量补仓的均价8.85；正股净投入8.32与剩余真实均价应分开，后者仍待核实。",
         "当日高抛的仓位性质：GDXU 建仓-清仓为当日完成，属临时战术操作；留不留趋势 runner 需按核心/博弈仓口径定性，勿让临时仓干扰核心逻辑"
       ],
       "todo": [
@@ -2575,7 +2589,9 @@
         "回笼/观望：仍以核心仓 CC 收租为主，卫星仓小步快跑、带逻辑进出"
       ],
       "observation": [],
-      "execStatus": "plan"
+      "execStatus": "plan",
+      "reviewDate": "2026-10-06",
+      "reviewTimezone": "Asia/Shanghai"
     }
   ]
 }

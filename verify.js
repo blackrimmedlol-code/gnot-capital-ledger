@@ -149,7 +149,32 @@ if (j.reviews) {
   console.log('ℹ️ 无 reviews（尚未启用结构化复盘）');
 }
 
-// ---- 9. 内容哈希（数据 / 模板 / 规则 / 构建脚本，用于判断是否有变化） ----
+// 同步验收：每条卖出必须派生一次；新交易必须被对应交易日复盘引用。
+const derived = require('./derive').derive(j);
+const viewIds = derived.trades.flatMap(t => t.legs.map(l => l.executionId));
+const sales = j.executions.filter(e => e.side === 'sell');
+sales.forEach(e => {
+  if (viewIds.filter(id => id === e.executionId).length !== 1) {
+    errors++; console.error('❌ 卖出视图缺失或重复: ' + e.executionId);
+  }
+});
+derived.groups.forEach(d => d.trades.forEach(t => t.legs.forEach(l => {
+  if (l.date !== d.date) { errors++; console.error('❌ 成交被归到错误交易日: ' + l.executionId); }
+})));
+const reviewSince = j.methodology && j.methodology.updatePolicy && j.methodology.updatePolicy.reviewRequiredFrom;
+if (reviewSince) j.executions.filter(e => e.date >= reviewSince).forEach(e => {
+  const linked = (j.reviews || []).some(r => r.date === e.date && (r.executionIds || []).includes(e.executionId));
+  if (!linked) { errors++; console.error('❌ 新成交未同步当日复盘: ' + e.executionId); }
+});
+console.log('ℹ️ 同步检查: ' + sales.length + ' 条卖出与兑现视图对照，新交易检查对应日复盘');
+
+// 校验失败不能写入成功哈希。
+if (errors > 0) {
+  console.error(`\n❌ 校验失败: ${errors} 错误, ${warnings} 警告`);
+  process.exit(1);
+}
+
+// ---- 9. 内容哈希（包含派生逻辑与渲染回归脚本） ----
 function sha256(p) {
   if (!fs.existsSync(p)) return null;
   return crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex').slice(0, 16);
@@ -158,10 +183,13 @@ const hashes = {
   ledger: sha256(LEDGER),
   template: sha256(TEMPLATE),
   rules: sha256(RULES),
-  build_public: sha256(path.join(ROOT, 'build_public.js'))
+  build_public: sha256(path.join(ROOT, 'build_public.js')),
+  derive: sha256(path.join(ROOT, 'derive.js')),
+  render_test: sha256(path.join(ROOT, 'test_render.js')),
+  agents: sha256(path.join(ROOT, 'AGENTS.md'))
 };
 const HASH_PATH = path.join(ROOT, '.hashes.json');
-const HASH_KEYS = ['ledger', 'template', 'rules', 'build_public'];
+const HASH_KEYS = Object.keys(hashes);
 let changed = true;
 if (fs.existsSync(HASH_PATH)) {
   try {
