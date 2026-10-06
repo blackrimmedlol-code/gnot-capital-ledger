@@ -29,10 +29,19 @@ function derive(ledger) {
     const ep = (ledger.episodes || []).find(e => e.episodeId === episodeId);
     const legacy = legacyByEp.get(episodeId) || {};
     const buys = events.filter(e => e.side === 'buy');
-    const complete = buys.length > 0 && events.every(e => positive(e.qty) && positive(e.price));
+    const checkpoints = (ledger.costCheckpoints || []).filter(c => c.episodeId === episodeId);
+    // An inherited position can supply a valid cost basis without supplying an entire entry-to-exit cycle.
+    const complete = checkpoints.length === 0 && buys.length > 0 && events.every(e => positive(e.qty) && positive(e.price));
     let balance = 0, avg = null, known = true;
+    let costSourceNote = '移动加权均价';
     const legs = [];
     for (const e of events) {
+      const checkpoint = checkpoints.find(c => c.beforeExecutionId === e.executionId);
+      if (checkpoint && positive(checkpoint.quantityBefore) && positive(checkpoint.averageCost) &&
+          checkpoint.source && checkpoint.source.originalCostBasisType === 'actual') {
+        balance = checkpoint.quantityBefore; avg = checkpoint.averageCost; known = true;
+        costSourceNote = '历史实际均价基准，后续移动加权';
+      }
       if (e.side === 'buy') {
         if (!positive(e.qty) || !positive(e.price)) { known = false; continue; }
         if (known) {
@@ -51,7 +60,7 @@ function derive(ledger) {
         price: number(e.price) ? e.price : null, qty: positive(e.qty) ? e.qty : null,
         cost: cost === null ? null : round(cost), costBasisType: basis,
         retPct: ret, note: e.note || '',
-        costNote: fromFlow ? '移动加权均价，未计费用' : (legacy.costNote || '成本待核实')
+        costNote: fromFlow ? costSourceNote : (legacy.costNote || '成本待核实')
       });
       if (known && fromFlow && positive(e.qty)) {
         balance -= e.qty;
@@ -82,7 +91,7 @@ function derive(ledger) {
         costNote: sameCost ? dayLegs[0].costNote : '分批成本见成交备注',
         legs: dayLegs, soldDate: date, isPartial: !closesEpisode, closesEpisode,
         totalRetPct: totalRet, result: resultOf(pnl),
-        totalRetNote: totalRet === null ? '加权收益待核实；相对摊薄成本的涨幅不代表真实盈亏' : '当日卖出成本收益率，未计费用，非账户收益',
+        totalRetNote: totalRet === null ? '加权收益待核实；相对摊薄成本的涨幅不代表真实盈亏' : '当日卖出成本收益率，非账户收益',
         cycleRetPct: closesEpisode && positive(cycleCapital) ? round(cyclePnl / cycleCapital * 100) : null,
         cycleResult: closesEpisode ? cycleResult : null,
         performanceEligible: closesEpisode && cycleKnown,

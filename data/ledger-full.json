@@ -70,7 +70,16 @@
     "ramOpeningCostPolicy": {
       "scope": "do_not_request",
       "confirmedDate": "2026-10-06",
-      "note": "不追补RAM期初真实成本，保留未知值，排除依赖未知成本的收益核算"
+      "note": "不追补更早买入流水；可以使用原历史记录明确标为实际成本的9/21均价13.564作为有来源的计算基准，不以当前摊薄成本倒填历史。"
+    },
+    "reviewPresentation": {
+      "timezone": "Asia/Shanghai",
+      "dateBasis": "美东交易日对应次日中国复盘日；实际成交日期和实际记录时间另存",
+      "internalVisibility": "结单核对、历史补录、内部观察仅存仓库，不进入网站加载数据"
+    },
+    "displayReturns": {
+      "fees": "ignore_in_display",
+      "note": "按股票成交价核算；保留原始费用但页面不重复显示费用表述"
     }
   },
   "discipline": {
@@ -94,7 +103,7 @@
           "sym": "RAM",
           "name": "2x DRAM (Roundhill T-Rex)",
           "qty": 1000,
-          "cost": 13.364,
+          "cost": 13.75312,
           "costDate": "原持续持仓；10/2兑现数量已核实，10/6夜盘按13.85加仓",
           "stop": null,
           "lastPrice": 14.24,
@@ -175,16 +184,19 @@
           "oneLiner": "RAM 10/2 隔夜 @14.5 再止盈、摊薄 13.31：连续两日冲高分批兑现；剩余持有观察，8 张 call 覆盖约九成、14C 接受 @14 行权。",
           "strategyNote": "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。",
           "actualCostBasis": {
-            "value": null,
-            "status": "不追补",
-            "note": "用户明确不追补期初真实买入成本；不生成依赖该成本的真实盈亏"
+            "value": 13.75312,
+            "status": "确认",
+            "note": "依据历史9/21实际均价13.564及后续已确认流水滚动；未重建更早分笔买入",
+            "sourceType": "historical_actual_checkpoint"
           },
           "netInvestedCost": {
-            "value": 13.364,
-            "status": "历史口径续算",
-            "note": "基于原台账净投入每股13.31续算加仓；不代表真实买入成本，未扣费用、未含期权现金流"
+            "value": 13.361,
+            "status": "确认",
+            "scope": "episode",
+            "episodeId": "EP-RAM-2026Q3",
+            "note": "当前持续交易仓净投入，采用历史实际均价基准及确认成交价，排除独立短线和观察仓"
           },
-          "costDisplay": "摊薄口径",
+          "costDisplay": "历史均价基准滚动",
           "entrySetup": [
             "趋势波段"
           ],
@@ -601,6 +613,40 @@
   ],
   "executions": [
     {
+      "executionId": "EX-STMT-20260930-RAM-BUY-P030-080",
+      "episodeId": "EP-RAM-SCALP-20260916",
+      "account": "main",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 80,
+      "price": 11.51,
+      "date": "2026-09-16",
+      "time": "15:28:00",
+      "timezone": "America/New_York",
+      "timestamp": "2026-09-16T15:28:00-04:00",
+      "fee": 2.23,
+      "currency": "USD",
+      "status": "confirmed",
+      "note": "结单已确认短线买入，对应9/17卖出",
+      "source": {
+        "type": "broker_statement",
+        "sourceId": "futu-main-20260930",
+        "page": 30,
+        "statementTimezone": "Asia/Hong_Kong",
+        "statementTimestamp": "2026-09-17T03:28:00+08:00",
+        "settlementDate": "2026-09-17"
+      },
+      "brokerFills": [
+        {
+          "qty": 80,
+          "price": 11.51,
+          "timestamp": "2026-09-16T15:28:00-04:00",
+          "statementTime": "2026-09-17T03:28:00+08:00",
+          "settlementDate": "2026-09-17"
+        }
+      ]
+    },
+    {
       "executionId": "EX-20260917-CRDU-BUY-011",
       "episodeId": "EP-CRDU-2026Q3",
       "account": "main",
@@ -1001,7 +1047,7 @@
       "executionId": "EX-STMT-20260930-RAM-SELL-P031-011",
       "note": "券商结单补录",
       "account": "main",
-      "episodeId": "EP-RAM-2026Q3",
+      "episodeId": "EP-RAM-SCALP-20260916",
       "sym": "RAM",
       "side": "sell",
       "qty": 80,
@@ -3264,6 +3310,18 @@
       "currentQty": 143,
       "exitReason": null,
       "exitDate": null
+    },
+    {
+      "episodeId": "EP-RAM-SCALP-20260916",
+      "sym": "RAM",
+      "account": "main",
+      "status": "closed",
+      "entryDate": "2026-09-16",
+      "entrySetup": [],
+      "entryExecStatus": "unknown",
+      "currentQty": 0,
+      "exitReason": "结单确认的短线买入与次日卖出",
+      "exitDate": "2026-09-17"
     }
   ],
   "closedTrades": [
@@ -4074,13 +4132,18 @@
       "date": "2026-10-06",
       "item": "用户补齐成交及RAM夜盘加仓",
       "detail": "10/2 RAM卖出与IRE两卖一买的股数均补为100；10/6夜盘RAM按13.85买100，交易仓900→1000。IRE真实成本与净投入重算，RAM期初真实成本按用户要求不追补。"
+    },
+    {
+      "date": "2026-10-06",
+      "item": "复盘展示与RAM成本关联",
+      "detail": "内部核对与观察不发布，复盘按中国日历显示。RAM按原实际均价13.564成本基准滚动，9/16-17短线按结单买卖配对；不以当前摊薄成本回填历史。"
     }
   ],
   "reviews": [
     {
       "reviewId": "RV-20261005",
       "date": "2026-10-05",
-      "dateLabel": "2026-10-06 复盘 · 美东交易日 10/05",
+      "dateLabel": "2026-10-06 复盘",
       "title": "IRE 两档补仓 · GDXU 日内高抛 · 1号 AVGX 清仓 / LABU 快进快出 / 新开 SNXX",
       "executionIds": [
         "EX-20261005-IRE-BUY-049",
@@ -4119,12 +4182,12 @@
         "1号 SNXX：观察支撑位反弹成色，用结果验证建仓逻辑；到止盈位按博弈仓一次清、不留 runner",
         "回笼/观望：仍以核心仓 CC 收租为主，卫星仓小步快跑、带逻辑进出"
       ],
-      "observation": [
-        "10/6补齐历史流水后：IRE当前周期净投入重算约8.3146，真实剩余均价约8.9499，均未计费用；原8.32保留为当时估算。"
-      ],
       "execStatus": "plan",
       "reviewDate": "2026-10-06",
-      "reviewTimezone": "Asia/Shanghai"
+      "reviewTimezone": "Asia/Shanghai",
+      "internalObservation": [
+        "10/6补齐历史流水后：IRE当前周期净投入重算约8.3146，真实剩余均价约8.9499，均未计费用；原8.32保留为当时估算。"
+      ]
     },
     {
       "reviewId": "RV-RECONCILE-20261006",
@@ -4190,7 +4253,8 @@
         "EX-20261002-RAM-SELL-008",
         "EX-20261002-IRE-SELL-015",
         "EX-20261002-IRE-SELL-016",
-        "EX-20261002-IRE-BUY-017"
+        "EX-20261002-IRE-BUY-017",
+        "EX-STMT-20260930-RAM-BUY-P030-080"
       ],
       "plan": [
         "保留原始事前计划与标签；结单只能证明成交，不能追溯证明计划内。"
@@ -4210,49 +4274,55 @@
         "期权按用户确认保留足额备兑状态，不再要求补权利金，不计算含期权组合收益。",
         "用户确认额外单股为价格观察仓；实际成交保留，对分析、交易仓集中度与清仓状态排除。"
       ],
-      "execStatus": "unknown"
+      "execStatus": "unknown",
+      "visibility": "internal"
     },
     {
       "reviewId": "RV-20261006",
       "date": "2026-10-06",
-      "reviewDate": "2026-10-06",
+      "reviewDate": "2026-10-07",
       "reviewTimezone": "Asia/Shanghai",
-      "dateLabel": "2026-10-06 夜盘更新 · 美东交易日10/06",
-      "title": "RAM夜盘加仓 · 补齐10/2成交数量",
+      "dateLabel": "2026-10-07 复盘",
+      "title": "RAM夜盘加仓",
       "executionIds": [
         "EX-USER-20261006-RAM-BUY-001"
       ],
       "plan": [
-        "本次加仓的事前依据未提供，按未记录保留，不追溯认定计划内或情绪交易。"
+        "本次加仓的事前计划未记录。"
       ],
       "execution": [
-        "主号RAM：美东10/6夜盘按13.85加仓，归属原未结束持仓周期。",
-        "历史补录：10/2 RAM按14.50卖出；IRE按9.90、10.38两次兑现后按9.23买回，数量均已核实。",
-        "IRE当前周期真实剩余均价约8.9499，正股净投入约8.3146，两者按已核实流水重算，均未计费用；历史8.32为当时估算。"
+        "主号RAM：美东10/6夜盘按13.85加仓，归属原未结束持仓周期。"
       ],
       "good": [],
       "issues": [],
       "todo": [],
-      "observation": [
+      "execStatus": "unknown",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-06T13:58:11+08:00",
+      "reviewDateBasis": "对应美东10/6交易日的次日中国复盘日",
+      "internalExecution": [
+        "历史补录：10/2 RAM按14.50卖出；IRE按9.90、10.38两次兑现后按9.23买回，数量均已核实。",
+        "IRE当前周期真实剩余均价约8.9499，正股净投入约8.3146，两者按已核实流水重算，均未计费用；历史8.32为当时估算。"
+      ],
+      "internalObservation": [
         "RAM期初真实买入成本按用户要求不追补，不生成依赖未知成本的真实收益。",
         "额外观察股不计交易表现；期权只保留足额备兑状态，不要求补历史记录。",
         "行情仍为美东10/5收盘快照；夜盘成交价格单独记录，不冒充实时行情。"
-      ],
-      "execStatus": "unknown"
+      ]
     }
   ],
   "openingPositions": [
     {
       "account": "main",
       "sym": "RAM",
-      "asOf": "2026-09-17",
-      "qty": 981,
-      "actualCostBasis": null,
-      "costBasisStatus": "not_requested",
+      "asOf": "2026-09-21",
+      "qty": 901,
+      "actualCostBasis": 13.564,
+      "costBasisStatus": "historical_actual",
       "sourceId": "futu-main-20260930",
-      "note": "期初持仓数量已由结单衔接；用户明确不追补真实买入成本",
+      "note": "9/21减仓前交易仓基准；数量由结单衔接，均价取原历史实际成本记录，非新买入",
       "observationQty": 1,
-      "analysisQty": 980
+      "analysisQty": 900
     },
     {
       "account": "main",
@@ -5148,5 +5218,157 @@
       "CRDU": 14.03232,
       "IRE": 15.59147
     }
-  }
+  },
+  "costCheckpoints": [
+    {
+      "episodeId": "EP-RAM-2026Q3",
+      "beforeExecutionId": "EX-20260922-RAM-SELL-037",
+      "quantityBefore": 900,
+      "averageCost": 13.564,
+      "costBasisType": "historical_actual",
+      "source": {
+        "type": "historical_ledger",
+        "tradeId": "RAM-SELL",
+        "originalCostBasisType": "actual"
+      },
+      "note": "原历史记录标为实际均价；仅作为9/21减仓前持续持仓基准，未重建更早分笔买入"
+    }
+  ],
+  "openingPositionCorrections": [
+    {
+      "account": "main",
+      "sym": "RAM",
+      "asOf": "2026-09-17",
+      "qty": 981,
+      "actualCostBasis": null,
+      "costBasisStatus": "not_requested",
+      "sourceId": "futu-main-20260930",
+      "note": "期初持仓数量已由结单衔接；用户明确不追补真实买入成本",
+      "observationQty": 1,
+      "analysisQty": 980
+    }
+  ],
+  "holdingCostCorrections": [
+    {
+      "sym": "RAM",
+      "previousActual": {
+        "value": null,
+        "status": "不追补",
+        "note": "用户明确不追补期初真实买入成本；不生成依赖该成本的真实盈亏"
+      },
+      "previousNet": {
+        "value": 13.364,
+        "status": "历史口径续算",
+        "note": "基于原台账净投入每股13.31续算加仓；不代表真实买入成本，未扣费用、未含期权现金流"
+      }
+    }
+  ],
+  "internalLegacyReviewNotes": [
+    {
+      "visibility": "internal",
+      "type": "observation",
+      "html": "<h3><span>🧠</span>待验证的观察</h3>\n          <ul>\n            <li>同赛道冲高减仓（S1）样本增至 2 次（9/19 与 9/21）且均兑现，仍偏少、不足以定论。</li>\n            <li>SOXS 仓位的心理承受边界：单日 -15% 是否超出风险承受力，需在实践中校准。</li>\n          </ul>"
+    },
+    {
+      "visibility": "internal",
+      "type": "observation",
+      "html": "<h3><span>🧠</span>待验证的观察</h3>\n          <ul>\n            <li>今日 3 笔平仓（SNDK/LITX/CRDU）全部盈利，样本仅 4 笔平仓（含 RKLX 1 笔完整交易），尚不能得出\"分批卖一定更优\"的结论。SNDK 第三笔卖到当日高点不代表分批策略必然优于一次性卖出——单日高点是事后才知道的。</li>\n            <li>高 IV 时卖 call 的权利金更厚，但高 IV 往往伴随大事件，卖 call 不等于\"高胜率\"，可能只是承担了尾部风险的补偿。</li>\n          </ul>"
+    },
+    {
+      "visibility": "internal",
+      "type": "reconciliation",
+      "html": "<span style=\"color:var(--muted); font-size:11px;\">（结单核对：主体仓10/1兑现，最后观察仓10/2卖出；不是当前持仓建议）</span>"
+    },
+    {
+      "visibility": "internal",
+      "type": "reconciliation",
+      "html": "<span style=\"color:var(--muted); font-size:11px;\">（结单及用户核对：最后观察仓10/2卖出，此为历史回看）</span>"
+    }
+  ],
+  "legacyReviewDisplayDates": [
+    {
+      "originalLabel": "2026-10-02",
+      "reviewDate": "2026-10-03",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-10-01",
+      "reviewDate": "2026-10-02",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-09-30",
+      "reviewDate": "2026-10-01",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-09-29",
+      "reviewDate": "2026-09-30",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-09-28",
+      "reviewDate": "2026-09-29",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-09-25",
+      "reviewDate": "2026-09-26",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-09-24",
+      "reviewDate": "2026-09-25",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-09-23",
+      "reviewDate": "2026-09-24",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-09-22",
+      "reviewDate": "2026-09-23",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-09-21",
+      "reviewDate": "2026-09-22",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-09-19",
+      "reviewDate": "2026-09-19",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    },
+    {
+      "originalLabel": "2026-09-18",
+      "reviewDate": "2026-09-19",
+      "reviewTimezone": "Asia/Shanghai",
+      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "visibility": "internal"
+    }
+  ]
 }

@@ -24,4 +24,26 @@ assert.equal(derive(unknown).trades.flatMap(t => t.legs).find(l => l.executionId
 const legacy = structuredClone(unknown);
 legacy.closedTrades = [{ trades: [{ episodeId: 'EP', cost: 0, result: 'win', costBasisType: 'netInvested' }] }];
 assert.ok(derive(legacy).trades.every(t => t.totalRetPct === null), '零成本或旧盈利标签生成伪收益');
-console.log('✅ 兑现派生通过：实际日期、移动均价、清仓去重、缺项、持平、幂等');
+const inherited = {
+  accounts: [], closedTrades: [], episodes: [{ episodeId: 'EP', status: 'closed' }],
+  costCheckpoints: [{ episodeId: 'EP', beforeExecutionId: 'S1', quantityBefore: 100,
+    averageCost: 10, source: { originalCostBasisType: 'actual' } }],
+  executions: [event('S1', '2026-10-02', 'sell', 50, 12),
+    event('B2', '2026-10-03', 'buy', 50, 20), event('S2', '2026-10-04', 'sell', 100, 15)]
+};
+const snapshot = derive(inherited);
+assert.equal(snapshot.trades[0].legs[0].cost, 10);
+assert.equal(snapshot.trades[0].totalRetPct, 20);
+assert.equal(snapshot.trades[1].legs[0].cost, 15);
+assert.ok(snapshot.trades.every(t => !t.performanceEligible), '历史均价快照被伪装成完整周期');
+const ledger = require('./data/ledger-full.json');
+const ram = derive(ledger).trades.filter(t => t.sym === 'RAM');
+assert.ok(ram.length && ram.every(t => Number.isFinite(t.totalRetPct)), 'RAM已有依据仍显示成本待核实');
+const core = ram.filter(t => t.episodeId === 'EP-RAM-2026Q3');
+assert.equal(core.find(t => t.soldDate === '2026-09-21').totalRetPct, 7.26924);
+assert.equal(core.find(t => t.soldDate === '2026-10-02').totalRetPct, 5.51317);
+const withoutFutureBuy = structuredClone(ledger);
+withoutFutureBuy.executions = withoutFutureBuy.executions.filter(e => e.date < '2026-10-06');
+assert.deepEqual(derive(withoutFutureBuy).trades.filter(t => t.sym === 'RAM'), ram,
+  '后续夜盘加仓倒改了RAM历史收益');
+console.log('✅ 兑现派生通过：实际日期、移动均价、历史成本来源、清仓去重、缺项、持平、幂等');

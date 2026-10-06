@@ -47,6 +47,21 @@ j.closedTrades.forEach(d => d.trades.forEach(t => {
 }));
 if (!refErr) console.log('✅ 引用关系: 所有 execution / closedTrade 均指向存在的 episode');
 
+// Historical actual-cost snapshots must link to the preserved source, never a current net cost.
+const checkpointIds = new Set();
+(j.costCheckpoints || []).forEach(c => {
+  const e = j.executions.find(e => e.executionId === c.beforeExecutionId);
+  const source = j.closedTrades.flatMap(d => d.trades).find(t => t.tradeId === c.source?.tradeId);
+  if (checkpointIds.has(c.beforeExecutionId) || !e || e.episodeId !== c.episodeId ||
+      !Number.isFinite(c.quantityBefore) || c.quantityBefore <= 0 ||
+      !Number.isFinite(c.averageCost) || c.averageCost <= 0 ||
+      c.source?.originalCostBasisType !== 'actual' || source?.costBasisType !== 'actual' ||
+      source?.cost !== c.averageCost) {
+    errors++; console.error('❌ 历史成本基准缺失或来源不一致: ' + c.beforeExecutionId);
+  }
+  checkpointIds.add(c.beforeExecutionId);
+});
+
 // ---- 4. 疑似重复成交（同账户+标的+方向+日期+价格） ----
 const execKey = {};
 j.executions.forEach(e => {
@@ -179,7 +194,11 @@ if (j.reviews) {
     if (!r.date) { errors++; console.error(`❌ review ${r.reviewId} 缺 date`); }
     if (r.executionIds) r.executionIds.forEach(id => { if (!execIdSet.has(id)) { rvRefErr++; errors++; console.error(`❌ review ${r.reviewId} 引用缺失 execution: ${id}`); } });
     // 可见文本禁股数/金额（价格允许）
-    const texts = [r.title, r.dateLabel].concat(r.plan || [], r.execution || [], r.good || [], r.issues || [], r.todo || [], r.observation || []);
+    if (r.visibility === 'internal') return;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(r.reviewDate || '') || r.reviewTimezone !== 'Asia/Shanghai') {
+      errors++; console.error('❌ 公开复盘缺中国日期/时区: ' + r.reviewId);
+    }
+    const texts = [r.title, r.dateLabel].concat(r.plan || [], r.execution || [], r.good || [], r.issues || [], r.todo || []);
     texts.forEach(t => { if (t && /[0-9]+\s*股|\$\s?[0-9]|[0-9]+\s*(美元|USD|元)/.test(t)) { rvLeak++; errors++; console.error(`❌ review ${r.reviewId} 可见文本含股数/金额: ${t.slice(0, 40)}`); } });
   });
   if (!rvRefErr) console.log('✅ reviews 引用关系: 所有 executionIds 均存在');

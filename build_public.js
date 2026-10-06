@@ -129,7 +129,13 @@ const publicData = {
     }))
   })),
   // 结构化复盘（结构化记录），按真实日期倒序，最新置顶
-  reviews: (ledger.reviews || []).slice().sort((a, b) => (a.date < b.date ? 1 : (a.date > b.date ? -1 : 0)))
+  reviews: (ledger.reviews || []).filter(r => r.visibility !== 'internal').map(r => {
+    const out = {};
+    for (const k of ['reviewId', 'date', 'reviewDate', 'reviewTimezone', 'dateLabel', 'title', 'plan', 'execution', 'good', 'issues', 'todo', 'execStatus']) {
+      if (r[k] !== undefined) out[k] = r[k];
+    }
+    return out;
+  }).sort((a, b) => (b.reviewDate || b.date).localeCompare(a.reviewDate || a.date))
 };
 
 // ---- 3. 读取 HTML 模板 ----

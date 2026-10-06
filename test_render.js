@@ -42,9 +42,16 @@ function check(html, ledger) {
   const dates = api.DATA.closedTrades.map(d => d.date);
   assert.deepEqual(dates.slice(), dates.slice().sort().reverse(), '兑现日期未倒序');
   const reviewIds = [...nodes.reviewsBox.innerHTML.matchAll(/data-review-id="([^"]+)"/g)].map(m => m[1]);
-  assert.deepEqual(reviewIds.slice().sort(), (ledger.reviews || []).map(r => r.reviewId).sort(), '结构化复盘未全部渲染');
+  const publicReviews = (ledger.reviews || []).filter(r => r.visibility !== 'internal');
+  assert.deepEqual(reviewIds.slice().sort(), publicReviews.map(r => r.reviewId).sort(), '公开复盘缺失或内部核对泄漏');
+  assert.ok(!nodes.reviewsBox.innerHTML.includes('待补观察'), '内部观察出现在复盘');
+  const reviewSection = html.slice(html.indexOf('<section id="review"'), html.indexOf('</section>', html.indexOf('<section id="review"')));
+  assert.ok(!/待补观察|待验证的观察|历史结单核对|历史补录|结单核对/.test(reviewSection + nodes.reviewsBox.innerHTML), '旧复盘内部内容仍在页面');
+  assert.ok(!/internalLegacyReviewNotes|internalObservation|internalExecution|RV-RECONCILE/.test(html), '内部记录嵌入网站产物');
+  assert.ok(!nodes.closedDays.innerHTML.includes('未计费用') && !nodes.closedDays.innerHTML.includes('未扣费用'), '兑现卡片仍重复显示费用表述');
+  for (const r of api.DATA.reviews) assert.ok(!r.observation && !r.internalObservation && !r.internalExecution, '内部字段进入页面数据');
   if (reviewIds.length) {
-    const latest = ledger.reviews.slice().sort((a, b) => b.date.localeCompare(a.date))[0];
+    const latest = publicReviews.slice().sort((a, b) => (b.reviewDate || b.date).localeCompare(a.reviewDate || a.date))[0];
     assert.equal(reviewIds[0], latest.reviewId, '最新复盘未置顶');
     assert.ok(nodes.reviewsBox.innerHTML.startsWith('<article class="entry" data-review-id="' + latest.reviewId + '"><details open>'), '最新复盘未展开');
   }
