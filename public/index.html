@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交已更新至美东2026/10/6：RAM连续补仓（13.70盘中+13.85夜盘+13.55，交易仓1200）；主号新开STXL支撑位抄底75@27.29。行情：RAM等仍10/5收盘，STXL为10/6收盘。",
-  asOfLabel: "成交：10/6（RAM三档补仓+STXL建仓） · 行情：10/5/10/6收盘",
+  asOf: "成交已更新至美东2026/10/6：RAM连续补仓（13.70盘+13.85夜+13.55，仓1200）；主号新开STXL支撑抄底75@27.29；主号IRE卖出300@9.55（剩余100）。行情：RAM等仍10/5收盘，STXL为10/6收盘。",
+  asOfLabel: "成交：10/6（RAM三档补仓+STXL建仓+IRE止盈300） · 行情：10/5/10/6收盘",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1666,7 +1666,7 @@
             isFullyBacked: true,
             sharesUnknown: false
           },
-          weightRank: 5,
+          weightRank: 4,
           weightLevel: "低"
         },
         {
@@ -1701,7 +1701,7 @@
             isFullyBacked: true,
             sharesUnknown: false
           },
-          weightRank: 3,
+          weightRank: 2,
           weightLevel: "低"
         },
         {
@@ -1721,14 +1721,14 @@
             "支撑低吸"
           ],
           execStatus: "adhoc",
-          oneLiner: "两档回调补仓后持有；原计划观察一周能否回升至10。",
+          oneLiner: "9.55卖出300锁定利润，剩余100持有观察。",
           coverage: {
             status: "none",
             statusText: "无备兑",
             isFullyBacked: false,
             sharesUnknown: false
           },
-          weightRank: 2,
+          weightRank: 5,
           weightLevel: "低"
         },
         {
@@ -1753,7 +1753,7 @@
             isFullyBacked: false,
             sharesUnknown: false
           },
-          weightRank: 4,
+          weightRank: 3,
           weightLevel: "低"
         }
       ]
@@ -1921,6 +1921,52 @@
     }
   ],
   closedTrades: [
+    {
+      date: "2026-10-06",
+      dateStart: "2026-10-06",
+      dateEnd: "2026-10-06",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-06",
+      trades: [
+        {
+          tradeId: "EP-IRE-2026Q3:2026-10-06",
+          episodeId: "EP-IRE-2026Q3",
+          sym: "IRE",
+          name: "Defiance 2x IREN · 2x AI云",
+          acct: "主账号",
+          cost: 8.94987,
+          soldDate: "2026-10-06",
+          dateStart: "2026-10-06",
+          dateEnd: "2026-10-06",
+          isPartial: true,
+          closesEpisode: false,
+          totalRetPct: 6.70546,
+          result: "win",
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
+          reason: "部分减仓兑现",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261006-IRE-SELL-001",
+              date: "2026-10-06",
+              dateEnd: "2026-10-06",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 9.55,
+              cost: 8.94987,
+              costBasisType: "actual",
+              retPct: 6.7054,
+              note: "用户报告卖出IRE 300@9.55，剩余100持有；未提供卖出理由，原观望1周回升至10的计划提前兑现"
+            }
+          ]
+        }
+      ]
+    },
     {
       date: "2026-10-05/2026-10-06",
       dateStart: "2026-10-05",
@@ -3268,7 +3314,7 @@
       reviewDate: "2026-10-07",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-07 复盘",
-      title: "RAM连续补仓 · STXL支撑抄底",
+      title: "RAM连续补仓 · IRE部分止盈 · STXL支撑抄底",
       plan: [
         "本次13.70/13.85加仓的事前计划未记录；13.55补仓用户表示'预期补的倒数第二波'（连续补仓计划内）。"
       ],
@@ -3276,7 +3322,8 @@
         "主号RAM：10/6夜盘按13.85加仓，归属原未结束持仓周期。",
         "10/6盘中再按13.70加仓，归属原未结束持仓周期。",
         "主号STXL 于支撑位按27.29抄底建仓（2x希捷，当日大跌-17.6%收于27.27，买在低点区），事前计划明确、预期快进快出。",
-        "主号RAM：按13.55补仓（用户预期倒数第二波），归属原未结束持仓周期。"
+        "主号RAM：按13.55补仓（用户预期倒数第二波），归属原未结束持仓周期。",
+        "主号IRE：9.55卖出300（部分止盈），剩余100持有；原观望1周回升至10的计划提前兑现。"
       ],
       good: [],
       issues: [],
@@ -3284,12 +3331,15 @@
       execStatus: "unknown",
       symbols: [
         "RAM",
-        "STXL"
+        "STXL",
+        "IRE"
       ],
       accounts: [
         "主账号"
       ],
-      saleExecutionIds: []
+      saleExecutionIds: [
+        "EX-USER-20261006-IRE-SELL-001"
+      ]
     },
     {
       reviewId: "RV-20261005",
