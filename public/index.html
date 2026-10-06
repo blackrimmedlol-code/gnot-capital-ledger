@@ -1479,8 +1479,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "2026-10-06 刷新 10/5 收盘价：RAM 14.24（-0.49%）/ CRWG 18.29（-4.79%）/ CRDU 10.68（-5.49%）/ IRE 8.90（-6.32%）/ 1号 SNXX 15.98（-2.14%）· A股国庆休市至 10/8",
-  asOfLabel: "10/5 收盘价刷新（10/6）· 全线下挫",
+  asOf: "成交已更新至美东2026/10/6夜盘；RAM按13.85加仓。行情仍为美东10/5收盘快照，A股休市快照沿用。",
+  asOfLabel: "成交：10/6夜盘 · 行情：10/5收盘",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1500,13 +1500,13 @@
       role: "核心仓 · CC 收租为主 · 美股",
       tag: "核心仓·收租",
       nav: null,
-      navNote: "USD · 仓位为估算",
+      navNote: "USD · 账户仓位为10/5历史估算；10/6加仓后的最新净资产仓位未核算",
       holdings: [
         {
           sym: "RAM",
           name: "2x DRAM (Roundhill T-Rex)",
-          cost: 13.31,
-          costDate: "期初持续持仓，后续成交已按结单补录；10/2卖出数量待核实",
+          cost: 13.364,
+          costDate: "原持续持仓；10/2兑现数量已核实，10/6夜盘按13.85加仓",
           stop: null,
           lastPrice: 14.24,
           lastPriceDate: "2026-10-05 收盘",
@@ -1587,13 +1587,13 @@
           strategyNote: "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。",
           actualCostBasis: {
             value: null,
-            note: "真实期初买入成本缺失；已知成交数量不能代替期初成本",
-            status: "待核实"
+            note: "用户明确不追补期初真实买入成本；不生成依赖该成本的真实盈亏",
+            status: "不追补"
           },
           netInvestedCost: {
-            value: 13.31,
-            note: "净投入摊薄口径（10/2 @14.5 止盈后）",
-            status: "确认"
+            value: 13.364,
+            status: "历史口径续算",
+            note: "基于原台账净投入每股13.31续算加仓；不代表真实买入成本，未扣费用、未含期权现金流"
           },
           entrySetup: [
             "趋势波段"
@@ -1607,6 +1607,7 @@
             status: "本轮不核算",
             note: "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
+          weightNote: "沿用10/5净资产权重估算；不是10/6加仓后的实时账户权重",
           coverage: {
             status: "covered",
             statusText: "足额备兑",
@@ -1667,6 +1668,7 @@
             status: "本轮不核算",
             note: "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
+          weightNote: "沿用10/5净资产权重估算；不是10/6加仓后的实时账户权重",
           coverage: {
             status: "covered",
             statusText: "足额备兑",
@@ -1728,6 +1730,7 @@
             status: "本轮不核算",
             note: "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
+          weightNote: "沿用10/5净资产权重估算；不是10/6加仓后的实时账户权重",
           coverage: {
             status: "covered",
             statusText: "足额备兑",
@@ -1741,7 +1744,7 @@
         {
           sym: "IRE",
           name: "Defiance 2x IREN · 2x AI云",
-          cost: 8.32,
+          cost: 8.94987,
           costDate: "9/30建底仓 / 10/1 8.58+8.81补底仓 / 10/2 9.9 止盈摊薄 / 10/2 10.38 止盈摊薄 / 10/2 9.23 回调接回 / 10/5 8.93 加仓 / 10/5 8.77 再加仓",
           lastPrice: 8.9,
           lastPriceDate: "2026-10-05 收盘",
@@ -1764,14 +1767,16 @@
           execStatus: "adhoc",
           oneLiner: "IRE 10/5 两档补仓（@8.93/@8.77）摊薄 8.32；观望 1 周能否回升至 10。",
           actualCostBasis: {
-            value: null,
-            note: "结单已核实9/30、10/1买入；10/2卖出与回补数量仍缺失",
-            status: "待核实"
+            value: 8.94987,
+            status: "确认",
+            note: "按已核实股票流水的移动加权均价，排除观察股，未计费用"
           },
           netInvestedCost: {
-            value: 8.32,
-            note: "净投入摊薄口径（10/2 @9.23 接回 + 10/5 @8.93/@8.77 各加100）",
-            status: "确认"
+            value: 8.31462,
+            status: "确认",
+            scope: "episode",
+            episodeId: "EP-IRE-2026Q3",
+            note: "当前未结束周期的正股净投入，排除已结束旧周期及观察股，未计费用、未含期权"
           },
           entrySetup: [
             "支撑低吸"
@@ -1780,13 +1785,14 @@
           actionExecStatus: null,
           exitReason: null,
           episodeId: "EP-IRE-2026Q4",
+          weightNote: "沿用10/5净资产权重估算；不是10/6加仓后的实时账户权重",
           coverage: {
             status: "none",
             statusText: "无备兑",
             isFullyBacked: false,
             sharesUnknown: false
           },
-          costNote: "摊薄口径"
+          costNote: "实际成本"
         }
       ]
     },
@@ -2224,8 +2230,8 @@
           sym: "IRE",
           name: "Defiance 2x IREN · 2x AI云",
           acct: "主账号",
-          cost: null,
-          costNote: "分批成本见成交备注",
+          cost: 8.8695,
+          costNote: "移动加权均价，未计费用",
           legs: [
             {
               executionId: "EX-20261002-IRE-SELL-015",
@@ -2243,19 +2249,19 @@
               date: "2026-10-02",
               time: "盘中",
               price: 10.38,
-              cost: null,
-              costBasisType: "unknown",
-              retPct: null,
+              cost: 8.8695,
+              costBasisType: "actual",
+              retPct: 17.03027,
               note: "高抛再兑现（数量待核实）",
-              costNote: "成本待核实"
+              costNote: "移动加权均价，未计费用"
             }
           ],
           soldDate: "2026-10-02",
           isPartial: true,
           closesEpisode: false,
-          totalRetPct: null,
-          result: null,
-          totalRetNote: "加权收益待核实；相对摊薄成本的涨幅不代表真实盈亏",
+          totalRetPct: 14.32437,
+          result: "win",
+          totalRetNote: "当日卖出成本收益率，未计费用，非账户收益",
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
@@ -3240,6 +3246,34 @@
   ],
   reviews: [
     {
+      reviewId: "RV-20261006",
+      date: "2026-10-06",
+      reviewDate: "2026-10-06",
+      reviewTimezone: "Asia/Shanghai",
+      dateLabel: "2026-10-06 夜盘更新 · 美东交易日10/06",
+      title: "RAM夜盘加仓 · 补齐10/2成交数量",
+      executionIds: [
+        "EX-USER-20261006-RAM-BUY-001"
+      ],
+      plan: [
+        "本次加仓的事前依据未提供，按未记录保留，不追溯认定计划内或情绪交易。"
+      ],
+      execution: [
+        "主号RAM：美东10/6夜盘按13.85加仓，归属原未结束持仓周期。",
+        "历史补录：10/2 RAM按14.50卖出；IRE按9.90、10.38两次兑现后按9.23买回，数量均已核实。",
+        "IRE当前周期真实剩余均价约8.9499，正股净投入约8.3146，两者按已核实流水重算，均未计费用；历史8.32为当时估算。"
+      ],
+      good: [],
+      issues: [],
+      todo: [],
+      observation: [
+        "RAM期初真实买入成本按用户要求不追补，不生成依赖未知成本的真实收益。",
+        "额外观察股不计交易表现；期权只保留足额备兑状态，不要求补历史记录。",
+        "行情仍为美东10/5收盘快照；夜盘成交价格单独记录，不冒充实时行情。"
+      ],
+      execStatus: "unknown"
+    },
+    {
       reviewId: "RV-20261005",
       date: "2026-10-05",
       dateLabel: "2026-10-06 复盘 · 美东交易日 10/05",
@@ -3281,7 +3315,9 @@
         "1号 SNXX：观察支撑位反弹成色，用结果验证建仓逻辑；到止盈位按博弈仓一次清、不留 runner",
         "回笼/观望：仍以核心仓 CC 收租为主，卫星仓小步快跑、带逻辑进出"
       ],
-      observation: [],
+      observation: [
+        "10/6补齐历史流水后：IRE当前周期净投入重算约8.3146，真实剩余均价约8.9499，均未计费用；原8.32保留为当时估算。"
+      ],
       execStatus: "plan",
       reviewDate: "2026-10-06",
       reviewTimezone: "Asia/Shanghai"
@@ -3346,7 +3382,11 @@
         "EX-STMT-20260930-RKLX-BUY-P054-021",
         "EX-STMT-20260930-ASTX-BUY-P055-022",
         "EX-DOC-20260922-SOXS1-BUY-001",
-        "EX-USER-20261002-MSTU-SELL-LAST"
+        "EX-USER-20261002-MSTU-SELL-LAST",
+        "EX-20261002-RAM-SELL-008",
+        "EX-20261002-IRE-SELL-015",
+        "EX-20261002-IRE-SELL-016",
+        "EX-20261002-IRE-BUY-017"
       ],
       plan: [
         "保留原始事前计划与标签；结单只能证明成交，不能追溯证明计划内。"
@@ -3355,13 +3395,12 @@
         "按券商结单核对相关股票的数量、实际价格、费用和日期，香港时间转换为美东时间。",
         "MSTU：交易仓10/1分批退出；最后观察仓10/2按46.30卖出保留底层，但按用户要求不计本轮交易表现。",
         "IRE：9/24原止盈目标12.30，实际成交12.20；成交与计划目标分别保留。",
-        "CRDU：真实剩余成本已按完整正股流水重算，与净投入摊薄分开。"
+        "CRDU：真实剩余成本已按完整正股流水重算，与净投入摊薄分开。",
+        "10/2 RAM卖出、IRE两次卖出与回补的数量经用户补充，相关缺项已补齐。"
       ],
       good: [],
       issues: [],
-      todo: [
-        "RAM 10/2卖出、IRE 10/2两次卖出及回补的数量，仍待后续结单核实。"
-      ],
+      todo: [],
       observation: [
         "当前核对结单覆盖主账号至10/1；未覆盖的其他账户及后续成交继续保留原记录。",
         "期权按用户确认保留足额备兑状态，不再要求补权利金，不计算含期权组合收益。",

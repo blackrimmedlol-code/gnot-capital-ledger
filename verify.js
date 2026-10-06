@@ -130,9 +130,13 @@ j.accounts.forEach(a => (a.holdings || []).forEach(h => {
     return;
   }
   const openings = (j.openingPositions || []).filter(o => o.account === acctIdOf(a) && o.sym === h.sym);
-  if (openings.some(o => o.actualCostBasis === null)) return;
-  const buyAmt = ex.filter(e => e.side === 'buy').reduce((s, e) => s + analysisQty(e) * e.price, 0);
-  const sellAmt = ex.filter(e => e.side === 'sell').reduce((s, e) => s + analysisQty(e) * e.price, 0);
+  if (openings.some(o => analysisQty(o) > 0 && o.actualCostBasis === null)) return;
+  const costEvents = ni.scope === 'episode' ? ex.filter(e => e.episodeId === ni.episodeId) : ex;
+  if (ni.scope === 'episode' && (!ni.episodeId || !costEvents.length)) {
+    errors++; console.error(`❌ ${h.sym} 周期净投入缺对应流水`); return;
+  }
+  const buyAmt = costEvents.filter(e => e.side === 'buy').reduce((s, e) => s + analysisQty(e) * e.price, 0);
+  const sellAmt = costEvents.filter(e => e.side === 'sell').reduce((s, e) => s + analysisQty(e) * e.price, 0);
   const openingAmt = openings.reduce((s, o) => s + analysisQty(o) * o.actualCostBasis, 0);
   const recomputed = Math.round((openingAmt + buyAmt - sellAmt) / h.qty * 100000) / 100000;
   if (Math.abs(recomputed - ni.value) > 0.001) {
