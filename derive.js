@@ -5,6 +5,7 @@ const number = v => typeof v === 'number' && Number.isFinite(v);
 const positive = v => number(v) && v > 0;
 const round = v => Math.round(v * 100000) / 100000;
 const resultOf = v => !number(v) ? null : v > 0 ? 'win' : v < 0 ? 'loss' : 'flat';
+const { cleanExecutionNote } = require('./presentation');
 
 function derive(ledger) {
   const legacyByEp = new Map();
@@ -56,10 +57,10 @@ function derive(ledger) {
       const basis = fromFlow ? 'actual' : (legacy.costBasisType || 'unknown');
       const ret = positive(cost) && positive(e.price) ? round((e.price - cost) / cost * 100) : null;
       legs.push({
-        executionId: e.executionId, date: e.date, time: e.time || '时间待核实',
+        executionId: e.executionId, date: e.date, time: e.time || null,
         price: number(e.price) ? e.price : null, qty: positive(e.qty) ? e.qty : null,
         cost: cost === null ? null : round(cost), costBasisType: basis,
-        retPct: ret, note: e.note || '',
+        retPct: ret, note: cleanExecutionNote(e),
         costNote: fromFlow ? costSourceNote : (legacy.costNote || '成本待核实')
       });
       if (known && fromFlow && positive(e.qty)) {
@@ -95,7 +96,7 @@ function derive(ledger) {
         cycleRetPct: closesEpisode && positive(cycleCapital) ? round(cyclePnl / cycleCapital * 100) : null,
         cycleResult: closesEpisode ? cycleResult : null,
         performanceEligible: closesEpisode && cycleKnown,
-        reason: legacy.reason || (closesEpisode ? ep.exitReason || '清仓登记' : '部分减仓兑现'),
+        reason: closesEpisode ? legacy.reason || ep.exitReason || '清仓登记' : '部分减仓兑现',
         setup: legacy.setup || [], execStatus: legacy.execStatus || 'unknown', oneLiner: legacy.oneLiner || ''
       });
     });
@@ -128,15 +129,15 @@ function chinaExecutionTime(e) {
   }
   // A confirmed local day is valid even when the exact execution clock is missing.
   if (e.chinaDate && e.chinaDateSource) return { date: e.chinaDate, dateEnd: e.chinaDate,
-    time: '时刻未记录', timezone: 'Asia/Shanghai', datePrecision: 'day' };
+    time: null, timezone: 'Asia/Shanghai', datePrecision: 'day' };
   const zone = e.timezone || 'America/New_York';
   if (zone === 'Asia/Shanghai' || zone === 'Asia/Hong_Kong') return { date: e.date, dateEnd: e.date,
-    time: '时刻未记录', timezone: 'Asia/Shanghai', datePrecision: 'day' };
+    time: null, timezone: 'Asia/Shanghai', datePrecision: 'day' };
   // A source calendar day can span two China dates. Session words are not timestamps.
   const a = partsAt(localInstant(e.date, '00:00:00', zone), 'Asia/Shanghai');
   const b = partsAt(localInstant(e.date, '23:59:59', zone), 'Asia/Shanghai');
   return { date: `${a.year}-${a.month}-${a.day}`, dateEnd: `${b.year}-${b.month}-${b.day}`,
-    time: '时刻未记录', timezone: 'Asia/Shanghai', datePrecision: 'range' };
+    time: null, timezone: 'Asia/Shanghai', datePrecision: 'range' };
 }
 function presentChinaDates(derived, ledger) {
   const executions = new Map(ledger.executions.map(e => [e.executionId, e]));
@@ -160,6 +161,7 @@ function presentChinaDates(derived, ledger) {
   const trades = [...combined.values()];
   for (const t of trades) {
     t.isPartial = !t.closesEpisode;
+    if (t.isPartial) t.reason = '部分减仓兑现';
     const same = t.legs.every(l => l.cost === t.legs[0].cost);
     t.cost = same ? t.legs[0].cost : null;
     t.costNote = same ? t.legs[0].costNote : '分批成本见成交备注';

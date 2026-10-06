@@ -226,6 +226,25 @@ if (reviewSince) j.executions.filter(e => e.date >= reviewSince).forEach(e => {
 });
 console.log('ℹ️ 同步检查: ' + sales.length + ' 条卖出与兑现视图对照，新交易检查对应日复盘');
 
+// 当前纪律只有一个来源；旧ID继续映射，避免历史引用断裂或重新执行停用规则。
+if (j.discipline && j.discipline.rules) {
+  const groups = new Set((j.discipline.groups || []).map(g => g.id));
+  const ruleIds = new Set();
+  for (const r of j.discipline.rules) {
+    if (!r.id || !groups.has(r.group) || !r.title || !Array.isArray(r.items) || !r.items.length) {
+      errors++; console.error('❌ 当前纪律字段/分组缺失: ' + r.id);
+    }
+    for (const id of [r.id, ...(r.aliases || [])]) {
+      if (ruleIds.has(id)) { errors++; console.error('❌ 当前纪律ID/别名重复: ' + id); }
+      ruleIds.add(id);
+    }
+  }
+  for (const r of j.discipline.inactiveRules || []) if (ruleIds.has(r.id)) {
+    errors++; console.error('❌ 停用纪律仍作为当前规则: ' + r.id);
+  }
+  console.log('✅ 当前纪律及历史别名引用通过');
+}
+
 // 校验失败不能写入成功哈希。
 if (errors > 0) {
   console.error(`\n❌ 校验失败: ${errors} 错误, ${warnings} 警告`);
@@ -243,6 +262,7 @@ const hashes = {
   rules: sha256(RULES),
   build_public: sha256(path.join(ROOT, 'build_public.js')),
   derive: sha256(path.join(ROOT, 'derive.js')),
+  presentation: sha256(path.join(ROOT, 'presentation.js')),
   render_test: sha256(path.join(ROOT, 'test_render.js')),
   agents: sha256(path.join(ROOT, 'AGENTS.md'))
 };

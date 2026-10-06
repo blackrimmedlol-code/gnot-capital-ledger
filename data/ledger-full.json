@@ -8,22 +8,15 @@
     "fxNote": "美股/ A 股分开统计，不做汇率折算"
   },
   "methodology": {
-    "costBasis": "actualCostBasis 统一按移动加权平均法（卖出不改变剩余均价，仅适用该口径）；netInvestedCost 按正股买卖现金流摊薄（不含期权）；含期权现金流的另记为 compositeNetInvested（组合净投入），两者不得混用；券商采用 FIFO 或指定批次时保留券商口径。历史数据不足标待核实。",
-    "pending": [
-      "RAM 真实买入成本待核实（分批买入，减仓批次无法对应）",
-      "IRE 真实买入成本待核实（分批买入+日内高抛低吸）",
-      "MSTU 真实买入成本待核实（多次止盈回补）",
-      "CRDU 3张10/16 7C 权利金待补",
-      "部分成交费用待补",
-      "部分成交数量待核实"
-    ],
+    "costBasis": "正股表现采用成交前移动加权均价，卖出不改变剩余均价；净投入摊薄另列。当前计算忽略费用，不核算期权或组合收益；券商原始成本及来源独立保留。",
+    "pending": [],
     "costAlgorithm": {
       "primary": "移动加权平均法",
       "scope": "内部复盘统一口径，用于 actualCostBasis（真实持仓每股均价）",
       "rules": [
         {
           "rule": "移动加权平均",
-          "detail": "买入时新均价 =（原持仓成本总额 + 本次买入金额 + 对应费用）÷ 新总股数"
+          "detail": "买入时新均价 =（原交易仓成本总额 + 本次买入股数×成交价）÷ 新交易仓股数；当前复盘忽略费用。"
         },
         {
           "rule": "卖出不改变剩余均价",
@@ -35,15 +28,15 @@
         },
         {
           "rule": "正股净投入摊薄",
-          "detail": "netInvestedCost =（Σ正股买入金额 + Σ买入费用 − Σ正股卖出回款 + Σ卖出费用）÷ 剩余股数。只含正股买卖现金流与对应费用，不含期权现金流"
+          "detail": "netInvestedCost =（Σ正股买入金额 − Σ正股卖出回款）÷ 剩余交易仓股数；忽略费用，不含期权。"
         },
         {
           "rule": "组合净投入",
-          "detail": "compositeNetInvested 在上述正股现金流基础上，额外计入期权现金流（权利金收入、期权买卖盈亏）。与正股净投入分开记录，不得混用"
+          "detail": "compositeNetInvested 仅保留历史数据；当前期权仅记录足额备兑状态，不核算组合收益。"
         },
         {
           "rule": "历史数据不足",
-          "detail": "批次、费用或权利金缺失时，对应成本口径保留待核实状态（value=null），不倒推、不编造"
+          "detail": "真实必要的数量或价格缺失时保留null，不倒推、不编造；先查已有结单和确认记录，不重复要求用户补齐已提供数据。费用及历史期权流水不列待补任务。"
         }
       ]
     },
@@ -51,7 +44,7 @@
       "reviewRequiredFrom": "2026-10-05",
       "tradeTimezone": "America/New_York",
       "reviewTimezone": "Asia/Shanghai",
-      "missingValues": "保留null，页面显示待核实，不阻止事件渲染",
+      "missingValues": "内部保留null与缺项来源；公开价格/收益无法计算时显示—，缺精确时刻不显示占位提示，不能以0代替。",
       "acceptanceCommand": "node check_update.js",
       "displayTradeTimezone": "Asia/Shanghai"
     },
@@ -66,7 +59,7 @@
       "scope": "exclude_from_trading_analysis",
       "confirmedDate": "2026-10-06",
       "note": "用户确认额外单股仅为观察价格；保留原始qty及成交，analysisQty排除观察份额，不计交易胜负、清仓状态、交易仓集中度。仅明确的额外观察股排除，不将所有qty=1的成交自动删除。",
-      "orderFeePolicy": "已保存费用为券商订单实际费用；当前收益仍为未扣费毛收益，未分摊混合订单费用"
+      "orderFeePolicy": "保留券商实际费用供对账，当前正股表现计算忽略费用。"
     },
     "ramOpeningCostPolicy": {
       "scope": "do_not_request",
@@ -88,11 +81,204 @@
       "day": "用户确认中国日期时保留日期，时刻未知不补0点",
       "range": "仅有美东原日期时显示其可能对应的中国日期区间，不统一加一天，不将报告时间当成交时间",
       "original": "executions.date/time/timezone和券商时间保持来源原义；呈现转换由derive.js统一执行"
+    },
+    "publicPresentation": {
+      "version": "2026-10-06.1",
+      "diagnostics": "已补齐数量后删除旧备注的数量待核实；内部核对/待办保留仓库，不发布。未知价格或收益用—，只显示一处计算口径，不重复列0条待核实。",
+      "clock": "精确成交时刻只取有效timestamp；未知时刻为null，不显示时刻未记录。整日无精确时刻则省略时间列，原日期的中国时间区间仍保留。",
+      "concentration": "按账户内正股交易仓qty×lastPrice计算，不含观察股、现金及期权。完整数量/价格均已知才出档位；高>=50%、中>=25%、低<25%。公开只提供档位、排序及最大持仓标的，不加载精确权重或金额。持仓与行情时点分开。",
+      "rules": "discipline.rules为当前规则唯一来源，保留稳定id及aliases；旧规则与未验证观察仅存disciplineHistory/inactiveRules。不得按旧要求追补权利金，不追溯改写历史复盘。"
     }
   },
   "discipline": {
-    "issues": [
-      "IRE 财报密集期仓位高频波动（9/30-10/1 建、10/2 三连买卖）：@9.9、@10.38 分批止盈、@9.23 接回，摊薄 7.79；日内频繁进出需明确 IRE 定位与退出边界"
+    "version": "2026-10-06.1",
+    "groups": [
+      {
+        "id": "entry",
+        "title": "入场与计划",
+        "icon": "🎯",
+        "style": "entry"
+      },
+      {
+        "id": "position",
+        "title": "持仓与退出",
+        "icon": "⚖️",
+        "style": "pos"
+      },
+      {
+        "id": "record",
+        "title": "备兑与复盘",
+        "icon": "📋",
+        "style": "opt"
+      }
+    ],
+    "reviewPrinciples": [
+      "左侧低吸和计划内加仓正常；不强制机械止损。",
+      "一次性清仓、分批兑现和留 runner 都可成立，按交易目标与事前计划评价。",
+      "同日再投入、交易频次、止盈后上涨或单笔亏损不能单独证明执行偏差。",
+      "事实与判断分开：有事前依据才标计划内，情绪交易须本人自评或明确证据；未知不猜。"
+    ],
+    "rules": [
+      {
+        "id": "R1",
+        "aliases": [
+          "B1"
+        ],
+        "group": "entry",
+        "title": "入场与加仓先明确逻辑和边界",
+        "status": "约定",
+        "items": [
+          {
+            "label": "记录",
+            "text": "本次 setup、交易角色、仓位边界与退出依据；已有有效计划可引用，无须每次重写。"
+          },
+          {
+            "label": "适用",
+            "text": "开仓、加仓和预设回补。左侧交易可按逻辑、事件或仓位管理，不强制价格止损。"
+          }
+        ]
+      },
+      {
+        "id": "B2",
+        "aliases": [
+          "R2"
+        ],
+        "group": "entry",
+        "title": "按交易角色决策",
+        "status": "约定",
+        "items": [
+          {
+            "label": "区分",
+            "text": "核心持有、短线反弹、事件博弈分别记录；主账号与小账号是账户，不能替代交易定位。"
+          },
+          {
+            "label": "边界",
+            "text": "卫星仓也可计划内分批加仓；分账号不代表风险消失，按既定承受范围执行。"
+          }
+        ]
+      },
+      {
+        "id": "B3",
+        "aliases": [
+          "B4",
+          "P2"
+        ],
+        "group": "entry",
+        "title": "每次再投入都有独立依据",
+        "status": "约定",
+        "items": [
+          {
+            "label": "检查",
+            "text": "卖出回笼或挂单撤回后，下一笔交易有自己的 setup、额度与退出依据；没有明确机会可以等待。"
+          },
+          {
+            "label": "评价",
+            "text": "计划内同日回补正常，不设机械冷静期；只有明确的补偿冲动或追涨证据才判情绪偏差。"
+          }
+        ]
+      },
+      {
+        "id": "P3",
+        "aliases": [],
+        "group": "entry",
+        "title": "计划变更保留版本",
+        "status": "约定",
+        "items": [
+          {
+            "label": "留痕",
+            "text": "变更前核对原预案，记录新依据、修改时刻与影响；适用于所有账户及交易角色。"
+          },
+          {
+            "label": "评价",
+            "text": "临时判断与违规分开。不得事后重写原计划，把成交结果包装成事前判断。"
+          }
+        ]
+      },
+      {
+        "id": "P1",
+        "aliases": [],
+        "group": "position",
+        "title": "按账户观察集中度",
+        "status": "约定",
+        "items": [
+          {
+            "label": "口径",
+            "text": "观察单一标的及相关主题的集中程度，正股、现金、期权范围分清；不同账户权重不相加。"
+          },
+          {
+            "label": "行动",
+            "text": "集中持仓本身不算违规；对照既定仓位边界与事件预案，只有超出明确边界才记偏差。"
+          }
+        ]
+      },
+      {
+        "id": "S2",
+        "aliases": [
+          "S3",
+          "S4"
+        ],
+        "group": "position",
+        "title": "止盈方式匹配交易目标",
+        "status": "约定",
+        "items": [
+          {
+            "label": "选择",
+            "text": "短线反弹可一次性退出，分批兑现可按预设层次执行；趋势仓是否留 runner 取决于原计划。"
+          },
+          {
+            "label": "评价",
+            "text": "不以卖出后继续上涨判错，不认定分批一定更优；观察股不算 runner，也不阻止交易仓清仓。"
+          }
+        ]
+      },
+      {
+        "id": "O3",
+        "aliases": [
+          "O1",
+          "O2",
+          "O5"
+        ],
+        "group": "record",
+        "title": "保留足额备兑与既定指派计划",
+        "status": "约定",
+        "items": [
+          {
+            "label": "范围",
+            "text": "当前卖 call 按用户确认的足额备兑记录；足额担保不等于全部正股都被覆盖。"
+          },
+          {
+            "label": "更新",
+            "text": "发生实际期权变动时同步合约状态；不追补历史权利金、不核算期权组合收益，不反复催改已接受的指派安排。"
+          }
+        ]
+      },
+      {
+        "id": "D1",
+        "aliases": [],
+        "group": "record",
+        "title": "复盘评过程，收益按统一口径",
+        "status": "约定",
+        "items": [
+          {
+            "label": "事实",
+            "text": "复盘与成交展示按中国时间，保留原来源时间；数量、成本与来源只在仓库核对。"
+          },
+          {
+            "label": "统计",
+            "text": "部分减仓不当完整周期；忽略费用，收益按成交前正股成本核算，不以盈利或亏损倒推执行质量。"
+          }
+        ]
+      }
+    ],
+    "inactiveRules": [
+      {
+        "id": "S1",
+        "reason": "板块同步冲高仅有少量历史案例，保留内部观察，不升级为当前纪律。"
+      },
+      {
+        "id": "O4",
+        "reason": "用户已取消期权权利金及组合收益追补，旧三项期权数字要求停止执行。"
+      }
     ]
   },
   "accounts": [
@@ -105,7 +291,7 @@
       "role": "核心仓 · CC 收租为主 · 美股",
       "tag": "核心仓·收租",
       "nav": null,
-      "navNote": "USD · 账户仓位为10/5历史估算；10/6加仓后的最新净资产仓位未核算",
+      "navNote": "USD · 重仓（10/5仓位估算）",
       "holdings": [
         {
           "sym": "RAM",
@@ -189,7 +375,7 @@
             "趋势波段"
           ],
           "execStatus": "adhoc",
-          "oneLiner": "RAM 10/2 隔夜 @14.5 再止盈、摊薄 13.31：连续两日冲高分批兑现；剩余持有观察，8 张 call 覆盖约九成、14C 接受 @14 行权。",
+          "oneLiner": "中国时间10/6按13.85夜盘加仓，继续持有；既定14C接受指派。",
           "strategyNote": "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。",
           "actualCostBasis": {
             "value": 13.75312,
@@ -355,7 +541,7 @@
             "支撑低吸"
           ],
           "execStatus": "adhoc",
-          "oneLiner": "IRE 10/5 两档补仓（@8.93/@8.77）摊薄 8.32；观望 1 周能否回升至 10。",
+          "oneLiner": "两档回调补仓后持有；原计划观察一周能否回升至10。",
           "actualCostBasis": {
             "value": 8.94987,
             "status": "确认",
@@ -378,7 +564,9 @@
           "episodeId": "EP-IRE-2026Q4",
           "weightNote": "沿用10/5净资产权重估算；不是10/6加仓后的实时账户权重"
         }
-      ]
+      ],
+      "positionAsOf": "2026-10-05",
+      "holdingsAsOf": "2026-10-06"
     },
     {
       "id": "sat1",
@@ -699,7 +887,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-BUY-P012-001",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -733,7 +921,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-SELL-P012-002",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -767,7 +955,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-SELL-P014-003",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -801,7 +989,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-BUY-P015-004",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -835,7 +1023,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-BUY-P016-005",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -869,7 +1057,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-BUY-P017-006",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -903,7 +1091,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-BUY-P018-007",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -937,7 +1125,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-SELL-P020-008",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -971,7 +1159,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-BUY-P020-009",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -1005,7 +1193,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-SELL-P028-010",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -1053,7 +1241,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-RAM-SELL-P031-011",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-RAM-SCALP-20260916",
       "sym": "RAM",
@@ -1137,7 +1325,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRWG-BUY-P033-012",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRWG-2026Q3",
       "sym": "CRWG",
@@ -1171,7 +1359,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRDU-SELL-P038-013",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
@@ -1387,7 +1575,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-CRWG-SELL-P039-014",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-CRWG-2026Q3",
       "sym": "CRWG",
@@ -1430,7 +1618,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-RAM-BUY-P041-015",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-RAM-SCALP-20260922",
       "sym": "RAM",
@@ -1498,7 +1686,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-SOXS-BUY-P042-016",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-SOXS-CLOSED-20260923",
       "sym": "SOXS",
@@ -1532,7 +1720,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-SOXS-BUY-P044-017",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-SOXS-CLOSED-20260923",
       "sym": "SOXS",
@@ -1566,7 +1754,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-SOXS-BUY-P045-018",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-SOXS-CLOSED-20260923",
       "sym": "SOXS",
@@ -1819,7 +2007,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-IRE-BUY-P053-020",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-IRE-CLOSED-20260924",
       "sym": "IRE",
@@ -1932,7 +2120,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-RKLX-BUY-P054-021",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-RKLX-CLOSED-20260924",
       "sym": "RKLX",
@@ -2026,7 +2214,7 @@
       "time": "09:40:11",
       "timezone": "America/New_York",
       "fee": 2.3,
-      "note": "卖出主体仓；结单仍有观察仓，后续处理待核实",
+      "note": "按原目标卖出交易仓",
       "status": "confirmed",
       "timestamp": "2026-09-24T09:40:11-04:00",
       "currency": "USD",
@@ -2050,7 +2238,7 @@
     },
     {
       "executionId": "EX-STMT-20260930-ASTX-BUY-P055-022",
-      "note": "券商结单补录",
+      "note": "",
       "account": "main",
       "episodeId": "EP-ASTX-CLOSED-20260924",
       "sym": "ASTX",
@@ -2196,7 +2384,7 @@
       "time": "03:02:17",
       "timezone": "America/New_York",
       "fee": 2.14,
-      "note": "建仓（数量待核实）",
+      "note": "建仓",
       "status": "confirmed",
       "timestamp": "2026-09-25T03:02:17-04:00",
       "currency": "USD",
@@ -2239,7 +2427,7 @@
       "time": "10:53:08",
       "timezone": "America/New_York",
       "fee": 2.1,
-      "note": "夜盘加仓（数量待核实）",
+      "note": "夜盘加仓",
       "status": "confirmed",
       "timestamp": "2026-09-25T10:53:08-04:00",
       "currency": "USD",
@@ -2307,7 +2495,7 @@
       "time": "10:40:07",
       "timezone": "America/New_York",
       "fee": 2.63,
-      "note": "反弹止盈减仓（数量待核实）",
+      "note": "反弹止盈减仓",
       "status": "confirmed",
       "timestamp": "2026-09-29T10:40:07-04:00",
       "currency": "USD",
@@ -2348,7 +2536,7 @@
       "time": "10:40:42",
       "timezone": "America/New_York",
       "fee": 2.17,
-      "note": "最后加仓摊低（数量待核实）",
+      "note": "最后加仓摊低",
       "status": "confirmed",
       "timestamp": "2026-09-29T10:40:42-04:00",
       "currency": "USD",
@@ -2389,7 +2577,7 @@
       "time": "09:09:19",
       "timezone": "America/New_York",
       "fee": 2.4,
-      "note": "高位止盈（数量待核实）",
+      "note": "高位止盈",
       "status": "confirmed",
       "timestamp": "2026-09-30T09:09:19-04:00",
       "currency": "USD",
@@ -2423,7 +2611,7 @@
       "time": "09:57:55",
       "timezone": "America/New_York",
       "fee": 2.29,
-      "note": "低位重建底仓（数量待核实）",
+      "note": "低位重建底仓",
       "status": "confirmed",
       "timestamp": "2026-09-30T09:57:55-04:00",
       "currency": "USD",
@@ -2457,7 +2645,7 @@
       "time": "10:29:31",
       "timezone": "America/New_York",
       "fee": 2.07,
-      "note": "尾盘回补（数量待核实）",
+      "note": "尾盘回补",
       "status": "confirmed",
       "timestamp": "2026-09-30T10:29:31-04:00",
       "currency": "USD",
@@ -2525,7 +2713,7 @@
       "time": "09:43:41",
       "timezone": "America/New_York",
       "fee": 2.13,
-      "note": "分批止盈（数量待核实）",
+      "note": "分批止盈",
       "status": "confirmed",
       "timestamp": "2026-10-01T09:43:41-04:00",
       "currency": "USD",
@@ -2559,7 +2747,7 @@
       "time": "09:46:25",
       "timezone": "America/New_York",
       "fee": 2.29,
-      "note": "补底仓（数量待核实）",
+      "note": "补底仓",
       "status": "confirmed",
       "timestamp": "2026-10-01T09:46:25-04:00",
       "currency": "USD",
@@ -2593,7 +2781,7 @@
       "time": "10:12:30",
       "timezone": "America/New_York",
       "fee": 2.29,
-      "note": "补底仓（数量待核实）",
+      "note": "补底仓",
       "status": "confirmed",
       "timestamp": "2026-10-01T10:12:30-04:00",
       "currency": "USD",
@@ -2626,7 +2814,7 @@
       "time": "13:27:22",
       "timezone": "America/New_York",
       "fee": 2.13,
-      "note": "分批止盈，结单仍有观察仓；最后观察仓于10/2另行卖出",
+      "note": "分批止盈",
       "status": "confirmed",
       "qty": 35,
       "timestamp": "2026-10-01T13:27:22-04:00",
@@ -2661,7 +2849,7 @@
       "time": "14:56:21",
       "timezone": "America/New_York",
       "fee": 2.65,
-      "note": "财报冲高止盈（数量待核实）",
+      "note": "财报冲高止盈",
       "status": "confirmed",
       "timestamp": "2026-10-01T14:56:21-04:00",
       "currency": "USD",
@@ -2695,7 +2883,7 @@
       "time": "隔夜",
       "timezone": "America/New_York",
       "fee": null,
-      "note": "连续第二日冲高止盈（数量待核实）",
+      "note": "连续第二日冲高止盈",
       "status": "confirmed",
       "source": {
         "type": "user_confirmation",
@@ -2715,7 +2903,7 @@
       "time": "盘中",
       "timezone": "America/New_York",
       "fee": null,
-      "note": "冲高先兑现（数量待核实）",
+      "note": "冲高先兑现",
       "status": "confirmed",
       "source": {
         "type": "user_confirmation",
@@ -2735,7 +2923,7 @@
       "time": "盘中",
       "timezone": "America/New_York",
       "fee": null,
-      "note": "高抛再兑现（数量待核实）",
+      "note": "高抛再兑现",
       "status": "confirmed",
       "source": {
         "type": "user_confirmation",
@@ -2755,7 +2943,7 @@
       "time": "盘中",
       "timezone": "America/New_York",
       "fee": null,
-      "note": "回调接回（数量待核实）",
+      "note": "回调接回",
       "status": "confirmed",
       "source": {
         "type": "user_confirmation",
@@ -3334,7 +3522,7 @@
       "entrySetup": [],
       "entryExecStatus": "unknown",
       "currentQty": 0,
-      "exitReason": "结单确认的短线买入与次日卖出",
+      "exitReason": "短线止盈，交易仓已清仓",
       "exitDate": "2026-09-17"
     }
   ],
@@ -3360,14 +3548,14 @@
           ],
           "totalRetPct": 19.1,
           "totalRetNote": "+19.1%（清仓腿·相对摊薄成本）",
-          "reason": "交易仓10/1分批兑现完毕；额外观察仓独立排除",
+          "reason": "分批止盈，交易仓已清仓",
           "result": "win",
           "setup": [
             "趋势波段",
             "仓位管理"
           ],
           "execStatus": "plan",
-          "oneLiner": "按真实股票流水核算交易仓；观察股不计本轮盈亏，历史摊薄成本不冒充真实买入成本。",
+          "oneLiner": "按分批止盈安排退出交易仓。",
           "episodeId": "EP-MSTU-CLOSED-20261001",
           "entrySetup": [
             "趋势波段",
@@ -3442,7 +3630,7 @@
           ],
           "totalRetPct": 4.2,
           "totalRetNote": "+4.2%（毛）",
-          "reason": "原止盈目标12.30；结单核实实际成交12.20，已结束该轮交易",
+          "reason": "原止盈目标12.30；实际成交12.20，交易仓已清仓",
           "result": "win",
           "setup": [
             "支撑低吸",
@@ -3478,14 +3666,14 @@
           ],
           "totalRetPct": 6,
           "totalRetNote": "+6.0%（毛）",
-          "reason": "交易仓按原17.78目标退出，额外观察仓排除",
+          "reason": "按原目标退出交易仓",
           "result": "win",
           "setup": [
             "超跌反弹",
             "趋势波段"
           ],
           "execStatus": "adhoc",
-          "oneLiner": "止盈目标与成交价一致；额外观察仓不改变本轮交易已清仓状态。",
+          "oneLiner": "止盈目标与成交价一致。",
           "episodeId": "EP-RKLX-CLOSED-20260924",
           "entrySetup": [
             "超跌反弹",
@@ -4175,7 +4363,7 @@
         "回笼现金默认观望，仅用户明确目标才动用"
       ],
       "execution": [
-        "主号 IRE：@8.93、@8.77 两档补仓（10/5），净投入摊薄 7.79 → 8.17 → 8.32，观望 1 周能否回升至 10",
+        "主号 IRE：@8.93、@8.77两档回调补仓；剩余交易仓实际均价8.9499，正股净投入8.3146，观望1周能否回升至10",
         "主号 GDXU：当日 @99.7 首建、盘中 @104 高抛清仓（日内波段落袋约 +4.3%）",
         "1号 AVGX：@39.8 全数清仓（+2.2%），缩量上涨日离场、转空仓观望",
         "1号 LABU：@240.65 建、@255 当日全清（快进快出约 +6%）",
@@ -4183,16 +4371,13 @@
         "行情（10/5 收盘）：RAM 14.24（-0.49%）/ CRWG 18.29（-4.79%）/ CRDU 10.68（-5.49%）/ IRE 8.90（-6.32%）/ SNXX 15.98（-2.14%）——AI 硬件链全线下挫"
       ],
       "good": [
-        "左侧分批补 IRE：等回调至 8 字头后两档补仓摊薄至 8.32，符合等回调接回后加码的左侧节奏，未追高",
+        "左侧分批补 IRE：等回调至 8 字头后两档补仓净投入约8.31，符合等回调接回后加码的左侧节奏，未追高",
         "GDXU 日内高抛：当日建仓 @99.7、@104 高抛了结 +4.3%，缩量上涨日拿日内波段即走，不留隔夜风险",
         "1号带逻辑离场：AVGX @39.8 全清（+2.2%）、LABU 快进快出 +6%，都在缩量上涨日锁定利润、转空仓观望；后按观察建 SNXX 属计划内（plan）"
       ],
-      "issues": [
-        "IRE 补仓与此前不再频繁加减约定的边界需核对事前依据。收盘8.90介于两档补仓价8.77与8.93之间，高于这两笔等数量补仓的均价8.85；正股净投入8.32与剩余真实均价应分开，后者仍待核实。",
-        "当日高抛的仓位性质：GDXU 建仓-清仓为当日完成，属临时战术操作；留不留趋势 runner 需按核心/博弈仓口径定性，勿让临时仓干扰核心逻辑"
-      ],
+      "issues": [],
       "todo": [
-        "IRE：净投入摊薄 8.32、10/5 收盘 8.90，观望 1 周能否修复回升至 10；明确退出边界，避免财报密集期继续加仓",
+        "IRE：净投入约8.31、10/5 收盘 8.90，观望 1 周能否修复回升至 10；明确退出边界，避免财报密集期继续加仓",
         "1号 SNXX：观察支撑位反弹成色，用结果验证建仓逻辑；到止盈位按博弈仓一次清、不留 runner",
         "回笼/观望：仍以核心仓 CC 收租为主，卫星仓小步快跑、带逻辑进出"
       ],
@@ -4200,7 +4385,9 @@
       "reviewDate": "2026-10-06",
       "reviewTimezone": "Asia/Shanghai",
       "internalObservation": [
-        "10/6补齐历史流水后：IRE当前周期净投入重算约8.3146，真实剩余均价约8.9499，均未计费用；原8.32保留为当时估算。"
+        "10/6补齐历史流水后：IRE当前周期净投入重算约8.3146，真实剩余均价约8.9499，均未计费用；原8.32保留为当时估算。",
+        "IRE 补仓与此前不再频繁加减约定的边界需核对事前依据。收盘8.90介于两档补仓价8.77与8.93之间，高于这两笔等数量补仓的均价8.85；正股净投入8.32与剩余真实均价应分开，后者仍待核实。",
+        "当日高抛的仓位性质：GDXU 建仓-清仓为当日完成，属临时战术操作；留不留趋势 runner 需按核心/博弈仓口径定性，勿让临时仓干扰核心逻辑"
       ]
     },
     {
@@ -5383,6 +5570,443 @@
       "reviewTimezone": "Asia/Shanghai",
       "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
       "visibility": "internal"
+    }
+  ],
+  "disciplineHistory": [
+    {
+      "version": "before-2026-10-06-consolidation",
+      "discipline": {
+        "issues": [
+          "IRE 财报密集期仓位高频波动（9/30-10/1 建、10/2 三连买卖）：@9.9、@10.38 分批止盈、@9.23 接回，摊薄 7.79；日内频繁进出需明确 IRE 定位与退出边界"
+        ]
+      },
+      "rulesHtml": "  <!-- Rules Framework (revised to be testable) -->\n  <section id=\"rules\" aria-label=\"纪律框架\">\n    <div class=\"sec-head\">\n      <span class=\"n\">04</span>\n      <h2>纪律框架</h2>\n      <span class=\"note\">带适用条件、失效条件 · 少量案例标记\"待验证\"</span>\n    </div>\n\n    <div class=\"rules-intro\">\n      <strong>五大维度：</strong>风控 → 买入 → 卖出 → 仓位 → 期权。每条规则包含：适用条件、做什么、风险/代价、失效情形。\n      <div style=\"margin-top:8px; font-size:12px; color:var(--muted);\">区分：<b style=\"color:var(--accent);\">既定约束</b>（用户明确同意的规则）/ <b style=\"color:var(--warn);\">理论原理</b>（市场规律）/ <b style=\"color:var(--muted);\">数据验证</b>（样本内统计，不代表普遍规律）</div>\n      <div class=\"legend\">\n        <span><span class=\"dot\" style=\"background:var(--accent);\"></span> 核心规则（多次验证）</span>\n        <span><span class=\"dot\" style=\"background:var(--warn);\"></span> 待验证（少量案例，暂不升级）</span>\n        <span><span class=\"dot\" style=\"background:var(--muted);\"></span> 已修正（避免机械套用）</span>\n      </div>\n    </div>\n\n    <!-- 一、风控 -->\n    <div class=\"cat risk\">\n      <div class=\"cat-head\">\n        <div class=\"cat-icon\">🛡</div>\n        <div class=\"cat-name\">一、风控 <span class=\"cat-sub\">活着比赚大钱重要</span></div>\n      </div>\n      <div class=\"cat-body\">\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">R1</span>买入前先想清楚在哪儿走 <span class=\"status core\">核心</span></div>\n          <div class=\"d\"><span class=\"cond\">适用：</span>所有开仓，尤其是 2x 杠杆、接飞刀、事件驱动。<span class=\"cond\">做什么：</span>下单前想清楚什么情况下该走（逻辑破坏、技术位、事件催化兑现、仓位规则等）。<span class=\"cond\">风格兼容：</span>左侧打法不强制挂止损，可用宽止损或不设硬止损，退出依据以逻辑破坏/仓位规则为主，而非机械价格位。<span class=\"cond\">风险：</span>左侧深度接飞刀、高杠杆标的，若未预先定义退出依据，浮亏可能放大且难理性离场。<span class=\"cond\">失效：</span>已有明确逻辑止损/仓位纪律者。<span class=\"cond\">说明：</span>与 B1 合并（同一条规则，避免重复）。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">R2</span>高风险操作分仓隔离 <span class=\"status core\">核心</span></div>\n          <div class=\"d\"><span class=\"cond\">适用：</span>接飞刀、妖股博弈、裸卖期权、不明事件驱动。<span class=\"cond\">做什么：</span>放入小账号，与主仓物理隔离。<span class=\"cond\">注意：</span>分仓隔离是<strong>心理隔离</strong>，不是风险消除——小账号满仓 + 高杠杆的绝对亏损仍然是真实亏损，不能因为\"不伤主仓\"就放松止损。<span class=\"cond\">失效：</span>无。这是资金管理的基础。</div>\n          <div class=\"meta\">修正：删除\"即使归零也不影响总风险\"的误导表述——分仓不等于零风险。</div>\n        </div>\n      </div>\n    </div>\n\n    <!-- 二、买入 -->\n    <div class=\"cat entry\">\n      <div class=\"cat-head\">\n        <div class=\"cat-icon\">🎯</div>\n        <div class=\"cat-name\">二、买入 <span class=\"cat-sub\">买在无人问津处</span></div>\n      </div>\n      <div class=\"cat-body\">\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">B1</span>买之前先想好在哪走 <span class=\"status core\">核心</span></div>\n          <div class=\"d\">同 R1（已合并）。买入前先想清楚退出依据（逻辑破坏、技术位、事件兑现、仓位规则等）。左侧打法不强制挂止损，可宽止损或不设硬止损，关键是退出逻辑要清晰，而非机械设价。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">B2</span>核心仓 vs 卫星仓分开决策 <span class=\"status core\">核心</span></div>\n          <div class=\"d\"><span class=\"cond\">核心仓（主号）：</span>长期持有+收租，止损宽、仓位重、逻辑是基本面/趋势。<span class=\"cond\">卫星仓（小号）：</span>博弈，止损紧、仓位轻，逻辑破了立刻走，不补仓不摊平。<span class=\"cond\">注意：</span>小账号不是天然禁止加仓，但加仓必须有明确计划和仓位边界；不因账号小就临时补仓摊低。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">B3</span>卖飞后避免情绪化反向补偿交易 <span class=\"status testing\">待验证</span></div>\n          <div class=\"d\"><span class=\"cond\">触发：</span>卖飞、踏空、止损被扫之后，FOMO 与\"把亏的赚回来\"的冲动最强烈，是情绪交易高发区。<span class=\"cond\">规则：</span>此时开新仓需有独立于上一笔的 setup 与退出逻辑；不允许为补偿上一笔而反手、加倍或追同方向。但明确计划内的同日回补（如预设低吸价位、日内 scalp）允许，需事前留痕。<span class=\"cond\">自测：</span>把上一笔交易从脑海里删掉，这笔交易依然会做，才算独立逻辑。</div>\n          <div class=\"meta\">依据：9/22 SOXS 建仓复盘标记为情绪交易——卖飞多头仓位后出现明显反向补偿倾向。修正：删除\"至少隔一个交易日\"的机械表述。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">B4</span>警惕\"总得做点什么\"的冲动 <span class=\"status testing\">待验证</span></div>\n          <div class=\"d\"><span class=\"cond\">触发：</span>预设挂单未成交撤单、或刚止盈落袋后，因\"资金闲置\"立即把同一笔钱转投其他标的。<span class=\"cond\">规则：</span>没明确机会时空仓等待，不因手上有现金、有时间、想追回亏损而交易；但计划内回补不属于\"手痒\"。<span class=\"cond\">自测：</span>如果这笔转向不是刚空出来资金，是否依然会做？</div>\n          <div class=\"meta\">依据：9/24 RAM 13.68 二波挂单撤单后资金转 RKLX（adhoc，虽当日止盈成功）+ 止盈后立即回补 RAM；样本单日，标\"待验证\"。修正：从\"禁止立即转向\"改为\"警惕冲动\"，允许计划内回补。</div>\n        </div>\n      </div>\n    </div>\n\n    <!-- 三、卖出 -->\n    <div class=\"cat exit\">\n      <div class=\"cat-head\">\n        <div class=\"cat-icon\">💰</div>\n        <div class=\"cat-name\">三、卖出 <span class=\"cat-sub\">卖在人声鼎沸时</span></div>\n      </div>\n      <div class=\"cat-body\">\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">S1</span>同赛道多标的同步冲高可作为减仓信号 <span class=\"status testing\">待验证</span></div>\n          <div class=\"d\"><span class=\"cond\">适用条件：</span>持仓在同一子赛道（如 AI 硬件链）集中度高，且多个标的同步放量冲高。<span class=\"cond\">逻辑：</span>板块性亢奋常伴随短期情绪顶点。<span class=\"cond\">风险：</span>趋势行情中过早减仓可能踏空主升浪。<span class=\"cond\">失效条件：</span>如果是基本面重大变化驱动的板块重估（而非情绪推动），不应因\"涨多了\"就减仓。</div>\n          <div class=\"meta\">依据：仅 9/19 一次案例（SNDK/CRDU/LITX 同日冲高落袋），样本不足以下定论。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">S2</span>分批卖出 vs 一次性卖出：看场景，不做教条 <span class=\"status revised\">已修正</span></div>\n          <div class=\"d\"><span class=\"cond\">分批卖的优势：</span>强趋势中可能吃到尾段，心理压力小。<span class=\"cond\">分批卖的劣势：</span>增加交易成本，且第一笔若在回撤前卖出可能\"卖早了\"但后续补跌时反而是对的——事后才能评判。<span class=\"cond\">更合理的做法：</span>根据信心度和流动性决定，而不是机械分批。强趋势+高流动性可分批，逻辑破了或急涨见顶信号明确时应果断一把走。</div>\n          <div class=\"meta\">修正：删除\"分批卖一定优于一次性清仓\"\"分批卖不暴露于回撤\"的绝对表述——分批卖仍暴露后几批在回撤中，且 9/19 SNDK 卖到高点是结果不是策略保证。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">S3</span>趋势仓部分止盈后保留 Runner，但不自动判\"卖早\" <span class=\"status testing\">待验证</span></div>\n          <div class=\"d\"><span class=\"cond\">做法：</span>趋势未破坏、基本面逻辑仍在时，部分止盈后保留少量未封顶仓位继续跟随趋势，而不是一次性全清。<span class=\"cond\">何时不留：</span>逻辑破坏、急涨见顶信号明确、或仓位规则要求出清时果断全走（呼应 S2）。<span class=\"cond\">代价：</span>Runner 会暴露在回撤中，回吐部分浮盈是跟随趋势的门票钱。<span class=\"cond\">注意：</span>\"全清后上涨\"不等于执行错误，只作为\"是否需优化分批兑现\"的观察线索，不单独标记偏差。</div>\n          <div class=\"meta\">依据：9/18-9/22 五笔平仓复盘（RKLX/SNDK/LITX/CRDU/RAM）共同指向\"过早全清、没有 Runner\"。修正：添加\"不自动判卖早\"说明。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">S4</span>2x 高波标的\"当日快进快出\"：执行做对，但别养成高频依赖 <span class=\"status testing\">待验证</span></div>\n          <div class=\"d\"><span class=\"cond\">现象：</span>9/24 IRE/RKLX/ASTX 同日均\"当日建仓当日止盈\"（+3%~+6%），到价/冲高失败即走、执行利落；但当天三次快进快出也反映出赢面偏窄，趋势仓位一再没留住。<span class=\"cond\">做法：</span>短线 2x 标的按点位落袋的纪律值得肯定；但当此类操作高频出现时，需审视是否\"赚小钱就走\"挤占了对强趋势仓位的持有——强趋势标的应优先考虑更大目标位或保留 Runner（呼应 S3）。<span class=\"cond\">失效：</span>已有明确趋势持有 / 部分止盈保留 Runner 的计划。<span class=\"cond\">注意：</span>观察线索不等于执行错误，不单独标记偏差。</div>\n          <div class=\"meta\">依据：9/24 三次当日快进快出（IRE/RKLX/ASTX）；样本为单日三笔，标\"待验证\"观察后续频次。修正：添加\"观察线索≠执行错误\"说明。</div>\n        </div>\n      </div>\n    </div>\n\n    <!-- 四、仓位 -->\n    <div class=\"cat pos\">\n      <div class=\"cat-head\">\n        <div class=\"cat-icon\">⚖️</div>\n        <div class=\"cat-name\">四、仓位 <span class=\"cat-sub\">仓位决定心态</span></div>\n      </div>\n      <div class=\"cat-body\">\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">P1</span>主动管理集中度 <span class=\"status core\">核心</span></div>\n          <div class=\"d\"><span class=\"cond\">做什么：</span>单一赛道/主题占比过高时，主动减仓而非等回调被动出清。<span class=\"cond\">注意：</span>集中度本身不是罪，高确信度的核心仓位可以集中；问题是<strong>无计划的集中</strong>和<strong>超过心理承受能力的集中</strong>。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">P2</span>空仓是合法仓位 <span class=\"status core\">核心</span></div>\n          <div class=\"d\">不为了\"不空仓\"勉强开仓。现金是期权——等待机会的权利。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">P3</span>核心仓计划变更留痕，不追溯改写 <span class=\"status testing\">待验证</span></div>\n          <div class=\"d\"><span class=\"cond\">触发：</span>核心仓已接近集中度上限或满仓状态下，因\"下跌低吸\"\"埋伏事件\"加仓。<span class=\"cond\">规则：</span>加仓前核对最近一版\"下次调整/预案\"是否已明示\"避免加码\"；若相悖，当场记录偏差。保留计划变更留痕，但不把\"预案修正\"追溯改写成执行错误。<span class=\"cond\">注意：</span>左侧打法允许逆势低吸，本规则不限制低吸本身，而是要求低吸决策与事前预案显式对齐。<span class=\"cond\">失效：</span>加仓已在事前计划中写明（如预设回踩分批），或仓位远未触及集中度上限。</div>\n          <div class=\"meta\">依据：9/28 RAM 核心仓在美光财报前超跌时逆势加仓（adhoc），与 9/25 复盘\"财报前避免加码\"预案相悖；样本单次，标\"待验证\"。修正：从\"必须书面声明理由\"改为\"留痕但不追溯改写\"。</div>\n        </div>\n      </div>\n    </div>\n\n    <!-- 五、期权 -->\n    <div class=\"cat opt\">\n      <div class=\"cat-head\">\n        <div class=\"cat-icon\">📜</div>\n        <div class=\"cat-name\">五、期权 <span class=\"cat-sub\">CC 是让渡上涨换权利金，不是免费午餐</span></div>\n      </div>\n      <div class=\"cat-body\">\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">O1</span>Covered Call 的本质 <span class=\"status core\">核心</span></div>\n          <div class=\"d\"><span class=\"cond\">本质：</span>让渡行权价以上的上涨空间，换取权利金收入。提供<strong>有限的</strong>下跌缓冲（缓冲幅度 = 收到的权利金/股）。<span class=\"cond\">不是：</span>免费收租、高胜率赌博、下跌保护。股价暴跌超过权利金幅度时，CC 组合同样亏钱，只是多亏少亏的区别。<span class=\"cond\">适用：</span>中性偏多观点，认为正股不会大涨，但愿意在涨到行权价时卖出。</div>\n          <div class=\"meta\">修正：删除\"高 IV 时卖权胜率最高\"——高 IV 反映市场预期大波动，权利金厚是因为承担了尾部风险，不是\"胜率高\"。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">O2</span>卖 call 前检查事件日历 <span class=\"status core\">核心</span></div>\n          <div class=\"d\"><span class=\"cond\">做什么：</span>卖 call 前看到期日前是否有财报、FOMC、大选等重磅事件。<span class=\"cond\">横跨财报的处理：</span>不机械按\"浮盈 50% 买回\"——综合考虑：(a) 正股是否还想持有 (b) 财报后 IV crush 能回收多少时间价值 (c) 如果被指派卖飞的机会成本。<span class=\"cond\">买回 call ≠ 隔离财报风险：</span>正股本身在财报日会涨跌，call 的盈亏只是组合的一部分。如果不想承受财报波动，应该减正股而非只处理 call。</div>\n          <div class=\"meta\">修正：删除\"浮盈≥50%就买回做财报隔离\"的机械建议——买回 call 只是平仓了期权头寸，正股仍然暴露在财报波动中。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">O3</span>区分备兑与裸卖，分别管理 <span class=\"status core\">核心</span></div>\n          <div class=\"d\"><span class=\"cond\">备兑 call：</span>持有足额正股，最大收益=权利金+行权价-成本，最大亏损=正股跌至0-权利金。<span class=\"cond\">裸卖 call：</span>无正股对冲，理论最大亏损无限（正股暴涨），必须单独设止损和仓位上限。<span class=\"cond\">卖股时必须检查：</span>是否留下了无股覆盖的 call，如有则同步处理。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">O4</span>权利金、期权盈亏、组合盈亏分别记 <span class=\"status core\">核心</span></div>\n          <div class=\"d\"><span class=\"cond\">记录三个数字：</span>(a) 收到的权利金总额 (b) 期权端已实现盈亏 (c) 股票+期权的组合盈亏。不能只看权利金收入而忽略正股被指派卖飞的机会成本。</div>\n        </div>\n        <div class=\"rule\">\n          <div class=\"t\"><span class=\"num\">O5</span>CC 覆盖率匹配观点，别默认 100% <span class=\"status testing\">待验证</span></div>\n          <div class=\"d\"><span class=\"cond\">问题：</span>核心趋势仓 100% 备兑会把上行收益全部封顶，趋势行情只能吃到行权价。<span class=\"cond\">做法：</span>新核心趋势仓建议只覆盖部分仓位，保留未覆盖 Runner 吃趋势；中性偏震荡或愿意被叫走的仓位才适合高覆盖。<span class=\"cond\">自检：</span>加卖 call 前先问：这轮行情我想赚的是权利金，还是趋势本身？</div>\n          <div class=\"meta\">依据：9/22 RAM 策略备注——正股几乎全部被 CC 覆盖，上行封顶；9/23 已落地执行（加仓降至约八成）。</div>\n        </div>\n      </div>\n    </div>\n  </section>\n",
+      "reason": "保留旧规则与问题快照供历史引用；重复规则、单例推断与已取消的期权统计不作为当前纪律。"
+    }
+  ],
+  "presentationCorrections": [
+    {
+      "executionId": "EX-20260924-RKLX-SELL-032",
+      "field": "note",
+      "before": "卖出主体仓；结单仍有观察仓，后续处理待核实",
+      "after": "按原目标卖出交易仓",
+      "reason": "观察仓已获用户确认，内部核对提示不再公开。"
+    },
+    {
+      "executionId": "EX-20260925-MSTU-BUY-020",
+      "field": "note",
+      "before": "建仓（数量待核实）",
+      "after": "建仓",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20260925-MSTU-BUY-021",
+      "field": "note",
+      "before": "夜盘加仓（数量待核实）",
+      "after": "夜盘加仓",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20260929-RAM-SELL-005",
+      "field": "note",
+      "before": "反弹止盈减仓（数量待核实）",
+      "after": "反弹止盈减仓",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20260929-MSTU-BUY-022",
+      "field": "note",
+      "before": "最后加仓摊低（数量待核实）",
+      "after": "最后加仓摊低",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20260930-MSTU-SELL-023",
+      "field": "note",
+      "before": "高位止盈（数量待核实）",
+      "after": "高位止盈",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20260930-IRE-BUY-012",
+      "field": "note",
+      "before": "低位重建底仓（数量待核实）",
+      "after": "低位重建底仓",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20260930-MSTU-BUY-024",
+      "field": "note",
+      "before": "尾盘回补（数量待核实）",
+      "after": "尾盘回补",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20261001-MSTU-SELL-025",
+      "field": "note",
+      "before": "分批止盈（数量待核实）",
+      "after": "分批止盈",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20261001-IRE-BUY-014",
+      "field": "note",
+      "before": "补底仓（数量待核实）",
+      "after": "补底仓",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20261001-IRE-BUY-013",
+      "field": "note",
+      "before": "补底仓（数量待核实）",
+      "after": "补底仓",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20261001-RAM-SELL-007",
+      "field": "note",
+      "before": "财报冲高止盈（数量待核实）",
+      "after": "财报冲高止盈",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20261002-RAM-SELL-008",
+      "field": "note",
+      "before": "连续第二日冲高止盈（数量待核实）",
+      "after": "连续第二日冲高止盈",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20261002-IRE-SELL-015",
+      "field": "note",
+      "before": "冲高先兑现（数量待核实）",
+      "after": "冲高先兑现",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20261002-IRE-SELL-016",
+      "field": "note",
+      "before": "高抛再兑现（数量待核实）",
+      "after": "高抛再兑现",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "executionId": "EX-20261002-IRE-BUY-017",
+      "field": "note",
+      "before": "回调接回（数量待核实）",
+      "after": "回调接回",
+      "reason": "已根据结单/用户确认补齐数量，移除过期状态，数量与来源不变。"
+    },
+    {
+      "tradeId": "MSTU-SELL",
+      "before": {
+        "reason": "交易仓10/1分批兑现完毕；额外观察仓独立排除",
+        "oneLiner": "按真实股票流水核算交易仓；观察股不计本轮盈亏，历史摊薄成本不冒充真实买入成本。"
+      },
+      "reason": "核对过程留仓库，公开说明只描述执行。"
+    },
+    {
+      "tradeId": "RKLX-SELL",
+      "before": {
+        "reason": "交易仓按原17.78目标退出，额外观察仓排除",
+        "oneLiner": "止盈目标与成交价一致；额外观察仓不改变本轮交易已清仓状态。"
+      },
+      "reason": "移除公开表格中的内部观察仓核对说明。"
+    },
+    {
+      "account": "main",
+      "field": "navNote",
+      "before": "USD · 账户仓位为10/5历史估算；10/6加仓后的最新净资产仓位未核算",
+      "reason": "仓位仍为历史估算；页面保留时点，省略内部待核算任务。"
+    },
+    {
+      "field": "methodology.pending",
+      "before": [
+        "RAM 真实买入成本待核实（分批买入，减仓批次无法对应）",
+        "IRE 真实买入成本待核实（分批买入+日内高抛低吸）",
+        "MSTU 真实买入成本待核实（多次止盈回补）",
+        "CRDU 3张10/16 7C 权利金待补",
+        "部分成交费用待补",
+        "部分成交数量待核实"
+      ],
+      "reason": "数量已补齐，正股成本已有来源基准；期权/费用追补已按用户要求取消。"
+    },
+    {
+      "field": "methodology.costAlgorithm",
+      "before": {
+        "primary": "移动加权平均法",
+        "scope": "内部复盘统一口径，用于 actualCostBasis（真实持仓每股均价）",
+        "rules": [
+          {
+            "rule": "移动加权平均",
+            "detail": "买入时新均价 =（原交易仓成本总额 + 本次买入股数×成交价）÷ 新交易仓股数；当前复盘忽略费用。"
+          },
+          {
+            "rule": "卖出不改变剩余均价",
+            "detail": "卖出仅减少总股数，成本总额按移动加权均价等比减少，剩余每股均价不变。此性质仅适用于移动加权平均口径，不适用于净投入摊薄口径"
+          },
+          {
+            "rule": "券商口径保留",
+            "detail": "券商若采用 FIFO 或指定批次（specific lots）计成本，保留券商成本及口径，不强行覆盖为内部复盘移动加权平均成本"
+          },
+          {
+            "rule": "正股净投入摊薄",
+            "detail": "netInvestedCost =（Σ正股买入金额 − Σ正股卖出回款）÷ 剩余交易仓股数；忽略费用，不含期权。"
+          },
+          {
+            "rule": "组合净投入",
+            "detail": "compositeNetInvested 仅保留历史数据；当前期权仅记录足额备兑状态，不核算组合收益。"
+          },
+          {
+            "rule": "历史数据不足",
+            "detail": "真实必要的数量或价格缺失时保留null，不倒推、不编造；先查已有结单和确认记录，不重复要求用户补齐已提供数据。费用及历史期权流水不列待补任务。"
+          }
+        ]
+      },
+      "reason": "与用户确认的忽略费用及期权仅记录备兑范围统一。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-BUY-P012-001",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-SELL-P012-002",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-SELL-P014-003",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-BUY-P015-004",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-BUY-P016-005",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-BUY-P017-006",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-BUY-P018-007",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-SELL-P020-008",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-BUY-P020-009",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-SELL-P028-010",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-RAM-SELL-P031-011",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRWG-BUY-P033-012",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRDU-SELL-P038-013",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-CRWG-SELL-P039-014",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-RAM-BUY-P041-015",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-SOXS-BUY-P042-016",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-SOXS-BUY-P044-017",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-SOXS-BUY-P045-018",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-IRE-BUY-P053-020",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-RKLX-BUY-P054-021",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-STMT-20260930-ASTX-BUY-P055-022",
+      "field": "note",
+      "before": "券商结单补录",
+      "after": "",
+      "reason": "券商来源保留source/brokerFills，纯核对文案不发布。"
+    },
+    {
+      "ref": "EX-20261001-MSTU-SELL-029",
+      "field": "note",
+      "before": "分批止盈，结单仍有观察仓；最后观察仓于10/2另行卖出",
+      "after": "分批止盈",
+      "reason": "观察仓已确认，内部处理细节不公开。"
+    },
+    {
+      "ref": "EP-RAM-SCALP-20260916",
+      "field": "exitReason",
+      "before": "结单确认的短线买入与次日卖出",
+      "after": "短线止盈，交易仓已清仓",
+      "reason": "结单核对来源保留底层，公开只描述退出。"
+    },
+    {
+      "ref": "IRE-SELL",
+      "field": "reason",
+      "before": "原止盈目标12.30；结单核实实际成交12.20，已结束该轮交易",
+      "after": "原止盈目标12.30；实际成交12.20，交易仓已清仓",
+      "reason": "保留计划与实际价差，省略核对过程。"
+    },
+    {
+      "ref": "holding:main:RAM",
+      "field": "oneLiner",
+      "before": "RAM 10/2 隔夜 @14.5 再止盈、摊薄 13.31：连续两日冲高分批兑现；剩余持有观察，8 张 call 覆盖约九成、14C 接受 @14 行权。",
+      "after": "中国时间10/6按13.85夜盘加仓，继续持有；既定14C接受指派。",
+      "reason": "移除旧成本与精确备兑占比，更新最新已确认行动；合约张数仍正常显示。"
+    },
+    {
+      "ref": "holding:main:IRE",
+      "field": "oneLiner",
+      "before": "IRE 10/5 两档补仓（@8.93/@8.77）摊薄 8.32；观望 1 周能否回升至 10。",
+      "after": "两档回调补仓后持有；原计划观察一周能否回升至10。",
+      "reason": "当前成本由统一口径字段展示，备注不重复历史摊薄估算。"
+    },
+    {
+      "ref": "RV-20261005",
+      "field": "issues",
+      "before": [
+        "IRE 补仓与此前不再频繁加减约定的边界需核对事前依据。收盘8.90介于两档补仓价8.77与8.93之间，高于这两笔等数量补仓的均价8.85；正股净投入8.32与剩余真实均价应分开，后者仍待核实。",
+        "当日高抛的仓位性质：GDXU 建仓-清仓为当日完成，属临时战术操作；留不留趋势 runner 需按核心/博弈仓口径定性，勿让临时仓干扰核心逻辑"
+      ],
+      "after": [],
+      "reason": "原两条为内部边界/定位核对，且成本已补齐；未确认执行偏差不发布为问题。"
+    },
+    {
+      "ref": "RV-20261005",
+      "field": "execution",
+      "before": [
+        "主号 IRE：@8.93、@8.77 两档补仓（10/5），净投入摊薄 7.79 → 8.17 → 8.32，观望 1 周能否回升至 10",
+        "主号 GDXU：当日 @99.7 首建、盘中 @104 高抛清仓（日内波段落袋约 +4.3%）",
+        "1号 AVGX：@39.8 全数清仓（+2.2%），缩量上涨日离场、转空仓观望",
+        "1号 LABU：@240.65 建、@255 当日全清（快进快出约 +6%）",
+        "1号新开 SNXX：@15.695 建仓（2x 闪迪全仓，plan）——清 AVGX 后回笼资金按既定观察支撑位反弹迹象建仓",
+        "行情（10/5 收盘）：RAM 14.24（-0.49%）/ CRWG 18.29（-4.79%）/ CRDU 10.68（-5.49%）/ IRE 8.90（-6.32%）/ SNXX 15.98（-2.14%）——AI 硬件链全线下挫"
+      ],
+      "after": [
+        "主号 IRE：@8.93、@8.77两档回调补仓；剩余交易仓实际均价8.9499，正股净投入8.3146，观望1周能否回升至10",
+        "主号 GDXU：当日 @99.7 首建、盘中 @104 高抛清仓（日内波段落袋约 +4.3%）",
+        "1号 AVGX：@39.8 全数清仓（+2.2%），缩量上涨日离场、转空仓观望",
+        "1号 LABU：@240.65 建、@255 当日全清（快进快出约 +6%）",
+        "1号新开 SNXX：@15.695 建仓（2x 闪迪全仓，plan）——清 AVGX 后回笼资金按既定观察支撑位反弹迹象建仓",
+        "行情（10/5 收盘）：RAM 14.24（-0.49%）/ CRWG 18.29（-4.79%）/ CRDU 10.68（-5.49%）/ IRE 8.90（-6.32%）/ SNXX 15.98（-2.14%）——AI 硬件链全线下挫"
+      ],
+      "reason": "按已核实正股流水修正公开事实，原始文本留修正历史，原计划不改。"
+    },
+    {
+      "ref": "RV-20261005",
+      "field": "good",
+      "before": [
+        "左侧分批补 IRE：等回调至 8 字头后两档补仓摊薄至 8.32，符合等回调接回后加码的左侧节奏，未追高",
+        "GDXU 日内高抛：当日建仓 @99.7、@104 高抛了结 +4.3%，缩量上涨日拿日内波段即走，不留隔夜风险",
+        "1号带逻辑离场：AVGX @39.8 全清（+2.2%）、LABU 快进快出 +6%，都在缩量上涨日锁定利润、转空仓观望；后按观察建 SNXX 属计划内（plan）"
+      ],
+      "after": [
+        "左侧分批补 IRE：等回调至 8 字头后两档补仓净投入约8.31，符合等回调接回后加码的左侧节奏，未追高",
+        "GDXU 日内高抛：当日建仓 @99.7、@104 高抛了结 +4.3%，缩量上涨日拿日内波段即走，不留隔夜风险",
+        "1号带逻辑离场：AVGX @39.8 全清（+2.2%）、LABU 快进快出 +6%，都在缩量上涨日锁定利润、转空仓观望；后按观察建 SNXX 属计划内（plan）"
+      ],
+      "reason": "统一已核算净投入口径，省略旧估算。"
+    },
+    {
+      "ref": "RV-20261005",
+      "field": "todo",
+      "before": [
+        "IRE：净投入摊薄 8.32、10/5 收盘 8.90，观望 1 周能否修复回升至 10；明确退出边界，避免财报密集期继续加仓",
+        "1号 SNXX：观察支撑位反弹成色，用结果验证建仓逻辑；到止盈位按博弈仓一次清、不留 runner",
+        "回笼/观望：仍以核心仓 CC 收租为主，卫星仓小步快跑、带逻辑进出"
+      ],
+      "after": [
+        "IRE：净投入约8.31、10/5 收盘 8.90，观望 1 周能否修复回升至 10；明确退出边界，避免财报密集期继续加仓",
+        "1号 SNXX：观察支撑位反弹成色，用结果验证建仓逻辑；到止盈位按博弈仓一次清、不留 runner",
+        "回笼/观望：仍以核心仓 CC 收租为主，卫星仓小步快跑、带逻辑进出"
+      ],
+      "reason": "仅更新已核实成本值，保留原计划文字。"
     }
   ]
 }

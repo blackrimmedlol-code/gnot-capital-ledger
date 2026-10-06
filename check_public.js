@@ -30,6 +30,12 @@ if (/nav\s*:\s*[0-9]/.test(html)) {
   console.log('✅ 无资金金额（nav 数字）泄漏');
 }
 
+// 数量可以藏在别名或派生字段中；精确覆盖/权重亦可能结合call张数倒推股数。
+if (/\b(?:analysisQty|observationQty|quantityBefore|marketValue|cash|totalCallShares|uncoveredShares|uncappedShares|shareCoveragePct|wtPct)\s*:/.test(html)) {
+  errors++;
+  console.error('❌ 发布产物含内部数量、资金或精确比例字段');
+}
+
 // 3. 允许期权张数（mult），确认没有被误删（有期权持仓时应存在）
 if (/mult\s*:/.test(html)) {
   console.log('✅ 期权张数（mult）正常保留展示');

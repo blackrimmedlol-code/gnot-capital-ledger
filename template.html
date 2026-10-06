@@ -642,7 +642,7 @@
     <div class="sec-head">
       <span class="n">01</span>
       <h2>持仓监测</h2>
-      <span class="note">占比=账户内市值权重 · 美股 10/5 收盘 · A股 9/30 收盘（国庆休市）</span>
+      <span class="note">权重档位=账户内正股市值 · 沿用已记录行情快照</span>
     </div>
     <div id="holdingsBox"></div>
   </section>
@@ -1308,176 +1308,24 @@
     </div>
 
     <div class="closed-summary" id="closedSummary"></div>
-    <div class="subcell">成交日期与时刻均为中国时间；仅有原日期的历史成交显示可能的中国日期区间。</div>
+    <div class="subcell">日期与时刻按中国时间；仅有原日期时保留可能的日期区间。收益按成交前正股成本核算，加权合计仅对应本组卖出；— 表示暂无可核算值。</div>
     <div class="closed-days" id="closedDays"></div>
   </section>
 
 </div>
 <div class="tab-panel" id="panel-rules" role="tabpanel" aria-labelledby="tab-rules" hidden>
-  <!-- Discipline snapshot (轻量交易纪律) -->
-  <section id="discipline" aria-label="交易纪律">
-    <div class="discipline">
-      <div class="disc-card">
-        <h4>最近交易状态</h4>
-        <div class="disc-counts" id="discCounts"></div>
-      </div>
-      <div class="disc-card">
-        <h4>最近重复出现的问题</h4>
-        <ul class="disc-issues" id="discIssues"></ul>
-      </div>
+  <section id="discipline" aria-label="复盘判断口径">
+    <div class="disc-card">
+      <h4>复盘判断口径</h4>
+      <ul class="disc-issues" id="discPrinciples"></ul>
     </div>
   </section>
-
-  <!-- Rules Framework (revised to be testable) -->
   <section id="rules" aria-label="纪律框架">
     <div class="sec-head">
-      <span class="n">04</span>
-      <h2>纪律框架</h2>
-      <span class="note">带适用条件、失效条件 · 少量案例标记"待验证"</span>
+      <span class="n">04</span><h2>纪律框架</h2>
+      <span class="note" id="rulesVersion"></span>
     </div>
-
-    <div class="rules-intro">
-      <strong>五大维度：</strong>风控 → 买入 → 卖出 → 仓位 → 期权。每条规则包含：适用条件、做什么、风险/代价、失效情形。
-      <div style="margin-top:8px; font-size:12px; color:var(--muted);">区分：<b style="color:var(--accent);">既定约束</b>（用户明确同意的规则）/ <b style="color:var(--warn);">理论原理</b>（市场规律）/ <b style="color:var(--muted);">数据验证</b>（样本内统计，不代表普遍规律）</div>
-      <div class="legend">
-        <span><span class="dot" style="background:var(--accent);"></span> 核心规则（多次验证）</span>
-        <span><span class="dot" style="background:var(--warn);"></span> 待验证（少量案例，暂不升级）</span>
-        <span><span class="dot" style="background:var(--muted);"></span> 已修正（避免机械套用）</span>
-      </div>
-    </div>
-
-    <!-- 一、风控 -->
-    <div class="cat risk">
-      <div class="cat-head">
-        <div class="cat-icon">🛡</div>
-        <div class="cat-name">一、风控 <span class="cat-sub">活着比赚大钱重要</span></div>
-      </div>
-      <div class="cat-body">
-        <div class="rule">
-          <div class="t"><span class="num">R1</span>买入前先想清楚在哪儿走 <span class="status core">核心</span></div>
-          <div class="d"><span class="cond">适用：</span>所有开仓，尤其是 2x 杠杆、接飞刀、事件驱动。<span class="cond">做什么：</span>下单前想清楚什么情况下该走（逻辑破坏、技术位、事件催化兑现、仓位规则等）。<span class="cond">风格兼容：</span>左侧打法不强制挂止损，可用宽止损或不设硬止损，退出依据以逻辑破坏/仓位规则为主，而非机械价格位。<span class="cond">风险：</span>左侧深度接飞刀、高杠杆标的，若未预先定义退出依据，浮亏可能放大且难理性离场。<span class="cond">失效：</span>已有明确逻辑止损/仓位纪律者。<span class="cond">说明：</span>与 B1 合并（同一条规则，避免重复）。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">R2</span>高风险操作分仓隔离 <span class="status core">核心</span></div>
-          <div class="d"><span class="cond">适用：</span>接飞刀、妖股博弈、裸卖期权、不明事件驱动。<span class="cond">做什么：</span>放入小账号，与主仓物理隔离。<span class="cond">注意：</span>分仓隔离是<strong>心理隔离</strong>，不是风险消除——小账号满仓 + 高杠杆的绝对亏损仍然是真实亏损，不能因为"不伤主仓"就放松止损。<span class="cond">失效：</span>无。这是资金管理的基础。</div>
-          <div class="meta">修正：删除"即使归零也不影响总风险"的误导表述——分仓不等于零风险。</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 二、买入 -->
-    <div class="cat entry">
-      <div class="cat-head">
-        <div class="cat-icon">🎯</div>
-        <div class="cat-name">二、买入 <span class="cat-sub">买在无人问津处</span></div>
-      </div>
-      <div class="cat-body">
-        <div class="rule">
-          <div class="t"><span class="num">B1</span>买之前先想好在哪走 <span class="status core">核心</span></div>
-          <div class="d">同 R1（已合并）。买入前先想清楚退出依据（逻辑破坏、技术位、事件兑现、仓位规则等）。左侧打法不强制挂止损，可宽止损或不设硬止损，关键是退出逻辑要清晰，而非机械设价。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">B2</span>核心仓 vs 卫星仓分开决策 <span class="status core">核心</span></div>
-          <div class="d"><span class="cond">核心仓（主号）：</span>长期持有+收租，止损宽、仓位重、逻辑是基本面/趋势。<span class="cond">卫星仓（小号）：</span>博弈，止损紧、仓位轻，逻辑破了立刻走，不补仓不摊平。<span class="cond">注意：</span>小账号不是天然禁止加仓，但加仓必须有明确计划和仓位边界；不因账号小就临时补仓摊低。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">B3</span>卖飞后避免情绪化反向补偿交易 <span class="status testing">待验证</span></div>
-          <div class="d"><span class="cond">触发：</span>卖飞、踏空、止损被扫之后，FOMO 与"把亏的赚回来"的冲动最强烈，是情绪交易高发区。<span class="cond">规则：</span>此时开新仓需有独立于上一笔的 setup 与退出逻辑；不允许为补偿上一笔而反手、加倍或追同方向。但明确计划内的同日回补（如预设低吸价位、日内 scalp）允许，需事前留痕。<span class="cond">自测：</span>把上一笔交易从脑海里删掉，这笔交易依然会做，才算独立逻辑。</div>
-          <div class="meta">依据：9/22 SOXS 建仓复盘标记为情绪交易——卖飞多头仓位后出现明显反向补偿倾向。修正：删除"至少隔一个交易日"的机械表述。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">B4</span>警惕"总得做点什么"的冲动 <span class="status testing">待验证</span></div>
-          <div class="d"><span class="cond">触发：</span>预设挂单未成交撤单、或刚止盈落袋后，因"资金闲置"立即把同一笔钱转投其他标的。<span class="cond">规则：</span>没明确机会时空仓等待，不因手上有现金、有时间、想追回亏损而交易；但计划内回补不属于"手痒"。<span class="cond">自测：</span>如果这笔转向不是刚空出来资金，是否依然会做？</div>
-          <div class="meta">依据：9/24 RAM 13.68 二波挂单撤单后资金转 RKLX（adhoc，虽当日止盈成功）+ 止盈后立即回补 RAM；样本单日，标"待验证"。修正：从"禁止立即转向"改为"警惕冲动"，允许计划内回补。</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 三、卖出 -->
-    <div class="cat exit">
-      <div class="cat-head">
-        <div class="cat-icon">💰</div>
-        <div class="cat-name">三、卖出 <span class="cat-sub">卖在人声鼎沸时</span></div>
-      </div>
-      <div class="cat-body">
-        <div class="rule">
-          <div class="t"><span class="num">S1</span>同赛道多标的同步冲高可作为减仓信号 <span class="status testing">待验证</span></div>
-          <div class="d"><span class="cond">适用条件：</span>持仓在同一子赛道（如 AI 硬件链）集中度高，且多个标的同步放量冲高。<span class="cond">逻辑：</span>板块性亢奋常伴随短期情绪顶点。<span class="cond">风险：</span>趋势行情中过早减仓可能踏空主升浪。<span class="cond">失效条件：</span>如果是基本面重大变化驱动的板块重估（而非情绪推动），不应因"涨多了"就减仓。</div>
-          <div class="meta">依据：仅 9/19 一次案例（SNDK/CRDU/LITX 同日冲高落袋），样本不足以下定论。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">S2</span>分批卖出 vs 一次性卖出：看场景，不做教条 <span class="status revised">已修正</span></div>
-          <div class="d"><span class="cond">分批卖的优势：</span>强趋势中可能吃到尾段，心理压力小。<span class="cond">分批卖的劣势：</span>增加交易成本，且第一笔若在回撤前卖出可能"卖早了"但后续补跌时反而是对的——事后才能评判。<span class="cond">更合理的做法：</span>根据信心度和流动性决定，而不是机械分批。强趋势+高流动性可分批，逻辑破了或急涨见顶信号明确时应果断一把走。</div>
-          <div class="meta">修正：删除"分批卖一定优于一次性清仓""分批卖不暴露于回撤"的绝对表述——分批卖仍暴露后几批在回撤中，且 9/19 SNDK 卖到高点是结果不是策略保证。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">S3</span>趋势仓部分止盈后保留 Runner，但不自动判"卖早" <span class="status testing">待验证</span></div>
-          <div class="d"><span class="cond">做法：</span>趋势未破坏、基本面逻辑仍在时，部分止盈后保留少量未封顶仓位继续跟随趋势，而不是一次性全清。<span class="cond">何时不留：</span>逻辑破坏、急涨见顶信号明确、或仓位规则要求出清时果断全走（呼应 S2）。<span class="cond">代价：</span>Runner 会暴露在回撤中，回吐部分浮盈是跟随趋势的门票钱。<span class="cond">注意：</span>"全清后上涨"不等于执行错误，只作为"是否需优化分批兑现"的观察线索，不单独标记偏差。</div>
-          <div class="meta">依据：9/18-9/22 五笔平仓复盘（RKLX/SNDK/LITX/CRDU/RAM）共同指向"过早全清、没有 Runner"。修正：添加"不自动判卖早"说明。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">S4</span>2x 高波标的"当日快进快出"：执行做对，但别养成高频依赖 <span class="status testing">待验证</span></div>
-          <div class="d"><span class="cond">现象：</span>9/24 IRE/RKLX/ASTX 同日均"当日建仓当日止盈"（+3%~+6%），到价/冲高失败即走、执行利落；但当天三次快进快出也反映出赢面偏窄，趋势仓位一再没留住。<span class="cond">做法：</span>短线 2x 标的按点位落袋的纪律值得肯定；但当此类操作高频出现时，需审视是否"赚小钱就走"挤占了对强趋势仓位的持有——强趋势标的应优先考虑更大目标位或保留 Runner（呼应 S3）。<span class="cond">失效：</span>已有明确趋势持有 / 部分止盈保留 Runner 的计划。<span class="cond">注意：</span>观察线索不等于执行错误，不单独标记偏差。</div>
-          <div class="meta">依据：9/24 三次当日快进快出（IRE/RKLX/ASTX）；样本为单日三笔，标"待验证"观察后续频次。修正：添加"观察线索≠执行错误"说明。</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 四、仓位 -->
-    <div class="cat pos">
-      <div class="cat-head">
-        <div class="cat-icon">⚖️</div>
-        <div class="cat-name">四、仓位 <span class="cat-sub">仓位决定心态</span></div>
-      </div>
-      <div class="cat-body">
-        <div class="rule">
-          <div class="t"><span class="num">P1</span>主动管理集中度 <span class="status core">核心</span></div>
-          <div class="d"><span class="cond">做什么：</span>单一赛道/主题占比过高时，主动减仓而非等回调被动出清。<span class="cond">注意：</span>集中度本身不是罪，高确信度的核心仓位可以集中；问题是<strong>无计划的集中</strong>和<strong>超过心理承受能力的集中</strong>。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">P2</span>空仓是合法仓位 <span class="status core">核心</span></div>
-          <div class="d">不为了"不空仓"勉强开仓。现金是期权——等待机会的权利。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">P3</span>核心仓计划变更留痕，不追溯改写 <span class="status testing">待验证</span></div>
-          <div class="d"><span class="cond">触发：</span>核心仓已接近集中度上限或满仓状态下，因"下跌低吸""埋伏事件"加仓。<span class="cond">规则：</span>加仓前核对最近一版"下次调整/预案"是否已明示"避免加码"；若相悖，当场记录偏差。保留计划变更留痕，但不把"预案修正"追溯改写成执行错误。<span class="cond">注意：</span>左侧打法允许逆势低吸，本规则不限制低吸本身，而是要求低吸决策与事前预案显式对齐。<span class="cond">失效：</span>加仓已在事前计划中写明（如预设回踩分批），或仓位远未触及集中度上限。</div>
-          <div class="meta">依据：9/28 RAM 核心仓在美光财报前超跌时逆势加仓（adhoc），与 9/25 复盘"财报前避免加码"预案相悖；样本单次，标"待验证"。修正：从"必须书面声明理由"改为"留痕但不追溯改写"。</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 五、期权 -->
-    <div class="cat opt">
-      <div class="cat-head">
-        <div class="cat-icon">📜</div>
-        <div class="cat-name">五、期权 <span class="cat-sub">CC 是让渡上涨换权利金，不是免费午餐</span></div>
-      </div>
-      <div class="cat-body">
-        <div class="rule">
-          <div class="t"><span class="num">O1</span>Covered Call 的本质 <span class="status core">核心</span></div>
-          <div class="d"><span class="cond">本质：</span>让渡行权价以上的上涨空间，换取权利金收入。提供<strong>有限的</strong>下跌缓冲（缓冲幅度 = 收到的权利金/股）。<span class="cond">不是：</span>免费收租、高胜率赌博、下跌保护。股价暴跌超过权利金幅度时，CC 组合同样亏钱，只是多亏少亏的区别。<span class="cond">适用：</span>中性偏多观点，认为正股不会大涨，但愿意在涨到行权价时卖出。</div>
-          <div class="meta">修正：删除"高 IV 时卖权胜率最高"——高 IV 反映市场预期大波动，权利金厚是因为承担了尾部风险，不是"胜率高"。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">O2</span>卖 call 前检查事件日历 <span class="status core">核心</span></div>
-          <div class="d"><span class="cond">做什么：</span>卖 call 前看到期日前是否有财报、FOMC、大选等重磅事件。<span class="cond">横跨财报的处理：</span>不机械按"浮盈 50% 买回"——综合考虑：(a) 正股是否还想持有 (b) 财报后 IV crush 能回收多少时间价值 (c) 如果被指派卖飞的机会成本。<span class="cond">买回 call ≠ 隔离财报风险：</span>正股本身在财报日会涨跌，call 的盈亏只是组合的一部分。如果不想承受财报波动，应该减正股而非只处理 call。</div>
-          <div class="meta">修正：删除"浮盈≥50%就买回做财报隔离"的机械建议——买回 call 只是平仓了期权头寸，正股仍然暴露在财报波动中。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">O3</span>区分备兑与裸卖，分别管理 <span class="status core">核心</span></div>
-          <div class="d"><span class="cond">备兑 call：</span>持有足额正股，最大收益=权利金+行权价-成本，最大亏损=正股跌至0-权利金。<span class="cond">裸卖 call：</span>无正股对冲，理论最大亏损无限（正股暴涨），必须单独设止损和仓位上限。<span class="cond">卖股时必须检查：</span>是否留下了无股覆盖的 call，如有则同步处理。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">O4</span>权利金、期权盈亏、组合盈亏分别记 <span class="status core">核心</span></div>
-          <div class="d"><span class="cond">记录三个数字：</span>(a) 收到的权利金总额 (b) 期权端已实现盈亏 (c) 股票+期权的组合盈亏。不能只看权利金收入而忽略正股被指派卖飞的机会成本。</div>
-        </div>
-        <div class="rule">
-          <div class="t"><span class="num">O5</span>CC 覆盖率匹配观点，别默认 100% <span class="status testing">待验证</span></div>
-          <div class="d"><span class="cond">问题：</span>核心趋势仓 100% 备兑会把上行收益全部封顶，趋势行情只能吃到行权价。<span class="cond">做法：</span>新核心趋势仓建议只覆盖部分仓位，保留未覆盖 Runner 吃趋势；中性偏震荡或愿意被叫走的仓位才适合高覆盖。<span class="cond">自检：</span>加卖 call 前先问：这轮行情我想赚的是权利金，还是趋势本身？</div>
-          <div class="meta">依据：9/22 RAM 策略备注——正股几乎全部被 CC 覆盖，上行封顶；9/23 已落地执行（加仓降至约八成）。</div>
-        </div>
-      </div>
-    </div>
+    <div id="rulesBox"></div>
   </section>
 
 </div>
@@ -1500,379 +1348,7 @@
   // ============================================================
   // UNIFIED DATA SOURCE — 所有展示数据从这里生成，避免手写不同步
   // ============================================================
-  var DATA = {
-    asOf: "2026-10-02 收盘（RAM 冲高连续兑现 · IRE 两次兑现一次回调接回）· 美股 2026-10-02 收盘 · A股 9/30 收盘（国庆休市）",
-    fx: { USDCNY: null, fxNote: "美股/ A 股分开统计，不做汇率折算" },
-    discipline: { issues: [
-      "IRE 财报密集期仓位高频波动（9/30-10/1 建、10/2 三连买卖）：@9.9、@10.38 分批止盈、@9.23 接回，摊薄 7.79；日内频繁进出需明确 IRE 定位与退出边界"
-    ] },
-
-    accounts: [
-      {
-        id: "main", name: "主账号", market: "US", color: "#a33a21",
-        positionPct: 74,
-        role: "核心仓 · CC 收租为主 · 美股",
-        tag: "核心仓·收租",
-        nav: null, navNote: "USD · 仓位为估算",
-        holdings: [
-          {
-            sym: "RAM", name: "2x DRAM (Roundhill T-Rex)", qty: 900, cost: 13.31, costNote: "摊薄成本", costDate: "分批（9/23+9/24+9/28 加仓；9/29 减仓摊薄；9/30 13.66 埋伏财报；10/1 14.35 止盈摊薄；10/2 14.5 止盈摊薄）", stop: null,
-            lastPrice: 14.31, lastPriceDate: "2026-10-02 收盘",
-            wtPct: 48, strategy: ["核心仓", "CC收租"],
-            options: [
-              { exp: "2026-10-16", legs: [
-                { mult: 1, strike: 14, type: "C", premium: 1.36, note: "9/19加卖" },
-                { mult: 1, strike: 14, type: "C", premium: 1.125, note: "" },
-                { mult: 2, strike: 15, type: "C", premium: 0.95, note: "" },
-                { mult: 1, strike: 15, type: "C", premium: 1.10, note: "9/19加卖" },
-                { mult: 1, strike: 16, type: "C", premium: 0.77, note: "9/19卖出" },
-                { mult: 1, strike: 16, type: "C", premium: 1.10, note: "9/22新卖" },
-                { mult: 1, strike: 17, type: "C", premium: 0.90, note: "9/22卖出" }
-              ]}
-              // 注：9/18到期 14C@1.15×2 + 15C×2 已结算作废、权利金落袋，不再计入未平仓；
-              // 用户口径：13.70 基础上 9/24 晚 13.82 加仓 → 加权13.71；9/28 13.13 再加 → 加权13.67；
-              // 二波挂13.68始终差零点几未触发，已撤单，该笔资金转向 RKLX（详见RKLX条目）；
-              // 10/16 共8张call覆盖约九成（10/2再减仓后），其余为未覆盖Runner（O5延续）；14.08 scalp=买13.7卖14.08，+2.8%落袋（历史）；
-              // 16C两张(0.77/1.10)与17C(0.90)各自独立新仓，勿当平仓删除
-            ],
-            tags: ["hold"], status: ["持有"], alerts: [],
-            alertSub: "财报冲高连续两日兑现 · 剩余持有观察",
-            setup: ["趋势波段"], execStatus: "adhoc",
-            oneLiner: "RAM 10/2 隔夜 @14.5 再止盈、摊薄 13.31：连续两日冲高分批兑现；剩余持有观察，8 张 call 覆盖约九成、14C 接受 @14 行权。",
-            strategyNote: "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。"
-          },
-          {
-            sym: "CRWG", name: "2x CoreWeave (Leverage Shares)", qty: 101, cost: 15.75, costDate: "2026-09-17",
-            lastPrice: 19.21, lastPriceDate: "2026-10-02 收盘",
-            wtPct: 7, strategy: ["核心仓", "CC收租"],
-            options: [
-              { exp: "2026-10-16", legs: [
-                { mult: 1, strike: 17, type: "C", premium: 2.00, note: "9/19加卖" }
-              ]}
-            ],
-            tags: ["hold"], status: ["持有"]
-          },
-          {
-            sym: "CRDU", name: "2x Credo (Tradr)", qty: 300, cost: 6.66,
-            lastPrice: 11.30, lastPriceDate: "2026-10-02 收盘",
-            wtPct: 13, strategy: ["核心仓", "CC收租"],
-            options: [
-              { exp: "2026-10-16", legs: [
-                { mult: 3, strike: 7, type: "C", note: "权利金待补" }
-              ]}
-            ],
-            tags: ["hold"], status: ["持有"],
-            strategyNote: "10/16 7C 深度实值，正股+权利金接受 @7 行权落袋；若趋势观点延续，可评估买回部分 call 解锁上行（O5）。"
-          },
-          {
-            sym: "IRE", name: "Defiance 2x IREN · 2x AI云", qty: 200, cost: 7.79, costNote: "摊薄成本", costDate: "9/30建底仓 / 10/1 8.58+8.81补底仓 / 10/2 9.9 止盈摊薄 / 10/2 10.38 止盈摊薄 / 10/2 9.23 回调接回",
-            lastPrice: 9.50, lastPriceDate: "2026-10-02 收盘",
-            wtPct: 7, strategy: ["卫星仓·AI云"],
-            options: [],
-            tags: ["hold"], status: ["持有"],
-            alertSub: "2x 每日重置 · 高波动",
-            note: "9/30 @9.23 建底仓；10/1 @8.58、@8.81 两档补、摊薄 8.87；10/2 @9.9、@10.38 分批止盈、@9.23 回调接回，摊薄 7.79——冲高两档兑现后等回调接回，持有观察",
-            setup: ["支撑低吸"], execStatus: "adhoc",
-            oneLiner: "IRE 10/2 日内三连：@9.9 先兑现 +11.6%、@10.38 高抛 +24.2%（相对摊薄成本）、@9.23 回调接回，摊薄 7.79；冲高两档锁住反弹浮盈、回落接回后持有观察。"
-          }
-        ]
-      },
-      {
-        id: "sat1", name: "1 号小账号", market: "US", color: "#b0711a",
-        positionPct: 100,
-        role: "高风险卫星仓 · 快进快出博弈",
-        tag: "卫星博弈",
-        nav: null, navNote: "USD · 满仓",
-        holdings: [
-          {
-            sym: "AVGX", name: "Defiance 2x AVGO · 2x博通", qty: 53, cost: 38.95, costDate: "2026-09-23",
-            lastPrice: 38.48, lastPriceDate: "2026-10-02 收盘",
-            wtPct: 100, strategy: ["卫星仓·2x博通博弈"],
-            options: [],
-            tags: ["hold"], status: ["持有"],
-            alertSub: "2x 每日重置 · 高波动",
-            note: "9/23 38.95 低位反手建仓，预期持有至 10 月",
-            setup: ["超跌反弹", "趋势波段"], execStatus: "adhoc",
-            oneLiner: "止损后果断换向，逻辑独立（大盘上行+个股补涨+持有至10月），非单纯补偿交易。"
-          }
-        ]
-      },
-      {
-        id: "sat2", name: "2 号小账号", market: "US", color: "#a89f8d",
-        positionPct: 100,
-        role: "高风险投机仓 · 相对长持的杠杆主题博弈",
-        tag: "卫星投机",
-        nav: null, navNote: "USD · 满仓",
-        holdings: [
-          {
-            sym: "SNXX", name: "Tradr 2X Long SNDK · 2x 闪迪", qty: 67, cost: 18.32, costDate: "2026-09-23",
-            lastPrice: 16.33, lastPriceDate: "2026-10-02 收盘",
-            wtPct: 100, strategy: ["卫星仓·存储杠杆博弈"],
-            options: [],
-            tags: ["hold"], status: ["持有"],
-            alertSub: "2x 每日重置 · 高波动标的",
-            note: "9/23 18.32 接回调建仓（全仓情绪单，用户自评）",
-            setup: ["其他"], execStatus: "emo",
-            oneLiner: "纯情绪博弈自评入档：昨日大涨今日回调追接，无独立触发逻辑；全仓 2x 进，用结果验证情绪单质量。"
-          }
-        ]
-      },
-      {
-        id: "cn", name: "A 股账户", market: "CN", color: "#2d724e",
-        positionPct: 100,
-        role: "广发证券（尾号8438）· 周期+贵金属+价值",
-        nav: null, navNote: "CNY · 满仓",
-        holdings: [
-          {
-            sym: "杰瑞股份", code: "002353", name: "油气装备", qty: 300, cost: 123.90,
-            lastPrice: 110.22, lastPriceDate: "2026-09-30 收盘",
-            wtPct: 66, strategy: ["周期配置"], isCN: true,
-            options: [],
-            tags: ["hold"], status: ["持有"]
-          },
-          {
-            sym: "兴业银锡", code: "000426", name: "白银/有色金属", qty: 400, cost: 34.67,
-            lastPrice: 31.50, lastPriceDate: "2026-09-30 收盘",
-            wtPct: 25, strategy: ["贵金属"], isCN: true,
-            options: [],
-            tags: ["hold"], status: ["持有"]
-          },
-          {
-            sym: "科达制造", code: "600499", name: "陶瓷装备/锂电", qty: 400, cost: 13.48,
-            lastPrice: 11.19, lastPriceDate: "2026-09-30 收盘",
-            wtPct: 9, strategy: ["价值"], isCN: true,
-            options: [],
-            tags: ["hold"], status: ["持有"]
-          }
-        ]
-      }
-    ],
-
-    // 平仓记录：按"完整交易"（tradeId）分组，每笔交易可以有多个分批成交（legs）
-    closedTrades: [
-      {
-        date: "2026-10-01", dateLabel: "2026-10-01",
-        trades: [
-          {
-            tradeId: "MSTU-SELL", sym: "MSTU", name: "2x MicroStrategy · 比特币", acct: "主账号",
-            qty: null, cost: 36.53, costNote: "摊薄成本",
-            legs: [
-              { time: "10/1 冲高", price: 43.5, retPct: 19.1, note: "@42.23 分批止盈后，剩余全数清仓（相对摊薄成本）" }
-            ],
-            totalRetPct: 19.1, totalRetNote: "+19.1%（清仓腿·相对摊薄成本）",
-            reason: "2x 比特币杠杆仓全部退出：9/25 建仓 → 9/30 高位止盈+低位回补 → 10/1 反弹分批兑现后全清，低吸+回补+反弹三段浮盈落袋",
-            result: "win",
-            setup: ["趋势波段", "仓位管理"], execStatus: "plan",
-            oneLiner: "反弹分批兑现后全清、卖在当日高位附近；到止盈一次清不留 runner 的卫星仓纪律执行到位。"
-          }
-        ]
-      },
-      {
-        date: "2026-09-25", dateLabel: "2026-09-25",
-        trades: [
-          {
-            tradeId: "UGL-SELL", sym: "UGL", name: "ProShares Ultra Gold · 2x黄金", acct: "主账号",
-            qty: 30, cost: 48.70,
-            legs: [
-              { time: "9/25", qty: 30, price: 48.50, retPct: -0.4, note: "低资金利用率清仓换标的" }
-            ],
-            totalRetPct: -0.4, totalRetNote: "-0.4%（毛）",
-            reason: "UGL 小仓资金利用率过低，48.5 清仓回笼换网投 MSTU",
-            result: "loss",
-            setup: ["仓位管理"], execStatus: "adhoc",
-            oneLiner: "小仓黄金杠杆利用率偏低，主动清仓回笼转向更高弹性标的；小亏认错、资金不留恋在低效仓位。"
-          }
-        ]
-      },
-      {
-        date: "2026-09-24", dateLabel: "2026-09-24",
-        trades: [
-          {
-            tradeId: "IRE-SELL", sym: "IRE", name: "Defiance 2x IREN · 2x AI云", acct: "主账号",
-            qty: 100, cost: 11.80,
-            legs: [
-              { time: "9/24 盘中", qty: 100, price: 12.30, retPct: 4.2, note: "预设止盈位到价全清" }
-            ],
-            totalRetPct: 4.2, totalRetNote: "+4.2%（毛）",
-            reason: "建仓当日观察点位预设 12.3 止盈，盘中到价全部卖出",
-            result: "win",
-            setup: ["支撑低吸", "趋势波段"], execStatus: "plan",
-            oneLiner: "左侧支撑建仓后设 12.3 目标，当日到价落袋；2x 结构不贪，按点位执行。"
-          },
-          {
-            tradeId: "RKLX-SELL", sym: "RKLX", name: "Defiance 2X RKLB · 2x 火箭实验室", acct: "主账号",
-            qty: 86, cost: 16.77,
-            legs: [
-              { time: "9/24 盘中", qty: 86, price: 17.78, retPct: 6.0, note: "预设止盈位到价全清" }
-            ],
-            totalRetPct: 6.0, totalRetNote: "+6.0%（毛）",
-            reason: "建仓后设 17.78 止盈，观察点位到价全部卖出",
-            result: "win",
-            setup: ["超跌反弹", "趋势波段"], execStatus: "adhoc",
-            oneLiner: "RAM 二波撤单转进的替补仓，当日 17.78 到价落袋；超跌反弹兑现不恋战。"
-          },
-          {
-            tradeId: "ASTX-MAIN-SELL", sym: "ASTX", name: "2x AST SpaceMobile · 卫星通信", acct: "主账号",
-            qty: 150, cost: 9.529,
-            legs: [
-              { time: "9/24 盘中", qty: 150, price: 9.855, retPct: 3.4, note: "冲高失败止盈全清" }
-            ],
-            totalRetPct: 3.4, totalRetNote: "+3.4%（毛）",
-            reason: "观察冲高失败，9.855 清仓并转身补 RAM",
-            result: "win",
-            setup: ["支撑低吸", "趋势波段"], execStatus: "plan",
-            oneLiner: "当日支撑低吸建仓、见冲高失败果断 9.855 止盈离场，资金无缝转身补 RAM 核心仓；锁盈不恋战。"
-          }
-        ]
-      },
-      {
-        date: "2026-09-23", dateLabel: "2026-09-23",
-        trades: [
-          {
-            tradeId: "SOXS-MAIN", sym: "SOXS", name: "3x Inverse Semiconductor · 做空半导体", acct: "主账号",
-            qty: 180, cost: 33.25,
-            legs: [
-              { time: "反弹一", qty: 100, price: 34.10, retPct: 2.6, note: "第一批兑现" },
-              { time: "上涨乏力", qty: 80, price: 34.60, retPct: 4.1, note: "识别乏力·全清" }
-            ],
-            totalRetPct: 3.2, totalRetNote: "加权≈+3.2%（毛）",
-            reason: "反弹兑现·识别上涨乏力后果断全清",
-            result: "win",
-            setup: ["支撑低吸", "对冲 / 逆向博弈"], execStatus: "adhoc",
-            oneLiner: "分批低吸后随反弹分批兑现，识别'上涨乏力'后不恋战原目标位，果断全清，过程利落。"
-          },
-          {
-            tradeId: "SOXS-1", sym: "SOXS", name: "3x Inverse Semiconductor · 做空半导体", acct: "1号小账号",
-            qty: 59, cost: 35.95,
-            legs: [
-              { time: "盘中", qty: 59, price: 34.73, retPct: -3.4, note: "认错止损全清" }
-            ],
-            totalRetPct: -3.4, totalRetNote: "-3.4%（毛）",
-            reason: "原定 36.2 兑现未及·跟随观察认错离场",
-            result: "loss",
-            setup: ["对冲 / 逆向博弈"], execStatus: "adhoc",
-            oneLiner: "原定 36.2 兑现未等到，跟随主号观察接受小亏认错，没有硬扛等反弹，执行果断。"
-          }
-        ]
-      },
-      {
-        date: "2026-09-22", dateLabel: "2026-09-22",
-        trades: [
-          {
-            tradeId: "RAM-SELL", sym: "RAM", name: "2x DRAM · 存储", acct: "主账号",
-            qty: 100, cost: 13.564,
-            legs: [
-              { time: "09-22", qty: 100, price: 14.55, retPct: 7.3, note: "减仓锁定利润" }
-            ],
-            totalRetPct: 7.3, totalRetNote: "+7.3%（毛）",
-            reason: "冲高减仓·卖回部分套利call",
-            result: "win",
-            setup: ["趋势波段", "仓位管理"], execStatus: "plan",
-            oneLiner: "冲高锁利合理，核心问题不是卖出，而是后续需要始终保留不封顶的趋势 Runner。"
-          },
-          {
-            tradeId: "CRWG-SELL", sym: "CRWG", name: "2x CoreWeave · AI云计算", acct: "主账号",
-            qty: 100, cost: 15.75,
-            legs: [
-              { time: "09-22", qty: 100, price: 17.26, retPct: 9.6, note: "减仓止盈" }
-            ],
-            totalRetPct: 9.6, totalRetNote: "+9.6%（毛）",
-            reason: "AI硬件链冲高·部分止盈（保留剩余仓位+17C备兑）",
-            result: "win",
-            setup: ["趋势波段", "仓位管理"], execStatus: "plan",
-            oneLiner: "+9.6% 部分兑现合理，保留剩余仓位比一次性全清更符合趋势交易。"
-          },
-          {
-            tradeId: "RAM-SCALP", sym: "RAM", name: "2x DRAM · 存储", acct: "主账号",
-            qty: 100, cost: 13.70,
-            legs: [
-              { time: "09-22", qty: 100, price: 14.08, retPct: 2.8, note: "买回后快进快出 scalp" }
-            ],
-            totalRetPct: 2.8, totalRetNote: "+2.8%（毛）",
-            reason: "伊朗海峡消息不及预期·scalp减仓落袋",
-            result: "win",
-            setup: ["日内 Scalp"], execStatus: "adhoc",
-            oneLiner: "消息驱动下快进快出并成功盈利，但属于临时战术交易，不应和核心仓逻辑混在一起。"
-          },
-          {
-            tradeId: "ASTX-DONE", sym: "ASTX", name: "2x AST SpaceMobile · 卫星通信", acct: "1号小账号",
-            qty: 202, cost: 9.50,
-            legs: [
-              { time: "第一波", qty: 101, price: 10.55, retPct: 11.1, note: "反弹先落" },
-              { time: "第二波", qty: 101, price: 10.74, retPct: 13.1, note: "全清" }
-            ],
-            totalRetPct: 12.1, totalRetNote: "加权≈+12.1%（毛）",
-            reason: "接飞刀反弹止盈清仓",
-            result: "win",
-            setup: ["超跌反弹"], execStatus: "plan",
-            oneLiner: "接飞刀后反弹 +12.1% 即退出符合这类交易定位，不需要强行把反弹单拿成趋势单。"
-          }
-        ]
-      },
-      {
-        date: "2026-09-19", dateLabel: "2026-09-19",
-        trades: [
-          {
-            tradeId: "SNDK-1", sym: "SNDK", name: "Sandisk · 存储", acct: "主账号",
-            qty: 3, cost: 1640,
-            legs: [
-              { time: "盘前", qty: 1, price: 1649.18, retPct: 0.6, note: "第一笔减仓" },
-              { time: "盘中", qty: 1, price: 1662, retPct: 1.3, note: "第二笔顺势减" },
-              { time: "盘中", qty: 1, price: 1714, retPct: 4.5, note: "最后一笔·当日高点" }
-            ],
-            totalRetPct: 2.1, totalRetNote: "加权平均≈+2.1%（毛，未扣费用）",
-            reason: "AI 硬件链冲高，释放集中度",
-            result: "win",
-            setup: ["趋势波段", "仓位管理"], execStatus: "plan",
-            oneLiner: "降低 AI 硬件链集中度逻辑合理，但全清会失去后续趋势收益。"
-          },
-          {
-            tradeId: "LITX-1", sym: "LITX", name: "2x Lumentum · 光通信", acct: "1号小账号",
-            qty: 58, cost: 30.09,
-            legs: [
-              { time: "盘前", qty: 58, price: 32.70, retPct: 8.7, note: "一笔清仓" }
-            ],
-            totalRetPct: 8.7, totalRetNote: "+8.7%（毛）",
-            reason: "卫星仓止盈，光通信板块冲高",
-            result: "win",
-            setup: ["趋势波段"], execStatus: "plan",
-            oneLiner: "+8.7% 冲高止盈没有问题，但趋势未破坏时可考虑保留少量尾仓。"
-          },
-          {
-            tradeId: "CRDU-2", sym: "CRDU", name: "2x Credo · 连接", acct: "2号小账号",
-            qty: 168, cost: 6.71,
-            legs: [
-              { time: "盘中", qty: 168, price: 7.40, retPct: 10.3, note: "一笔清仓" }
-            ],
-            totalRetPct: 10.3, totalRetNote: "+10.3%（毛）",
-            reason: "冲高止盈，账号清空",
-            result: "win",
-            setup: ["趋势波段", "仓位管理"], execStatus: "plan",
-            oneLiner: "+10.3% 止盈执行很好，但直接全清使组合失去了继续跟随趋势的仓位。"
-          }
-        ]
-      },
-      {
-        date: "2026-09-18", dateLabel: "2026-09-18",
-        isOld: true,
-        trades: [
-          {
-            tradeId: "RKLX-1", sym: "RKLX", name: "2x Rocket Lab", acct: "1号小账号",
-            qty: 111, cost: 14.95,
-            legs: [
-              { time: "第一波", qty: 55, price: 15.70, retPct: 5.0, note: "先落一半" },
-              { time: "第二波", qty: 56, price: 16.40, retPct: 9.7, note: "第二波拉升全清" }
-            ],
-            totalRetPct: 7.4, totalRetNote: "加权平均≈+7.4%（毛）",
-            reason: "冲高分批止盈",
-            result: "win",
-            setup: ["趋势波段", "仓位管理"], execStatus: "plan",
-            oneLiner: "冲高分批止盈执行正常，但强趋势行情可以考虑留下 10%～20% Runner。"
-          }
-        ]
-      }
-    ]
-  };
+  var DATA = {}; // 构建时从唯一台账注入脱敏数据，不在模板维护第二份事实。
 
   // ============================================================
   // COMPUTED HELPERS
@@ -1886,10 +1362,7 @@
       status: "unknown",
       statusText: "待核实",
       isFullyBacked: false,
-      hasFreeShares: false,
-      sharesUnknown: true,
-      coveragePct: null,
-      shareCoveragePct: null
+      sharesUnknown: true
     };
   }
 
@@ -1930,18 +1403,23 @@
 
   function computeMetrics() {
     var totalHoldings = 0;
-    var ccTargets = [];
-    var usCount = 0, cnCount = 0;
+    var symbols = new Set(), usSymbols = new Set(), cnSymbols = new Set();
+    var activeAccounts = 0, usAccounts = 0, cnAccounts = 0;
     DATA.accounts.forEach(function(acct){
+      if (acct.holdings.length) {
+        activeAccounts++;
+        if (acct.market === 'US') usAccounts++; else cnAccounts++;
+      }
       acct.holdings.forEach(function(h){
         totalHoldings++;
-        if (acct.market === "US") usCount++; else cnCount++;
-        if (h.options && h.options.length > 0) ccTargets.push(h.sym);
+        var key = acct.market + ':' + h.sym;
+        symbols.add(key);
+        if (acct.market === 'US') usSymbols.add(key); else cnSymbols.add(key);
       });
     });
     // 统计兑现条目：完整清仓单独计（用于平仓胜率），部分减仓单列为 partial
     // 事实与数量来自派生 closedTrades；缺数量/成本 → 收益待核实、不计入胜率
-    var registeredEntries = 0, clearedTrades = 0, winTrades = 0, partialEntries = 0, completedEpisodes = 0, unknownEntries = 0, mm = null, mx = null;
+    var registeredEntries = 0, clearedTrades = 0, winTrades = 0, lossTrades = 0, flatTrades = 0, partialEntries = 0, completedEpisodes = 0, unknownEntries = 0, mm = null, mx = null;
     DATA.closedTrades.forEach(function(d){
       var tMin = d.dateStart || d.date, tMax = d.dateEnd || d.date;
       if (mm === null || tMin < mm) mm = tMin;
@@ -1954,6 +1432,7 @@
         if (t.performanceEligible && (t.cycleResult === "win" || t.cycleResult === "loss" || t.cycleResult === "flat")) {
           clearedTrades++;
           if (t.cycleResult === "win") winTrades++;
+          else if (t.cycleResult === 'loss') lossTrades++; else flatTrades++;
         }
       });
     });
@@ -1962,10 +1441,11 @@
     DATA.closedTrades.forEach(function(d){
       d.trades.forEach(function(t){ totalFills += t.legs.length; });
     });
-    var sampleNote = (mm && mx) ? ("样本期 " + mm + " 至 " + mx + " · 含部分减仓 · 样本小不具统计意义") : "样本期待核实";
+    var sampleNote = (mm && mx) ? (mm + ' 至 ' + mx) : '—';
     return {
-      totalHoldings: totalHoldings, usCount: usCount, cnCount: cnCount,
-      ccCount: ccTargets.length, ccTargets: ccTargets,
+      totalHoldings: totalHoldings, uniqueHoldings: symbols.size, usCount: usSymbols.size, cnCount: cnSymbols.size,
+      activeAccounts: activeAccounts, usAccounts: usAccounts, cnAccounts: cnAccounts,
+      winTrades: winTrades, lossTrades: lossTrades, flatTrades: flatTrades,
       winRate: clearedTrades > 0 ? Math.round(winTrades / clearedTrades * 100) : null,
       registeredEntries: registeredEntries, clearedTrades: clearedTrades,
       partialEntries: partialEntries, completedEpisodes: completedEpisodes, unknownEntries: unknownEntries,
@@ -1978,10 +1458,10 @@
   // ============================================================
   function knownNumber(value) { return typeof value === "number" && isFinite(value); }
   function percentText(value) {
-    return knownNumber(value) ? (value > 0 ? "+" : "") + value.toFixed(1) + "%" : "待核实";
+    return knownNumber(value) ? (value > 0 ? "+" : "") + value.toFixed(1) + "%" : "—";
   }
   function priceText(value, ccy) {
-    return knownNumber(value) ? (ccy || "") + value.toFixed(2) : "待核实";
+    return knownNumber(value) ? (ccy || "") + value.toFixed(2) : "—";
   }
   function returnClass(value) {
     return !knownNumber(value) || value === 0 ? "muted" : (value > 0 ? "up" : "down");
@@ -2007,12 +1487,15 @@
     var box = document.getElementById("metricsBox");
     var m = computeMetrics();
     var wrDisplay = m.winRate !== null ? m.winRate + "%" : "—";
-    var wrSub = m.registeredEntries + "条已登记兑现/" + m.totalFills + "次成交 · " + m.sampleNote;
+    var wrSub = m.clearedTrades + ' 个可核算完整周期 · ' + m.winTrades + ' 盈 / ' + m.lossTrades + ' 亏' + (m.flatTrades ? ' / ' + m.flatTrades + ' 平' : '');
+    var c = DATA.mainConcentration || {}, cSub = c.available ? '最大持仓 ' + c.topSym + ' · 主账号正股' : '暂无完整估值';
+    if (c.holdingsAsOf) cSub += '<br>持仓 ' + htmlText(c.holdingsAsOf);
+    if (c.priceAsOf) cSub += ' · 行情 ' + htmlText(c.priceAsOf);
     box.innerHTML =
-      '<div class="metric"><div class="k">CC 覆盖标的</div><div class="v accent">' + m.ccCount + '</div><div class="sub">' + m.ccTargets.join(" · ") + '</div></div>' +
-      '<div class="metric"><div class="k">持仓标的</div><div class="v">' + m.totalHoldings + '</div><div class="sub">美股 ' + m.usCount + ' · A股 ' + m.cnCount + '</div></div>' +
+      '<div class="metric"><div class="k">主仓集中度</div><div class="v accent">' + (c.available ? htmlText(c.level) : '—') + '</div><div class="sub">' + cSub + '</div></div>' +
+      '<div class="metric"><div class="k">持仓标的</div><div class="v">' + m.uniqueHoldings + '</div><div class="sub">美股 ' + m.usCount + ' · A股 ' + m.cnCount + ' · 跨账户 ' + m.totalHoldings + ' 笔持仓</div></div>' +
       '<div class="metric"><div class="k">平仓胜率</div><div class="v rise">' + wrDisplay + '</div><div class="sub">' + wrSub + '</div></div>' +
-      '<div class="metric"><div class="k">综合仓位</div><div class="v warn">重仓</div><div class="sub">1号/2号/A股满仓 · 主仓74% · 净资产待补</div></div>';
+      '<div class="metric"><div class="k">活跃账户</div><div class="v">' + m.activeAccounts + '</div><div class="sub">美股 ' + m.usAccounts + ' · A股 ' + m.cnAccounts + '</div></div>';
   }
 
   function renderAccounts() {
@@ -2059,12 +1542,12 @@
           '<th scope="col">期权 / 覆盖</th>' +
           '<th scope="col">状态</th>' +
           '</tr></thead><tbody>';
-        var sortedH = acct.holdings.slice().sort(function(a, b) { return (b.wtPct || 0) - (a.wtPct || 0); });
+        var sortedH = acct.holdings.slice().sort(function(a, b) { return (a.weightRank || 999) - (b.weightRank || 999); });
         sortedH.forEach(function(h) {
-          var costStr = knownNumber(h.cost) ? (acct.market === "CN" ? "¥" : "$") + h.cost.toFixed(h.cost < 20 ? 3 : 2) : "待核实";
+          var costStr = knownNumber(h.cost) ? (acct.market === "CN" ? "¥" : "$") + h.cost.toFixed(h.cost < 20 ? 3 : 2) : "—";
           if (h.costNote) costStr += '<div class="subcell" style="font-size:10px; color:var(--muted);">' + h.costNote + '</div>';
           var symCell = '<span class="sym">' + h.sym + '</span>';
-          if (h.wtPct !== null && h.wtPct !== undefined) symCell += '<span class="wt">≈' + h.wtPct + '%</span>';
+          if (h.weightLevel) symCell += '<span class="wt">' + htmlText(h.weightLevel) + '权重</span>';
           if (h.code) symCell += '<div class="desc">' + h.code + '</div>';
           symCell += '<div class="desc">' + h.name + '</div>';
           // 统一不显示具体持股数（隐私）
@@ -2125,33 +1608,30 @@
     var summary = document.getElementById("closedSummary");
     var days = document.getElementById("closedDays");
     var m = computeMetrics();
-    var winPct = knownNumber(m.winRate) ? m.winRate + "%" : "待核实";
+    var winPct = knownNumber(m.winRate) ? m.winRate + "%" : "—";
     summary.innerHTML =
-      '<span>已登记兑现条目：<strong>' + m.registeredEntries + '</strong> 条</span>' +
-      '<span>已登记卖出事件：<strong>' + m.totalFills + '</strong> 笔（含缺项）</span>' +
-      '<span>清仓登记：<strong>' + m.completedEpisodes + '</strong> 个周期 · 可核算毛收益：' + m.clearedTrades + ' 个</span>' +
-      '<span>可核算清仓周期胜率：<strong>' + winPct + '</strong></span>' +
-      '<span>样本期：<strong>' + (m.sampleNote || "待核实") + '</strong></span>' +
-      '<span style="color:var(--warn);">' + m.unknownEntries + ' 条加权收益待核实 · 非账户收益</span>';
+      '<span>兑现：<strong>' + m.registeredEntries + '</strong> 条 · 卖出 <strong>' + m.totalFills + '</strong> 笔</span>' +
+      '<span>清仓登记：<strong>' + m.completedEpisodes + '</strong> 个周期 · 可核算 <strong>' + m.clearedTrades + '</strong> 个</span>' +
+      '<span>完整周期胜率：<strong>' + winPct + '</strong></span>' +
+      '<span>样本：中国日期 <strong>' + m.sampleNote + '</strong></span>';
 
     var html = "";
     DATA.closedTrades.forEach(function(day, idx) {
-      var dayWinCount = 0, dayLossCount = 0, dayFills = 0, dayUnknown = 0;
+      var dayFills = 0, hasTime = false;
       day.trades.forEach(function(t){
-        if (!knownNumber(t.totalRetPct)) dayUnknown++;
-        else if (t.totalRetPct > 0) dayWinCount++;
-        else if (t.totalRetPct < 0) dayLossCount++;
         dayFills += t.legs.length;
+        t.legs.forEach(function(l) { if (l.time && /^\d{2}:\d{2}/.test(l.time)) hasTime = true; });
       });
+      var cols = hasTime ? 7 : 6;
       var tagCls = day.isOld ? " old" : "";
-      var tagText = day.trades.length + " 条兑现 · " + dayFills + " 笔卖出" + (dayUnknown ? " · " + dayUnknown + " 条收益待核实" : "");
+      var tagText = day.trades.length + " 条兑现 · " + dayFills + " 笔卖出";
       html += '<article class="closed-day" data-record-date="' + htmlText(day.dateEnd || day.date) + '" data-record-symbols="' + htmlText(Array.from(new Set(day.trades.map(function(t) { return t.sym; }))).join(',')) + '" data-record-accounts="' + htmlText(Array.from(new Set(day.trades.map(function(t) { return t.acct; }))).join(',')) + '"><details' + ((day.isOld || idx > 0) ? "" : " open") + '>' +
         '<summary>' +
           '<span class="day-date">' + day.dateLabel + '</span>' +
           '<span class="day-tag' + tagCls + '">' + tagText + '</span>' +
         '</summary>' +
         '<div class="table-scroll"><table><thead><tr>' +
-          '<th scope="col">中国时间</th><th scope="col">标的</th><th scope="col">账号</th>' +
+          (hasTime ? '<th scope="col">中国时间</th>' : '') + '<th scope="col">标的</th><th scope="col">账号</th>' +
           '<th scope="col" class="num">成本</th><th scope="col" class="num">卖出价</th>' +
           '<th scope="col" class="num">收益率</th><th scope="col">备注</th>' +
         '</tr></thead><tbody>';
@@ -2162,35 +1642,29 @@
           var retCls = returnClass(leg.retPct);
           var retStr = percentText(leg.retPct);
           html += '<tr data-execution-id="' + htmlText(leg.executionId) + '"' + (isMultiLeg && li === 0 ? ' class="trade-group"' : '') + '>';
+          if (hasTime) html += '<td><span class="time">' + htmlText(leg.time || '—') + '</span></td>';
           if (li === 0) {
-            html += '<td rowspan="' + t.legs.length + '"><span class="time">' + (isMultiLeg ? "分批" : leg.time) + '</span></td>';
             html += '<td rowspan="' + t.legs.length + '"><span class="sym">' + t.sym + '</span><div class="desc">' + t.name + '</div><div class="subcell">' + t.acct + '</div></td>';
             html += '<td rowspan="' + t.legs.length + '">' + t.acct + '</td>';
-            html += '<td rowspan="' + t.legs.length + '" class="num price">' + priceText(t.cost, ccy) + (t.costNote ? '<div class="subcell" style="font-size:10px; color:var(--muted);">' + htmlText(t.costNote) + '</div>' : '') + '</td>';
           }
-          if (isMultiLeg) {
-            html += '<td class="num price" style="font-size:12px;">' + priceText(leg.price, ccy) + '</td>';
-            html += '<td class="num ' + retCls + '" style="font-size:12px;">' + retStr + '</td>';
-            html += '<td><span class="leg-tag">' + htmlText(leg.time) + ' · ' + htmlText(leg.note) + '</span>' + (leg.costBasisType === "netInvested" ? '<div class="subcell">涨幅相对历史摊薄成本，非真实盈亏</div>' : '') + '</td>';
-          } else {
-            html += '<td class="num price">' + priceText(leg.price, ccy) + '</td>';
-            html += '<td class="num ' + retCls + '">' + retStr + '</td>';
-            html += '<td><span class="tag reason">' + htmlText(leg.note) + '</span>' + (leg.costBasisType === "netInvested" ? '<div class="subcell">涨幅相对历史摊薄成本，非真实盈亏</div>' : '') + '</td>';
-          }
+          html += '<td class="num price">' + priceText(leg.cost === undefined ? t.cost : leg.cost, ccy) + '</td>';
+          html += '<td class="num price">' + priceText(leg.price, ccy) + '</td>';
+          html += '<td class="num ' + retCls + '">' + retStr + '</td>';
+          html += '<td>' + (leg.note ? '<span class="' + (isMultiLeg ? 'leg-tag' : 'tag reason') + '">' + htmlText(leg.note) + '</span>' : '') +
+            (leg.costBasisType === 'netInvested' ? '<div class="subcell">相对历史摊薄成本的涨幅</div>' : '') + '</td>';
           html += '</tr>';
         });
         // 汇总行
         var totCls = returnClass(t.totalRetPct);
         html += '<tr class="trade-summary-row">' +
-          '<td colspan="3" style="text-align:right;font-size:12px;">加权合计：</td>' +
-          '<td class="num" style="font-size:12px;">—</td>' +
+          '<td colspan="' + (cols - 2) + '" style="text-align:right;font-size:12px;">加权合计：</td>' +
           '<td class="num ' + totCls + '" style="font-size:13px;">' + percentText(t.totalRetPct) + '</td>' +
-          '<td colspan="2" style="font-size:11.5px;color:var(--muted);">' + (t.reason||"") + ' · ' + (t.totalRetNote||"成交价收益") + '</td>' +
+          '<td style="font-size:11.5px;color:var(--muted);">' + htmlText(t.reason) + '</td>' +
           '</tr>';
-        if (t.setup || t.execStatus || t.oneLiner) {
-          var exMap = { plan: "✅ 计划内", adhoc: "⚠️ 临时判断", emo: "🔴 情绪交易" };
-          html += '<tr class="rev-row"><td colspan="7">' +
-            '<span class="rev-badge ' + (t.execStatus||"") + '">' + (exMap[t.execStatus]||"待复盘") + '</span>' +
+        var exMap = { plan: "✅ 计划内", adhoc: "⚠️ 临时判断", emo: "🔴 情绪交易" };
+        if ((t.setup && t.setup.length) || exMap[t.execStatus] || t.oneLiner) {
+          html += '<tr class="rev-row"><td colspan="' + cols + '">' +
+            (exMap[t.execStatus] ? '<span class="rev-badge ' + t.execStatus + '">' + exMap[t.execStatus] + '</span>' : '') +
             (t.setup ? t.setup.map(function(x){ return '<span class="rev-setup">' + x + '</span>'; }).join("") : "") +
             (t.oneLiner ? '<span class="rev-oneliner">' + t.oneLiner + '</span>' : "") +
             '</td></tr>';
@@ -2350,31 +1824,30 @@
     DATA.closedTrades.forEach(function(day) { day.trades.forEach(function(t) { t.legs.forEach(function(l) {
       if (ids.indexOf(l.executionId) === -1) return;
       var ccy = t.acct.indexOf('A') !== -1 ? '¥' : '$';
-      rows.push('<tr><td>' + htmlText(day.dateLabel) + '<div class="subcell">' + htmlText(l.time) + '</div></td><td>' + htmlText(t.sym) + '</td><td>' + htmlText(t.acct) + '</td><td class="num">' + priceText(l.price, ccy) + '</td><td class="num ' + returnClass(l.retPct) + '">' + percentText(l.retPct) + '</td></tr>');
+      rows.push('<tr><td>' + htmlText(day.dateLabel) + (l.time ? '<div class="subcell">' + htmlText(l.time) + '</div>' : '') + '</td><td>' + htmlText(t.sym) + '</td><td>' + htmlText(t.acct) + '</td><td class="num">' + priceText(l.price, ccy) + '</td><td class="num ' + returnClass(l.retPct) + '">' + percentText(l.retPct) + '</td></tr>');
     }); }); });
     if (!rows.length) return '';
     return '<details class="related-sales"><summary>查看关联卖出 · ' + rows.length + ' 笔</summary><div class="table-scroll"><table><thead><tr><th>中国日期 / 时间</th><th>标的</th><th>账户</th><th class="num">卖出价</th><th class="num">收益率</th></tr></thead><tbody>' + rows.join('') + '</tbody></table></div></details>';
   }
 
   // ============================================================
-  // DISCIPLINE SNAPSHOT（最近交易状态 + 重复问题）
+  // 当前约定由台账统一管理；不混计持仓标签与历史兑现条目。
   // ============================================================
   function renderDiscipline() {
-    var counts = { plan: 0, adhoc: 0, emo: 0 };
-    DATA.closedTrades.forEach(function(d){
-      d.trades.forEach(function(t){ if (counts[t.execStatus] !== undefined) counts[t.execStatus]++; });
-    });
-    DATA.accounts.forEach(function(a){
-      a.holdings.forEach(function(h){ if (counts[h.execStatus] !== undefined) counts[h.execStatus]++; });
-    });
-    var labels = { plan: "✅ 计划内", adhoc: "⚠️ 临时判断", emo: "🔴 情绪交易" };
+    var d = DATA.discipline || {}, rules = d.rules || [];
+    document.getElementById('discPrinciples').innerHTML = (d.reviewPrinciples || []).map(function(x) { return '<li>' + htmlText(x) + '</li>'; }).join('');
+    document.getElementById('rulesVersion').textContent = rules.length + ' 条约定 · ' + (d.version || '').slice(0, 10);
     var html = "";
-    ["plan", "adhoc", "emo"].forEach(function(k){
-      html += '<div class="disc-count ' + k + '"><span class="dc-num">' + counts[k] + '</span><span class="dc-label">' + labels[k] + '</span></div>';
+    (d.groups || []).forEach(function(g) {
+      html += '<div class="cat ' + htmlText(g.style) + '"><div class="cat-head"><div class="cat-icon">' + htmlText(g.icon) + '</div><div class="cat-name">' + htmlText(g.title) + '</div></div><div class="cat-body">';
+      rules.filter(function(r) { return r.group === g.id; }).forEach(function(r) {
+        html += '<div class="rule" data-rule-id="' + htmlText(r.id) + '"><div class="t"><span class="num">' + htmlText(r.id) + '</span>' + htmlText(r.title) + '<span class="status core">' + htmlText(r.status) + '</span></div><div class="d">';
+        (r.items || []).forEach(function(i) { html += '<span class="cond">' + htmlText(i.label) + '：</span>' + htmlText(i.text) + ' '; });
+        html += '</div></div>';
+      });
+      html += '</div></div>';
     });
-    document.getElementById("discCounts").innerHTML = html;
-    var iss = (DATA.discipline && DATA.discipline.issues) ? DATA.discipline.issues : [];
-    document.getElementById("discIssues").innerHTML = iss.map(function(x){ return '<li>' + x + '</li>'; }).join("");
+    document.getElementById('rulesBox').innerHTML = html;
   }
 
   // ============================================================
@@ -2383,7 +1856,7 @@
   function init() {
     [
       [renderAlerts, "alertBox"], [renderMetrics, "metricsBox"],
-      [renderDiscipline, "discCounts"], [renderAccounts, "acctGrid"],
+      [renderDiscipline, "rulesBox"], [renderAccounts, "acctGrid"],
       [renderHoldings, "holdingsBox"], [renderClosed, "closedDays"],
       [renderReviews, "reviewsBox"]
     ].forEach(function(item) {

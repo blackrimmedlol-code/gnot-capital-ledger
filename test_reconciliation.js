@@ -41,7 +41,7 @@ for (const e of brokerEvents) {
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'ledger-reconcile-'));
 try {
   fs.mkdirSync(path.join(temp, 'data'));
-  for (const f of ['verify.js', 'derive.js', 'template.html', 'RULES_日常更新.md']) fs.copyFileSync(path.join(__dirname, f), path.join(temp, f));
+  for (const f of ['verify.js', 'derive.js', 'presentation.js', 'template.html', 'RULES_日常更新.md']) fs.copyFileSync(path.join(__dirname, f), path.join(temp, f));
   const baseline = JSON.parse(JSON.stringify(ledger));
   const baselineHolding = baseline.accounts.find(a => a.id === 'main').holdings.find(h => h.sym === 'CRWG');
   baselineHolding.qty = 101;

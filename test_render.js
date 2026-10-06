@@ -57,6 +57,14 @@ function check(html, ledger) {
     JSON.stringify(expected.groups.map(d => [d.date, d.dateLabel])), '成交日期没有按中国时区转换');
   assert.ok(!nodes.holdingsBox.innerHTML.includes('策略备注'), '持仓仍显示策略备注');
   assert.ok(api.DATA.accounts.every(a => a.holdings.every(h => !h.strategyNote)), '策略备注仍进入页面数据');
+  assert.ok(api.DATA.accounts.every(a => a.holdings.every(h => h.wtPct === undefined)), '精确正股权重仍进入页面数据');
+  assert.ok(nodes.metricsBox.innerHTML.includes('主仓集中度') && !nodes.metricsBox.innerHTML.includes('CC 覆盖标的'), '顶部指标未更新');
+  assert.ok(!/净资产待补|主仓74%|综合仓位/.test(nodes.metricsBox.innerHTML), '顶部仍使用旧仓位或内部待办');
+  assert.equal(api.computeMetrics().uniqueHoldings, new Set(ledger.accounts.flatMap(a => a.holdings.filter(h => h.analysisQty !== 0 && h.qty !== h.observationQty).map(h => a.market + ':' + h.sym))).size, '跨账户同标的重复计数');
+  const expectedRules = ledger.discipline.rules.map(r => r.id).sort();
+  const renderedRules = [...nodes.rulesBox.innerHTML.matchAll(/data-rule-id="([^"]+)"/g)].map(m => m[1]).sort();
+  assert.deepEqual(renderedRules, expectedRules, '当前纪律未从唯一来源渲染');
+  assert.ok(!/disciplineHistory|inactiveRules|rulesHtml|最近交易状态|多次验证/.test(html), '内部历史纪律或错误统计口径进入页面');
   for (const id of ['holdingsBox', 'closedDays', 'reviewsBox']) assert.ok(nodes[id], '缺页面容器 ' + id);
   const sales = ledger.executions.filter(e => e.side === 'sell' && e.includeInPerformance !== false && e.analysisQty !== 0);
   const renderedIds = [...nodes.closedDays.innerHTML.matchAll(/data-execution-id="([^"]+)"/g)].map(m => m[1]);
@@ -74,6 +82,9 @@ function check(html, ledger) {
   assert.ok(!/待补观察|待验证的观察|历史结单核对|历史补录|结单核对/.test(reviewSection + nodes.reviewsBox.innerHTML), '旧复盘内部内容仍在页面');
   assert.ok(!/internalLegacyReviewNotes|internalObservation|internalExecution|RV-RECONCILE/.test(html), '内部记录嵌入网站产物');
   assert.ok(!nodes.closedDays.innerHTML.includes('未计费用') && !nodes.closedDays.innerHTML.includes('未扣费用'), '兑现卡片仍重复显示费用表述');
+  assert.ok(!/数量待核实|时刻未记录|待复盘|后续处理待核实/.test(nodes.closedDays.innerHTML + nodes.reviewsBox.innerHTML), '旧状态或内部核对提示仍出现');
+  assert.ok(!/券商结单补录|结单仍有观察仓|后者仍待核实/.test(nodes.closedDays.innerHTML + nodes.reviewsBox.innerHTML), '内部来源核对提示仍出现');
+  assert.ok(!nodes.closedSummary.innerHTML.includes('待核实'), '摘要仍重复显示内部缺项任务');
   for (const r of api.DATA.reviews) assert.ok(!r.observation && !r.internalObservation && !r.internalExecution, '内部字段进入页面数据');
   if (reviewIds.length) {
     const latest = publicReviews.slice().sort((a, b) => (b.reviewDate || b.date).localeCompare(a.reviewDate || a.date))[0];
@@ -90,12 +101,25 @@ function check(html, ledger) {
   api.DATA.closedTrades = [fixture];
   api.init();
   assert.deepEqual(errors, [], '空值导致模块崩溃');
-  assert.ok(nodes.closedDays.innerHTML.includes('待核实'), '缺项应显示待核实');
+  assert.ok(nodes.closedDays.innerHTML.includes('—'), '不可核算值应保留空缺符号');
+  assert.ok(!/待核实|时刻未记录|null|undefined/.test(nodes.closedDays.innerHTML), '缺项变成重复提示或文本null');
+  assert.ok(!nodes.closedDays.innerHTML.includes('<th scope="col">中国时间'), '全日缺时刻仍显示空时间列');
   assert.ok(nodes.closedDays.innerHTML.includes('0.0%'), '零收益被误判');
   assert.ok(!nodes.closedDays.innerHTML.includes('NaN'), '出现伪数值');
   const before = nodes.reviewsBox.innerHTML;
   assert.ok(!reviewIds.length || before.includes('data-review-id='), '缺项卡片阻止复盘显示');
   assert.equal(api.computeMetrics().clearedTrades, 0, '未知收益被计入周期胜率');
+  // 同日再买入后继续卖出：逐笔成本可算，组成本不同不应显示“成本待核实”。
+  api.DATA.closedTrades = [{ date: '2099-01-02', dateLabel: '2099-01-02', trades: [{
+    sym: 'MIX', name: '分批不同成本', acct: '主账号', cost: null, totalRetPct: 5, reason: '部分减仓兑现',
+    legs: [{ executionId: 'MIX-1', cost: 10, price: 11, retPct: 10, time: '09:01:00' },
+      { executionId: 'MIX-2', cost: 20, price: 21, retPct: 5, time: null }]
+  }] }];
+  api.init();
+  assert.ok(nodes.closedDays.innerHTML.includes('$10.00') && nodes.closedDays.innerHTML.includes('$20.00'), '不同成本未逐腿显示');
+  assert.ok(nodes.closedDays.innerHTML.includes('09:01:00') && nodes.closedDays.innerHTML.includes('<th scope="col">中国时间'), '精确时刻被清理掉');
+  assert.ok(!/待核实|时刻未记录|null|undefined/.test(nodes.closedDays.innerHTML));
+  assert.deepEqual(errors, [], '分批不同成本导致渲染失败');
   return { sales: sales.length, reviews: reviewIds.length, days: dates.length };
 }
 

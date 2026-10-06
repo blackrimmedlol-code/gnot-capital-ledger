@@ -5,6 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 const { derive, presentChinaDates, chinaExecutionTime } = require('./derive.js'); // 成交兑现视图派生（事实来自 executions）
+const { summarizeHoldings } = require('./presentation.js');
 
 const ROOT = __dirname;
 const LEDGER_PATH = path.join(ROOT, 'data', 'ledger-full.json');
@@ -96,9 +97,13 @@ function attachCoverage(h) {
 }
 
 // 字段映射：ledger-full.json 新字段名 → HTML 模板旧字段名
-function mapFields(holding) {
+function mapFields(holding, weight) {
   const h = { ...holding };
   delete h.strategyNote; // Keep strategy notes in the full ledger only.
+  delete h.wtPct; // Exact stock weights stay in the repository; public view shows levels/ranks only.
+  Object.assign(h, weight || {});
+  h.options = (h.options || []).map(g => ({ ...pick(g, ['exp', 'settled']),
+    legs: (g.legs || []).map(l => pick(l, ['mult', 'strike', 'type', 'premium', 'naked'])) }));
   // entrySetup → setup, entryExecStatus → execStatus（向后兼容）
   if (h.entrySetup && !h.setup) h.setup = h.entrySetup;
   if (h.entryExecStatus && !h.execStatus) h.execStatus = h.entryExecStatus;
@@ -107,27 +112,49 @@ function mapFields(holding) {
     h.costNote = h.costDisplay;
     delete h.costDisplay;
   }
-  return h;
+  return pick(h, ['sym', 'name', 'code', 'cost', 'costNote', 'strategy', 'options', 'tags', 'alerts',
+    'alertSub', 'setup', 'execStatus', 'oneLiner', 'reviewNote', 'coverage', 'weightRank', 'weightLevel']);
+}
+function pick(obj, keys) {
+  return Object.fromEntries(keys.filter(k => obj[k] !== undefined).map(k => [k, obj[k]]));
+}
+function publicClosedTrade(t) {
+  const out = pick(t, ['tradeId', 'episodeId', 'sym', 'name', 'acct', 'cost', 'soldDate', 'dateStart', 'dateEnd',
+    'isPartial', 'closesEpisode', 'totalRetPct', 'result', 'cycleRetPct', 'cycleResult', 'performanceEligible',
+    'reason', 'setup', 'execStatus', 'oneLiner']);
+  out.legs = t.legs.map(l => ({
+    ...pick(l, ['executionId', 'date', 'dateEnd', 'datePrecision', 'timezone', 'time', 'price', 'cost', 'costBasisType', 'retPct']),
+    note: (l.note || '').replace(/[（(]\s*数量待核实\s*[）)]/g, '').trim()
+  }));
+  return out;
 }
 
 // 构建脱敏 DATA（与 HTML 模板中的 var DATA = {...} 结构一致）
+const mainAccount = ledger.accounts.find(a => a.id === 'main');
+const mainWeight = mainAccount ? summarizeHoldings(mainAccount) : { available: false, topSym: null, level: null };
 const publicData = {
   optionsAnalysisScope: (ledger.methodology.optionsAnalysis || {}).scope || 'full',
   asOf: ledger.asOf,
   asOfLabel: ledger.asOfLabel,
   fx: ledger.fx,
-  discipline: ledger.discipline,
-  accounts: ledger.accounts.map(acct => ({
-    ...acct,
-    holdings: (acct.holdings || []).map(h => mapFields(sanitize(attachCoverage(h))))
-  })),
+  discipline: { version: ledger.discipline.version, reviewPrinciples: ledger.discipline.reviewPrinciples,
+    groups: (ledger.discipline.groups || []).map(g => pick(g, ['id', 'title', 'icon', 'style'])),
+    rules: (ledger.discipline.rules || []).map(r => ({ ...pick(r, ['id', 'aliases', 'group', 'title', 'status']),
+      items: (r.items || []).map(i => pick(i, ['label', 'text'])) })) },
+  mainConcentration: { available: mainWeight.available, topSym: mainWeight.topSym, level: mainWeight.level,
+    holdingsAsOf: mainAccount?.holdingsAsOf || null,
+    priceAsOf: (() => {
+      const dates = [...new Set((mainAccount?.holdings || []).map(h => h.lastPriceDate))];
+      return dates.length && dates.every(Boolean) ? '美东 ' + dates.join(' / ') : null;
+    })() },
+  accounts: ledger.accounts.map(acct => {
+    const weights = summarizeHoldings(acct);
+    return { ...pick(acct, ['id', 'name', 'market', 'color', 'positionPct', 'positionAsOf', 'role', 'tag', 'navNote', 'emptyNote']),
+      holdings: (acct.holdings || []).flatMap((h, i) => weights.holdings[i].excluded ? [] : [mapFields(sanitize(attachCoverage(h)), weights.holdings[i])]) };
+  }),
   closedTrades: derivedClosed.map(day => ({
     ...day,
-    trades: (day.trades || []).map(t => ({
-      ...sanitize(t),
-      // legs 保留 executionId 引用（供勾稽），剥离可能出现的 qty
-      legs: (t.legs || []).map(leg => sanitize(leg))
-    }))
+    trades: (day.trades || []).map(publicClosedTrade)
   })),
   // 结构化复盘（结构化记录），按真实日期倒序，最新置顶
   reviews: (ledger.reviews || []).filter(r => r.visibility !== 'internal').map(r => {
