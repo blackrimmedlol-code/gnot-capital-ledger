@@ -65,6 +65,7 @@ function check(html, ledger) {
   const renderedRules = [...nodes.rulesBox.innerHTML.matchAll(/data-rule-id="([^"]+)"/g)].map(m => m[1]).sort();
   assert.deepEqual(renderedRules, expectedRules, '当前纪律未从唯一来源渲染');
   assert.ok(!/disciplineHistory|inactiveRules|rulesHtml|最近交易状态|多次验证/.test(html), '内部历史纪律或错误统计口径进入页面');
+  assert.ok(!nodes.holdingsBox.innerHTML.includes('中国时间') && !nodes.reviewsBox.innerHTML.includes('中国时间'), '页面持仓/复盘仍写"中国时间"字样');
   for (const id of ['holdingsBox', 'closedDays', 'reviewsBox']) assert.ok(nodes[id], '缺页面容器 ' + id);
   const sales = ledger.executions.filter(e => e.side === 'sell' && e.includeInPerformance !== false && e.analysisQty !== 0);
   const renderedIds = [...nodes.closedDays.innerHTML.matchAll(/data-execution-id="([^"]+)"/g)].map(m => m[1]);
