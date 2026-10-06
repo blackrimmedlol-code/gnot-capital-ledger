@@ -4,7 +4,7 @@
 // 输出: git-publish/public/index.html (脱敏版，浏览器只加载脱敏数据)
 const fs = require('fs');
 const path = require('path');
-const { derive, presentChinaDates } = require('./derive.js'); // 成交兑现视图派生（事实来自 executions）
+const { derive, presentChinaDates, chinaExecutionTime } = require('./derive.js'); // 成交兑现视图派生（事实来自 executions）
 
 const ROOT = __dirname;
 const LEDGER_PATH = path.join(ROOT, 'data', 'ledger-full.json');
@@ -199,7 +199,9 @@ function toJsLiteral(obj, indent = 0) {
 const dataLiteral = toJsLiteral(publicData);
 const before = template.slice(0, dataStart);
 const after = template.slice(dataEnd + 1);
-const output = before + dataLiteral + after;
+const latestRecordDate = ledger.executions.map(e => chinaExecutionTime(e).dateEnd).sort().pop();
+const output = (before + dataLiteral + after).replace('__LATEST_RECORD_STAMP__',
+  latestRecordDate ? '记录更新至 ' + latestRecordDate + ' · 中国时间' : '记录日期待核实');
 
 // ---- 5. 渲染层零泄露自检 ----
 // 检查渲染函数中是否将 qty 拼入 HTML

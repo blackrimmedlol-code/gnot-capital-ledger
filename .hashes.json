@@ -1,10 +1,10 @@
 {
   "ledger": "40074b7480a91cc6",
-  "template": "c0492da248aa2fb0",
+  "template": "9c6bef6e100e66de",
   "rules": "6e676b6da441654b",
-  "build_public": "a5f40ba721469f2d",
+  "build_public": "492cc000b99a1e55",
   "derive": "383254c95e347451",
-  "render_test": "d66b76a8458d2f85",
+  "render_test": "9bc51f43af2e3fdb",
   "agents": "ea80f182db66107d",
-  "generatedAt": "2026-10-06T06:31:20.816Z"
+  "generatedAt": "2026-10-06T06:36:36.409Z"
 }

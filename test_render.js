@@ -51,6 +51,8 @@ function check(html, ledger) {
   nodes['tab-records'].events.keydown({ key: 'ArrowRight', preventDefault() {} });
   assert.equal(nodes['panel-rules'].hidden, false, '键盘不能切换Tab');
   const expected = require('./derive').presentChinaDates(require('./derive').derive(ledger), ledger);
+  const latestRecordDate = ledger.executions.map(e => require('./derive').chinaExecutionTime(e).dateEnd).sort().pop();
+  assert.ok(html.includes('记录更新至 ' + latestRecordDate + ' · 中国时间'), '页头记录日期未随台账更新');
   assert.equal(JSON.stringify(api.DATA.closedTrades.map(d => [d.date, d.dateLabel])),
     JSON.stringify(expected.groups.map(d => [d.date, d.dateLabel])), '成交日期没有按中国时区转换');
   assert.ok(!nodes.holdingsBox.innerHTML.includes('策略备注'), '持仓仍显示策略备注');
