@@ -11,27 +11,45 @@ function runPage(html) {
   assert.ok(script, '缺页面 DATA 脚本');
   const nodes = {};
   for (const m of html.matchAll(/\bid="([^"]+)"/g)) {
-    nodes[m[1]] = { innerHTML: '', style: {}, classList: { toggle() {} }, addEventListener() {} };
+    nodes[m[1]] = { innerHTML: '', style: {}, attributes: {}, events: {}, hidden: false,
+      classList: { toggle() {} }, setAttribute(k, v) { this.attributes[k] = v; },
+      addEventListener(k, fn) { this.events[k] = fn; }, focus() { this.focused = true; } };
   }
   const errors = [];
   const document = {
     readyState: 'complete', getElementById: id => nodes[id] || null,
     querySelectorAll: () => [], addEventListener() {}
   };
+  const pageWindow = { scrollY: 0, location: { hash: '' }, addEventListener() {},
+    scrollTo({ top }) { this.scrollY = top; }, history: { pushState(_a, _b, hash) { pageWindow.location.hash = hash; } } };
   const context = vm.createContext({
-    document, window: { addEventListener() {} },
+    document, window: pageWindow,
     console: { log() {}, warn() {}, error(...args) { errors.push(args.map(String).join(' ')); } }
   });
   const instrumented = script.replace('function init() {',
-    'globalThis.pageTest = { DATA, computeMetrics, renderClosed, renderReviews, init };\n  function init() {');
+    'globalThis.pageTest = { DATA, computeMetrics, renderClosed, renderReviews, activateView, init };\n  function init() {');
   vm.runInContext(instrumented, context, { timeout: 3000 });
   assert.deepEqual(errors, [], '页面出现渲染错误');
   assert.ok(context.pageTest, '页面初始化接口缺失');
-  return { api: context.pageTest, nodes, errors };
+  return { api: context.pageTest, nodes, errors, window: pageWindow };
 }
 
 function check(html, ledger) {
-  const { api, nodes, errors } = runPage(html);
+  const { api, nodes, errors, window } = runPage(html);
+  assert.equal(nodes['panel-overview'].hidden, false, '默认未打开持仓总览');
+  assert.equal(nodes['panel-records'].hidden, true);
+  assert.equal(nodes['panel-rules'].hidden, true);
+  window.scrollY = 250;
+  nodes['tab-records'].events.click();
+  assert.equal(nodes['panel-records'].hidden, false);
+  assert.equal(nodes['tab-records'].attributes['aria-selected'], 'true');
+  window.scrollY = 620;
+  nodes['tab-overview'].events.click();
+  assert.equal(window.scrollY, 250, '返回持仓丢失滚动位置');
+  nodes['tab-records'].events.click();
+  assert.equal(window.scrollY, 620, '返回复盘丢失滚动位置');
+  nodes['tab-records'].events.keydown({ key: 'ArrowRight', preventDefault() {} });
+  assert.equal(nodes['panel-rules'].hidden, false, '键盘不能切换Tab');
   const expected = require('./derive').presentChinaDates(require('./derive').derive(ledger), ledger);
   assert.equal(JSON.stringify(api.DATA.closedTrades.map(d => [d.date, d.dateLabel])),
     JSON.stringify(expected.groups.map(d => [d.date, d.dateLabel])), '成交日期没有按中国时区转换');
@@ -58,7 +76,7 @@ function check(html, ledger) {
   if (reviewIds.length) {
     const latest = publicReviews.slice().sort((a, b) => (b.reviewDate || b.date).localeCompare(a.reviewDate || a.date))[0];
     assert.equal(reviewIds[0], latest.reviewId, '最新复盘未置顶');
-    assert.ok(nodes.reviewsBox.innerHTML.startsWith('<article class="entry" data-review-id="' + latest.reviewId + '"><details open>'), '最新复盘未展开');
+    assert.ok(new RegExp('^<article class="entry" data-review-id="' + latest.reviewId + '"[^>]*><details open>').test(nodes.reviewsBox.innerHTML), '最新复盘未展开');
   }
   // 同时缺数量、价格、成本、收益；零收益不能显示成待核实或亏损。
   const fixture = { date: '2099-01-01', dateLabel: '2099-01-01', trades: [{

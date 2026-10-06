@@ -41,7 +41,7 @@
     --shadow: 0 1px 2px rgba(80,60,30,0.05), 0 2px 8px rgba(80,60,30,0.04);
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: auto; }
   body {
     margin: 0;
     background: var(--paper);
@@ -321,21 +321,21 @@
   .closed-days { display: grid; gap: 10px; }
   .closed-day { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
   .closed-day details { border: none; }
-  .closed-day summary {
+  .closed-day > details > summary {
     list-style: none; cursor: pointer;
     display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
     padding: 10px 16px;
     background: var(--surface-2); transition: background .15s;
     user-select: none;
   }
-  .closed-day summary::-webkit-details-marker { display: none; }
-  .closed-day summary::marker { content: ""; display: none; }
-  .closed-day summary::before {
+  .closed-day > details > summary::-webkit-details-marker { display: none; }
+  .closed-day > details > summary::marker { content: ""; display: none; }
+  .closed-day > details > summary::before {
     content: "▸"; font-family: var(--mono); font-size: 11px; color: var(--muted);
     transition: transform .2s ease; flex-shrink: 0; width: 10px; display: inline-block;
   }
-  .closed-day details[open] summary::before { transform: rotate(90deg); color: var(--accent); }
-  .closed-day summary:hover { background: #f4ecda; }
+  .closed-day > details[open] > summary::before { transform: rotate(90deg); color: var(--accent); }
+  .closed-day > details > summary:hover { background: #f4ecda; }
   .closed-day .day-date { font-family: var(--mono); font-weight: 700; font-size: 13px; color: var(--accent); }
   .closed-day .day-tag {
     font-family: var(--mono); font-size: 10.5px;
@@ -357,33 +357,33 @@
   .journal, .reviews-list { display: grid; gap: 12px; }
   .entry { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
   .entry details { border: none; }
-  .entry summary {
+  .entry > details > summary {
     list-style: none; cursor: pointer;
     display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px;
     padding: 12px 16px; border-bottom: 1px solid transparent;
     background: var(--surface-2); transition: background .15s;
     user-select: none;
   }
-  .entry summary::-webkit-details-marker { display: none; }
-  .entry summary::marker { content: ""; display: none; }
-  .entry summary:hover { background: #f4ecda; }
-  .entry summary::before {
+  .entry > details > summary::-webkit-details-marker { display: none; }
+  .entry > details > summary::marker { content: ""; display: none; }
+  .entry > details > summary:hover { background: #f4ecda; }
+  .entry > details > summary::before {
     content: "▸"; font-family: var(--mono); font-size: 11px; color: var(--muted);
     transition: transform .2s ease; flex-shrink: 0; width: 10px; display: inline-block;
   }
-  .entry details[open] summary { border-bottom-color: var(--line); }
-  .entry details[open] summary::before { transform: rotate(90deg); color: var(--accent); }
-  .entry summary .date {
+  .entry > details[open] > summary { border-bottom-color: var(--line); }
+  .entry > details[open] > summary::before { transform: rotate(90deg); color: var(--accent); }
+  .entry > details > summary .date {
     font-family: var(--mono); font-weight: 700; font-size: 13px; color: var(--accent);
     background: var(--accent-faint); padding: 2px 8px; border-radius: 3px;
   }
-  .entry summary .title { font-weight: 700; font-size: 15px; }
-  .entry summary .pill {
+  .entry > details > summary .title { font-weight: 700; font-size: 15px; }
+  .entry > details > summary .pill {
     margin-left: auto; font-family: var(--mono); font-size: 10.5px;
     color: var(--warn); background: var(--warn-bg); border: 1px solid #e7d2ae;
     border-radius: 3px; padding: 2px 6px; font-weight: 600; letter-spacing: 0.03em;
   }
-  .entry summary .pill.old { color: var(--muted); background: var(--surface); border-color: var(--line); }
+  .entry > details > summary .pill.old { color: var(--muted); background: var(--surface); border-color: var(--line); }
   .entry-body { padding: 16px 20px; }
   .entry-body h3 {
     font-size: 13.5px; margin: 16px 0 6px; color: var(--ink);
@@ -536,7 +536,7 @@
     .tag.risk { animation: none; }
     .gseg::after { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .entry details, .closed-day details { display: block !important; }
-    .entry summary::before, .closed-day summary::before { display: none; }
+    .entry > details > summary::before, .closed-day > details > summary::before { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -566,6 +566,30 @@
   .disc-issues { margin:0; padding-left:16px; font-size:11.5px; color: var(--ink); line-height:1.8; }
   .disc-issues li::marker { color: var(--accent); }
   @media (max-width: 720px) { #discipline .discipline { grid-template-columns: 1fr; } }
+
+  [hidden] { display: none !important; }
+  .tabs-bar { position: sticky; top: 0; z-index: 20; background: var(--paper); border-bottom: 1px solid var(--line-strong); box-shadow: var(--shadow); }
+  .page-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding-block: 8px; }
+  .page-tabs button { appearance: none; border: 0; border-bottom: 3px solid transparent; border-radius: 5px 5px 0 0; background: transparent; color: var(--muted); font: inherit; font-size: 14px; font-weight: 600; padding: 10px 8px; cursor: pointer; white-space: nowrap; }
+  .page-tabs button:hover { background: var(--surface); color: var(--ink); }
+  .page-tabs button[aria-selected="true"] { color: var(--accent); background: var(--surface); border-bottom-color: var(--accent); }
+  .tab-panel { min-width: 0; }
+  #reviewsBox:empty { display: none; }
+  .record-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; padding: 16px 0 4px; }
+  .record-filters label { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
+  .record-filters select, .filter-reset { border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: 5px; font: inherit; font-size: 12px; min-height: 36px; padding: 6px 10px; }
+  .filter-reset { cursor: pointer; }
+  .record-filter-status { width: 100%; font-size: 11.5px; color: var(--muted); }
+  .recent-label, .archive-label { margin: 12px 0 8px; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .month-archives { display: grid; gap: 8px; margin-top: 10px; }
+  .month-archive { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-2); }
+  .month-archive > summary { cursor: pointer; padding: 11px 14px; font-size: 13px; font-weight: 600; }
+  .month-archive > .archive-cards { display: grid; gap: 10px; padding: 0 10px 10px; }
+  .related-sales { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 9px; }
+  .related-sales > summary { cursor: pointer; font-size: 12px; color: var(--accent); }
+  .related-sales table { margin-top: 10px; }
+  section, .entry, .closed-day { scroll-margin-top: 76px; }
+  @media (max-width: 560px) { .page-tabs button { font-size: 13px; padding: 10px 4px; } .record-filters { gap: 8px; } .record-filters label { flex: 1 1 120px; } .record-filters select { flex: 1; min-width: 0; max-width: 100%; } }
 </style>
 </head>
 <body>
@@ -580,19 +604,19 @@
       </div>
       <span class="stamp">🕐 数据截至 2026-10-02 收盘</span>
     </div>
-    <nav class="toc" aria-label="页内导航">
-      <a href="#alerts">待办</a>
-      <a href="#summary">总览</a>
-      <a href="#accounts">账户</a>
-      <a href="#holdings">持仓</a>
-      <a href="#review">复盘</a>
-      <a href="#closed">平仓</a>
-      <a href="#rules">纪律</a>
-    </nav>
   </div>
 </header>
 
+<div class="tabs-bar">
+  <div class="wrap"><div class="page-tabs" role="tablist" aria-label="台账视图">
+    <button type="button" id="tab-overview" role="tab" aria-selected="true" aria-controls="panel-overview" tabindex="0">持仓总览</button>
+    <button type="button" id="tab-records" role="tab" aria-selected="false" aria-controls="panel-records" tabindex="-1">复盘与平仓</button>
+    <button type="button" id="tab-rules" role="tab" aria-selected="false" aria-controls="panel-rules" tabindex="-1">纪律规则</button>
+  </div></div>
+</div>
+
 <main class="wrap">
+<div class="tab-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
 
   <!-- Risk alerts (dynamically generated) -->
   <section id="alerts" aria-label="待处理事项">
@@ -602,20 +626,6 @@
   <!-- Metrics (dynamically generated from data) -->
   <section id="summary" aria-label="关键指标总览">
     <div class="metrics" id="metricsBox"></div>
-  </section>
-
-  <!-- Discipline snapshot (轻量交易纪律) -->
-  <section id="discipline" aria-label="交易纪律">
-    <div class="discipline">
-      <div class="disc-card">
-        <h4>最近交易状态</h4>
-        <div class="disc-counts" id="discCounts"></div>
-      </div>
-      <div class="disc-card">
-        <h4>最近重复出现的问题</h4>
-        <ul class="disc-issues" id="discIssues"></ul>
-      </div>
-    </div>
   </section>
 
   <!-- Accounts overview (dynamically generated) -->
@@ -637,6 +647,15 @@
     <div id="holdingsBox"></div>
   </section>
 
+</div>
+<div class="tab-panel" id="panel-records" role="tabpanel" aria-labelledby="tab-records" hidden>
+  <div class="record-filters" aria-label="历史记录筛选">
+    <label>标的 <select id="recordSymbol"><option value="">全部标的</option></select></label>
+    <label>账户 <select id="recordAccount"><option value="">全部账户</option></select></label>
+    <label>月份 <select id="recordMonth"><option value="">全部月份</option></select></label>
+    <button type="button" class="filter-reset" id="resetRecords">重置</button>
+    <span class="record-filter-status" id="recordFilterStatus" role="status" aria-live="polite"></span>
+  </div>
   <!-- Review (rewritten to plan-exec-deviation framework) -->
   <section id="review" aria-label="交易复盘">
     <div class="sec-head">
@@ -649,7 +668,7 @@
 
       <div id="reviewsBox" class="reviews-list"></div>
 
-<article class="entry">
+<article class="entry" data-record-date="2026-10-03" data-record-symbols="AVGX,CRDU,CRWG,IRE,RAM,SNXX" data-record-accounts="主账号">
         <details>
           <summary>
             <span class="date">2026-10-03 复盘</span>
@@ -699,7 +718,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-10-02" data-record-symbols="AVGX,CRDU,CRWG,IRE,MSTU,RAM,SNXX" data-record-accounts="主账号">
         <details>
           <summary>
             <span class="date">2026-10-02 复盘</span>
@@ -751,7 +770,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-10-01" data-record-symbols="AVGX,CRDU,CRWG,IRE,MSTU,RAM,SNXX,兴业银锡,科达制造" data-record-accounts="主账号,A股账户">
         <details>
           <summary>
             <span class="date">2026-10-01 复盘</span>
@@ -810,7 +829,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-09-30" data-record-symbols="AVGX,CRDU,CRWG,MSTU,RAM,SNXX,兴业银锡,科达制造" data-record-accounts="主账号,A股账户">
         <details>
           <summary>
             <span class="date">2026-09-30 复盘</span>
@@ -863,7 +882,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-09-29" data-record-symbols="AVGX,CRDU,CRWG,MSTU,RAM,SNXX" data-record-accounts="主账号,A股账户">
         <details>
           <summary>
             <span class="date">2026-09-29 复盘</span>
@@ -917,7 +936,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-09-26" data-record-symbols="AVGX,CRDU,CRWG,MSTU,RAM,RKLX,SNXX,UGL" data-record-accounts="主账号,A股账户">
         <details>
           <summary>
             <span class="date">2026-09-26 复盘</span>
@@ -973,7 +992,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-09-25" data-record-symbols="ASTX,AVGX,CRDU,IRE,RAM,RKLX,SNXX,UGL" data-record-accounts="主账号">
         <details>
           <summary>
             <span class="date">2026-09-25 复盘</span>
@@ -1030,7 +1049,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-09-24" data-record-symbols="AVGX,CRDU,RAM,SNXX,SOXS,UGL" data-record-accounts="主账号,1号小账号,2号小账号">
         <details>
           <summary>
             <span class="date">2026-09-24 复盘</span>
@@ -1087,7 +1106,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-09-23" data-record-symbols="CRDU,CRWG,RAM,SOXS" data-record-accounts="主账号,1号小账号,A股账户">
         <details>
           <summary>
             <span class="date">2026-09-23 复盘</span>
@@ -1138,7 +1157,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-09-22" data-record-symbols="ASTX,CRDU,CRWG,RAM,SOXS" data-record-accounts="主账号,1号小账号">
         <details>
           <summary>
             <span class="date">2026-09-22 复盘</span>
@@ -1191,7 +1210,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-09-19" data-record-symbols="ASTX,CRDU,CRWG,LITX,RAM,SNDK" data-record-accounts="主账号,1号小账号,2号小账号">
         <details>
           <summary>
             <span class="date">2026-09-19 复盘</span>
@@ -1241,7 +1260,7 @@
         </details>
       </article>
 
-      <article class="entry">
+      <article class="entry" data-record-date="2026-09-19" data-record-symbols="RAM,RKLX" data-record-accounts="">
         <details>
           <summary>
             <span class="date">2026-09-19 复盘</span>
@@ -1291,6 +1310,22 @@
     <div class="closed-summary" id="closedSummary"></div>
     <div class="subcell">成交日期与时刻均为中国时间；仅有原日期的历史成交显示可能的中国日期区间。</div>
     <div class="closed-days" id="closedDays"></div>
+  </section>
+
+</div>
+<div class="tab-panel" id="panel-rules" role="tabpanel" aria-labelledby="tab-rules" hidden>
+  <!-- Discipline snapshot (轻量交易纪律) -->
+  <section id="discipline" aria-label="交易纪律">
+    <div class="discipline">
+      <div class="disc-card">
+        <h4>最近交易状态</h4>
+        <div class="disc-counts" id="discCounts"></div>
+      </div>
+      <div class="disc-card">
+        <h4>最近重复出现的问题</h4>
+        <ul class="disc-issues" id="discIssues"></ul>
+      </div>
+    </div>
   </section>
 
   <!-- Rules Framework (revised to be testable) -->
@@ -1445,8 +1480,7 @@
     </div>
   </section>
 
-  <section aria-label="数据口径说明">
-  </section>
+</div>
 
 </main>
 
@@ -2111,7 +2145,7 @@
       });
       var tagCls = day.isOld ? " old" : "";
       var tagText = day.trades.length + " 条兑现 · " + dayFills + " 笔卖出" + (dayUnknown ? " · " + dayUnknown + " 条收益待核实" : "");
-      html += '<article class="closed-day"><details' + ((day.isOld || idx > 0) ? "" : " open") + '>' +
+      html += '<article class="closed-day" data-record-date="' + htmlText(day.dateEnd || day.date) + '" data-record-symbols="' + htmlText(Array.from(new Set(day.trades.map(function(t) { return t.sym; }))).join(',')) + '" data-record-accounts="' + htmlText(Array.from(new Set(day.trades.map(function(t) { return t.acct; }))).join(',')) + '"><details' + ((day.isOld || idx > 0) ? "" : " open") + '>' +
         '<summary>' +
           '<span class="day-date">' + day.dateLabel + '</span>' +
           '<span class="day-tag' + tagCls + '">' + tagText + '</span>' +
@@ -2176,7 +2210,7 @@
     if (!DATA.reviews || DATA.reviews.length === 0) { box.style.display = "none"; return; }
     var html = "";
     DATA.reviews.forEach(function(r, idx) {
-      html += '<article class="entry" data-review-id="' + htmlText(r.reviewId) + '"><details' + (idx === 0 ? " open" : "") + '>' +
+      html += '<article class="entry" data-review-id="' + htmlText(r.reviewId) + '" data-record-date="' + htmlText(r.reviewDate || r.date) + '" data-record-symbols="' + htmlText((r.symbols || []).join(',')) + '" data-record-accounts="' + htmlText((r.accounts || []).join(',')) + '"><details' + (idx === 0 ? " open" : "") + '>' +
         '<summary><span class="date">' + htmlText(r.dateLabel || r.date) + '</span><span class="title">' + htmlText(r.title) + '</span></summary>' +
         '<div class="entry-body">';
       html += '<div class="plan-exec">' +
@@ -2189,9 +2223,137 @@
       if (r.good && r.good.length) html += '<h3 class="good"><span>✅</span>做对的</h3><ul>' + r.good.map(function(x){ return "<li>" + x + "</li>"; }).join("") + '</ul>';
       if (r.issues && r.issues.length) html += '<h3 class="bad"><span>⚠️</span>偏差与问题</h3><ul>' + r.issues.map(function(x){ return "<li>" + x + "</li>"; }).join("") + '</ul>';
       if (r.todo && r.todo.length) html += '<h3><span>🔄</span>下次调整</h3><ul>' + r.todo.map(function(x){ return "<li>" + x + "</li>"; }).join("") + '</ul>';
+      html += relatedSales(r);
       html += '</div></details></article>';
     });
     box.innerHTML = html;
+  }
+
+  // UI state affects visibility only; metrics always use the complete sanitized DATA.
+  var tabsReady = false, recordsReady = false;
+  var tabPosition = { overview: 0, records: 0, rules: 0 }, activeView = 'overview';
+  function activateView(name, restore, updateUrl) {
+    if (['overview', 'records', 'rules'].indexOf(name) === -1) name = 'overview';
+    if (restore && name !== activeView) tabPosition[activeView] = window.scrollY || 0;
+    ['overview', 'records', 'rules'].forEach(function(key) {
+      var selected = key === name;
+      var button = document.getElementById('tab-' + key), panel = document.getElementById('panel-' + key);
+      button.setAttribute('aria-selected', selected ? 'true' : 'false');
+      button.setAttribute('tabindex', selected ? '0' : '-1');
+      panel.hidden = !selected;
+    });
+    activeView = name;
+    if (updateUrl && window.history && window.history.pushState) window.history.pushState(null, '', '#' + name);
+    if (restore && window.scrollTo) window.scrollTo({ top: tabPosition[name] || 0, behavior: 'auto' });
+  }
+  function viewFromHash() {
+    var hash = window.location ? window.location.hash : '';
+    if (/^#(records|review|closed)$/.test(hash)) return 'records';
+    if (/^#(rules|discipline)$/.test(hash)) return 'rules';
+    return 'overview';
+  }
+  function setupTabs() {
+    if (tabsReady) return;
+    tabsReady = true;
+    var names = ['overview', 'records', 'rules'];
+    names.forEach(function(name, i) {
+      var button = document.getElementById('tab-' + name);
+      button.addEventListener('click', function() { if (activeView !== name) activateView(name, true, true); });
+      button.addEventListener('keydown', function(e) {
+        var next = e.key === 'ArrowRight' ? (i + 1) % 3 : e.key === 'ArrowLeft' ? (i + 2) % 3 : e.key === 'Home' ? 0 : e.key === 'End' ? 2 : null;
+        if (next === null) return;
+        e.preventDefault(); document.getElementById('tab-' + names[next]).focus(); activateView(names[next], true, true);
+      });
+    });
+    window.addEventListener('popstate', function() { activateView(viewFromHash(), true, false); });
+    window.addEventListener('hashchange', function() { activateView(viewFromHash(), true, false); });
+    activateView(viewFromHash(), false, false);
+  }
+  function setupRecordView() {
+    if (recordsReady) return;
+    recordsReady = true;
+    var all = [];
+    document.querySelectorAll('#review .entry, #closed .closed-day').forEach(function(node) {
+      var date = node.getAttribute('data-record-date');
+      if (!date) return;
+      all.push({ node: node, date: date, month: date.slice(0, 7),
+        symbols: (node.getAttribute('data-record-symbols') || '').split(',').filter(Boolean),
+        accounts: (node.getAttribute('data-record-accounts') || '').split(',').filter(Boolean),
+        kind: node.classList.contains('closed-day') ? 'closed' : 'review' });
+    });
+    if (!all.length) return;
+    var dates = Array.from(new Set(all.map(function(r) { return r.date; }))).sort().reverse();
+    var cutoff = dates[Math.min(6, dates.length - 1)];
+    var months = [], collections = [], wasFiltered = false;
+    function archive(host, kind) {
+      var recent = document.createElement('div'); recent.className = kind === 'review' ? 'journal' : 'closed-days';
+      recent.id = kind + 'Recent';
+      var older = document.createElement('div'); older.className = 'month-archives'; older.id = kind + 'Archive';
+      var label = document.createElement('div'); label.className = 'recent-label'; label.textContent = '最近 7 个记录日'; host.appendChild(label);
+      host.appendChild(recent);
+      var archiveLabel = document.createElement('div'); archiveLabel.className = 'archive-label'; archiveLabel.textContent = '历史归档'; host.appendChild(archiveLabel); host.appendChild(older);
+      var monthly = {};
+      all.filter(function(r) { return r.kind === kind; }).sort(function(a, b) { return b.date.localeCompare(a.date); }).forEach(function(r) {
+        if (r.date >= cutoff) { recent.appendChild(r.node); return; }
+        if (!monthly[r.month]) {
+          var group = document.createElement('details'); group.className = 'month-archive'; group.setAttribute('data-month', r.month);
+          var summary = document.createElement('summary'); var cards = document.createElement('div'); cards.className = 'archive-cards';
+          group.appendChild(summary); group.appendChild(cards); older.appendChild(group);
+          monthly[r.month] = { node: group, summary: summary, cards: cards, records: [] }; months.push(monthly[r.month]);
+        }
+        monthly[r.month].records.push(r); monthly[r.month].cards.appendChild(r.node);
+      });
+      older.hidden = !Object.keys(monthly).length; archiveLabel.hidden = older.hidden;
+      collections.push({ kind: kind, recent: recent, label: label, older: older, archiveLabel: archiveLabel });
+    }
+    archive(document.querySelector('#review .journal'), 'review');
+    archive(document.getElementById('closedDays'), 'closed');
+    function options(id, values, empty) {
+      var box = document.getElementById(id);
+      box.innerHTML = '<option value="">' + empty + '</option>' + Array.from(new Set(values)).sort().map(function(v) { return '<option value="' + htmlText(v) + '">' + htmlText(v) + '</option>'; }).join('');
+    }
+    options('recordSymbol', all.flatMap(function(r) { return r.symbols; }), '全部标的');
+    options('recordAccount', all.flatMap(function(r) { return r.accounts; }), '全部账户');
+    options('recordMonth', all.map(function(r) { return r.month; }), '全部月份');
+    function applyFilters() {
+      var sym = document.getElementById('recordSymbol').value, acct = document.getElementById('recordAccount').value, month = document.getElementById('recordMonth').value;
+      var filtered = !!(sym || acct || month), count = 0;
+      if (filtered && !wasFiltered) months.forEach(function(m) { m.beforeFilterOpen = !!m.node.open; });
+      all.forEach(function(r) {
+        r.node.hidden = !!((sym && r.symbols.indexOf(sym) === -1) || (acct && r.accounts.indexOf(acct) === -1) || (month && r.month !== month));
+        if (!r.node.hidden) count++;
+      });
+      months.forEach(function(m) {
+        var visible = m.records.filter(function(r) { return !r.node.hidden; }).length;
+        m.node.hidden = visible === 0;
+        m.summary.textContent = m.node.getAttribute('data-month') + ' · ' + visible + ' 条记录';
+        if (filtered && visible) m.node.open = true;
+        if (!filtered && wasFiltered) m.node.open = m.beforeFilterOpen;
+      });
+      collections.forEach(function(c) {
+        c.recent.hidden = !all.some(function(r) { return r.kind === c.kind && r.date >= cutoff && !r.node.hidden; });
+        c.label.hidden = c.recent.hidden;
+        c.older.hidden = !Array.from(c.older.children).some(function(n) { return !n.hidden; });
+        c.archiveLabel.hidden = c.older.hidden;
+      });
+      wasFiltered = filtered;
+      document.getElementById('recordFilterStatus').textContent = filtered ? (count ? '找到 ' + count + ' 条记录；历史归档已展开。统计仍按全部记录计算。' : '没有匹配记录，试试重置筛选。') : '近期默认展示最近 7 个记录日；更早记录按月归档。统计按全部记录计算。';
+    }
+    ['recordSymbol', 'recordAccount', 'recordMonth'].forEach(function(id) { document.getElementById(id).addEventListener('change', applyFilters); });
+    document.getElementById('resetRecords').addEventListener('click', function() {
+      ['recordSymbol', 'recordAccount', 'recordMonth'].forEach(function(id) { document.getElementById(id).value = ''; }); applyFilters();
+    });
+    applyFilters();
+  }
+  function relatedSales(r) {
+    var ids = r.saleExecutionIds || [], rows = [];
+    DATA.closedTrades.forEach(function(day) { day.trades.forEach(function(t) { t.legs.forEach(function(l) {
+      if (ids.indexOf(l.executionId) === -1) return;
+      var ccy = t.acct.indexOf('A') !== -1 ? '¥' : '$';
+      rows.push('<tr><td>' + htmlText(day.dateLabel) + '<div class="subcell">' + htmlText(l.time) + '</div></td><td>' + htmlText(t.sym) + '</td><td>' + htmlText(t.acct) + '</td><td class="num">' + priceText(l.price, ccy) + '</td><td class="num ' + returnClass(l.retPct) + '">' + percentText(l.retPct) + '</td></tr>');
+    }); }); });
+    if (!rows.length) return '';
+    return '<details class="related-sales"><summary>查看关联卖出 · ' + rows.length + ' 笔</summary><div class="table-scroll"><table><thead><tr><th>中国日期 / 时间</th><th>标的</th><th>账户</th><th class="num">卖出价</th><th class="num">收益率</th></tr></thead><tbody>' + rows.join('') + '</tbody></table></div></details>';
   }
 
   // ============================================================
@@ -2232,18 +2394,9 @@
         if (box) box.innerHTML = '<div class="alert warn">该模块暂时无法显示，请检查更新记录。</div>';
       }
     });
+    try { setupRecordView(); setupTabs(); } catch (err) { console.error("页面导航或归档失败", err); }
   }
 
-  // TOC smooth scroll
-  try {
-    document.querySelectorAll('nav.toc a[href^="#"]').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        var id = a.getAttribute('href').slice(1);
-        var target = document.getElementById(id);
-        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      });
-    });
-  } catch (err) {}
   try {
     var btn = document.getElementById('toTop');
     window.addEventListener('scroll', function () {

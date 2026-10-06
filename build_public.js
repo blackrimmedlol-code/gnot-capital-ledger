@@ -135,6 +135,13 @@ const publicData = {
     for (const k of ['reviewId', 'date', 'reviewDate', 'reviewTimezone', 'dateLabel', 'title', 'plan', 'execution', 'good', 'issues', 'todo', 'execStatus']) {
       if (r[k] !== undefined) out[k] = r[k];
     }
+    const events = (r.executionIds || []).map(id => ledger.executions.find(e => e.executionId === id)).filter(Boolean);
+    out.symbols = [...new Set(events.map(e => e.sym))];
+    out.accounts = [...new Set(events.map(e => {
+      const a = ledger.accounts.find(a => a.id === e.account);
+      return (a ? a.name : e.account).replace(/\s/g, '');
+    }))];
+    out.saleExecutionIds = events.filter(e => e.side === 'sell' && e.includeInPerformance !== false && e.analysisQty !== 0).map(e => e.executionId);
     return out;
   }).sort((a, b) => (b.reviewDate || b.date).localeCompare(a.reviewDate || a.date))
 };

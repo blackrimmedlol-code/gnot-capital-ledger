@@ -1,10 +1,10 @@
 {
   "ledger": "40074b7480a91cc6",
-  "template": "67cea737ec532c00",
-  "rules": "3f64942a5ba1b5a7",
-  "build_public": "5ffff4a7704458ed",
+  "template": "c0492da248aa2fb0",
+  "rules": "6e676b6da441654b",
+  "build_public": "a5f40ba721469f2d",
   "derive": "383254c95e347451",
-  "render_test": "8f2fc6f6051bb2d4",
+  "render_test": "d66b76a8458d2f85",
   "agents": "ea80f182db66107d",
-  "generatedAt": "2026-10-06T06:16:07.950Z"
+  "generatedAt": "2026-10-06T06:31:20.816Z"
 }
