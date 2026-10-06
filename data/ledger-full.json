@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交已更新至美东2026/10/6：RAM连续四档补仓（达本轮上限·周内停加）、STXL支撑位建仓、IRE部分止盈；行情：RAM等仍10/5收盘，STXL为10/6收盘。",
-  "asOfLabel": "成交：10/6（RAM四档补仓+STXL建仓+IRE止盈） · 行情：10/5/10/6收盘",
+  "asOf": "成交与行情均已更新至美东2026/10/6收盘：主号RAM连续四档补仓（达本轮上限·周内停加）·IRE部分止盈·STXL支撑位抄底建仓；行情：RAM/CRWG/CRDU/IRE/STXL/SNXX均10/6收盘",
+  "asOfLabel": "成交：10/6（RAM四档补仓+STXL建仓+IRE止盈） · 行情：10/6收盘",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -287,11 +287,11 @@
       "name": "主账号",
       "market": "US",
       "color": "#a33a21",
-      "positionPct": 80,
+      "positionPct": 96,
       "role": "核心仓 · CC 收租为主 · 美股",
       "tag": "核心仓·收租",
       "nav": null,
-      "navNote": "USD · 重仓（10/5仓位估算）",
+      "navNote": "USD · 重仓（10/6仓位估算）",
       "holdings": [
         {
           "sym": "RAM",
@@ -300,9 +300,9 @@
           "cost": 13.70779,
           "costDate": "原持续持仓；10/2兑现数量已核实，10/6逐一13.70/13.85/13.55/13.42连续四档加仓",
           "stop": null,
-          "lastPrice": 14.24,
-          "lastPriceDate": "2026-10-05 收盘",
-          "wtPct": 48,
+          "lastPrice": 13.25,
+          "lastPriceDate": "2026-10-06 收盘",
+          "wtPct": 67,
           "strategy": [
             "核心仓",
             "CC收租"
@@ -370,7 +370,7 @@
             "持有"
           ],
           "alerts": [],
-          "alertSub": "财报冲高连续两日兑现 · 剩余持有观察",
+          "alertSub": "10/6多档补仓后回落 · 已达加仓上限·周内停加·持有观察",
           "setup": [
             "趋势波段"
           ],
@@ -411,9 +411,9 @@
           "qty": 100,
           "cost": 15.75,
           "costDate": "2026-09-17",
-          "lastPrice": 18.29,
-          "lastPriceDate": "2026-10-05 收盘",
-          "wtPct": 7,
+          "lastPrice": 20.06,
+          "lastPriceDate": "2026-10-06 收盘",
+          "wtPct": 8,
           "strategy": [
             "核心仓",
             "CC收租"
@@ -466,9 +466,9 @@
           "name": "2x Credo (Tradr)",
           "qty": 300,
           "cost": 6.71493,
-          "lastPrice": 10.68,
-          "lastPriceDate": "2026-10-05 收盘",
-          "wtPct": 12,
+          "lastPrice": 11.49,
+          "lastPriceDate": "2026-10-06 收盘",
+          "wtPct": 13,
           "strategy": [
             "核心仓",
             "CC收租"
@@ -522,9 +522,9 @@
           "qty": 100,
           "cost": 8.94987,
           "costDate": "9/30建底仓 / 10/1 8.58+8.81补 / 10/2 9.9+10.38止盈 / 10/2 9.23接回 / 10/5 8.93+8.77补仓 / 10/7 9.55止盈300",
-          "lastPrice": 8.9,
-          "lastPriceDate": "2026-10-05 收盘",
-          "wtPct": 3,
+          "lastPrice": 9.25,
+          "lastPriceDate": "2026-10-06 收盘",
+          "wtPct": 4,
           "strategy": [
             "卫星仓·AI云"
           ],
@@ -570,9 +570,9 @@
           "qty": 75,
           "cost": 27.29,
           "costDate": "10/6支撑位抄底建仓",
-          "lastPrice": 27.27,
+          "lastPrice": 27.12,
           "lastPriceDate": "2026-10-06 收盘",
-          "wtPct": null,
+          "wtPct": 8,
           "strategy": [
             "支撑低吸"
           ],
@@ -604,7 +604,7 @@
           ]
         }
       ],
-      "positionAsOf": "2026-10-05",
+      "positionAsOf": "2026-10-06",
       "holdingsAsOf": "2026-10-06"
     },
     {
@@ -624,8 +624,8 @@
           "qty": 143,
           "cost": 15.695,
           "costDate": "10/5 首建（1号小账户新开）",
-          "lastPrice": 15.98,
-          "lastPriceDate": "2026-10-05 收盘",
+          "lastPrice": 15.19,
+          "lastPriceDate": "2026-10-06 收盘",
           "wtPct": 100,
           "strategy": [
             "卫星仓·存储杠杆博弈"
@@ -681,8 +681,8 @@
           "qty": 67,
           "cost": 18.32,
           "costDate": "2026-09-23",
-          "lastPrice": 15.98,
-          "lastPriceDate": "2026-10-05 收盘",
+          "lastPrice": 15.19,
+          "lastPriceDate": "2026-10-06 收盘",
           "wtPct": 100,
           "strategy": [
             "卫星仓·存储杠杆博弈"
@@ -4716,13 +4716,23 @@
         "主号STXL 于支撑位按27.29抄底建仓（2x希捷，当日大跌-17.6%收于27.27，买在低点区），事前计划明确、预期快进快出。",
         "主号RAM：按13.55补仓（用户预期倒数第二波），归属原未结束持仓周期。",
         "主号IRE：9.55部分止盈卖出，剩余仓位继续持有；原观望1周回升至10的计划提前兑现。",
-        "主号RAM：13.42继续加仓（达本轮上限，一周内不再加仓），归属原未结束持仓周期。"
+        "主号RAM：13.42继续加仓（达本轮上限，一周内不再加仓），归属原未结束持仓周期。",
+        "行情（10/6 收盘）：RAM 13.25（-6.95%）/ CRWG 20.06（+9.68%）/ CRDU 11.49（+7.58%）/ IRE 9.25（+3.93%）/ STXL 27.12（-18.09%）/ SNXX 15.19（-4.94%）——AI 硬件链分化，RAM 补仓后承压回落、STXL 大跌日抄底"
       ],
-      "good": [],
-      "issues": [],
-      "todo": [],
+      "good": [
+        "IRE 结果：@9.55 部分止盈，原观望回升至10的计划提前兑现、锁定部分利润，剩余仓位继续持有",
+        "STXL 执行：按27.29支撑区抄底建仓（2x希捷），事前计划明确（plan）、预期快进快出"
+      ],
+      "issues": [
+        "RAM 承压：10/6 多档补仓后收盘13.25（-6.95%），短期走弱；已按\"周内不再加仓\"纪律执行到位"
+      ],
+      "todo": [
+        "RAM：收盘13.25已明显低于14行权价，14C@14接受行权出货口径不变但近期难指派，到期前继续收租观察；周内不再加仓",
+        "STXL：支撑位建仓后收盘27.12贴近建仓价27.29属快进快出观察标的，跌破支撑则按计划离场（尊重左侧、无机械止损）",
+        "IRE：剩余仓位继续持有，沿用明确退出边界；9.55已兑现部分利润"
+      ],
       "execStatus": "unknown",
-      "reviewStatus": "in_progress",
+      "reviewStatus": "complete",
       "recordedAt": "2026-10-07T00:30:00+08:00",
       "reviewDateBasis": "对应美东10/6交易日的次日中国复盘日",
       "internalExecution": [
@@ -5639,13 +5649,14 @@
   "stockConcentration": {
     "account": "main",
     "positionAsOf": "2026-10-06",
-    "priceAsOf": "2026-10-05",
+    "priceAsOf": "2026-10-06",
     "denominator": "正股交易仓市值，不含现金、期权或观察股",
     "weights": {
-      "RAM": 62.36587,
-      "CRWG": 8.01034,
-      "CRDU": 14.03232,
-      "IRE": 15.59147
+      "RAM": 67.19,
+      "CRWG": 7.82,
+      "CRDU": 13.45,
+      "IRE": 3.61,
+      "STXL": 7.93
     }
   },
   "costCheckpoints": [
