@@ -52,7 +52,7 @@ function check(html, ledger) {
   assert.equal(nodes['panel-rules'].hidden, false, '键盘不能切换Tab');
   const expected = require('./derive').presentChinaDates(require('./derive').derive(ledger), ledger);
   const latestRecordDate = ledger.executions.map(e => require('./derive').chinaExecutionTime(e).dateEnd).sort().pop();
-  assert.ok(html.includes('记录更新至 ' + latestRecordDate + ' · 中国时间'), '页头记录日期未随台账更新');
+  assert.ok(html.includes('记录更新至 ' + latestRecordDate) && !html.includes(' · 中国时间'), '页头记录日期未随台账更新或仍写中国时间');
   assert.equal(JSON.stringify(api.DATA.closedTrades.map(d => [d.date, d.dateLabel])),
     JSON.stringify(expected.groups.map(d => [d.date, d.dateLabel])), '成交日期没有按中国时区转换');
   assert.ok(!nodes.holdingsBox.innerHTML.includes('策略备注'), '持仓仍显示策略备注');
@@ -103,7 +103,7 @@ function check(html, ledger) {
   assert.deepEqual(errors, [], '空值导致模块崩溃');
   assert.ok(nodes.closedDays.innerHTML.includes('—'), '不可核算值应保留空缺符号');
   assert.ok(!/待核实|时刻未记录|null|undefined/.test(nodes.closedDays.innerHTML), '缺项变成重复提示或文本null');
-  assert.ok(!nodes.closedDays.innerHTML.includes('<th scope="col">中国时间'), '全日缺时刻仍显示空时间列');
+  assert.ok(!nodes.closedDays.innerHTML.includes('<th scope="col">时间'), '全日缺时刻仍显示空时间列');
   assert.ok(nodes.closedDays.innerHTML.includes('0.0%'), '零收益被误判');
   assert.ok(!nodes.closedDays.innerHTML.includes('NaN'), '出现伪数值');
   const before = nodes.reviewsBox.innerHTML;
@@ -117,7 +117,7 @@ function check(html, ledger) {
   }] }];
   api.init();
   assert.ok(nodes.closedDays.innerHTML.includes('$10.00') && nodes.closedDays.innerHTML.includes('$20.00'), '不同成本未逐腿显示');
-  assert.ok(nodes.closedDays.innerHTML.includes('09:01:00') && nodes.closedDays.innerHTML.includes('<th scope="col">中国时间'), '精确时刻被清理掉');
+  assert.ok(nodes.closedDays.innerHTML.includes('09:01:00') && nodes.closedDays.innerHTML.includes('<th scope="col">时间'), '精确时刻被清理掉');
   assert.ok(!/待核实|时刻未记录|null|undefined/.test(nodes.closedDays.innerHTML));
   assert.deepEqual(errors, [], '分批不同成本导致渲染失败');
   return { sales: sales.length, reviews: reviewIds.length, days: dates.length };

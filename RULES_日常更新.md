@@ -13,6 +13,7 @@
 - 日内重复更新同一 reviewId，追加本次 executionIds 并同步事实；保留原计划及修改时间，不能追溯改写事前判断。
 
 - 实际成交展示也使用Asia/Shanghai。原executions.date/time/timezone及券商timestamp保持来源原义；derive的presentChinaDates按真实timestamp精确转换，或用有来源的chinaDate。仅有原美东日期显示可能对应的中国日期区间；不制造成交时刻、不用报告时刻代替成交时刻，不统一日期加一天。日期重分组不能改变成本流水顺序或重复计清仓周期。
+- **页面时间展示（2026-10-07）**：页面成交与复盘默认为中国时间，**不在页面上写"中国时间"字样**（页脚、复盘正文、成交展示均不加此标注）；内部 chinaDate / reviewTimezone / reviewDate / chinaDateSource 字段仍完整保留，仅用于归属换算，不进入页面文案。
 - 持仓策略备注strategyNote仅留完整台账，构建时剥离，不显示、不嵌入页面。
 
 ## 2. 每笔成交的固定闭环

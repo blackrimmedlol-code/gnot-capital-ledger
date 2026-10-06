@@ -228,7 +228,7 @@ const before = template.slice(0, dataStart);
 const after = template.slice(dataEnd + 1);
 const latestRecordDate = ledger.executions.map(e => chinaExecutionTime(e).dateEnd).sort().pop();
 const output = (before + dataLiteral + after).replace('__LATEST_RECORD_STAMP__',
-  latestRecordDate ? '记录更新至 ' + latestRecordDate + ' · 中国时间' : '记录日期待核实');
+  latestRecordDate ? '记录更新至 ' + latestRecordDate : '记录日期待核实');
 
 // ---- 5. 渲染层零泄露自检 ----
 // 检查渲染函数中是否将 qty 拼入 HTML

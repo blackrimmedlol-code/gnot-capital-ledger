@@ -602,7 +602,7 @@
         <h1>持仓监测与交易复盘</h1>
         <p class="motto-compact">Fundamental Truth is not Alpha.</p>
       </div>
-      <span class="stamp">记录更新至 2026-10-06 · 中国时间</span>
+      <span class="stamp">记录更新至 2026-10-07</span>
     </div>
   </div>
 </header>
@@ -661,7 +661,7 @@
     <div class="sec-head">
       <span class="n">02</span>
       <h2>交易复盘</h2>
-      <span class="note">中国时间 · 原计划 → 实际执行 → 偏差 → 下次调整</span>
+      <span class="note">原计划 → 实际执行 → 偏差 → 下次调整</span>
     </div>
     <div class="journal">
 
@@ -1308,7 +1308,7 @@
     </div>
 
     <div class="closed-summary" id="closedSummary"></div>
-    <div class="subcell">日期与时刻按中国时间；仅有原日期时保留可能的日期区间。收益按成交前正股成本核算，加权合计仅对应本组卖出；— 表示暂无可核算值。</div>
+    <div class="subcell">日期与时刻为归属展示；仅有原日期时保留可能的日期区间。收益按成交前正股成本核算，加权合计仅对应本组卖出；— 表示暂无可核算值。</div>
     <div class="closed-days" id="closedDays"></div>
   </section>
 
@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交已更新至美东2026/10/6：RAM盘中13.70+夜盘13.85两档加仓（交易仓1100）。行情仍为美东10/5收盘快照，A股休市快照沿用。",
-  asOfLabel: "成交：10/6（盘中+夜盘） · 行情：10/5收盘",
+  asOf: "成交已更新至美东2026/10/6：RAM两档加仓（13.70盘中+13.85夜盘，交易仓1100）；主号新开STXL支撑位抄底75@27.29。行情：RAM等仍10/5收盘，STXL为10/6收盘。",
+  asOfLabel: "成交：10/6（RAM加仓+STXL建仓） · 行情：10/5/10/6收盘",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1542,7 +1542,7 @@
     topSym: "RAM",
     level: "高",
     holdingsAsOf: "2026-10-06",
-    priceAsOf: "美东 2026-10-05 收盘"
+    priceAsOf: "美东 2026-10-05 收盘 / 2026-10-06 收盘"
   },
   accounts: [
     {
@@ -1666,7 +1666,7 @@
             isFullyBacked: true,
             sharesUnknown: false
           },
-          weightRank: 4,
+          weightRank: 5,
           weightLevel: "低"
         },
         {
@@ -1729,6 +1729,31 @@
             sharesUnknown: false
           },
           weightRank: 2,
+          weightLevel: "低"
+        },
+        {
+          sym: "STXL",
+          name: "Defiance 2x Long STX · 2x 希捷",
+          cost: 27.29,
+          strategy: [
+            "支撑低吸"
+          ],
+          options: [],
+          tags: [
+            "hold"
+          ],
+          setup: [
+            "支撑低吸"
+          ],
+          execStatus: "plan",
+          oneLiner: "支撑位抄底建仓（75@27.29，当日=27.27 低点区）；预期快进快出，用反弹验证成色。",
+          coverage: {
+            status: "none",
+            statusText: "无备兑",
+            isFullyBacked: false,
+            sharesUnknown: false
+          },
+          weightRank: 4,
           weightLevel: "低"
         }
       ]
@@ -3243,20 +3268,22 @@
       reviewDate: "2026-10-07",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-07 复盘",
-      title: "RAM盘中+夜盘两档加仓",
+      title: "RAM两档加仓 · STXL支撑抄底",
       plan: [
         "本次加仓的事前计划未记录。"
       ],
       execution: [
         "主号RAM：中国时间10/6按13.85夜盘加仓，归属原未结束持仓周期。",
-        "中国时间10/6盘中再按13.70加仓，归属原未结束持仓周期。"
+        "中国时间10/6盘中再按13.70加仓，归属原未结束持仓周期。",
+        "主号STXL 于支撑位按27.29抄底建仓（2x希捷，当日大跌-17.6%收于27.27，买在低点区），事前计划明确、预期快进快出。"
       ],
       good: [],
       issues: [],
       todo: [],
       execStatus: "unknown",
       symbols: [
-        "RAM"
+        "RAM",
+        "STXL"
       ],
       accounts: [
         "主账号"
@@ -3596,7 +3623,7 @@
           '<span class="day-tag' + tagCls + '">' + tagText + '</span>' +
         '</summary>' +
         '<div class="table-scroll"><table><thead><tr>' +
-          (hasTime ? '<th scope="col">中国时间</th>' : '') + '<th scope="col">标的</th><th scope="col">账号</th>' +
+          (hasTime ? '<th scope="col">时间</th>' : '') + '<th scope="col">标的</th><th scope="col">账号</th>' +
           '<th scope="col" class="num">成本</th><th scope="col" class="num">卖出价</th>' +
           '<th scope="col" class="num">收益率</th><th scope="col">备注</th>' +
         '</tr></thead><tbody>';

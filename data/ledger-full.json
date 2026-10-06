@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交已更新至美东2026/10/6：RAM盘中13.70+夜盘13.85两档加仓（交易仓1100）。行情仍为美东10/5收盘快照，A股休市快照沿用。",
-  "asOfLabel": "成交：10/6（盘中+夜盘） · 行情：10/5收盘",
+  "asOf": "成交已更新至美东2026/10/6：RAM两档加仓（13.70盘中+13.85夜盘，交易仓1100）；主号新开STXL支撑位抄底75@27.29。行情：RAM等仍10/5收盘，STXL为10/6收盘。",
+  "asOfLabel": "成交：10/6（RAM加仓+STXL建仓） · 行情：10/5/10/6收盘",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -563,6 +563,45 @@
           "exitReason": null,
           "episodeId": "EP-IRE-2026Q4",
           "weightNote": "沿用10/5净资产权重估算；不是10/6加仓后的实时账户权重"
+        },
+        {
+          "sym": "STXL",
+          "name": "Defiance 2x Long STX · 2x 希捷",
+          "qty": 75,
+          "cost": 27.29,
+          "costDate": "10/6支撑位抄底建仓",
+          "lastPrice": 27.27,
+          "lastPriceDate": "2026-10-06 收盘",
+          "wtPct": null,
+          "strategy": [
+            "支撑低吸"
+          ],
+          "status": [
+            "持有"
+          ],
+          "setup": [
+            "支撑低吸"
+          ],
+          "execStatus": "plan",
+          "episodeId": "EP-STXL-2026Q4",
+          "oneLiner": "支撑位抄底建仓（75@27.29，当日=27.27 低点区）；预期快进快出，用反弹验证成色。",
+          "actualCostBasis": {
+            "value": 27.29,
+            "status": "确认",
+            "note": "一次性建仓，摊薄=成交价",
+            "sourceType": "user_confirmation"
+          },
+          "netInvestedCost": {
+            "value": 27.29,
+            "status": "确认",
+            "scope": "episode",
+            "episodeId": "EP-STXL-2026Q4",
+            "note": "一次性买入，正股净投入=成交价"
+          },
+          "weightNote": "待净资产核算后分配权重；未计入历史集中度权重",
+          "tags": [
+            "hold"
+          ]
         }
       ],
       "positionAsOf": "2026-10-05",
@@ -3153,6 +3192,33 @@
         "reportedAt": "2026-10-06T23:46:00+08:00",
         "evidence": "用户报告中国时间10/6盘中加仓RAM，精确成交时刻未提供"
       }
+    },
+    {
+      "executionId": "EX-USER-20261006-STXL-BUY-001",
+      "episodeId": "EP-STXL-2026Q4",
+      "account": "main",
+      "sym": "STXL",
+      "side": "buy",
+      "qty": 75,
+      "price": 27.29,
+      "date": "2026-10-06",
+      "time": null,
+      "timezone": "America/New_York",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "plan",
+      "note": "用户确认主号支撑位抄底建仓STXL，预期快进快出；事前计划明确，精确成交时刻未提供",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-07T00:30:00+08:00"
+      },
+      "chinaDate": "2026-10-07",
+      "chinaDateSource": {
+        "type": "contemporaneous_user_report",
+        "reportedAt": "2026-10-07T00:30:00+08:00",
+        "evidence": "用户报告10/7凌晨（北京时间）买入STXL；当日属美东10/6盘中"
+      }
     }
   ],
   "episodes": [
@@ -3551,6 +3617,21 @@
       "currentQty": 0,
       "exitReason": "短线止盈，交易仓已清仓",
       "exitDate": "2026-09-17"
+    },
+    {
+      "episodeId": "EP-STXL-2026Q4",
+      "sym": "STXL",
+      "account": "main",
+      "status": "open",
+      "entryDate": "2026-10-06",
+      "entrySetup": [
+        "支撑低吸"
+      ],
+      "entryExecStatus": "plan",
+      "currentQty": 75,
+      "exitReason": null,
+      "exitDate": null,
+      "entryDateNote": "支撑位抄底建仓，预期快进快出"
     }
   ],
   "closedTrades": [
@@ -4371,6 +4452,11 @@
       "date": "2026-10-06",
       "item": "RAM盘中加仓登记",
       "detail": "主号RAM中国时间10/6盘中按13.70买100（新交易仓，与夜盘13.85两笔独立成交，不合并），交易仓1000→1100；续EP-RAM-2026Q3。移动加权实际均价13.75312→13.74829，正股净投入13.361→13.39182。精确成交时刻未提供，保留为空，录入时刻另记。"
+    },
+    {
+      "date": "2026-10-07",
+      "item": "STXL支撑抄底建仓登记",
+      "detail": "主号新开STXL（Defiance 2x Seagate），75@27.29、美东10/6、续EP-STXL-2026Q4；事前计划明确=支撑位抄底、预期快进快出（execStatus=plan）。精确成交时刻未提供，页面不写\"中国时间\"字样。lastPrice=27.27（10/6收盘）。"
     }
   ],
   "reviews": [
@@ -4516,24 +4602,26 @@
       "reviewDate": "2026-10-07",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-07 复盘",
-      "title": "RAM盘中+夜盘两档加仓",
+      "title": "RAM两档加仓 · STXL支撑抄底",
       "executionIds": [
         "EX-USER-20261006-RAM-BUY-001",
-        "EX-USER-20261006-RAM-BUY-002"
+        "EX-USER-20261006-RAM-BUY-002",
+        "EX-USER-20261006-STXL-BUY-001"
       ],
       "plan": [
         "本次加仓的事前计划未记录。"
       ],
       "execution": [
         "主号RAM：中国时间10/6按13.85夜盘加仓，归属原未结束持仓周期。",
-        "中国时间10/6盘中再按13.70加仓，归属原未结束持仓周期。"
+        "中国时间10/6盘中再按13.70加仓，归属原未结束持仓周期。",
+        "主号STXL 于支撑位按27.29抄底建仓（2x希捷，当日大跌-17.6%收于27.27，买在低点区），事前计划明确、预期快进快出。"
       ],
       "good": [],
       "issues": [],
       "todo": [],
       "execStatus": "unknown",
       "reviewStatus": "in_progress",
-      "recordedAt": "2026-10-06T23:46:00+08:00",
+      "recordedAt": "2026-10-07T00:30:00+08:00",
       "reviewDateBasis": "对应美东10/6交易日的次日中国复盘日",
       "internalExecution": [
         "历史补录：10/2 RAM按14.50卖出；IRE按9.90、10.38两次兑现后按9.23买回，数量均已核实。",
@@ -4543,7 +4631,8 @@
         "RAM期初真实买入成本按用户要求不追补，不生成依赖未知成本的真实收益。",
         "额外观察股不计交易表现；期权只保留足额备兑状态，不要求补历史记录。",
         "行情仍为美东10/5收盘快照；夜盘成交价格单独记录，不冒充实时行情。",
-        "本笔13.70精确成交时刻未提供，保留为空；行情仍为美东10/5收盘快照，加仓成交价不冒充实时行情。"
+        "本笔13.70精确成交时刻未提供，保留为空；行情仍为美东10/5收盘快照，加仓成交价不冒充实时行情。",
+        "STXL精确成交时刻未提供，保留为空；成交价27.29为报告值，行情lastPrice=27.27（10/6收盘快照）。"
       ]
     }
   ],
