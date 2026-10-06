@@ -126,7 +126,30 @@ j.accounts.forEach(a => {
 });
 console.log(`✅ 成本口径: ${optHolds} 个期权持仓均分记 netInvestedCost（正股）/ compositeNetInvested（组合）`);
 
-// ---- 8. 内容哈希（数据 / 模板 / 规则 / 构建脚本，用于判断是否有变化） ----
+// ---- 8. Reviews 结构化复盘校验（reviewId 唯一、日期、executionId 引用、可见文本脱敏） ----
+if (j.reviews) {
+  const rvIds = j.reviews.map(r => r.reviewId);
+  const nullRv = rvIds.filter(id => !id);
+  const dupRv = rvIds.filter((id, i) => id && rvIds.indexOf(id) !== i);
+  if (nullRv.length) { errors++; console.error(`❌ ${nullRv.length} 条 review 缺 reviewId`); }
+  if (dupRv.length) { errors++; console.error(`❌ reviewId 重复: ${[...new Set(dupRv)].join(', ')}`); }
+  else console.log(`✅ reviewId 唯一: ${rvIds.length} 条无重复`);
+  let rvRefErr = 0, rvLeak = 0;
+  const execIdSet = new Set(j.executions.map(e => e.executionId));
+  j.reviews.forEach(r => {
+    if (!r.date) { errors++; console.error(`❌ review ${r.reviewId} 缺 date`); }
+    if (r.executionIds) r.executionIds.forEach(id => { if (!execIdSet.has(id)) { rvRefErr++; errors++; console.error(`❌ review ${r.reviewId} 引用缺失 execution: ${id}`); } });
+    // 可见文本禁股数/金额（价格允许）
+    const texts = [r.title, r.dateLabel].concat(r.plan || [], r.execution || [], r.good || [], r.issues || [], r.todo || [], r.observation || []);
+    texts.forEach(t => { if (t && /[0-9]+\s*股|\$\s?[0-9]|[0-9]+\s*(美元|USD|元)/.test(t)) { rvLeak++; errors++; console.error(`❌ review ${r.reviewId} 可见文本含股数/金额: ${t.slice(0, 40)}`); } });
+  });
+  if (!rvRefErr) console.log('✅ reviews 引用关系: 所有 executionIds 均存在');
+  if (!rvLeak) console.log('✅ reviews 可见文本无股数/金额');
+} else {
+  console.log('ℹ️ 无 reviews（尚未启用结构化复盘）');
+}
+
+// ---- 9. 内容哈希（数据 / 模板 / 规则 / 构建脚本，用于判断是否有变化） ----
 function sha256(p) {
   if (!fs.existsSync(p)) return null;
   return crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex').slice(0, 16);

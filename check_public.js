@@ -37,6 +37,18 @@ if (/mult\s*:/.test(html)) {
   console.log('ℹ️ 无 mult 字段（当前无期权张数数据，正常）');
 }
 
+// 4. 可见文本（reviews/journal/closed 说明等）禁止股数/金额：数字+「股」、数字+「元」、$数字
+let proseBad = 0;
+const proseLeaks = html.match(/[0-9]+\s*股|[0-9]+\s*(美元|USD|\b元)|\$\s?[0-9]/g);
+if (proseLeaks) {
+  // 排除期权「张数 ×8」的偶发命中（× 后为张数可显示）、价格上下文由人工辨识
+  proseBad += proseLeaks.length;
+  console.error('❌ 可见文本疑似股数/金额泄漏: ' + [...new Set(proseLeaks)].slice(0, 10).join(' | '));
+} else {
+  console.log('✅ 可见文本无股数/金额（prose 扫描）');
+}
+if (proseBad > 0) errors += proseBad;
+
 if (errors > 0) {
   console.error(`\n❌ 发布产物检查失败: ${errors} 处问题，阻止部署`);
   process.exit(1);

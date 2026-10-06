@@ -43,16 +43,22 @@
 - **标签**：`entrySetup`/`entryExecStatus`/`actionExecStatus`/`exitReason` 分开；计划需事前依据，未知标 `unknown`，不因盈亏改写标签。
 - **覆盖**：构建阶段用完整台账算好，页面只读预计算结果（不依赖已删 qty）；仅统计未结算卖出 call（合约乘数 ×100）；分别算担保是否足额、正股覆盖比例、未封顶正股（自由仓）；未知数量标「待核实」不按 0；保留自由仓≠担保不足，仅「卖 call 超出可担保正股」告警。
 
-## 五、日常更新流程
+## 五、日常更新流程（固定闭环，缺一不可）
 
-1. 记录起始提交版本 + 跑 `node verify.js` 核对哈希与去重。
-2. 改 `data/ledger-full.json`（数据）或 `template.html`（模板），用**局部补丁**保留无关内容。
-3. `node build_public.js` 生成脱敏 `public/index.html`（构建阶段预计算期权覆盖，不重生成整份 HTML/CSS）。
-4. `node check_public.js` 检查发布产物（允许期权张数、禁止股数/金额）。
-5. `node verify.js` 校验（executionId/episodeId 去重、引用关系、疑似重复、持仓对账、成本一致性、成本口径、内容哈希）。
-6. `git fetch` 核对远程最新；有新增记录则合并（按 executionId 去重，冲突保留来源标待核实），**不用旧台账覆盖**。
-7. `git add -A && git commit && git push`，Actions 顺序执行「校验→生成→检查→部署」。
-8. 校验线上 200 + 渲染层零泄露。
+> 日常更新是一个**固定闭环**：录入成交 → 持仓/周期 → 兑现视图 → 当日复盘 → 统计 → 校验/构建/部署/线上验证。一次新成交只允许缩小**读取与修改的范围**（只动受影响账户/标的/周期/复盘），**不允许省略相关模块**——不能只更新持仓、等下次提醒才补平仓/复盘/统计。
+
+1. 记录起始提交版本 + `node verify.js` 核对哈希与去重、reviews 引用与脱敏。
+2. 在 `data/ledger-full.json` 追加唯一 execution（executionId 去重），并同步更新对应 episode（周期/currentQty/open/close）与 account.holding（持仓/成本）。
+3. **兑现视图不手填**：`node build_public.js` 通过 `derive.js` 从 executions 派生 closedTrades（按 episodeId 关联，最新卖出日期倒序置顶）。缺 qty/成本 → 腿收益「待核实」、不参与绩效统计；部分卖出进兑现视图但不算清仓；episode `closed` 才关周期。评语文字继承历史 closedTrades，价格/数量/收益一律来自 executions。
+4. **当日复盘写结构化 reviews**：在 `data/ledger-full.json` 的 `reviews[]` 新增（或更新当日同一条），含 date/title/executionIds/plan/execution/good/issues/todo/observation；引用本次执行 的 executionId。无事前计划则 plan 标「未记录」；执行评价只能依据已有证据，不编造、不默认判情绪交易。审视图由 `renderReviews` 渲染，按日期倒序置顶、首条默认展开。
+5. **统计程序重算**：computeMetrics 由派生数据动态算（兑现条数/完整清仓/部分减仓/成交笔数/平仓胜率/样本期），不写死日期、不手工累加。
+6. `node check_public.js` 检查发布产物（允许期权张数、禁止股数/金额；含 reviews/prose 可见文本扫描）。
+7. `node verify.js` 重新校验（executionId/episodeId/reviewId 去重、引用、疑似重复、持仓对账、成本一致性、成本口径、reviews 脱敏、内容哈希）。
+8. `git fetch` 核对远程；有新增记录按 executionId 去重合并冲突，**不用旧台账覆盖**，并跑一遍 derived（reviews 去重保留来源标待核实）。
+9. `git add -A && git commit && git push`，Actions 顺序执行「校验→生成→检查→部署」。
+10. **线上验证**：确认 Actions 成功（非 cancelled/failed）→ 线上 HTTP 200 + 渲染层零泄露 + **最新内容真实出现**（成交量倒序置顶、当日复盘引用本次成交）后才可回复「已上线」。未部署/构建失败不得报「已上线」。
+
+> 同步验收（每次新增卖出后自检）：① 本次卖出是否出现在兑现视图；② 确认清仓是否更新为关周期；③ 当日复盘是否引用本次 executionId；④ 重复运行是否重复记录；⑤ 最新记录是否置顶；⑥ 线上是否对应本次部署。任一不满足 → 先修复再报上线。
 
 ## 六、回复格式（日常）
 

@@ -17,6 +17,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # 显式超时：本地全链路 <1s，正常应在数分钟内完成；超时即为环境卡死，加快失败暴露并避免 cancel 竞争引起的长悬挂
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

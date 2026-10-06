@@ -4,6 +4,7 @@
 // 输出: git-publish/public/index.html (脱敏版，浏览器只加载脱敏数据)
 const fs = require('fs');
 const path = require('path');
+const { derive } = require('./derive.js'); // 成交兑现视图派生（事实来自 executions）
 
 const ROOT = __dirname;
 const LEDGER_PATH = path.join(ROOT, 'data', 'ledger-full.json');
@@ -20,6 +21,9 @@ const ledger = JSON.parse(fs.readFileSync(LEDGER_PATH, 'utf8'));
 console.log(`✅ ledger-full.json: ${ledger.accounts.length} accounts, ${ledger.executions.length} executions, ${ledger.episodes.length} episodes`);
 
 // ---- 2. 生成脱敏数据 ----
+// 成交兑现视图：由 executions 派生（事实），继承历史评语；按真实日期倒序
+const derivedClosed = derive(ledger).groups;
+
 // 递归剥离 qty 字段（股数），保留其他所有字段
 function sanitize(obj) {
   if (obj === null || obj === undefined) return obj;
@@ -107,14 +111,16 @@ const publicData = {
     ...acct,
     holdings: (acct.holdings || []).map(h => mapFields(sanitize(attachCoverage(h))))
   })),
-  closedTrades: (ledger.closedTrades || []).map(day => ({
+  closedTrades: derivedClosed.map(day => ({
     ...day,
     trades: (day.trades || []).map(t => ({
       ...sanitize(t),
-      // closedTrades 中的 legs 保留 qty（用于部分减仓判断），但不显示到页面
+      // legs 保留 executionId 引用（供勾稽），剥离可能出现的 qty
       legs: (t.legs || []).map(leg => sanitize(leg))
     }))
-  }))
+  })),
+  // 结构化复盘（结构化记录），按真实日期倒序，最新置顶
+  reviews: (ledger.reviews || []).slice().sort((a, b) => (a.date < b.date ? 1 : (a.date > b.date ? -1 : 0)))
 };
 
 // ---- 3. 读取 HTML 模板 ----
