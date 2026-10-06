@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { derive } = require('./derive');
+const { derive, chinaExecutionTime, presentChinaDates } = require('./derive');
 const event = (id, date, side, qty, price) => ({ executionId: id, episodeId: 'EP', sym: 'TEST', account: 'main', date, side, qty, price });
 const fixture = { accounts: [], closedTrades: [], episodes: [{ episodeId: 'EP', status: 'closed' }], executions: [
   event('B1', '2026-10-01', 'buy', 100, 10), event('S1', '2026-10-02', 'sell', 50, 12),
@@ -47,3 +47,29 @@ withoutFutureBuy.executions = withoutFutureBuy.executions.filter(e => e.date < '
 assert.deepEqual(derive(withoutFutureBuy).trades.filter(t => t.sym === 'RAM'), ram,
   '后续夜盘加仓倒改了RAM历史收益');
 console.log('✅ 兑现派生通过：实际日期、移动均价、历史成本来源、清仓去重、缺项、持平、幂等');
+assert.equal(chinaExecutionTime({ timestamp: '2026-10-01T13:00:00-04:00' }).date, '2026-10-02');
+assert.equal(chinaExecutionTime({ timestamp: '2026-10-01T08:00:00-04:00' }).date, '2026-10-01');
+assert.equal(chinaExecutionTime({ timestamp: '2026-12-01T12:00:00-05:00' }).time, '01:00:00');
+const undated = chinaExecutionTime({ date: '2026-10-01', timezone: 'America/New_York', time: '盘中' });
+assert.equal(undated.date, '2026-10-01'); assert.equal(undated.dateEnd, '2026-10-02');
+assert.equal(undated.time, '时刻未记录');
+const cnFixture = structuredClone(fixture);
+cnFixture.executions[1].timestamp = '2026-10-02T13:00:00-04:00';
+cnFixture.executions[3].timestamp = '2026-10-04T08:00:00-04:00';
+const china = presentChinaDates(derive(cnFixture), cnFixture);
+assert.equal(china.trades.find(t => t.legs.some(l => l.executionId === 'S1')).soldDate, '2026-10-03');
+assert.equal(china.trades.filter(t => t.performanceEligible).length, first.trades.filter(t => t.performanceEligible).length);
+assert.equal(china.trades.find(t => t.performanceEligible).cycleRetPct, first.trades.find(t => t.performanceEligible).cycleRetPct);
+const split = { accounts: [], closedTrades: [], episodes: [{ episodeId: 'EP', status: 'closed' }],
+  executions: [event('B1', '2026-10-01', 'buy', 100, 10),
+    { ...event('S1', '2026-10-02', 'sell', 50, 11), timestamp: '2026-10-02T08:00:00-04:00' },
+    { ...event('S2', '2026-10-02', 'sell', 50, 12), timestamp: '2026-10-02T13:00:00-04:00' }] };
+const splitChina = presentChinaDates(derive(split), split);
+assert.equal(splitChina.groups.length, 2, '同一美东日跨两个中国日期未拆分');
+assert.equal(splitChina.trades.filter(t => t.closesEpisode).length, 1, '转换日期重复计清仓');
+assert.equal(splitChina.trades.find(t => t.closesEpisode).soldDate, '2026-10-03');
+assert.equal(splitChina.trades.find(t => t.closesEpisode).cycleRetPct, 15);
+const cn = presentChinaDates(derive(ledger), ledger);
+assert.equal(cn.trades.flatMap(t => t.legs).length, derive(ledger).trades.flatMap(t => t.legs).length);
+assert.equal(cn.trades.filter(t => t.performanceEligible).length, derive(ledger).trades.filter(t => t.performanceEligible).length);
+console.log('✅ 中国日期通过：跨日、冬夏时区偏移、缺时刻区间、清仓与收益不变');

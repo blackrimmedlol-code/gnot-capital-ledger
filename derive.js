@@ -106,4 +106,77 @@ function derive(ledger) {
     .sort((a, b) => b.date.localeCompare(a.date));
   return { groups, trades };
 }
-module.exports = { derive };
+const partsAt = (ms, timezone) => Object.fromEntries(new Intl.DateTimeFormat('en-CA', {
+  timeZone: timezone, year: 'numeric', month: '2-digit', day: '2-digit',
+  hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'
+}).formatToParts(new Date(ms)).filter(p => p.type !== 'literal').map(p => [p.type, p.value]));
+function localInstant(date, time, timezone) {
+  const target = Date.parse(date + 'T' + time + 'Z');
+  let ms = target;
+  for (let i = 0; i < 3; i++) {
+    const p = partsAt(ms, timezone);
+    ms += target - Date.parse(`${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:${p.second}Z`);
+  }
+  return ms;
+}
+function chinaExecutionTime(e) {
+  const instant = e.timestamp || e.source?.statementTimestamp;
+  if (instant && /(?:Z|[+-]\d{2}:\d{2})$/.test(instant) && Number.isFinite(Date.parse(instant))) {
+    const p = partsAt(Date.parse(instant), 'Asia/Shanghai');
+    return { date: `${p.year}-${p.month}-${p.day}`, dateEnd: `${p.year}-${p.month}-${p.day}`,
+      time: `${p.hour}:${p.minute}:${p.second}`, timezone: 'Asia/Shanghai', datePrecision: 'instant' };
+  }
+  // A confirmed local day is valid even when the exact execution clock is missing.
+  if (e.chinaDate && e.chinaDateSource) return { date: e.chinaDate, dateEnd: e.chinaDate,
+    time: '时刻未记录', timezone: 'Asia/Shanghai', datePrecision: 'day' };
+  const zone = e.timezone || 'America/New_York';
+  if (zone === 'Asia/Shanghai' || zone === 'Asia/Hong_Kong') return { date: e.date, dateEnd: e.date,
+    time: '时刻未记录', timezone: 'Asia/Shanghai', datePrecision: 'day' };
+  // A source calendar day can span two China dates. Session words are not timestamps.
+  const a = partsAt(localInstant(e.date, '00:00:00', zone), 'Asia/Shanghai');
+  const b = partsAt(localInstant(e.date, '23:59:59', zone), 'Asia/Shanghai');
+  return { date: `${a.year}-${a.month}-${a.day}`, dateEnd: `${b.year}-${b.month}-${b.day}`,
+    time: '时刻未记录', timezone: 'Asia/Shanghai', datePrecision: 'range' };
+}
+function presentChinaDates(derived, ledger) {
+  const executions = new Map(ledger.executions.map(e => [e.executionId, e]));
+  const combined = new Map();
+  for (const t of derived.trades) {
+    for (let i = 0; i < t.legs.length; i++) {
+      const l = t.legs[i], e = executions.get(l.executionId);
+      const display = chinaExecutionTime(e);
+      const key = display.date === display.dateEnd ? display.date : display.date + '/' + display.dateEnd;
+      const id = t.episodeId + ':' + key;
+      const last = t.closesEpisode && i === t.legs.length - 1;
+      if (!combined.has(id)) combined.set(id, { ...t, tradeId: id, soldDate: key, dateStart: display.date,
+        dateEnd: display.dateEnd, legs: [], closesEpisode: false, performanceEligible: false,
+        cycleRetPct: null, cycleResult: null });
+      const out = combined.get(id);
+      out.legs.push({ ...l, ...display, date: key });
+      if (last) Object.assign(out, { closesEpisode: true, performanceEligible: t.performanceEligible,
+        cycleRetPct: t.cycleRetPct, cycleResult: t.cycleResult, reason: t.reason });
+    }
+  }
+  const trades = [...combined.values()];
+  for (const t of trades) {
+    t.isPartial = !t.closesEpisode;
+    const same = t.legs.every(l => l.cost === t.legs[0].cost);
+    t.cost = same ? t.legs[0].cost : null;
+    t.costNote = same ? t.legs[0].costNote : '分批成本见成交备注';
+    const known = t.legs.every(l => positive(l.qty) && positive(l.price) && positive(l.cost) && l.costBasisType === 'actual');
+    const capital = known ? t.legs.reduce((s, l) => s + l.qty * l.cost, 0) : null;
+    const pnl = known ? t.legs.reduce((s, l) => s + l.qty * (l.price - l.cost), 0) : null;
+    t.totalRetPct = positive(capital) ? round(pnl / capital * 100) : null;
+    t.result = resultOf(pnl);
+  }
+  const days = new Map();
+  for (const t of trades) {
+    if (!days.has(t.soldDate)) days.set(t.soldDate, { date: t.soldDate, dateStart: t.dateStart,
+      dateEnd: t.dateEnd, timezone: 'Asia/Shanghai', dateLabel: t.dateStart === t.dateEnd ? t.dateStart : t.dateStart + '—' + t.dateEnd,
+      trades: [] });
+    days.get(t.soldDate).trades.push(t);
+  }
+  return { trades, groups: [...days.values()].sort((a, b) => b.dateEnd.localeCompare(a.dateEnd) || b.date.localeCompare(a.date)) };
+}
+
+module.exports = { derive, chinaExecutionTime, presentChinaDates };

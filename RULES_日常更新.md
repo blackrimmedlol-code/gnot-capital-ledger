@@ -9,8 +9,11 @@
 - 用户2026/10/6确认：额外单股为价格观察仓，不计交易表现、交易仓集中度或清仓判断。原始 qty 保留用于券商对账；analysisQty + observationQty 必须等于 qty。纯观察事件 includeInPerformance=false，不进入兑现卡片。仅已确认观察份额排除，不按 qty=1 自动删除所有小额成交。
 - 结单是历史快照，不能覆盖较新持仓。差异保存到 reconciliations，附 sourceDocuments / statementPositions 证据；未核实差额成交不猜填，相关最新成本不得标为确认。期初持仓用 openingPositions，不伪造为当日买入。原值保存于 sourceCorrections。
 - `closedTrades` 保留历史成本口径和评语，展示由 `derive.js` 派生；不要手工维护另一套数量/价格。按实际成交日及 episode 分组，每条交易仓卖出出现一次，纯观察仓排除；跨日分批不能全部挪到最后一天。
-- reviews.date 是美东交易日；reviewDate/reviewTimezone 是中国复盘归属日/Asia/Shanghai，展示为“YYYY-MM-DD 复盘”，通常归属美东交易日次日，用户指定日期优先。recordedAt 单独保存实际录入时刻；不能把归属日伪装成录入时间，不制造次日成交。旧卡片日期换算保留于 legacyReviewDisplayDates，正文成交日期保持原义。不把构建时间改成行情时间。
+- reviews.date 保留原关联交易日，供executionIds同步；reviewDate/reviewTimezone 是中国复盘日/Asia/Shanghai，展示为“YYYY-MM-DD 复盘”，用户指定日期优先，与成交日期独立，不能套“交易日+1”到实际成交。recordedAt 单独保存实际录入时刻；不能把归属日伪装成录入时间，不制造次日成交。旧卡片日期换算保留于 legacyReviewDisplayDates，正文成交日期保持原义。不把构建时间改成行情时间。
 - 日内重复更新同一 reviewId，追加本次 executionIds 并同步事实；保留原计划及修改时间，不能追溯改写事前判断。
+
+- 实际成交展示也使用Asia/Shanghai。原executions.date/time/timezone及券商timestamp保持来源原义；derive的presentChinaDates按真实timestamp精确转换，或用有来源的chinaDate。仅有原美东日期显示可能对应的中国日期区间；不制造成交时刻、不用报告时刻代替成交时刻，不统一日期加一天。日期重分组不能改变成本流水顺序或重复计清仓周期。
+- 持仓策略备注strategyNote仅留完整台账，构建时剥离，不显示、不嵌入页面。
 
 ## 2. 每笔成交的固定闭环
 

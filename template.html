@@ -1289,6 +1289,7 @@
     </div>
 
     <div class="closed-summary" id="closedSummary"></div>
+    <div class="subcell">成交日期与时刻均为中国时间；仅有原日期的历史成交显示可能的中国日期区间。</div>
     <div class="closed-days" id="closedDays"></div>
   </section>
 
@@ -1908,7 +1909,7 @@
     // 事实与数量来自派生 closedTrades；缺数量/成本 → 收益待核实、不计入胜率
     var registeredEntries = 0, clearedTrades = 0, winTrades = 0, partialEntries = 0, completedEpisodes = 0, unknownEntries = 0, mm = null, mx = null;
     DATA.closedTrades.forEach(function(d){
-      var tMin = d.date, tMax = d.date;
+      var tMin = d.dateStart || d.date, tMax = d.dateEnd || d.date;
       if (mm === null || tMin < mm) mm = tMin;
       if (mx === null || tMax > mx) mx = tMax;
       d.trades.forEach(function(t){
@@ -2076,7 +2077,6 @@
             });
           }
           if (h.alertSub) statusTags += '<div class="subcell">' + h.alertSub + '</div>';
-          if (h.strategyNote) statusTags += '<div class="rev-note"><b>策略备注</b>' + h.strategyNote + '</div>';
           if (h.reviewNote) statusTags += '<div class="rev-note"><b>复盘判断</b>' + h.reviewNote + '</div>';
           html += '<tr><td>' + symCell + '</td><td>' + stratTags + '</td><td class="num price">' + costStr + '</td><td>' + optCell + '</td><td>' + statusTags + '</td></tr>';
         });
@@ -2117,7 +2117,7 @@
           '<span class="day-tag' + tagCls + '">' + tagText + '</span>' +
         '</summary>' +
         '<div class="table-scroll"><table><thead><tr>' +
-          '<th scope="col">时段</th><th scope="col">标的</th><th scope="col">账号</th>' +
+          '<th scope="col">中国时间</th><th scope="col">标的</th><th scope="col">账号</th>' +
           '<th scope="col" class="num">成本</th><th scope="col" class="num">卖出价</th>' +
           '<th scope="col" class="num">收益率</th><th scope="col">备注</th>' +
         '</tr></thead><tbody>';

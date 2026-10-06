@@ -1289,6 +1289,7 @@
     </div>
 
     <div class="closed-summary" id="closedSummary"></div>
+    <div class="subcell">成交日期与时刻均为中国时间；仅有原日期的历史成交显示可能的中国日期区间。</div>
     <div class="closed-days" id="closedDays"></div>
   </section>
 
@@ -1572,7 +1573,6 @@
           ],
           execStatus: "adhoc",
           oneLiner: "RAM 10/2 隔夜 @14.5 再止盈、摊薄 13.31：连续两日冲高分批兑现；剩余持有观察，8 张 call 覆盖约九成、14C 接受 @14 行权。",
-          strategyNote: "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。",
           actualCostBasis: {
             value: 13.75312,
             status: "确认",
@@ -1700,7 +1700,6 @@
           status: [
             "持有"
           ],
-          strategyNote: "10/16 7C 深度实值，正股+权利金接受 @7 行权落袋；若趋势观点延续，可评估买回部分 call 解锁上行（O5）。",
           actualCostBasis: {
             value: 6.71493,
             status: "确认",
@@ -2059,11 +2058,14 @@
   ],
   closedTrades: [
     {
-      date: "2026-10-05",
-      dateLabel: "2026-10-05",
+      date: "2026-10-05/2026-10-06",
+      dateStart: "2026-10-05",
+      dateEnd: "2026-10-06",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-05—2026-10-06",
       trades: [
         {
-          tradeId: "EP-AVGX-2026Q3:2026-10-05",
+          tradeId: "EP-AVGX-2026Q3:2026-10-05/2026-10-06",
           episodeId: "EP-AVGX-2026Q3",
           sym: "AVGX",
           name: "Defiance 2x AVGO · 2x博通",
@@ -2073,17 +2075,20 @@
           legs: [
             {
               executionId: "EX-20261005-AVGX-SELL-052",
-              date: "2026-10-05",
-              time: "盘中",
+              date: "2026-10-05/2026-10-06",
+              time: "时刻未记录",
               price: 39.8,
               cost: 38.95,
               costBasisType: "actual",
               retPct: 2.18228,
               note: "1号小账户缩量上涨日 @39.8 全数清仓，转空仓观望",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-10-06",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             }
           ],
-          soldDate: "2026-10-05",
+          soldDate: "2026-10-05/2026-10-06",
           isPartial: false,
           closesEpisode: true,
           totalRetPct: 2.18228,
@@ -2098,10 +2103,12 @@
             "趋势波段"
           ],
           execStatus: "adhoc",
-          oneLiner: "AVGX 缩量上涨日 @39.8 全清离场、1号小账户转空仓观望；落袋为安。"
+          oneLiner: "AVGX 缩量上涨日 @39.8 全清离场、1号小账户转空仓观望；落袋为安。",
+          dateStart: "2026-10-05",
+          dateEnd: "2026-10-06"
         },
         {
-          tradeId: "EP-GDXU-CLOSED-20261005:2026-10-05",
+          tradeId: "EP-GDXU-CLOSED-20261005:2026-10-05/2026-10-06",
           episodeId: "EP-GDXU-CLOSED-20261005",
           sym: "GDXU",
           name: "Direxion Daily Gold Miners Bull 2X",
@@ -2111,17 +2118,20 @@
           legs: [
             {
               executionId: "EX-20261005-GDXU-SELL-055",
-              date: "2026-10-05",
-              time: "盘中",
+              date: "2026-10-05/2026-10-06",
+              time: "时刻未记录",
               price: 104,
               cost: 99.7,
               costBasisType: "actual",
               retPct: 4.31294,
               note: "主号 10/5 当日建（99.7）→104 高抛清仓",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-10-06",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             }
           ],
-          soldDate: "2026-10-05",
+          soldDate: "2026-10-05/2026-10-06",
           isPartial: false,
           closesEpisode: true,
           totalRetPct: 4.31294,
@@ -2135,10 +2145,12 @@
             "日内高抛"
           ],
           execStatus: "adhoc",
-          oneLiner: "GDXU 当日建仓 @99.7、@104 高抛清仓 +4.3%；缩量上涨日日内了结。"
+          oneLiner: "GDXU 当日建仓 @99.7、@104 高抛清仓 +4.3%；缩量上涨日日内了结。",
+          dateStart: "2026-10-05",
+          dateEnd: "2026-10-06"
         },
         {
-          tradeId: "EP-LABU-CLOSED-20261005:2026-10-05",
+          tradeId: "EP-LABU-CLOSED-20261005:2026-10-05/2026-10-06",
           episodeId: "EP-LABU-CLOSED-20261005",
           sym: "LABU",
           name: "3x 做多生物科技ETF",
@@ -2148,17 +2160,20 @@
           legs: [
             {
               executionId: "EX-20261005-LABU-SELL-054",
-              date: "2026-10-05",
-              time: "盘中",
+              date: "2026-10-05/2026-10-06",
+              time: "时刻未记录",
               price: 255,
               cost: 240.65,
               costBasisType: "actual",
               retPct: 5.96302,
               note: "当日 255 全数清仓（快进快出）",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-10-06",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             }
           ],
-          soldDate: "2026-10-05",
+          soldDate: "2026-10-05/2026-10-06",
           isPartial: false,
           closesEpisode: true,
           totalRetPct: 5.96302,
@@ -2172,12 +2187,120 @@
             "快进快出"
           ],
           execStatus: "adhoc",
-          oneLiner: "LABU 当日快进快出 +6%：240.65 建、255 全清，缩量上涨日打一枪就走。"
+          oneLiner: "LABU 当日快进快出 +6%：240.65 建、255 全清，缩量上涨日打一枪就走。",
+          dateStart: "2026-10-05",
+          dateEnd: "2026-10-06"
+        }
+      ]
+    },
+    {
+      date: "2026-10-02/2026-10-03",
+      dateStart: "2026-10-02",
+      dateEnd: "2026-10-03",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-02—2026-10-03",
+      trades: [
+        {
+          tradeId: "EP-RAM-2026Q3:2026-10-02/2026-10-03",
+          episodeId: "EP-RAM-2026Q3",
+          sym: "RAM",
+          name: "2x DRAM (Roundhill T-Rex)",
+          acct: "主账号",
+          cost: 13.74236,
+          costNote: "历史实际均价基准，后续移动加权",
+          legs: [
+            {
+              executionId: "EX-20261002-RAM-SELL-008",
+              date: "2026-10-02/2026-10-03",
+              time: "时刻未记录",
+              price: 14.5,
+              cost: 13.74236,
+              costBasisType: "actual",
+              retPct: 5.51319,
+              note: "连续第二日冲高止盈（数量待核实）",
+              costNote: "历史实际均价基准，后续移动加权",
+              dateEnd: "2026-10-03",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
+            }
+          ],
+          soldDate: "2026-10-02/2026-10-03",
+          isPartial: true,
+          closesEpisode: false,
+          totalRetPct: 5.51317,
+          result: "win",
+          totalRetNote: "当日卖出成本收益率，非账户收益",
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
+          reason: "部分减仓兑现",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          dateStart: "2026-10-02",
+          dateEnd: "2026-10-03"
+        },
+        {
+          tradeId: "EP-IRE-2026Q3:2026-10-02/2026-10-03",
+          episodeId: "EP-IRE-2026Q3",
+          sym: "IRE",
+          name: "Defiance 2x IREN · 2x AI云",
+          acct: "主账号",
+          cost: 8.8695,
+          costNote: "移动加权均价",
+          legs: [
+            {
+              executionId: "EX-20261002-IRE-SELL-015",
+              date: "2026-10-02/2026-10-03",
+              time: "时刻未记录",
+              price: 9.9,
+              cost: 8.8695,
+              costBasisType: "actual",
+              retPct: 11.61847,
+              note: "冲高先兑现（数量待核实）",
+              costNote: "移动加权均价",
+              dateEnd: "2026-10-03",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
+            },
+            {
+              executionId: "EX-20261002-IRE-SELL-016",
+              date: "2026-10-02/2026-10-03",
+              time: "时刻未记录",
+              price: 10.38,
+              cost: 8.8695,
+              costBasisType: "actual",
+              retPct: 17.03027,
+              note: "高抛再兑现（数量待核实）",
+              costNote: "移动加权均价",
+              dateEnd: "2026-10-03",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
+            }
+          ],
+          soldDate: "2026-10-02/2026-10-03",
+          isPartial: true,
+          closesEpisode: false,
+          totalRetPct: 14.32437,
+          result: "win",
+          totalRetNote: "当日卖出成本收益率，非账户收益",
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
+          reason: "部分减仓兑现",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          dateStart: "2026-10-02",
+          dateEnd: "2026-10-03"
         }
       ]
     },
     {
       date: "2026-10-02",
+      dateStart: "2026-10-02",
+      dateEnd: "2026-10-02",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-10-02",
       trades: [
         {
@@ -2190,105 +2313,21 @@
           costNote: "历史实际均价基准，后续移动加权",
           legs: [
             {
-              executionId: "EX-20261002-RAM-SELL-008",
-              date: "2026-10-02",
-              time: "隔夜",
-              price: 14.5,
-              cost: 13.74236,
-              costBasisType: "actual",
-              retPct: 5.51319,
-              note: "连续第二日冲高止盈（数量待核实）",
-              costNote: "历史实际均价基准，后续移动加权"
-            }
-          ],
-          soldDate: "2026-10-02",
-          isPartial: true,
-          closesEpisode: false,
-          totalRetPct: 5.51317,
-          result: "win",
-          totalRetNote: "当日卖出成本收益率，非账户收益",
-          cycleRetPct: null,
-          cycleResult: null,
-          performanceEligible: false,
-          reason: "部分减仓兑现",
-          setup: [],
-          execStatus: "unknown",
-          oneLiner: ""
-        },
-        {
-          tradeId: "EP-IRE-2026Q3:2026-10-02",
-          episodeId: "EP-IRE-2026Q3",
-          sym: "IRE",
-          name: "Defiance 2x IREN · 2x AI云",
-          acct: "主账号",
-          cost: 8.8695,
-          costNote: "移动加权均价",
-          legs: [
-            {
-              executionId: "EX-20261002-IRE-SELL-015",
-              date: "2026-10-02",
-              time: "盘中",
-              price: 9.9,
-              cost: 8.8695,
-              costBasisType: "actual",
-              retPct: 11.61847,
-              note: "冲高先兑现（数量待核实）",
-              costNote: "移动加权均价"
-            },
-            {
-              executionId: "EX-20261002-IRE-SELL-016",
-              date: "2026-10-02",
-              time: "盘中",
-              price: 10.38,
-              cost: 8.8695,
-              costBasisType: "actual",
-              retPct: 17.03027,
-              note: "高抛再兑现（数量待核实）",
-              costNote: "移动加权均价"
-            }
-          ],
-          soldDate: "2026-10-02",
-          isPartial: true,
-          closesEpisode: false,
-          totalRetPct: 14.32437,
-          result: "win",
-          totalRetNote: "当日卖出成本收益率，非账户收益",
-          cycleRetPct: null,
-          cycleResult: null,
-          performanceEligible: false,
-          reason: "部分减仓兑现",
-          setup: [],
-          execStatus: "unknown",
-          oneLiner: ""
-        }
-      ]
-    },
-    {
-      date: "2026-10-01",
-      dateLabel: "2026-10-01",
-      trades: [
-        {
-          tradeId: "EP-RAM-2026Q3:2026-10-01",
-          episodeId: "EP-RAM-2026Q3",
-          sym: "RAM",
-          name: "2x DRAM (Roundhill T-Rex)",
-          acct: "主账号",
-          cost: 13.74236,
-          costNote: "历史实际均价基准，后续移动加权",
-          legs: [
-            {
               executionId: "EX-20261001-RAM-SELL-007",
-              date: "2026-10-01",
-              time: "14:56:21",
+              date: "2026-10-02",
+              time: "02:56:21",
               price: 14.35,
               cost: 13.74236,
               costBasisType: "actual",
               retPct: 4.42168,
               note: "财报冲高止盈（数量待核实）",
-              costNote: "历史实际均价基准，后续移动加权"
+              costNote: "历史实际均价基准，后续移动加权",
+              dateEnd: "2026-10-02",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
-          soldDate: "2026-10-01",
+          soldDate: "2026-10-02",
           isPartial: true,
           closesEpisode: false,
           totalRetPct: 4.42166,
@@ -2300,8 +2339,62 @@
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
-          oneLiner: ""
+          oneLiner: "",
+          dateStart: "2026-10-02",
+          dateEnd: "2026-10-02"
         },
+        {
+          tradeId: "EP-MSTU-CLOSED-20261001:2026-10-02",
+          episodeId: "EP-MSTU-CLOSED-20261001",
+          sym: "MSTU",
+          name: "2x MicroStrategy · 比特币",
+          acct: "主账号",
+          cost: 41.52094,
+          costNote: "移动加权均价",
+          legs: [
+            {
+              executionId: "EX-20261001-MSTU-SELL-029",
+              date: "2026-10-02",
+              time: "01:27:22",
+              price: 43.5,
+              cost: 41.52094,
+              costBasisType: "actual",
+              retPct: 4.76642,
+              note: "分批止盈，结单仍有观察仓；最后观察仓于10/2另行卖出",
+              costNote: "移动加权均价",
+              dateEnd: "2026-10-02",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
+            }
+          ],
+          soldDate: "2026-10-02",
+          isPartial: false,
+          closesEpisode: true,
+          totalRetPct: 4.76641,
+          result: "win",
+          totalRetNote: "当日卖出成本收益率，非账户收益",
+          cycleRetPct: 3.53546,
+          cycleResult: "win",
+          performanceEligible: true,
+          reason: "交易仓10/1分批兑现完毕；额外观察仓独立排除",
+          setup: [
+            "趋势波段",
+            "仓位管理"
+          ],
+          execStatus: "plan",
+          oneLiner: "按真实股票流水核算交易仓；观察股不计本轮盈亏，历史摊薄成本不冒充真实买入成本。",
+          dateStart: "2026-10-02",
+          dateEnd: "2026-10-02"
+        }
+      ]
+    },
+    {
+      date: "2026-10-01",
+      dateStart: "2026-10-01",
+      dateEnd: "2026-10-01",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-01",
+      trades: [
         {
           tradeId: "EP-MSTU-CLOSED-20261001:2026-10-01",
           episodeId: "EP-MSTU-CLOSED-20261001",
@@ -2314,47 +2407,44 @@
             {
               executionId: "EX-20261001-MSTU-SELL-025",
               date: "2026-10-01",
-              time: "09:43:41",
+              time: "21:43:41",
               price: 42.23,
               cost: 41.52094,
               costBasisType: "actual",
               retPct: 1.70773,
               note: "分批止盈（数量待核实）",
-              costNote: "移动加权均价"
-            },
-            {
-              executionId: "EX-20261001-MSTU-SELL-029",
-              date: "2026-10-01",
-              time: "13:27:22",
-              price: 43.5,
-              cost: 41.52094,
-              costBasisType: "actual",
-              retPct: 4.76642,
-              note: "分批止盈，结单仍有观察仓；最后观察仓于10/2另行卖出",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-10-01",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-10-01",
-          isPartial: false,
-          closesEpisode: true,
-          totalRetPct: 3.23707,
+          isPartial: true,
+          closesEpisode: false,
+          totalRetPct: 1.70772,
           result: "win",
           totalRetNote: "当日卖出成本收益率，非账户收益",
-          cycleRetPct: 3.53546,
-          cycleResult: "win",
-          performanceEligible: true,
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
           reason: "交易仓10/1分批兑现完毕；额外观察仓独立排除",
           setup: [
             "趋势波段",
             "仓位管理"
           ],
           execStatus: "plan",
-          oneLiner: "按真实股票流水核算交易仓；观察股不计本轮盈亏，历史摊薄成本不冒充真实买入成本。"
+          oneLiner: "按真实股票流水核算交易仓；观察股不计本轮盈亏，历史摊薄成本不冒充真实买入成本。",
+          dateStart: "2026-10-01",
+          dateEnd: "2026-10-01"
         }
       ]
     },
     {
       date: "2026-09-30",
+      dateStart: "2026-09-30",
+      dateEnd: "2026-09-30",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-09-30",
       trades: [
         {
@@ -2369,13 +2459,16 @@
             {
               executionId: "EX-20260930-MSTU-SELL-023",
               date: "2026-09-30",
-              time: "09:09:19",
+              time: "21:09:19",
               price: 44.1,
               cost: 42.51034,
               costBasisType: "actual",
               retPct: 3.73945,
               note: "高位止盈（数量待核实）",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-30",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-30",
@@ -2393,12 +2486,17 @@
             "仓位管理"
           ],
           execStatus: "plan",
-          oneLiner: "按真实股票流水核算交易仓；观察股不计本轮盈亏，历史摊薄成本不冒充真实买入成本。"
+          oneLiner: "按真实股票流水核算交易仓；观察股不计本轮盈亏，历史摊薄成本不冒充真实买入成本。",
+          dateStart: "2026-09-30",
+          dateEnd: "2026-09-30"
         }
       ]
     },
     {
       date: "2026-09-29",
+      dateStart: "2026-09-29",
+      dateEnd: "2026-09-29",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-09-29",
       trades: [
         {
@@ -2413,13 +2511,16 @@
             {
               executionId: "EX-20260929-RAM-SELL-005",
               date: "2026-09-29",
-              time: "10:40:07",
+              time: "22:40:07",
               price: 14.27,
               cost: 13.74984,
               costBasisType: "actual",
               retPct: 3.78299,
               note: "反弹止盈减仓（数量待核实）",
-              costNote: "历史实际均价基准，后续移动加权"
+              costNote: "历史实际均价基准，后续移动加权",
+              dateEnd: "2026-09-29",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-29",
@@ -2434,12 +2535,17 @@
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
-          oneLiner: ""
+          oneLiner: "",
+          dateStart: "2026-09-29",
+          dateEnd: "2026-09-29"
         }
       ]
     },
     {
       date: "2026-09-25",
+      dateStart: "2026-09-25",
+      dateEnd: "2026-09-25",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-09-25",
       trades: [
         {
@@ -2454,13 +2560,16 @@
             {
               executionId: "EX-20260925-UGL-SELL-030",
               date: "2026-09-25",
-              time: "03:00:00",
+              time: "15:00:00",
               price: 48.5,
               cost: 48.7,
               costBasisType: "actual",
               retPct: -0.41068,
               note: "低资金利用率清仓换标的",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-25",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-25",
@@ -2477,12 +2586,17 @@
             "仓位管理"
           ],
           execStatus: "adhoc",
-          oneLiner: "小仓黄金杠杆利用率偏低，主动清仓回笼转向更高弹性标的；小亏认错、资金不留恋在低效仓位。"
+          oneLiner: "小仓黄金杠杆利用率偏低，主动清仓回笼转向更高弹性标的；小亏认错、资金不留恋在低效仓位。",
+          dateStart: "2026-09-25",
+          dateEnd: "2026-09-25"
         }
       ]
     },
     {
       date: "2026-09-24",
+      dateStart: "2026-09-24",
+      dateEnd: "2026-09-24",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-09-24",
       trades: [
         {
@@ -2497,13 +2611,16 @@
             {
               executionId: "EX-20260924-IRE-SELL-031",
               date: "2026-09-24",
-              time: "09:39:21",
+              time: "21:39:21",
               price: 12.2,
               cost: 11.8,
               costBasisType: "actual",
               retPct: 3.38983,
               note: "预设止盈位到价全清",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-24",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-24",
@@ -2521,7 +2638,9 @@
             "趋势波段"
           ],
           execStatus: "plan",
-          oneLiner: "保留原左侧支撑与止盈计划；实际成交12.20，与目标12.30分别记录。"
+          oneLiner: "保留原左侧支撑与止盈计划；实际成交12.20，与目标12.30分别记录。",
+          dateStart: "2026-09-24",
+          dateEnd: "2026-09-24"
         },
         {
           tradeId: "EP-RKLX-CLOSED-20260924:2026-09-24",
@@ -2535,13 +2654,16 @@
             {
               executionId: "EX-20260924-RKLX-SELL-032",
               date: "2026-09-24",
-              time: "09:40:11",
+              time: "21:40:11",
               price: 17.78,
               cost: 16.77,
               costBasisType: "actual",
               retPct: 6.02266,
               note: "卖出主体仓；结单仍有观察仓，后续处理待核实",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-24",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-24",
@@ -2559,7 +2681,9 @@
             "趋势波段"
           ],
           execStatus: "adhoc",
-          oneLiner: "止盈目标与成交价一致；额外观察仓不改变本轮交易已清仓状态。"
+          oneLiner: "止盈目标与成交价一致；额外观察仓不改变本轮交易已清仓状态。",
+          dateStart: "2026-09-24",
+          dateEnd: "2026-09-24"
         },
         {
           tradeId: "EP-ASTX-CLOSED-20260924:2026-09-24",
@@ -2573,13 +2697,16 @@
             {
               executionId: "EX-20260924-ASTX-SELL-033",
               date: "2026-09-24",
-              time: "10:14:37",
+              time: "22:14:37",
               price: 9.855,
               cost: 9.529,
               costBasisType: "actual",
               retPct: 3.42114,
               note: "冲高失败止盈全清",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-24",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-24",
@@ -2597,12 +2724,68 @@
             "趋势波段"
           ],
           execStatus: "plan",
-          oneLiner: "当日支撑低吸建仓、见冲高失败果断 9.855 止盈离场，资金无缝转身补 RAM 核心仓；锁盈不恋战。"
+          oneLiner: "当日支撑低吸建仓、见冲高失败果断 9.855 止盈离场，资金无缝转身补 RAM 核心仓；锁盈不恋战。",
+          dateStart: "2026-09-24",
+          dateEnd: "2026-09-24"
+        }
+      ]
+    },
+    {
+      date: "2026-09-23/2026-09-24",
+      dateStart: "2026-09-23",
+      dateEnd: "2026-09-24",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-09-23—2026-09-24",
+      trades: [
+        {
+          tradeId: "EP-SOXS1-CLOSED-20260923:2026-09-23/2026-09-24",
+          episodeId: "EP-SOXS1-CLOSED-20260923",
+          sym: "SOXS",
+          name: "3x Inverse Semiconductor · 做空半导体",
+          acct: "1号小账号",
+          cost: 35.95,
+          costNote: "移动加权均价",
+          legs: [
+            {
+              executionId: "EX-20260923-SOXS-SELL-036",
+              date: "2026-09-23/2026-09-24",
+              time: "时刻未记录",
+              price: 34.73,
+              cost: 35.95,
+              costBasisType: "actual",
+              retPct: -3.3936,
+              note: "认错止损全清",
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-24",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
+            }
+          ],
+          soldDate: "2026-09-23/2026-09-24",
+          isPartial: false,
+          closesEpisode: true,
+          totalRetPct: -3.3936,
+          result: "loss",
+          totalRetNote: "当日卖出成本收益率，非账户收益",
+          cycleRetPct: -3.3936,
+          cycleResult: "loss",
+          performanceEligible: true,
+          reason: "原定 36.2 兑现未及·跟随观察认错离场",
+          setup: [
+            "对冲 / 逆向博弈"
+          ],
+          execStatus: "adhoc",
+          oneLiner: "原定 36.2 兑现未等到，跟随主号观察接受小亏认错，没有硬扛等反弹，执行果断。",
+          dateStart: "2026-09-23",
+          dateEnd: "2026-09-24"
         }
       ]
     },
     {
       date: "2026-09-23",
+      dateStart: "2026-09-23",
+      dateEnd: "2026-09-23",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-09-23",
       trades: [
         {
@@ -2617,24 +2800,30 @@
             {
               executionId: "EX-20260923-SOXS-SELL-034",
               date: "2026-09-23",
-              time: "09:47:16",
+              time: "21:47:16",
               price: 34.1,
               cost: 33.24903,
               costBasisType: "actual",
               retPct: 2.55937,
               note: "第一批兑现",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-23",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             },
             {
               executionId: "EX-20260923-SOXS-SELL-035",
               date: "2026-09-23",
-              time: "10:14:19",
+              time: "22:14:19",
               price: 34.615,
               cost: 33.24903,
               costBasisType: "actual",
               retPct: 4.10829,
               note: "识别乏力·全清",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-23",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-23",
@@ -2652,49 +2841,82 @@
             "对冲 / 逆向博弈"
           ],
           execStatus: "adhoc",
-          oneLiner: "分批低吸后随反弹分批兑现，识别'上涨乏力'后不恋战原目标位，果断全清，过程利落。"
-        },
+          oneLiner: "分批低吸后随反弹分批兑现，识别'上涨乏力'后不恋战原目标位，果断全清，过程利落。",
+          dateStart: "2026-09-23",
+          dateEnd: "2026-09-23"
+        }
+      ]
+    },
+    {
+      date: "2026-09-22/2026-09-23",
+      dateStart: "2026-09-22",
+      dateEnd: "2026-09-23",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-09-22—2026-09-23",
+      trades: [
         {
-          tradeId: "EP-SOXS1-CLOSED-20260923:2026-09-23",
-          episodeId: "EP-SOXS1-CLOSED-20260923",
-          sym: "SOXS",
-          name: "3x Inverse Semiconductor · 做空半导体",
+          tradeId: "EP-ASTX-CLOSED-20260922:2026-09-22/2026-09-23",
+          episodeId: "EP-ASTX-CLOSED-20260922",
+          sym: "ASTX",
+          name: "2x AST SpaceMobile · 卫星通信",
           acct: "1号小账号",
-          cost: 35.95,
-          costNote: "移动加权均价",
+          cost: 9.5,
+          costNote: "实际成本",
           legs: [
             {
-              executionId: "EX-20260923-SOXS-SELL-036",
-              date: "2026-09-23",
-              time: "盘中",
-              price: 34.73,
-              cost: 35.95,
+              executionId: "EX-20260922-ASTX-SELL-040",
+              date: "2026-09-22/2026-09-23",
+              time: "时刻未记录",
+              price: 10.55,
+              cost: 9.5,
               costBasisType: "actual",
-              retPct: -3.3936,
-              note: "认错止损全清",
-              costNote: "移动加权均价"
+              retPct: 11.05263,
+              note: "反弹先落",
+              costNote: "实际成本",
+              dateEnd: "2026-09-23",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
+            },
+            {
+              executionId: "EX-20260922-ASTX-SELL-041",
+              date: "2026-09-22/2026-09-23",
+              time: "时刻未记录",
+              price: 10.74,
+              cost: 9.5,
+              costBasisType: "actual",
+              retPct: 13.05263,
+              note: "全清",
+              costNote: "实际成本",
+              dateEnd: "2026-09-23",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             }
           ],
-          soldDate: "2026-09-23",
+          soldDate: "2026-09-22/2026-09-23",
           isPartial: false,
           closesEpisode: true,
-          totalRetPct: -3.3936,
-          result: "loss",
+          totalRetPct: 12.05263,
+          result: "win",
           totalRetNote: "当日卖出成本收益率，非账户收益",
-          cycleRetPct: -3.3936,
-          cycleResult: "loss",
-          performanceEligible: true,
-          reason: "原定 36.2 兑现未及·跟随观察认错离场",
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
+          reason: "接飞刀反弹止盈清仓",
           setup: [
-            "对冲 / 逆向博弈"
+            "超跌反弹"
           ],
-          execStatus: "adhoc",
-          oneLiner: "原定 36.2 兑现未等到，跟随主号观察接受小亏认错，没有硬扛等反弹，执行果断。"
+          execStatus: "plan",
+          oneLiner: "接飞刀后反弹 +12.1% 即退出符合这类交易定位，不需要强行把反弹单拿成趋势单。",
+          dateStart: "2026-09-22",
+          dateEnd: "2026-09-23"
         }
       ]
     },
     {
       date: "2026-09-22",
+      dateStart: "2026-09-22",
+      dateEnd: "2026-09-22",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-09-22",
       trades: [
         {
@@ -2709,13 +2931,16 @@
             {
               executionId: "EX-20260922-RAM-SELL-039",
               date: "2026-09-22",
-              time: "05:18:41",
+              time: "17:18:41",
               price: 14.0803,
               cost: 13.7,
               costBasisType: "actual",
               retPct: 2.77591,
               note: "买回后快进快出 scalp",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-22",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-22",
@@ -2732,60 +2957,17 @@
             "日内 Scalp"
           ],
           execStatus: "adhoc",
-          oneLiner: "消息驱动下快进快出并成功盈利，但属于临时战术交易，不应和核心仓逻辑混在一起。"
-        },
-        {
-          tradeId: "EP-ASTX-CLOSED-20260922:2026-09-22",
-          episodeId: "EP-ASTX-CLOSED-20260922",
-          sym: "ASTX",
-          name: "2x AST SpaceMobile · 卫星通信",
-          acct: "1号小账号",
-          cost: 9.5,
-          costNote: "实际成本",
-          legs: [
-            {
-              executionId: "EX-20260922-ASTX-SELL-040",
-              date: "2026-09-22",
-              time: "第一波",
-              price: 10.55,
-              cost: 9.5,
-              costBasisType: "actual",
-              retPct: 11.05263,
-              note: "反弹先落",
-              costNote: "实际成本"
-            },
-            {
-              executionId: "EX-20260922-ASTX-SELL-041",
-              date: "2026-09-22",
-              time: "第二波",
-              price: 10.74,
-              cost: 9.5,
-              costBasisType: "actual",
-              retPct: 13.05263,
-              note: "全清",
-              costNote: "实际成本"
-            }
-          ],
-          soldDate: "2026-09-22",
-          isPartial: false,
-          closesEpisode: true,
-          totalRetPct: 12.05263,
-          result: "win",
-          totalRetNote: "当日卖出成本收益率，非账户收益",
-          cycleRetPct: null,
-          cycleResult: null,
-          performanceEligible: false,
-          reason: "接飞刀反弹止盈清仓",
-          setup: [
-            "超跌反弹"
-          ],
-          execStatus: "plan",
-          oneLiner: "接飞刀后反弹 +12.1% 即退出符合这类交易定位，不需要强行把反弹单拿成趋势单。"
+          oneLiner: "消息驱动下快进快出并成功盈利，但属于临时战术交易，不应和核心仓逻辑混在一起。",
+          dateStart: "2026-09-22",
+          dateEnd: "2026-09-22"
         }
       ]
     },
     {
       date: "2026-09-21",
+      dateStart: "2026-09-21",
+      dateEnd: "2026-09-21",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-09-21",
       trades: [
         {
@@ -2800,13 +2982,16 @@
             {
               executionId: "EX-20260922-CRWG-SELL-010",
               date: "2026-09-21",
-              time: "09:46:46",
+              time: "21:46:46",
               price: 17.26,
               cost: 15.75,
               costBasisType: "actual",
               retPct: 9.5873,
               note: "部分止盈",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-21",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-21",
@@ -2824,7 +3009,9 @@
             "仓位管理"
           ],
           execStatus: "plan",
-          oneLiner: "+9.6% 部分兑现合理，保留剩余仓位比一次性全清更符合趋势交易。"
+          oneLiner: "+9.6% 部分兑现合理，保留剩余仓位比一次性全清更符合趋势交易。",
+          dateStart: "2026-09-21",
+          dateEnd: "2026-09-21"
         },
         {
           tradeId: "EP-RAM-2026Q3:2026-09-21",
@@ -2838,13 +3025,16 @@
             {
               executionId: "EX-20260922-RAM-SELL-037",
               date: "2026-09-21",
-              time: "09:42:38",
+              time: "21:42:38",
               price: 14.55,
               cost: 13.564,
               costBasisType: "actual",
               retPct: 7.26924,
               note: "减仓锁定利润",
-              costNote: "历史实际均价基准，后续移动加权"
+              costNote: "历史实际均价基准，后续移动加权",
+              dateEnd: "2026-09-21",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-21",
@@ -2859,16 +3049,21 @@
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
-          oneLiner: ""
+          oneLiner: "",
+          dateStart: "2026-09-21",
+          dateEnd: "2026-09-21"
         }
       ]
     },
     {
-      date: "2026-09-19",
-      dateLabel: "2026-09-19",
+      date: "2026-09-19/2026-09-20",
+      dateStart: "2026-09-19",
+      dateEnd: "2026-09-20",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-09-19—2026-09-20",
       trades: [
         {
-          tradeId: "EP-SNDK-CLOSED-20260919:2026-09-19",
+          tradeId: "EP-SNDK-CLOSED-20260919:2026-09-19/2026-09-20",
           episodeId: "EP-SNDK-CLOSED-20260919",
           sym: "SNDK",
           name: "Sandisk · 存储",
@@ -2878,39 +3073,48 @@
           legs: [
             {
               executionId: "EX-20260919-SNDK-SELL-042",
-              date: "2026-09-19",
-              time: "盘前",
+              date: "2026-09-19/2026-09-20",
+              time: "时刻未记录",
               price: 1649.18,
               cost: 1640,
               costBasisType: "actual",
               retPct: 0.55976,
               note: "第一笔减仓",
-              costNote: "实际成本"
+              costNote: "实际成本",
+              dateEnd: "2026-09-20",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             },
             {
               executionId: "EX-20260919-SNDK-SELL-043",
-              date: "2026-09-19",
-              time: "盘中",
+              date: "2026-09-19/2026-09-20",
+              time: "时刻未记录",
               price: 1662,
               cost: 1640,
               costBasisType: "actual",
               retPct: 1.34146,
               note: "第二笔顺势减",
-              costNote: "实际成本"
+              costNote: "实际成本",
+              dateEnd: "2026-09-20",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             },
             {
               executionId: "EX-20260919-SNDK-SELL-044",
-              date: "2026-09-19",
-              time: "盘中",
+              date: "2026-09-19/2026-09-20",
+              time: "时刻未记录",
               price: 1714,
               cost: 1640,
               costBasisType: "actual",
               retPct: 4.5122,
               note: "最后一笔·当日高点",
-              costNote: "实际成本"
+              costNote: "实际成本",
+              dateEnd: "2026-09-20",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             }
           ],
-          soldDate: "2026-09-19",
+          soldDate: "2026-09-19/2026-09-20",
           isPartial: false,
           closesEpisode: true,
           totalRetPct: 2.1378,
@@ -2925,10 +3129,12 @@
             "仓位管理"
           ],
           execStatus: "plan",
-          oneLiner: "降低 AI 硬件链集中度逻辑合理，但全清会失去后续趋势收益。"
+          oneLiner: "降低 AI 硬件链集中度逻辑合理，但全清会失去后续趋势收益。",
+          dateStart: "2026-09-19",
+          dateEnd: "2026-09-20"
         },
         {
-          tradeId: "EP-LITX-CLOSED-20260919:2026-09-19",
+          tradeId: "EP-LITX-CLOSED-20260919:2026-09-19/2026-09-20",
           episodeId: "EP-LITX-CLOSED-20260919",
           sym: "LITX",
           name: "2x Lumentum · 光通信",
@@ -2938,17 +3144,20 @@
           legs: [
             {
               executionId: "EX-20260919-LITX-SELL-045",
-              date: "2026-09-19",
-              time: "盘前",
+              date: "2026-09-19/2026-09-20",
+              time: "时刻未记录",
               price: 32.7,
               cost: 30.09,
               costBasisType: "actual",
               retPct: 8.67398,
               note: "一笔清仓",
-              costNote: "实际成本"
+              costNote: "实际成本",
+              dateEnd: "2026-09-20",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             }
           ],
-          soldDate: "2026-09-19",
+          soldDate: "2026-09-19/2026-09-20",
           isPartial: false,
           closesEpisode: true,
           totalRetPct: 8.67398,
@@ -2962,10 +3171,12 @@
             "趋势波段"
           ],
           execStatus: "plan",
-          oneLiner: "+8.7% 冲高止盈没有问题，但趋势未破坏时可考虑保留少量尾仓。"
+          oneLiner: "+8.7% 冲高止盈没有问题，但趋势未破坏时可考虑保留少量尾仓。",
+          dateStart: "2026-09-19",
+          dateEnd: "2026-09-20"
         },
         {
-          tradeId: "EP-CRDU-CLOSED-20260919:2026-09-19",
+          tradeId: "EP-CRDU-CLOSED-20260919:2026-09-19/2026-09-20",
           episodeId: "EP-CRDU-CLOSED-20260919",
           sym: "CRDU",
           name: "2x Credo · 连接",
@@ -2975,17 +3186,20 @@
           legs: [
             {
               executionId: "EX-20260919-CRDU-SELL-046",
-              date: "2026-09-19",
-              time: "盘中",
+              date: "2026-09-19/2026-09-20",
+              time: "时刻未记录",
               price: 7.4,
               cost: 6.71,
               costBasisType: "actual",
               retPct: 10.28316,
               note: "一笔清仓",
-              costNote: "实际成本"
+              costNote: "实际成本",
+              dateEnd: "2026-09-20",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             }
           ],
-          soldDate: "2026-09-19",
+          soldDate: "2026-09-19/2026-09-20",
           isPartial: false,
           closesEpisode: true,
           totalRetPct: 10.28316,
@@ -3000,16 +3214,21 @@
             "仓位管理"
           ],
           execStatus: "plan",
-          oneLiner: "+10.3% 止盈执行很好，但直接全清使组合失去了继续跟随趋势的仓位。"
+          oneLiner: "+10.3% 止盈执行很好，但直接全清使组合失去了继续跟随趋势的仓位。",
+          dateStart: "2026-09-19",
+          dateEnd: "2026-09-20"
         }
       ]
     },
     {
-      date: "2026-09-18",
-      dateLabel: "2026-09-18",
+      date: "2026-09-18/2026-09-19",
+      dateStart: "2026-09-18",
+      dateEnd: "2026-09-19",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-09-18—2026-09-19",
       trades: [
         {
-          tradeId: "EP-RKLX-CLOSED-20260918:2026-09-18",
+          tradeId: "EP-RKLX-CLOSED-20260918:2026-09-18/2026-09-19",
           episodeId: "EP-RKLX-CLOSED-20260918",
           sym: "RKLX",
           name: "2x Rocket Lab",
@@ -3019,28 +3238,34 @@
           legs: [
             {
               executionId: "EX-20260918-RKLX-SELL-047",
-              date: "2026-09-18",
-              time: "第一波",
+              date: "2026-09-18/2026-09-19",
+              time: "时刻未记录",
               price: 15.7,
               cost: 14.95,
               costBasisType: "actual",
               retPct: 5.01672,
               note: "先落一半",
-              costNote: "实际成本"
+              costNote: "实际成本",
+              dateEnd: "2026-09-19",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             },
             {
               executionId: "EX-20260918-RKLX-SELL-048",
-              date: "2026-09-18",
-              time: "第二波",
+              date: "2026-09-18/2026-09-19",
+              time: "时刻未记录",
               price: 16.4,
               cost: 14.95,
               costBasisType: "actual",
               retPct: 9.699,
               note: "第二波拉升全清",
-              costNote: "实际成本"
+              costNote: "实际成本",
+              dateEnd: "2026-09-19",
+              timezone: "Asia/Shanghai",
+              datePrecision: "range"
             }
           ],
-          soldDate: "2026-09-18",
+          soldDate: "2026-09-18/2026-09-19",
           isPartial: false,
           closesEpisode: true,
           totalRetPct: 7.37895,
@@ -3055,12 +3280,17 @@
             "仓位管理"
           ],
           execStatus: "plan",
-          oneLiner: "冲高分批止盈执行正常，但强趋势行情可以考虑留下 10%～20% Runner。"
+          oneLiner: "冲高分批止盈执行正常，但强趋势行情可以考虑留下 10%～20% Runner。",
+          dateStart: "2026-09-18",
+          dateEnd: "2026-09-19"
         }
       ]
     },
     {
       date: "2026-09-17",
+      dateStart: "2026-09-17",
+      dateEnd: "2026-09-17",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-09-17",
       trades: [
         {
@@ -3075,13 +3305,16 @@
             {
               executionId: "EX-STMT-20260930-RAM-SELL-P031-011",
               date: "2026-09-17",
-              time: "07:21:35",
+              time: "19:21:35",
               price: 12.1102,
               cost: 11.51,
               costBasisType: "actual",
               retPct: 5.2146,
               note: "券商结单补录",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-17",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-17",
@@ -3096,16 +3329,12 @@
           reason: "结单确认的短线买入与次日卖出",
           setup: [],
           execStatus: "unknown",
-          oneLiner: ""
-        }
-      ]
-    },
-    {
-      date: "2026-09-16",
-      dateLabel: "2026-09-16",
-      trades: [
+          oneLiner: "",
+          dateStart: "2026-09-17",
+          dateEnd: "2026-09-17"
+        },
         {
-          tradeId: "EP-CRDU-2026Q3:2026-09-16",
+          tradeId: "EP-CRDU-2026Q3:2026-09-17",
           episodeId: "EP-CRDU-2026Q3",
           sym: "CRDU",
           name: "2x Credo (Tradr)",
@@ -3115,17 +3344,20 @@
           legs: [
             {
               executionId: "EX-STMT-20260930-CRDU-SELL-P028-010",
-              date: "2026-09-16",
-              time: "19:53:02",
+              date: "2026-09-17",
+              time: "07:53:02",
               price: 6.75,
               cost: 6.71493,
               costBasisType: "actual",
               retPct: 0.5223,
               note: "券商结单补录",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-17",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
-          soldDate: "2026-09-16",
+          soldDate: "2026-09-17",
           isPartial: true,
           closesEpisode: false,
           totalRetPct: 0.52227,
@@ -3137,12 +3369,17 @@
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
-          oneLiner: ""
+          oneLiner: "",
+          dateStart: "2026-09-17",
+          dateEnd: "2026-09-17"
         }
       ]
     },
     {
       date: "2026-09-11",
+      dateStart: "2026-09-11",
+      dateEnd: "2026-09-11",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-09-11",
       trades: [
         {
@@ -3157,13 +3394,16 @@
             {
               executionId: "EX-STMT-20260930-CRDU-SELL-P020-008",
               date: "2026-09-11",
-              time: "08:51:04",
+              time: "20:51:04",
               price: 6.67,
               cost: 6.76866,
               costBasisType: "actual",
               retPct: -1.4576,
               note: "券商结单补录",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-11",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-11",
@@ -3178,12 +3418,17 @@
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
-          oneLiner: ""
+          oneLiner: "",
+          dateStart: "2026-09-11",
+          dateEnd: "2026-09-11"
         }
       ]
     },
     {
       date: "2026-09-09",
+      dateStart: "2026-09-09",
+      dateEnd: "2026-09-09",
+      timezone: "Asia/Shanghai",
       dateLabel: "2026-09-09",
       trades: [
         {
@@ -3198,24 +3443,30 @@
             {
               executionId: "EX-STMT-20260930-CRDU-SELL-P012-002",
               date: "2026-09-09",
-              time: "10:07:36",
+              time: "22:07:36",
               price: 7.2053,
               cost: 6.975,
               costBasisType: "actual",
               retPct: 3.30179,
               note: "券商结单补录",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-09",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             },
             {
               executionId: "EX-STMT-20260930-CRDU-SELL-P014-003",
               date: "2026-09-09",
-              time: "10:13:30",
+              time: "22:13:30",
               price: 7.4,
               cost: 6.975,
               costBasisType: "actual",
               retPct: 6.09319,
               note: "券商结单补录",
-              costNote: "移动加权均价"
+              costNote: "移动加权均价",
+              dateEnd: "2026-09-09",
+              timezone: "Asia/Shanghai",
+              datePrecision: "instant"
             }
           ],
           soldDate: "2026-09-09",
@@ -3230,7 +3481,9 @@
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
-          oneLiner: ""
+          oneLiner: "",
+          dateStart: "2026-09-09",
+          dateEnd: "2026-09-09"
         }
       ]
     }
@@ -3247,7 +3500,7 @@
         "本次加仓的事前计划未记录。"
       ],
       execution: [
-        "主号RAM：美东10/6夜盘按13.85加仓，归属原未结束持仓周期。"
+        "主号RAM：中国时间10/6按13.85夜盘加仓，归属原未结束持仓周期。"
       ],
       good: [],
       issues: [],
@@ -3362,7 +3615,7 @@
     // 事实与数量来自派生 closedTrades；缺数量/成本 → 收益待核实、不计入胜率
     var registeredEntries = 0, clearedTrades = 0, winTrades = 0, partialEntries = 0, completedEpisodes = 0, unknownEntries = 0, mm = null, mx = null;
     DATA.closedTrades.forEach(function(d){
-      var tMin = d.date, tMax = d.date;
+      var tMin = d.dateStart || d.date, tMax = d.dateEnd || d.date;
       if (mm === null || tMin < mm) mm = tMin;
       if (mx === null || tMax > mx) mx = tMax;
       d.trades.forEach(function(t){
@@ -3530,7 +3783,6 @@
             });
           }
           if (h.alertSub) statusTags += '<div class="subcell">' + h.alertSub + '</div>';
-          if (h.strategyNote) statusTags += '<div class="rev-note"><b>策略备注</b>' + h.strategyNote + '</div>';
           if (h.reviewNote) statusTags += '<div class="rev-note"><b>复盘判断</b>' + h.reviewNote + '</div>';
           html += '<tr><td>' + symCell + '</td><td>' + stratTags + '</td><td class="num price">' + costStr + '</td><td>' + optCell + '</td><td>' + statusTags + '</td></tr>';
         });
@@ -3571,7 +3823,7 @@
           '<span class="day-tag' + tagCls + '">' + tagText + '</span>' +
         '</summary>' +
         '<div class="table-scroll"><table><thead><tr>' +
-          '<th scope="col">时段</th><th scope="col">标的</th><th scope="col">账号</th>' +
+          '<th scope="col">中国时间</th><th scope="col">标的</th><th scope="col">账号</th>' +
           '<th scope="col" class="num">成本</th><th scope="col" class="num">卖出价</th>' +
           '<th scope="col" class="num">收益率</th><th scope="col">备注</th>' +
         '</tr></thead><tbody>';

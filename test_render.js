@@ -32,6 +32,11 @@ function runPage(html) {
 
 function check(html, ledger) {
   const { api, nodes, errors } = runPage(html);
+  const expected = require('./derive').presentChinaDates(require('./derive').derive(ledger), ledger);
+  assert.equal(JSON.stringify(api.DATA.closedTrades.map(d => [d.date, d.dateLabel])),
+    JSON.stringify(expected.groups.map(d => [d.date, d.dateLabel])), '成交日期没有按中国时区转换');
+  assert.ok(!nodes.holdingsBox.innerHTML.includes('策略备注'), '持仓仍显示策略备注');
+  assert.ok(api.DATA.accounts.every(a => a.holdings.every(h => !h.strategyNote)), '策略备注仍进入页面数据');
   for (const id of ['holdingsBox', 'closedDays', 'reviewsBox']) assert.ok(nodes[id], '缺页面容器 ' + id);
   const sales = ledger.executions.filter(e => e.side === 'sell' && e.includeInPerformance !== false && e.analysisQty !== 0);
   const renderedIds = [...nodes.closedDays.innerHTML.matchAll(/data-execution-id="([^"]+)"/g)].map(m => m[1]);
@@ -40,7 +45,7 @@ function check(html, ledger) {
     assert.equal(l.date, d.date, '卖出被迁移到错误日期');
   }
   const dates = api.DATA.closedTrades.map(d => d.date);
-  assert.deepEqual(dates.slice(), dates.slice().sort().reverse(), '兑现日期未倒序');
+  assert.equal(JSON.stringify(dates), JSON.stringify(expected.groups.map(d => d.date)), '兑现日期未倒序');
   const reviewIds = [...nodes.reviewsBox.innerHTML.matchAll(/data-review-id="([^"]+)"/g)].map(m => m[1]);
   const publicReviews = (ledger.reviews || []).filter(r => r.visibility !== 'internal');
   assert.deepEqual(reviewIds.slice().sort(), publicReviews.map(r => r.reviewId).sort(), '公开复盘缺失或内部核对泄漏');

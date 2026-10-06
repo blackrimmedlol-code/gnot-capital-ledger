@@ -4,7 +4,7 @@
 // 输出: git-publish/public/index.html (脱敏版，浏览器只加载脱敏数据)
 const fs = require('fs');
 const path = require('path');
-const { derive } = require('./derive.js'); // 成交兑现视图派生（事实来自 executions）
+const { derive, presentChinaDates } = require('./derive.js'); // 成交兑现视图派生（事实来自 executions）
 
 const ROOT = __dirname;
 const LEDGER_PATH = path.join(ROOT, 'data', 'ledger-full.json');
@@ -22,7 +22,7 @@ console.log(`✅ ledger-full.json: ${ledger.accounts.length} accounts, ${ledger.
 
 // ---- 2. 生成脱敏数据 ----
 // 成交兑现视图：由 executions 派生（事实），继承历史评语；按真实日期倒序
-const derivedClosed = derive(ledger).groups;
+const derivedClosed = presentChinaDates(derive(ledger), ledger).groups;
 
 // 递归剥离 qty 字段（股数），保留其他所有字段
 function sanitize(obj) {
@@ -98,6 +98,7 @@ function attachCoverage(h) {
 // 字段映射：ledger-full.json 新字段名 → HTML 模板旧字段名
 function mapFields(holding) {
   const h = { ...holding };
+  delete h.strategyNote; // Keep strategy notes in the full ledger only.
   // entrySetup → setup, entryExecStatus → execStatus（向后兼容）
   if (h.entrySetup && !h.setup) h.setup = h.entrySetup;
   if (h.entryExecStatus && !h.execStatus) h.execStatus = h.entryExecStatus;

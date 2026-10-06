@@ -52,7 +52,8 @@
       "tradeTimezone": "America/New_York",
       "reviewTimezone": "Asia/Shanghai",
       "missingValues": "保留null，页面显示待核实，不阻止事件渲染",
-      "acceptanceCommand": "node check_update.js"
+      "acceptanceCommand": "node check_update.js",
+      "displayTradeTimezone": "Asia/Shanghai"
     },
     "optionsAnalysis": {
       "scope": "coverage_only",
@@ -74,12 +75,19 @@
     },
     "reviewPresentation": {
       "timezone": "Asia/Shanghai",
-      "dateBasis": "美东交易日对应次日中国复盘日；实际成交日期和实际记录时间另存",
+      "dateBasis": "中国复盘日期；reviewDate与实际成交日期独立，原始美东交易日/时间保留用于对账",
       "internalVisibility": "结单核对、历史补录、内部观察仅存仓库，不进入网站加载数据"
     },
     "displayReturns": {
       "fees": "ignore_in_display",
       "note": "按股票成交价核算；保留原始费用但页面不重复显示费用表述"
+    },
+    "tradePresentation": {
+      "timezone": "Asia/Shanghai",
+      "exact": "有带时区成交timestamp时精确转换中国日期和时刻",
+      "day": "用户确认中国日期时保留日期，时刻未知不补0点",
+      "range": "仅有美东原日期时显示其可能对应的中国日期区间，不统一加一天，不将报告时间当成交时间",
+      "original": "executions.date/time/timezone和券商时间保持来源原义；呈现转换由derive.js统一执行"
     }
   },
   "discipline": {
@@ -2923,6 +2931,12 @@
       "source": {
         "type": "user_confirmation",
         "reportedAt": "2026-10-06T13:40:07+08:00"
+      },
+      "chinaDate": "2026-10-06",
+      "chinaDateSource": {
+        "type": "contemporaneous_user_report",
+        "reportedAt": "2026-10-06T13:40:07+08:00",
+        "evidence": "用户表示刚刚夜盘买入；报告中国时间10/6，精确成交时刻未提供"
       }
     }
   ],
@@ -4291,7 +4305,7 @@
         "本次加仓的事前计划未记录。"
       ],
       "execution": [
-        "主号RAM：美东10/6夜盘按13.85加仓，归属原未结束持仓周期。"
+        "主号RAM：中国时间10/6按13.85夜盘加仓，归属原未结束持仓周期。"
       ],
       "good": [],
       "issues": [],
