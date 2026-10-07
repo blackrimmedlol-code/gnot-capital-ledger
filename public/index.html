@@ -602,7 +602,7 @@
         <h1>持仓监测与交易复盘</h1>
         <p class="motto-compact">Fundamental Truth is not Alpha.</p>
       </div>
-      <span class="stamp">记录更新至 2026-10-07</span>
+      <span class="stamp">记录更新至 2026-10-08</span>
     </div>
   </div>
 </header>
@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交已更新至美东2026/10/7：主号RAM盘前13.2、12.98连补（均破周内停加纪律）；1号SNXX@16.1清仓兑现；行情：RAM等仍10/6收盘。",
-  asOfLabel: "成交：10/7（RAM双补+1号SNXX清仓） · 行情：10/6收盘",
+  asOf: "成交已更新至美东2026/10/7：主号RAM盘前13.2、12.98连补（破周内停加纪律）；1号SNXX@16.1清仓兑现、RKLX@17.6支撑位建仓；行情：RAM等仍10/6收盘。",
+  asOfLabel: "成交：10/7（RAM双补+1号SNXX清仓+RKLX建仓） · 行情：10/6收盘",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1767,7 +1767,35 @@
       role: "高风险卫星仓 · 快进快出博弈",
       tag: "卫星博弈",
       navNote: "USD · 满仓",
-      holdings: []
+      holdings: [
+        {
+          sym: "RKLX",
+          name: "Defiance 2X RKLB · 2x 火箭实验室",
+          cost: 17.6,
+          costNote: "实际成本",
+          strategy: [
+            "卫星仓·2x RKLB 杠杆博弈"
+          ],
+          options: [],
+          tags: [
+            "hold"
+          ],
+          alertSub: "2x 每日重置 · 高波动标的",
+          setup: [
+            "支撑位反弹"
+          ],
+          execStatus: "adhoc",
+          oneLiner: "10/7@17.6支撑位抄底建仓（1号小账号新开，2x RKLB 杠杆快进快出博弈）；观察反弹成色。",
+          coverage: {
+            status: "none",
+            statusText: "无备兑",
+            isFullyBacked: false,
+            sharesUnknown: false
+          },
+          weightRank: 1,
+          weightLevel: "高"
+        }
+      ]
     },
     {
       id: "sat2",
@@ -3380,12 +3408,14 @@
       plan: [
         "10/6曾定周内不再加仓RAM；本笔10/7 13.2加仓为用户主动突破该纪律。",
         "本笔无事先交易计划，用户承认'有点上头'。",
-        "1号小账号为快进快出博弈：SNXX反弹观察成色兑现即清仓。"
+        "1号小账号为快进快出博弈：SNXX反弹观察成色兑现即清仓。",
+        "1号小账号：RKLX 观察支撑位，低吸快进快出博弈；到止盈位/反弹成色验证后兑现。"
       ],
       execution: [
         "主号RAM：13.2情绪加仓（用户承认'有点上头'，记情绪交易），突破10/6所定周内停加纪律；后续回归纪律、周内不再加仓。",
         "主号RAM：12.98再追跌买入（未定性，疑似延续情绪加仓；再次突破周内停加纪律）。",
-        "1号小账号SNXX：16.1清仓兑现（10/5建仓@15.695，反弹成色验证后快进快出落袋，约+2.6%）；现金回笼默认观望。"
+        "1号小账号SNXX：16.1清仓兑现（10/5建仓@15.695，反弹成色验证后快进快出落袋，约+2.6%）；现金回笼默认观望。",
+        "1号小账号RKLX：17.6支撑位抄底建仓（2x RKLB 杠杆，快进快出观察反弹成色）。"
       ],
       good: [
         "1号SNXX按反弹验证逻辑到价兑现，未恋战。"
@@ -3401,7 +3431,8 @@
       execStatus: "emo",
       symbols: [
         "RAM",
-        "SNXX"
+        "SNXX",
+        "RKLX"
       ],
       accounts: [
         "主账号",

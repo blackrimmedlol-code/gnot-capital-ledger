@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交已更新至美东2026/10/7：主号RAM盘前13.2、12.98连补（均破周内停加纪律）；1号SNXX@16.1清仓兑现；行情：RAM等仍10/6收盘。",
-  "asOfLabel": "成交：10/7（RAM双补+1号SNXX清仓） · 行情：10/6收盘",
+  "asOf": "成交已更新至美东2026/10/7：主号RAM盘前13.2、12.98连补（破周内停加纪律）；1号SNXX@16.1清仓兑现、RKLX@17.6支撑位建仓；行情：RAM等仍10/6收盘。",
+  "asOfLabel": "成交：10/7（RAM双补+1号SNXX清仓+RKLX建仓） · 行情：10/6收盘",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -661,6 +661,50 @@
           "actionExecStatus": null,
           "exitReason": null,
           "episodeId": "EP-SNXX1-2026Q4"
+        },
+        {
+          "sym": "RKLX",
+          "name": "Defiance 2X RKLB · 2x 火箭实验室",
+          "qty": 131,
+          "cost": 17.6,
+          "costDate": "10/7 支撑位抄底建仓（1号小账号新开）",
+          "lastPrice": 17.6,
+          "lastPriceDate": "2026-10-07 盘中建仓价",
+          "wtPct": 100,
+          "strategy": [
+            "卫星仓·2x RKLB 杠杆博弈"
+          ],
+          "options": [],
+          "tags": [
+            "hold"
+          ],
+          "status": [
+            "持有"
+          ],
+          "alertSub": "2x 每日重置 · 高波动标的",
+          "setup": [
+            "支撑位反弹"
+          ],
+          "execStatus": "adhoc",
+          "oneLiner": "10/7@17.6支撑位抄底建仓（1号小账号新开，2x RKLB 杠杆快进快出博弈）；观察反弹成色。",
+          "actualCostBasis": {
+            "value": 17.6,
+            "note": "10/7@17.6新建仓，初始成本=买入价",
+            "status": "确认"
+          },
+          "netInvestedCost": {
+            "value": 17.6,
+            "note": "10/7@17.6新开正股净投入",
+            "status": "确认"
+          },
+          "costDisplay": "实际成本",
+          "entrySetup": [
+            "支撑位反弹"
+          ],
+          "entryExecStatus": "adhoc",
+          "actionExecStatus": "adhoc",
+          "exitReason": null,
+          "episodeId": "EP-RKLX1-2026Q4"
         }
       ]
     },
@@ -3381,6 +3425,33 @@
         "reportedAt": "2026-10-07T23:38:21+08:00",
         "evidence": "用户报告1号小账号16.1卖143 SNXX清仓；未明确成交时刻，按美东10/7交易日近似归属"
       }
+    },
+    {
+      "executionId": "EX-USER-20261007-RKLX-BUY-058",
+      "episodeId": "EP-RKLX1-2026Q4",
+      "account": "sat1",
+      "sym": "RKLX",
+      "side": "buy",
+      "qty": 131,
+      "price": 17.6,
+      "date": "2026-10-07",
+      "time": null,
+      "timezone": "America/New_York",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "adhoc",
+      "note": "1号小账号支撑位抄底建仓（用户观察到支撑位）；小额博弈，无完整计划，未提供精确成交时刻",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-08T01:16:37+08:00"
+      },
+      "chinaDate": "2026-10-08",
+      "chinaDateSource": {
+        "type": "contemporaneous_user_report",
+        "reportedAt": "2026-10-08T01:16:37+08:00",
+        "evidence": "用户报告1号小账号RKLX 17.6买131，原因观察到支撑位；按美东10/7交易日近似归属"
+      }
     }
   ],
   "episodes": [
@@ -3796,6 +3867,15 @@
       "exitReason": null,
       "exitDate": null,
       "entryDateNote": "支撑位抄底建仓，预期快进快出"
+    },
+    {
+      "episodeId": "EP-RKLX1-2026Q4",
+      "sym": "RKLX",
+      "account": "sat1",
+      "name": "1号RKLX支撑位建仓",
+      "status": "open",
+      "currentQty": 131,
+      "openedDate": "2026-10-07"
     }
   ],
   "closedTrades": [
@@ -4651,6 +4731,11 @@
       "date": "2026-10-07",
       "item": "1号SNXX清仓登记",
       "detail": "1号小账号SNXX按16.1卖143全部清仓（10/5建仓@15.695，兑现约+2.6%）；episode EP-SNXX1-2026Q4关闭，currentQty143→0，netInvestedCost归零、现金回笼。用户未定性暂记adhoc。并入RV-20261007。"
+    },
+    {
+      "date": "2026-10-08",
+      "item": "1号RKLX建仓登记",
+      "detail": "1号小账号RKLX按17.6买131（用户观察到支撑位），新开EP-RKLX1-2026Q4、initial成本17.6。用户未定性，暂记adhoc（支撑位观察决策）。"
     }
   ],
   "reviews": [
@@ -4857,17 +4942,20 @@
       "executionIds": [
         "EX-USER-20261007-RAM-BUY-005",
         "EX-USER-20261007-RAM-BUY-006",
-        "EX-USER-20261007-SNXX-SELL-057"
+        "EX-USER-20261007-SNXX-SELL-057",
+        "EX-USER-20261007-RKLX-BUY-058"
       ],
       "plan": [
         "10/6曾定周内不再加仓RAM；本笔10/7 13.2加仓为用户主动突破该纪律。",
         "本笔无事先交易计划，用户承认'有点上头'。",
-        "1号小账号为快进快出博弈：SNXX反弹观察成色兑现即清仓。"
+        "1号小账号为快进快出博弈：SNXX反弹观察成色兑现即清仓。",
+        "1号小账号：RKLX 观察支撑位，低吸快进快出博弈；到止盈位/反弹成色验证后兑现。"
       ],
       "execution": [
         "主号RAM：13.2情绪加仓（用户承认'有点上头'，记情绪交易），突破10/6所定周内停加纪律；后续回归纪律、周内不再加仓。",
         "主号RAM：12.98再追跌买入（未定性，疑似延续情绪加仓；再次突破周内停加纪律）。",
-        "1号小账号SNXX：16.1清仓兑现（10/5建仓@15.695，反弹成色验证后快进快出落袋，约+2.6%）；现金回笼默认观望。"
+        "1号小账号SNXX：16.1清仓兑现（10/5建仓@15.695，反弹成色验证后快进快出落袋，约+2.6%）；现金回笼默认观望。",
+        "1号小账号RKLX：17.6支撑位抄底建仓（2x RKLB 杠杆，快进快出观察反弹成色）。"
       ],
       "good": [
         "1号SNXX按反弹验证逻辑到价兑现，未恋战。"
@@ -4888,7 +4976,8 @@
       "internalObservation": [
         "本笔13.2成交时刻未提供，按美东10/7交易日近似归属；行情仍10/6收盘快照，成交价不冒充实时行情。",
         "本笔12.98成交时刻未提供，按美东10/7交易日近似归属；执行状态暂记adhoc，用户若认情绪可改emo。",
-        "本笔清仓时刻未提供，按美东10/7盘中近似归属；执行状态暂记adhoc。"
+        "本笔清仓时刻未提供，按美东10/7盘中近似归属；执行状态暂记adhoc。",
+        "本笔建仓时刻未提供，按美东10/7盘中近似归属；执行状态暂记adhoc（支撑位观察决策）。"
       ]
     }
   ],

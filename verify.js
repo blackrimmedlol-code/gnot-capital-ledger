@@ -105,7 +105,8 @@ function pendingBalance(acct, sym, calculated, reported) {
 }
 j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const acctId = acctIdOf(a);
-  const ex = j.executions.filter(e => e.sym === h.sym && e.account === acctId);
+  const closedEpIds = new Set((j.episodes || []).filter(e => e.status === 'closed').map(e => e.episodeId));
+  const ex = j.executions.filter(e => e.sym === h.sym && e.account === acctId && !closedEpIds.has(e.episodeId));
   if (ex.length === 0) {
     warnings++; console.warn(`⚠️ ${h.sym}(${acctId}) 无 execution 流水，无法对账持仓（期初/买入/卖出缺失）`);
     return;
@@ -134,7 +135,8 @@ console.log('✅ 持仓对账: 流水完整者已核对（买卖差=当前持仓
 j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const ni = h.netInvestedCost;
   if (!ni || ni.value === null) return;
-  const ex = j.executions.filter(e => e.sym === h.sym && e.account === acctIdOf(a));
+  const closedEpIds6 = new Set((j.episodes || []).filter(e => e.status === 'closed').map(e => e.episodeId));
+  const ex = j.executions.filter(e => e.sym === h.sym && e.account === acctIdOf(a) && !closedEpIds6.has(e.episodeId));
   const allKnown = ex.length > 0 && ex.every(e => e.qty !== null && e.qty !== undefined);
   if (!allKnown || !h.qty) return; // 流水不完整跳过硬核对
   const calculated = ex.reduce((s, e) => s + (e.side === 'buy' ? analysisQty(e) : -analysisQty(e)), 0);
