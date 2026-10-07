@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交与行情均已更新至美东2026/10/6收盘：主号RAM连续四档补仓（达本轮上限·周内停加）·IRE部分止盈·STXL支撑位抄底建仓；行情：RAM/CRWG/CRDU/IRE/STXL/SNXX均10/6收盘",
-  asOfLabel: "成交：10/6（RAM四档补仓+STXL建仓+IRE止盈） · 行情：10/6收盘",
+  asOf: "成交已更新至美东2026/10/7：主号RAM四档补仓后再情绪加仓13.2（突破周内停加纪律·记emo）；行情：RAM等仍10/6收盘。",
+  asOfLabel: "成交：10/7（RAM情绪加仓13.2） · 行情：10/6收盘",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1559,7 +1559,7 @@
         {
           sym: "RAM",
           name: "2x DRAM (Roundhill T-Rex)",
-          cost: 13.70779,
+          cost: 13.67152,
           costNote: "历史均价基准滚动",
           strategy: [
             "核心仓",
@@ -1623,7 +1623,7 @@
             "趋势波段"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/6连续四档补仓（13.85夜+13.70盘+13.55+13.42），已达加仓上限、一周内不再加仓；既定14C接受指派。",
+          oneLiner: "10/6四档补仓后10/7又情绪加仓13.2（突破周内停加纪律·用户已认知），后续回归纪律、周内不再加仓；14C接受指派。",
           coverage: {
             status: "covered",
             statusText: "足额备兑",
@@ -3351,6 +3351,36 @@
       saleExecutionIds: [
         "EX-USER-20261006-IRE-SELL-001"
       ]
+    },
+    {
+      reviewId: "RV-20261007",
+      date: "2026-10-07",
+      reviewDate: "2026-10-07",
+      reviewTimezone: "Asia/Shanghai",
+      dateLabel: "2026-10-07 复盘",
+      title: "RAM情绪加仓 · 突破周内停加纪律",
+      plan: [
+        "10/6曾定周内不再加仓RAM；本笔10/7 13.2加仓为用户主动突破该纪律。",
+        "本笔无事先交易计划，用户承认'有点上头'。"
+      ],
+      execution: [
+        "主号RAM：13.2情绪加仓（用户承认'有点上头'，记情绪交易），突破10/6所定周内停加纪律；后续回归纪律、周内不再加仓。"
+      ],
+      good: [],
+      issues: [
+        "情绪期打破自定的周内停加纪律，需回归计划、避免连续追低。"
+      ],
+      todo: [
+        "回归周内不再加仓RAM纪律；14C备兑状态不变、到期前继续收租。"
+      ],
+      execStatus: "emo",
+      symbols: [
+        "RAM"
+      ],
+      accounts: [
+        "主账号"
+      ],
+      saleExecutionIds: []
     },
     {
       reviewId: "RV-20261005",

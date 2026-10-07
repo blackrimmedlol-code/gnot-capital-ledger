@@ -45,7 +45,7 @@ if (/mult\s*:/.test(html)) {
 
 // 4. 可见文本（reviews/journal/closed 说明等）禁止股数/金额：数字+「股」、数字+「元」、$数字、交易动词+裸整数股数（不带「股」字也拦截）
 let proseBad = 0;
-const proseLeaks = html.match(/[0-9]+\s*股|[0-9]+\s*(美元|USD|\b元)|\$\s?[0-9]|(?:卖出|买入|加仓|减仓|清仓|抛售|购)\s*[0-9]+(?!\.\d)(?!\s*[张份])/g);
+const proseLeaks = html.match(/[0-9]+\s*股|[0-9]+\s*(美元|USD|\b元)|\$\s?[0-9]|(?:卖出|买入|加仓|减仓|清仓|抛售|购)\s*[0-9]+(?!\.?\d)(?!\s*[张份号])/g);
 if (proseLeaks) {
   // 排除期权「张数 ×8」的偶发命中（× 后为张数可显示）、价格上下文由人工辨识
   proseBad += proseLeaks.length;
