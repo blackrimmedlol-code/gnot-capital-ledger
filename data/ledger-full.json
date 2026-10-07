@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交已更新至美东2026/10/7：主号RAM盘前13.2、12.98连补（破周内停加纪律）；1号SNXX@16.1清仓兑现、RKLX@17.6支撑位建仓；行情：RAM等仍10/6收盘。",
-  "asOfLabel": "成交：10/7（RAM双补+1号SNXX清仓+RKLX建仓） · 行情：10/6收盘",
+  "asOf": "行情已更新至美东2026/10/7收盘：RAM 13.49(+1.81%)、CRWG 18.64(-7.08%)、CRDU 11.40(-0.78%)、IRE 8.08(-12.65%)、STXL 27.12(持平)、1号SNXX 15.74(+3.62%)、RKLX 18.01(-8.44%)；A股国庆休市跳过。",
+  "asOfLabel": "行情：10/7收盘",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -300,9 +300,9 @@
           "cost": 13.64814,
           "costDate": "原持续持仓；10/6四档13.70/13.85/13.55/13.42加仓；10/7 13.2情绪加仓（突破周内停加纪律）;10/7再12.98买49(追跌突破停加纪律)",
           "stop": null,
-          "lastPrice": 13.25,
-          "lastPriceDate": "2026-10-06 收盘",
-          "wtPct": 67,
+          "lastPrice": 13.49,
+          "lastPriceDate": "2026-10-07 收盘",
+          "wtPct": 71,
           "strategy": [
             "核心仓",
             "CC收租"
@@ -403,7 +403,7 @@
             "status": "本轮不核算",
             "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
-          "weightNote": "沿用10/5净资产权重估算；不是10/6加仓后的实时账户权重"
+          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）"
         },
         {
           "sym": "CRWG",
@@ -411,9 +411,9 @@
           "qty": 100,
           "cost": 15.75,
           "costDate": "2026-09-17",
-          "lastPrice": 20.06,
-          "lastPriceDate": "2026-10-06 收盘",
-          "wtPct": 8,
+          "lastPrice": 18.64,
+          "lastPriceDate": "2026-10-07 收盘",
+          "wtPct": 7,
           "strategy": [
             "核心仓",
             "CC收租"
@@ -459,16 +459,16 @@
             "status": "本轮不核算",
             "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
-          "weightNote": "沿用10/5净资产权重估算；不是10/6加仓后的实时账户权重"
+          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）"
         },
         {
           "sym": "CRDU",
           "name": "2x Credo (Tradr)",
           "qty": 300,
           "cost": 6.71493,
-          "lastPrice": 11.49,
-          "lastPriceDate": "2026-10-06 收盘",
-          "wtPct": 13,
+          "lastPrice": 11.4,
+          "lastPriceDate": "2026-10-07 收盘",
+          "wtPct": 12,
           "strategy": [
             "核心仓",
             "CC收租"
@@ -514,7 +514,7 @@
             "status": "本轮不核算",
             "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
-          "weightNote": "沿用10/5净资产权重估算；不是10/6加仓后的实时账户权重"
+          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）"
         },
         {
           "sym": "IRE",
@@ -522,9 +522,9 @@
           "qty": 100,
           "cost": 8.94987,
           "costDate": "9/30建底仓 / 10/1 8.58+8.81补 / 10/2 9.9+10.38止盈 / 10/2 9.23接回 / 10/5 8.93+8.77补仓 / 10/7 9.55止盈300",
-          "lastPrice": 9.25,
-          "lastPriceDate": "2026-10-06 收盘",
-          "wtPct": 4,
+          "lastPrice": 8.08,
+          "lastPriceDate": "2026-10-07 收盘",
+          "wtPct": 3,
           "strategy": [
             "卫星仓·AI云"
           ],
@@ -562,7 +562,7 @@
           "actionExecStatus": null,
           "exitReason": null,
           "episodeId": "EP-IRE-2026Q4",
-          "weightNote": "卖出300后剩100股，权重为估算待净资产刷新"
+          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）"
         },
         {
           "sym": "STXL",
@@ -571,8 +571,8 @@
           "cost": 27.29,
           "costDate": "10/6支撑位抄底建仓",
           "lastPrice": 27.12,
-          "lastPriceDate": "2026-10-06 收盘",
-          "wtPct": 8,
+          "lastPriceDate": "2026-10-07 收盘",
+          "wtPct": 7,
           "strategy": [
             "支撑低吸"
           ],
@@ -598,14 +598,14 @@
             "episodeId": "EP-STXL-2026Q4",
             "note": "一次性买入，正股净投入=成交价"
           },
-          "weightNote": "待净资产核算后分配权重；未计入历史集中度权重",
+          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
           "tags": [
             "hold"
           ]
         }
       ],
-      "positionAsOf": "2026-10-06",
-      "holdingsAsOf": "2026-10-06"
+      "positionAsOf": "2026-10-07",
+      "holdingsAsOf": "2026-10-07"
     },
     {
       "id": "sat1",
@@ -624,8 +624,8 @@
           "qty": 0,
           "cost": 15.695,
           "costDate": "10/5 首建（1号小账户新开）",
-          "lastPrice": 15.19,
-          "lastPriceDate": "2026-10-06 收盘",
+          "lastPrice": 15.74,
+          "lastPriceDate": "2026-10-07 收盘",
           "wtPct": 100,
           "strategy": [
             "卫星仓·存储杠杆博弈"
@@ -668,8 +668,8 @@
           "qty": 131,
           "cost": 17.6,
           "costDate": "10/7 支撑位抄底建仓（1号小账号新开）",
-          "lastPrice": 17.6,
-          "lastPriceDate": "2026-10-07 盘中建仓价",
+          "lastPrice": 18.01,
+          "lastPriceDate": "2026-10-07 收盘",
           "wtPct": 100,
           "strategy": [
             "卫星仓·2x RKLB 杠杆博弈"
@@ -725,8 +725,8 @@
           "qty": 67,
           "cost": 18.32,
           "costDate": "2026-09-23",
-          "lastPrice": 15.19,
-          "lastPriceDate": "2026-10-06 收盘",
+          "lastPrice": 15.74,
+          "lastPriceDate": "2026-10-07 收盘",
           "wtPct": 100,
           "strategy": [
             "卫星仓·存储杠杆博弈"
@@ -5879,15 +5879,15 @@
   ],
   "stockConcentration": {
     "account": "main",
-    "positionAsOf": "2026-10-06",
-    "priceAsOf": "2026-10-06",
+    "positionAsOf": "2026-10-07",
+    "priceAsOf": "2026-10-07",
     "denominator": "正股交易仓市值，不含现金、期权或观察股",
     "weights": {
-      "RAM": 67.19,
-      "CRWG": 7.82,
-      "CRDU": 13.45,
-      "IRE": 3.61,
-      "STXL": 7.93
+      "RAM": 70.64,
+      "CRWG": 6.74,
+      "CRDU": 12.36,
+      "IRE": 2.92,
+      "STXL": 7.35
     }
   },
   "costCheckpoints": [
