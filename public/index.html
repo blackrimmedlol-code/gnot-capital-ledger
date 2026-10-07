@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交已更新至美东2026/10/7：主号RAM盘前连补13.2、12.98两笔（均突破周内停加纪律），总仓至1449；行情：RAM等仍10/6收盘。",
-  asOfLabel: "成交：10/7（RAM 13.2情绪加仓+12.98追跌） · 行情：10/6收盘",
+  asOf: "成交已更新至美东2026/10/7：主号RAM盘前13.2、12.98连补（均破周内停加纪律）；1号SNXX@16.1清仓兑现；行情：RAM等仍10/6收盘。",
+  asOfLabel: "成交：10/7（RAM双补+1号SNXX清仓） · 行情：10/6收盘",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1767,35 +1767,7 @@
       role: "高风险卫星仓 · 快进快出博弈",
       tag: "卫星博弈",
       navNote: "USD · 满仓",
-      holdings: [
-        {
-          sym: "SNXX",
-          name: "Tradr 2X Long SNDK · 2x 闪迪",
-          cost: 15.695,
-          costNote: "实际成本",
-          strategy: [
-            "卫星仓·存储杠杆博弈"
-          ],
-          options: [],
-          tags: [
-            "hold"
-          ],
-          alertSub: "2x 每日重置 · 高波动标的",
-          setup: [
-            "支撑位反弹"
-          ],
-          execStatus: "plan",
-          oneLiner: "既定观察支撑位出现反弹迹象，10/5 建仓（2x 闪迪高波动博弈）；用结果验证反弹成色。",
-          coverage: {
-            status: "none",
-            statusText: "无备兑",
-            isFullyBacked: false,
-            sharesUnknown: false
-          },
-          weightRank: 1,
-          weightLevel: "高"
-        }
-      ]
+      holdings: []
     },
     {
       id: "sat2",
@@ -1921,6 +1893,52 @@
     }
   ],
   closedTrades: [
+    {
+      date: "2026-10-07",
+      dateStart: "2026-10-07",
+      dateEnd: "2026-10-07",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-07",
+      trades: [
+        {
+          tradeId: "EP-SNXX1-2026Q4:2026-10-07",
+          episodeId: "EP-SNXX1-2026Q4",
+          sym: "SNXX",
+          name: "Tradr 2X Long SNDK · 2x 闪迪",
+          acct: "1号小账号",
+          cost: 15.695,
+          soldDate: "2026-10-07",
+          dateStart: "2026-10-07",
+          dateEnd: "2026-10-07",
+          isPartial: true,
+          closesEpisode: false,
+          totalRetPct: 2.58044,
+          result: "win",
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
+          reason: "部分减仓兑现",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261007-SNXX-SELL-057",
+              date: "2026-10-07",
+              dateEnd: "2026-10-07",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 16.1,
+              cost: 15.695,
+              costBasisType: "actual",
+              retPct: 2.58044,
+              note: "1号小账号清仓全部SNXX 143（10/5建仓@15.695，快进快出博弈兑现约+2.6%）；用户未定性，暂记adhoc，原反弹成色验证逻辑兑现"
+            }
+          ]
+        }
+      ]
+    },
     {
       date: "2026-10-06",
       dateStart: "2026-10-06",
@@ -3361,28 +3379,37 @@
       title: "RAM情绪加仓 · 突破周内停加纪律",
       plan: [
         "10/6曾定周内不再加仓RAM；本笔10/7 13.2加仓为用户主动突破该纪律。",
-        "本笔无事先交易计划，用户承认'有点上头'。"
+        "本笔无事先交易计划，用户承认'有点上头'。",
+        "1号小账号为快进快出博弈：SNXX反弹观察成色兑现即清仓。"
       ],
       execution: [
         "主号RAM：13.2情绪加仓（用户承认'有点上头'，记情绪交易），突破10/6所定周内停加纪律；后续回归纪律、周内不再加仓。",
-        "主号RAM：12.98再追跌买入（未定性，疑似延续情绪加仓；再次突破周内停加纪律）。"
+        "主号RAM：12.98再追跌买入（未定性，疑似延续情绪加仓；再次突破周内停加纪律）。",
+        "1号小账号SNXX：16.1清仓兑现（10/5建仓@15.695，反弹成色验证后快进快出落袋，约+2.6%）；现金回笼默认观望。"
       ],
-      good: [],
+      good: [
+        "1号SNXX按反弹验证逻辑到价兑现，未恋战。"
+      ],
       issues: [
         "情绪期打破自定的周内停加纪律，需回归计划、避免连续追低。",
         "10/7两笔加仓（13.2、12.98）连续突破自定周内停加纪律、仓位显著抬升，需立即停手回归计划，避免跌破12继续摊平。"
       ],
       todo: [
-        "立即停手回归周内不再加仓纪律；14C备兑不变、到期前继续收租。"
+        "立即停手回归周内不再加仓纪律；14C备兑不变、到期前继续收租。",
+        "1号回笼现金默认观望，不做新仓；待用户明确去向。"
       ],
       execStatus: "emo",
       symbols: [
-        "RAM"
+        "RAM",
+        "SNXX"
       ],
       accounts: [
-        "主账号"
+        "主账号",
+        "1号小账号"
       ],
-      saleExecutionIds: []
+      saleExecutionIds: [
+        "EX-USER-20261007-SNXX-SELL-057"
+      ]
     },
     {
       reviewId: "RV-20261005",
