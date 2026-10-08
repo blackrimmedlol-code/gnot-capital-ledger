@@ -13,6 +13,8 @@
 - **复盘日期纠正（用户2026-10-08确认）**：原两篇历史复盘分别归属10/5（IRE/GDXU/1号操作）、10/6（RAM/IRE/STXL），10/7保留RAM加仓与1号换仓。用户随后明确确认RAM13.7预设限价减仓在10/8执行，故单独进入RV-20261008，不再放入RV-20261007。dateLabel、排序、筛选、归档统一使用reviewDate；最新一篇置顶并默认展开。仅改标题日期时不改成交事实；如果用户纠正实际成交归属，则迁移该executionId及对应事实/计划/评价，保留原文于presentationCorrections，不移动无关成交、不新增重复流水。
 - review_dates.js检查每笔新增成交只有一个公开复盘引用，且reviewDate落在实际中国日期（或真正未知时刻的可能日期区间）内。chinaDateSource.type=explicit_user_confirmation用于用户明确确认的成交日；精确timestamp或明确成交日优先于历史复盘标签。历史用户指定归属的有限例外保存在内部reviewDateOverrides，仅适用列明的executionId，不适用后来追加的成交。时刻/日期未知则查来源、保留区间，不将报告日期或行情价格关系当作成交时刻证据。
 - 日内重复更新同一 reviewId，追加本次 executionIds 并同步事实；保留原计划及修改时间，不能追溯改写事前判断。
+- **成交日期确认（2026-10-08）**：用户明确确认原10/5—10/6区间内AVGX/LABU/GDXU三笔卖出实际归属10/5，原10/2—10/3区间内RAM14.5与IRE9.9/10.38三笔卖出实际归属10/2。逐笔写chinaDate和explicit_user_confirmation来源，保留原date/time/timezone；公开按单一确认日期自动合并已有同日卡片，不新增成交、不改收益或周期状态。关联的旧10/3复盘改归10/2，保留原标签及更正原因。
+- **新录入日期门槛**：2026-10-08起（methodology.updatePolicy.actualChinaDateRequiredFrom）新成交及当天补录必须保存有来源的实际中国日期或带时区timestamp；原日期本来就是上海/香港日历日期时可直接采用。只缺时刻不等于缺日期，chinaDateSource保存用户确认/明确当日操作/结单依据，不用录入时刻代替成交时刻，不按美东日统一加一天。日期未知先存内部草稿或核对记录，不进入新正式流水并发布区间卡片；不能为通过检查猜填。review_dates.js阻止新记录缺实际日期、无来源、非法日期或与精确timestamp冲突。历史真正未知日期仍保留，不全量猜改。
 
 - 实际成交展示也使用Asia/Shanghai。原executions.date/time/timezone及券商timestamp保持来源原义；derive的presentChinaDates按真实timestamp精确转换，或用有来源的chinaDate。仅有原美东日期显示可能对应的中国日期区间；不制造成交时刻、不用报告时刻代替成交时刻，不统一日期加一天。日期重分组不能改变成本流水顺序或重复计清仓周期。
 - **页面时间展示（2026-10-07）**：页面成交与复盘默认为中国时间，**不在页面上写"中国时间"字样**（页脚、复盘正文、成交展示均不加此标注）；内部 chinaDate / reviewTimezone / reviewDate / chinaDateSource 字段仍完整保留，仅用于归属换算，不进入页面文案。

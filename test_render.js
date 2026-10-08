@@ -74,6 +74,14 @@ function check(html, ledger) {
     assert.equal(l.date, d.date, '卖出被迁移到错误日期');
   }
   const dates = api.DATA.closedTrades.map(d => d.date);
+  for (const [id, day] of [['EX-20261005-AVGX-SELL-052', '2026-10-05'],
+    ['EX-20261005-LABU-SELL-054', '2026-10-05'], ['EX-20261005-GDXU-SELL-055', '2026-10-05'],
+    ['EX-20261002-RAM-SELL-008', '2026-10-02'], ['EX-20261002-IRE-SELL-015', '2026-10-02'],
+    ['EX-20261002-IRE-SELL-016', '2026-10-02']]) {
+    const group = api.DATA.closedTrades.find(d => d.trades.some(t => t.legs.some(l => l.executionId === id)));
+    assert.equal(group.dateLabel, day, '线上确认日期仍显示跨日区间: ' + id);
+  }
+  assert.ok(!dates.includes('2026-10-05/2026-10-06') && !dates.includes('2026-10-02/2026-10-03'));
   const snxxClose = api.DATA.closedTrades.flatMap(d => d.trades).find(t => t.episodeId === 'EP-SNXX1-2026Q4');
   assert.ok(snxxClose && snxxClose.closesEpisode && !snxxClose.isPartial && snxxClose.performanceEligible,
     '已清仓SNXX页面仍按部分减仓展示');

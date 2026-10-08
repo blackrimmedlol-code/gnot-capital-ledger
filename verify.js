@@ -228,6 +228,9 @@ sales.forEach(e => {
 derived.groups.forEach(d => d.trades.forEach(t => t.legs.forEach(l => {
   if (l.date !== d.date) { errors++; console.error('❌ 成交被归到错误交易日: ' + l.executionId); }
 })));
+require('./review_dates').validateExecutionDates(j).forEach(problem => {
+  errors++; console.error('❌ ' + problem);
+});
 require('./review_dates').validateReviewLinks(j).forEach(problem => {
   errors++; console.error('❌ ' + problem);
 });

@@ -123,3 +123,23 @@ assert.equal(publicExecutionNote({ sym: 'STXL', qty: 75, note: '建仓75@27.29' 
 assert.equal(publicExecutionNote({ sym: 'RAM', qty: 100, note: '按13.7减仓，保留2张call' }), '按13.7减仓，保留2张call');
 assert.ok(shareCountPatterns(snxxSale).some(p => p.test(snxxSale.note)), '裸写股数检测未覆盖实际遗漏');
 console.log('✅ 完整清仓/部分减仓状态与裸写股票数量脱敏回归通过');
+const confirmedDays = new Map([
+  ['EX-20261005-AVGX-SELL-052', '2026-10-05'], ['EX-20261005-LABU-SELL-054', '2026-10-05'],
+  ['EX-20261005-GDXU-SELL-055', '2026-10-05'], ['EX-20261002-RAM-SELL-008', '2026-10-02'],
+  ['EX-20261002-IRE-SELL-015', '2026-10-02'], ['EX-20261002-IRE-SELL-016', '2026-10-02']
+]);
+for (const [id, day] of confirmedDays) {
+  const leg = cn.trades.flatMap(t => t.legs).find(l => l.executionId === id);
+  assert.equal(leg.date, day, '已确认成交日期仍被跨日显示: ' + id);
+  assert.equal(leg.datePrecision, 'day');
+  assert.equal(leg.time, null, '确认日期却伪造成交时刻');
+  assert.equal(cn.trades.flatMap(t => t.legs).filter(l => l.executionId === id).length, 1);
+}
+assert.ok(!cn.groups.some(g => ['2026-10-05/2026-10-06', '2026-10-02/2026-10-03'].includes(g.date)),
+  '已经确认的旧日期区间仍被发布');
+const originalDates = structuredClone(ledger);
+for (const e of originalDates.executions) if (confirmedDays.has(e.executionId)) { delete e.chinaDate; delete e.chinaDateSource; }
+assert.deepEqual(derive(originalDates), derive(ledger), '日期展示纠正改变了成本、收益或周期核算');
+assert.equal(cn.trades.filter(t => t.closesEpisode).length, derive(originalDates).trades.filter(t => t.closesEpisode).length,
+  '按中国日期合并卡片重复或漏计清仓');
+console.log('✅ 用户确认日期按单日合并、未知时刻保留、流水/成本/清仓计数不变');

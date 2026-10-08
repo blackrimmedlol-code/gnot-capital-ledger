@@ -47,7 +47,9 @@
       "missingValues": "内部保留null与缺项来源；公开价格/收益无法计算时显示—，缺精确时刻不显示占位提示，不能以0代替。",
       "acceptanceCommand": "node check_update.js",
       "displayTradeTimezone": "Asia/Shanghai",
-      "reviewDateValidation": "review_dates.js: 唯一公开复盘引用，按实际中国日期校验；明确成交日期优先于历史标签例外。"
+      "reviewDateValidation": "review_dates.js: 唯一公开复盘引用，按实际中国日期校验；明确成交日期优先于历史标签例外。",
+      "actualChinaDateRequiredFrom": "2026-10-08",
+      "actualChinaDateValidation": "review_dates.js: 新成交/当日补录须有来源的实际中国日期或带时区时间；仅缺时刻不显示日期区间。未知历史保留，已确认日期按日合并。"
     },
     "optionsAnalysis": {
       "scope": "coverage_only",
@@ -2973,6 +2975,12 @@
         "type": "user_confirmation",
         "confirmedDate": "2026-10-06",
         "timezone": "Asia/Shanghai"
+      },
+      "chinaDate": "2026-10-02",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-08T12:28:42+08:00",
+        "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
       }
     },
     {
@@ -2993,6 +3001,12 @@
         "type": "user_confirmation",
         "confirmedDate": "2026-10-06",
         "timezone": "Asia/Shanghai"
+      },
+      "chinaDate": "2026-10-02",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-08T12:28:42+08:00",
+        "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
       }
     },
     {
@@ -3013,6 +3027,12 @@
         "type": "user_confirmation",
         "confirmedDate": "2026-10-06",
         "timezone": "Asia/Shanghai"
+      },
+      "chinaDate": "2026-10-02",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-08T12:28:42+08:00",
+        "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
       }
     },
     {
@@ -3122,7 +3142,13 @@
       "timezone": "America/New_York",
       "fee": null,
       "note": "1号小账户缩量上涨日 @39.8 全数清仓，转空仓观望",
-      "status": "confirmed"
+      "status": "confirmed",
+      "chinaDate": "2026-10-05",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-08T12:28:42+08:00",
+        "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
+      }
     },
     {
       "executionId": "EX-20261005-LABU-BUY-053",
@@ -3152,7 +3178,13 @@
       "timezone": "America/New_York",
       "fee": null,
       "note": "当日 255 全数清仓（快进快出）",
-      "status": "confirmed"
+      "status": "confirmed",
+      "chinaDate": "2026-10-05",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-08T12:28:42+08:00",
+        "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
+      }
     },
     {
       "executionId": "EX-20261005-GDXU-SELL-055",
@@ -3167,7 +3199,13 @@
       "timezone": "America/New_York",
       "fee": null,
       "note": "主号 10/5 当日建（99.7）→104 高抛清仓",
-      "status": "confirmed"
+      "status": "confirmed",
+      "chinaDate": "2026-10-05",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-08T12:28:42+08:00",
+        "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
+      }
     },
     {
       "executionId": "EX-20261005-SNXX-BUY-056",
@@ -5969,6 +6007,114 @@
       },
       "date": "2026-10-08",
       "reason": "用户确认1号SNXX已全清；原买入143股和卖出143股、持仓0与closeDate均已存在，但status仍open且使用错误退出字段别名。统一为closed/exitDate/exitReason，不新增成交，不改变价格、数量或成交日期。"
+    },
+    {
+      "ref": "EX-20261002-RAM-SELL-008",
+      "field": "chinaDate/chinaDateSource",
+      "before": {
+        "chinaDate": null,
+        "chinaDateSource": null
+      },
+      "after": {
+        "chinaDate": "2026-10-02",
+        "chinaDateSource": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-08T12:28:42+08:00",
+          "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
+        }
+      },
+      "date": "2026-10-08",
+      "reason": "用户明确确认实际中国日期；收窄旧美东原日期推算的可能区间，原始date/time/timezone及成交数量价格保留。"
+    },
+    {
+      "ref": "EX-20261002-IRE-SELL-015",
+      "field": "chinaDate/chinaDateSource",
+      "before": {
+        "chinaDate": null,
+        "chinaDateSource": null
+      },
+      "after": {
+        "chinaDate": "2026-10-02",
+        "chinaDateSource": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-08T12:28:42+08:00",
+          "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
+        }
+      },
+      "date": "2026-10-08",
+      "reason": "用户明确确认实际中国日期；收窄旧美东原日期推算的可能区间，原始date/time/timezone及成交数量价格保留。"
+    },
+    {
+      "ref": "EX-20261002-IRE-SELL-016",
+      "field": "chinaDate/chinaDateSource",
+      "before": {
+        "chinaDate": null,
+        "chinaDateSource": null
+      },
+      "after": {
+        "chinaDate": "2026-10-02",
+        "chinaDateSource": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-08T12:28:42+08:00",
+          "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
+        }
+      },
+      "date": "2026-10-08",
+      "reason": "用户明确确认实际中国日期；收窄旧美东原日期推算的可能区间，原始date/time/timezone及成交数量价格保留。"
+    },
+    {
+      "ref": "EX-20261005-AVGX-SELL-052",
+      "field": "chinaDate/chinaDateSource",
+      "before": {
+        "chinaDate": null,
+        "chinaDateSource": null
+      },
+      "after": {
+        "chinaDate": "2026-10-05",
+        "chinaDateSource": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-08T12:28:42+08:00",
+          "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
+        }
+      },
+      "date": "2026-10-08",
+      "reason": "用户明确确认实际中国日期；收窄旧美东原日期推算的可能区间，原始date/time/timezone及成交数量价格保留。"
+    },
+    {
+      "ref": "EX-20261005-LABU-SELL-054",
+      "field": "chinaDate/chinaDateSource",
+      "before": {
+        "chinaDate": null,
+        "chinaDateSource": null
+      },
+      "after": {
+        "chinaDate": "2026-10-05",
+        "chinaDateSource": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-08T12:28:42+08:00",
+          "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
+        }
+      },
+      "date": "2026-10-08",
+      "reason": "用户明确确认实际中国日期；收窄旧美东原日期推算的可能区间，原始date/time/timezone及成交数量价格保留。"
+    },
+    {
+      "ref": "EX-20261005-GDXU-SELL-055",
+      "field": "chinaDate/chinaDateSource",
+      "before": {
+        "chinaDate": null,
+        "chinaDateSource": null
+      },
+      "after": {
+        "chinaDate": "2026-10-05",
+        "chinaDateSource": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-08T12:28:42+08:00",
+          "evidence": "用户根据圈出的平仓卡片明确确认：上方AVGX/LABU/GDXU三笔卖出归属10月5日，下方RAM14.5和IRE9.9/10.38三笔卖出归属10月2日；未提供精确成交时刻。"
+        }
+      },
+      "date": "2026-10-08",
+      "reason": "用户明确确认实际中国日期；收窄旧美东原日期推算的可能区间，原始date/time/timezone及成交数量价格保留。"
     }
   ],
   "historicalNarrativeCorrections": [
@@ -6079,9 +6225,9 @@
   "legacyReviewDisplayDates": [
     {
       "originalLabel": "2026-10-02",
-      "reviewDate": "2026-10-03",
+      "reviewDate": "2026-10-02",
       "reviewTimezone": "Asia/Shanghai",
-      "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+      "basis": "用户2026-10-08确认相关RAM/IRE兑现实际归属中国10/2，关联复盘同日归属；不改成交时刻及事前计划。",
       "visibility": "internal"
     },
     {
@@ -6715,6 +6861,26 @@
       ],
       "date": "2026-10-08",
       "reason": "用户确认RAM13.7减仓实际10/8执行，将对应计划、事实及评价独立归入10/8，10/7保留当日原加仓与1号换仓。"
+    },
+    {
+      "ref": "legacy-review-20261002",
+      "field": "reviewDate",
+      "before": {
+        "originalLabel": "2026-10-02",
+        "reviewDate": "2026-10-03",
+        "reviewTimezone": "Asia/Shanghai",
+        "basis": "9/19原日期已对应中国时间；其余按原美东交易日的次日复盘展示",
+        "visibility": "internal"
+      },
+      "after": {
+        "originalLabel": "2026-10-02",
+        "reviewDate": "2026-10-02",
+        "reviewTimezone": "Asia/Shanghai",
+        "basis": "用户2026-10-08确认相关RAM/IRE兑现实际归属中国10/2，关联复盘同日归属；不改成交时刻及事前计划。",
+        "visibility": "internal"
+      },
+      "date": "2026-10-08",
+      "reason": "关联卖出日期已确认，修正旧统一加一天的复盘标签。"
     }
   ],
   "reviewDateOverrides": [
