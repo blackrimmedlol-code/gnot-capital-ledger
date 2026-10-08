@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/8：主号IRE按7.36加仓、LABU按213.39建仓；持仓已同步，行情沿用10/7收盘快照。",
-  "asOfLabel": "成交：10/8 IRE加仓 · LABU建仓；行情：10/7收盘",
+  "asOf": "成交更新至10/8：主号IRE加仓、LABU建仓，RAM买回16C/17C；行情沿用10/7收盘快照。",
+  "asOfLabel": "成交：10/8 RAM买回备兑 · IRE加仓 · LABU建仓；行情：10/7收盘",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -341,27 +341,6 @@
                   "type": "C",
                   "premium": 1.1,
                   "note": "9/19加卖"
-                },
-                {
-                  "mult": 1,
-                  "strike": 16,
-                  "type": "C",
-                  "premium": 0.77,
-                  "note": "9/19卖出"
-                },
-                {
-                  "mult": 1,
-                  "strike": 16,
-                  "type": "C",
-                  "premium": 1.1,
-                  "note": "9/22新卖"
-                },
-                {
-                  "mult": 1,
-                  "strike": 17,
-                  "type": "C",
-                  "premium": 0.9,
-                  "note": "9/22卖出"
                 }
               ]
             }
@@ -373,12 +352,12 @@
             "持有"
           ],
           "alerts": [],
-          "alertSub": "10/6多档补仓后回落 · 已达加仓上限·周内停加·持有观察",
+          "alertSub": "等待反弹至约13.5 · 备兑或退出预案",
           "setup": [
             "趋势波段"
           ],
           "execStatus": "adhoc",
-          "oneLiner": "10/6~10/7连补后@13.7有序撤出减仓（预设限价、降单一仓位占比），14C备兑收租不变。",
+          "oneLiner": "10/8买回2张16C、1张17C，保留14C/15C；等待反弹至约13.5，再做备兑或直接清仓。",
           "strategyNote": "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。；10/6盘中13.70、夜盘13.85及13.55、13.42四档连续补仓（摊薄约13.71），10/7 13.2情绪加仓，突破周内停加纪律（用户已认知），后续回归周内不再加仓。；10/7 12.98再买49追跌",
           "actualCostBasis": {
             "value": 13.64814,
@@ -406,7 +385,33 @@
             "status": "本轮不核算",
             "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
-          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）"
+          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
+          "activePlan": {
+            "planId": "PLAN-RAM-20261008-REBOUND",
+            "status": "active",
+            "createdAt": "2026-10-08T23:52:25+08:00",
+            "effectiveFrom": "2026-10-08T23:52:25+08:00",
+            "source": {
+              "type": "user_confirmation",
+              "reportedAt": "2026-10-08T23:52:25+08:00",
+              "evidence": "释放空间，等反弹回13.5左右再做coveredcall或直接清仓"
+            },
+            "trigger": {
+              "underlyingPriceApprox": 13.5,
+              "kind": "user_observation_level",
+              "isPlacedOrder": false
+            },
+            "alternatives": [
+              "再卖covered call",
+              "直接清仓"
+            ],
+            "selectedAlternative": null,
+            "note": "这是后续二选一预案，未确认挂单、再卖call或卖出正股。选清仓时须核对仍开放14C/15C的备兑义务，不能把解除部分call当全仓解除。",
+            "relatedOptionExecutionIds": [
+              "OX-USER-20261008-RAM-BTC-16C-001",
+              "OX-USER-20261008-RAM-BTC-17C-002"
+            ]
+          }
         },
         {
           "sym": "CRWG",
@@ -5177,7 +5182,7 @@
       "reviewDate": "2026-10-08",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-08 复盘",
-      "title": "RAM预设限价减仓 · IRE加仓 · LABU建仓",
+      "title": "RAM减仓与买回备兑 · IRE加仓 · LABU建仓",
       "executionIds": [
         "EX-USER-20261007-RAM-SELL-059",
         "EX-USER-20261008-IRE-BUY-060",
@@ -5190,13 +5195,16 @@
       "execution": [
         "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。",
         "主号IRE：按7.36加仓，继续原未结束持仓周期。",
-        "主号LABU：按213.39建仓，与1号账号历史LABU周期独立。"
+        "主号LABU：按213.39建仓，与1号账号历史LABU周期独立。",
+        "主号RAM：按0.10买回2张16C、按0.05买回1张17C，释放对应备兑约束；正股未因此卖出，剩余14C/15C保持开放。"
       ],
       "good": [
         "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。"
       ],
       "issues": [],
-      "todo": [],
+      "todo": [
+        "用户后续预案：等待RAM反弹至约13.5，再做covered call或直接清仓；尚未选择路径或报告新成交。"
+      ],
       "execStatus": "unknown",
       "reviewStatus": "in_progress",
       "reviewDateBasis": "用户明确确认本笔在10/8执行，归属实际中国日期；与原美东日期及录入时间独立。",
@@ -5205,7 +5213,24 @@
         "本次只确认实际成交日期10/8，精确成交时刻未知；不采用此前盘后触发推测。",
         "10/8两笔买入有用户明确日期、数量和价格；时刻及执行定性未提供，不猜填。收盘后由唯一自动任务补必要评价。"
       ],
-      "updatedAt": "2026-10-08T22:21:39+08:00"
+      "updatedAt": "2026-10-08T23:55:36+08:00",
+      "optionExecutionIds": [
+        "OX-USER-20261008-RAM-BTC-16C-001",
+        "OX-USER-20261008-RAM-BTC-17C-002"
+      ],
+      "planAmendments": [
+        {
+          "amendmentId": "PA-RAM-20261008-REBOUND",
+          "recordedAt": "2026-10-08T23:55:36+08:00",
+          "effectiveFrom": "2026-10-08T23:52:25+08:00",
+          "source": "用户10/8 23:52确认",
+          "text": "等待RAM反弹至约13.5，再做coveredcall或直接清仓。后续预案不追溯作为本次买回的事前计划。",
+          "optionExecutionIds": [
+            "OX-USER-20261008-RAM-BTC-16C-001",
+            "OX-USER-20261008-RAM-BTC-17C-002"
+          ]
+        }
+      ]
     }
   ],
   "openingPositions": [
@@ -6291,6 +6316,74 @@
         "episodeId": "EP-IRE-2026Q4"
       },
       "executionId": "EX-USER-20261008-IRE-BUY-060"
+    },
+    {
+      "date": "2026-10-08",
+      "account": "main",
+      "sym": "RAM",
+      "reason": "按用户确认买回16C两张和17C一张，仅减少期权空头，不改正股数量和成本。原合约来源保存在optionExecutions.closedLegs。",
+      "previousOptions": [
+        {
+          "exp": "2026-10-16",
+          "legs": [
+            {
+              "mult": 1,
+              "strike": 14,
+              "type": "C",
+              "premium": 1.36,
+              "note": "9/19加卖"
+            },
+            {
+              "mult": 1,
+              "strike": 14,
+              "type": "C",
+              "premium": 1.125,
+              "note": ""
+            },
+            {
+              "mult": 2,
+              "strike": 15,
+              "type": "C",
+              "premium": 0.95,
+              "note": ""
+            },
+            {
+              "mult": 1,
+              "strike": 15,
+              "type": "C",
+              "premium": 1.1,
+              "note": "9/19加卖"
+            },
+            {
+              "mult": 1,
+              "strike": 16,
+              "type": "C",
+              "premium": 0.77,
+              "note": "9/19卖出"
+            },
+            {
+              "mult": 1,
+              "strike": 16,
+              "type": "C",
+              "premium": 1.1,
+              "note": "9/22新卖"
+            },
+            {
+              "mult": 1,
+              "strike": 17,
+              "type": "C",
+              "premium": 0.9,
+              "note": "9/22卖出"
+            }
+          ]
+        }
+      ],
+      "optionExecutionIds": [
+        "OX-USER-20261008-RAM-BTC-16C-001",
+        "OX-USER-20261008-RAM-BTC-17C-002"
+      ],
+      "oldOneLiner": "10/6~10/7连补后@13.7有序撤出减仓（预设限价、降单一仓位占比），14C备兑收租不变。",
+      "oldAlertSub": "10/6多档补仓后回落 · 已达加仓上限·周内停加·持有观察"
     }
   ],
   "stockConcentration": {
@@ -7068,5 +7161,118 @@
     "lastSuccessfulCutoff": null,
     "executionFingerprints": {},
     "note": "用户已暂停另一Agent的自动复盘；本任务接手收盘评价和发布。记录Agent继续录入事实。启用不等于已经成功运行，成功截止游标待首轮真实上线验证后更新。"
-  }
+  },
+  "optionExecutions": [
+    {
+      "executionId": "OX-USER-20261008-RAM-BTC-16C-001",
+      "account": "main",
+      "sym": "RAM",
+      "instrumentType": "option",
+      "action": "buy_to_close",
+      "side": "buy",
+      "positionEffect": "close",
+      "contracts": 2,
+      "contractMultiplier": 100,
+      "strike": 16,
+      "optionType": "C",
+      "exp": "2026-10-16",
+      "price": 0.1,
+      "priceUnit": "USD per underlying share",
+      "currency": "USD",
+      "date": "2026-10-08",
+      "chinaDate": "2026-10-08",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "status": "confirmed",
+      "actionExecStatus": "unknown",
+      "includeInStockPerformance": false,
+      "stockEpisodeId": "EP-RAM-2026Q3",
+      "fee": null,
+      "closedLegs": [
+        {
+          "mult": 1,
+          "strike": 16,
+          "type": "C",
+          "premium": 0.77,
+          "note": "9/19卖出"
+        },
+        {
+          "mult": 1,
+          "strike": 16,
+          "type": "C",
+          "premium": 1.1,
+          "note": "9/22新卖"
+        }
+      ],
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-08T23:52:25+08:00",
+        "evidence": "主账号1008在RAM买回了2张16C和1张17C，释放空间，等反弹回13.5左右再做coveredcall或直接清仓。"
+      },
+      "priceSource": {
+        "type": "prior_user_confirmation",
+        "conversation": "Covered Call滚动建议",
+        "reportedAt": "2026-10-08T23:49:14+08:00",
+        "evidence": "0.1 买回了 2 张 16C，0.05 买回了 1 张 17C"
+      },
+      "expirySource": {
+        "type": "matched_existing_open_contracts",
+        "evidence": "本账户当前未平仓16C共2张、17C共1张均为2026-10-16到期；本次买回与既有合约匹配，不另造合约。"
+      },
+      "recordedAt": "2026-10-08T23:55:36+08:00"
+    },
+    {
+      "executionId": "OX-USER-20261008-RAM-BTC-17C-002",
+      "account": "main",
+      "sym": "RAM",
+      "instrumentType": "option",
+      "action": "buy_to_close",
+      "side": "buy",
+      "positionEffect": "close",
+      "contracts": 1,
+      "contractMultiplier": 100,
+      "strike": 17,
+      "optionType": "C",
+      "exp": "2026-10-16",
+      "price": 0.05,
+      "priceUnit": "USD per underlying share",
+      "currency": "USD",
+      "date": "2026-10-08",
+      "chinaDate": "2026-10-08",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "status": "confirmed",
+      "actionExecStatus": "unknown",
+      "includeInStockPerformance": false,
+      "stockEpisodeId": "EP-RAM-2026Q3",
+      "fee": null,
+      "closedLegs": [
+        {
+          "mult": 1,
+          "strike": 17,
+          "type": "C",
+          "premium": 0.9,
+          "note": "9/22卖出"
+        }
+      ],
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-08T23:52:25+08:00",
+        "evidence": "主账号1008在RAM买回了2张16C和1张17C，释放空间，等反弹回13.5左右再做coveredcall或直接清仓。"
+      },
+      "priceSource": {
+        "type": "prior_user_confirmation",
+        "conversation": "Covered Call滚动建议",
+        "reportedAt": "2026-10-08T23:49:14+08:00",
+        "evidence": "0.1 买回了 2 张 16C，0.05 买回了 1 张 17C"
+      },
+      "expirySource": {
+        "type": "matched_existing_open_contracts",
+        "evidence": "本账户当前未平仓16C共2张、17C共1张均为2026-10-16到期；本次买回与既有合约匹配，不另造合约。"
+      },
+      "recordedAt": "2026-10-08T23:55:36+08:00"
+    }
+  ]
 }

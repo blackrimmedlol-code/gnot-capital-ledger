@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交更新至10/8：主号IRE按7.36加仓、LABU按213.39建仓；持仓已同步，行情沿用10/7收盘快照。",
-  asOfLabel: "成交：10/8 IRE加仓 · LABU建仓；行情：10/7收盘",
+  asOf: "成交更新至10/8：主号IRE加仓、LABU建仓，RAM买回16C/17C；行情沿用10/7收盘快照。",
+  asOfLabel: "成交：10/8 RAM买回备兑 · IRE加仓 · LABU建仓；行情：10/7收盘",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1592,24 +1592,6 @@
                   strike: 15,
                   type: "C",
                   premium: 1.1
-                },
-                {
-                  mult: 1,
-                  strike: 16,
-                  type: "C",
-                  premium: 0.77
-                },
-                {
-                  mult: 1,
-                  strike: 16,
-                  type: "C",
-                  premium: 1.1
-                },
-                {
-                  mult: 1,
-                  strike: 17,
-                  type: "C",
-                  premium: 0.9
                 }
               ]
             }
@@ -1618,12 +1600,12 @@
             "hold"
           ],
           alerts: [],
-          alertSub: "10/6多档补仓后回落 · 已达加仓上限·周内停加·持有观察",
+          alertSub: "等待反弹至约13.5 · 备兑或退出预案",
           setup: [
             "趋势波段"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/6~10/7连补后@13.7有序撤出减仓（预设限价、降单一仓位占比），14C备兑收租不变。",
+          oneLiner: "10/8买回2张16C、1张17C，保留14C/15C；等待反弹至约13.5，再做备兑或直接清仓。",
           coverage: {
             status: "covered",
             statusText: "足额备兑",
@@ -3406,7 +3388,7 @@
       reviewDate: "2026-10-08",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-08 复盘",
-      title: "RAM预设限价减仓 · IRE加仓 · LABU建仓",
+      title: "RAM减仓与买回备兑 · IRE加仓 · LABU建仓",
       plan: [
         "提前设置13.7限价，以降低存储仓单一标的仓位占比。",
         "IRE本次加仓及LABU建仓的事前计划未记录。"
@@ -3414,13 +3396,16 @@
       execution: [
         "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。",
         "主号IRE：按7.36加仓，继续原未结束持仓周期。",
-        "主号LABU：按213.39建仓，与1号账号历史LABU周期独立。"
+        "主号LABU：按213.39建仓，与1号账号历史LABU周期独立。",
+        "主号RAM：按0.10买回2张16C、按0.05买回1张17C，释放对应备兑约束；正股未因此卖出，剩余14C/15C保持开放。"
       ],
       good: [
         "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。"
       ],
       issues: [],
-      todo: [],
+      todo: [
+        "用户后续预案：等待RAM反弹至约13.5，再做covered call或直接清仓；尚未选择路径或报告新成交。"
+      ],
       execStatus: "unknown",
       symbols: [
         "RAM",
