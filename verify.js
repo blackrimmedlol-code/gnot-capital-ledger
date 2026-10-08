@@ -200,6 +200,9 @@ if (j.reviews) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(r.reviewDate || '') || r.reviewTimezone !== 'Asia/Shanghai') {
       errors++; console.error('❌ 公开复盘缺中国日期/时区: ' + r.reviewId);
     }
+    if (r.dateLabel !== r.reviewDate + ' 复盘') {
+      errors++; console.error('❌ 复盘卡片日期与归属日不一致: ' + r.reviewId);
+    }
     const texts = [r.title, r.dateLabel].concat(r.plan || [], r.execution || [], r.good || [], r.issues || [], r.todo || []);
     texts.forEach(t => { if (t && /[0-9]+\s*股|\$\s?[0-9]|[0-9]+\s*(美元|USD|元)/.test(t)) { rvLeak++; errors++; console.error(`❌ review ${r.reviewId} 可见文本含股数/金额: ${t.slice(0, 40)}`); } });
   });

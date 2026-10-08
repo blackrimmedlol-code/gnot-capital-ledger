@@ -78,6 +78,9 @@ function check(html, ledger) {
   const reviewIds = [...nodes.reviewsBox.innerHTML.matchAll(/data-review-id="([^"]+)"/g)].map(m => m[1]);
   const publicReviews = (ledger.reviews || []).filter(r => r.visibility !== 'internal');
   assert.deepEqual(reviewIds.slice().sort(), publicReviews.map(r => r.reviewId).sort(), '公开复盘缺失或内部核对泄漏');
+  const expectedReviewOrder = publicReviews.slice().sort((a, b) => (b.reviewDate || b.date).localeCompare(a.reviewDate || a.date));
+  assert.deepEqual(reviewIds, expectedReviewOrder.map(r => r.reviewId), '复盘未按归属日倒序');
+  for (const r of api.DATA.reviews) assert.equal(r.dateLabel, r.reviewDate + ' 复盘', '复盘卡片日期与排序日期不一致');
   assert.ok(!nodes.reviewsBox.innerHTML.includes('待补观察'), '内部观察出现在复盘');
   const reviewSection = html.slice(html.indexOf('<section id="review"'), html.indexOf('</section>', html.indexOf('<section id="review"')));
   assert.ok(!/待补观察|待验证的观察|历史结单核对|历史补录|结单核对/.test(reviewSection + nodes.reviewsBox.innerHTML), '旧复盘内部内容仍在页面');
