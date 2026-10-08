@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交更新至10/8：主号IRE加仓、LABU建仓，RAM买回16C/17C；行情沿用10/7收盘快照。",
-  asOfLabel: "成交：10/8 RAM买回备兑 · IRE加仓 · LABU建仓；行情：10/7收盘",
+  asOf: "成交更新至10/8：主号LABU全清后IRE/RAM低吸；RAM此前买回16C/17C已记录。行情沿用10/7收盘快照。",
+  asOfLabel: "成交：10月8日 · LABU清仓 · IRE/RAM加仓；行情：10/7收盘",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1559,7 +1559,7 @@
         {
           sym: "RAM",
           name: "2x DRAM (Roundhill T-Rex)",
-          cost: 13.64814,
+          cost: 13.5328,
           costNote: "历史均价基准滚动",
           strategy: [
             "核心仓",
@@ -1604,8 +1604,8 @@
           setup: [
             "趋势波段"
           ],
-          execStatus: "adhoc",
-          oneLiner: "10/8买回2张16C、1张17C，保留14C/15C；等待反弹至约13.5，再做备兑或直接清仓。",
+          execStatus: "unknown",
+          oneLiner: "10/8买回16C/17C后按12.15加仓；保留14C/15C及反弹约13.5后的备兑或退出预案。",
           coverage: {
             status: "covered",
             statusText: "足额备兑",
@@ -1614,7 +1614,7 @@
           },
           weightRank: 1,
           weightLevel: "高",
-          stockWeightPct: 57.4
+          stockWeightPct: 62.4
         },
         {
           sym: "CRWG",
@@ -1649,7 +1649,7 @@
             isFullyBacked: true,
             sharesUnknown: false
           },
-          weightRank: 6,
+          weightRank: 5,
           weightLevel: "低",
           stockWeightPct: 6.6
         },
@@ -1687,12 +1687,12 @@
           },
           weightRank: 2,
           weightLevel: "低",
-          stockWeightPct: 12.1
+          stockWeightPct: 12.2
         },
         {
           sym: "IRE",
           name: "Defiance 2x IREN · 2x AI云",
-          cost: 7.88996,
+          cost: 7.59247,
           costNote: "实际成本",
           strategy: [
             "卫星仓·AI云"
@@ -1706,7 +1706,7 @@
             "支撑低吸"
           ],
           execStatus: "unknown",
-          oneLiner: "10/8按7.36加仓，继续原持仓周期。",
+          oneLiner: "10/8先按7.36、后按6.70加仓，继续原周期。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1715,7 +1715,7 @@
           },
           weightRank: 3,
           weightLevel: "低",
-          stockWeightPct: 8.6
+          stockWeightPct: 11.5
         },
         {
           sym: "STXL",
@@ -1739,32 +1739,9 @@
             isFullyBacked: false,
             sharesUnknown: false
           },
-          weightRank: 5,
-          weightLevel: "低",
-          stockWeightPct: 7.2
-        },
-        {
-          sym: "LABU",
-          name: "3x 做多生物科技ETF",
-          cost: 213.39,
-          costNote: "实际成本",
-          strategy: [],
-          options: [],
-          tags: [
-            "hold"
-          ],
-          setup: [],
-          execStatus: "unknown",
-          oneLiner: "10/8按213.39建仓。",
-          coverage: {
-            status: "none",
-            statusText: "无备兑",
-            isFullyBacked: false,
-            sharesUnknown: false
-          },
           weightRank: 4,
           weightLevel: "低",
-          stockWeightPct: 8.1
+          stockWeightPct: 7.2
         }
       ]
     },
@@ -1977,6 +1954,43 @@
               costBasisType: "actual",
               retPct: 0.38005,
               note: "主号RAM有序撤出减仓：价位提前设置（限价13.7），因存储仓仓位占比过高、主动降低单一仓位；非情绪操作"
+            }
+          ]
+        },
+        {
+          tradeId: "EP-LABU-MAIN-20261008:2026-10-08",
+          episodeId: "EP-LABU-MAIN-20261008",
+          sym: "LABU",
+          name: "LABU",
+          acct: "主账号",
+          cost: 213.39,
+          soldDate: "2026-10-08",
+          dateStart: "2026-10-08",
+          dateEnd: "2026-10-08",
+          isPartial: false,
+          closesEpisode: true,
+          totalRetPct: 1.66831,
+          result: "win",
+          cycleRetPct: 1.66831,
+          cycleResult: "win",
+          performanceEligible: true,
+          reason: "清仓回笼后转投IRE/RAM低吸",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261008-LABU-SELL-062",
+              date: "2026-10-08",
+              dateEnd: "2026-10-08",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 216.95,
+              cost: 213.39,
+              costBasisType: "actual",
+              retPct: 1.66831,
+              note: "主号LABU按216.95全数清仓，用户表示随后将资金用于IRE/RAM低吸。"
             }
           ]
         }
@@ -3388,7 +3402,7 @@
       reviewDate: "2026-10-08",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-08 复盘",
-      title: "RAM减仓与买回备兑 · IRE加仓 · LABU建仓",
+      title: "RAM减仓与买回备兑 · LABU清仓 · IRE/RAM低吸",
       plan: [
         "提前设置13.7限价，以降低存储仓单一标的仓位占比。",
         "IRE本次加仓及LABU建仓的事前计划未记录。"
@@ -3397,7 +3411,10 @@
         "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。",
         "主号IRE：按7.36加仓，继续原未结束持仓周期。",
         "主号LABU：按213.39建仓，与1号账号历史LABU周期独立。",
-        "主号RAM：按0.10买回2张16C、按0.05买回1张17C，释放对应备兑约束；正股未因此卖出，剩余14C/15C保持开放。"
+        "主号RAM：按0.10买回2张16C、按0.05买回1张17C，释放对应备兑约束；正股未因此卖出，剩余14C/15C保持开放。",
+        "用户报告背景：OpenAI收入不如预期的新闻冲击、科技股下跌。",
+        "主号LABU：按216.95全清；本轮按213.39建仓，正股成本收益约+1.7%。",
+        "主号IRE：按6.70继续加仓；主号RAM：按12.15加仓。用户表示将回笼资金投入低吸。"
       ],
       good: [
         "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。"
@@ -3416,7 +3433,8 @@
         "主账号"
       ],
       saleExecutionIds: [
-        "EX-USER-20261007-RAM-SELL-059"
+        "EX-USER-20261007-RAM-SELL-059",
+        "EX-USER-20261008-LABU-SELL-062"
       ]
     },
     {

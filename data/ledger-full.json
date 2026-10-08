@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/8：主号IRE加仓、LABU建仓，RAM买回16C/17C；行情沿用10/7收盘快照。",
-  "asOfLabel": "成交：10/8 RAM买回备兑 · IRE加仓 · LABU建仓；行情：10/7收盘",
+  "asOf": "成交更新至10/8：主号LABU全清后IRE/RAM低吸；RAM此前买回16C/17C已记录。行情沿用10/7收盘快照。",
+  "asOfLabel": "成交：10月8日 · LABU清仓 · IRE/RAM加仓；行情：10/7收盘",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -299,9 +299,9 @@
         {
           "sym": "RAM",
           "name": "2x DRAM (Roundhill T-Rex)",
-          "qty": 1199,
-          "cost": 13.64814,
-          "costDate": "原持续持仓；10/6四档13.70/13.85/13.55/13.42加仓；10/7 13.2情绪加仓（突破周内停加纪律）;10/7再12.98买49(追跌突破停加纪律);10/7@13.7有序撤出减仓(降仓位占比)",
+          "qty": 1299,
+          "cost": 13.5328,
+          "costDate": "原持续持仓；10/6四档13.70/13.85/13.55/13.42加仓；10/7 13.2情绪加仓（突破周内停加纪律）;10/7再12.98买49(追跌突破停加纪律);10/7@13.7有序撤出减仓(降仓位占比) / 10/8 12.15加仓",
           "stop": null,
           "lastPrice": 13.49,
           "lastPriceDate": "2026-10-07 收盘",
@@ -356,28 +356,28 @@
           "setup": [
             "趋势波段"
           ],
-          "execStatus": "adhoc",
-          "oneLiner": "10/8买回2张16C、1张17C，保留14C/15C；等待反弹至约13.5，再做备兑或直接清仓。",
+          "execStatus": "unknown",
+          "oneLiner": "10/8买回16C/17C后按12.15加仓；保留14C/15C及反弹约13.5后的备兑或退出预案。",
           "strategyNote": "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。；10/6盘中13.70、夜盘13.85及13.55、13.42四档连续补仓（摊薄约13.71），10/7 13.2情绪加仓，突破周内停加纪律（用户已认知），后续回归周内不再加仓。；10/7 12.98再买49追跌",
           "actualCostBasis": {
-            "value": 13.64814,
+            "value": 13.5328,
             "status": "确认",
-            "note": "依据历史9/21实际均价13.564及后续已确认流水滚动，含10/6四档13.70/13.85/13.55/13.42、10/7 13.2情绪加仓、12.98补49；未重建更早分笔买入；10/7@13.7减仓，移动加权剩余均价不变",
+            "note": "沿用已有历史实际均价基准及后续确认流水，10/8按12.15加仓后逐笔移动加权；不改此前卖出成本。",
             "sourceType": "historical_actual_checkpoint"
           },
           "netInvestedCost": {
-            "value": 13.31028,
+            "value": 13.22095,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-RAM-2026Q3",
-            "note": "当前持续交易仓净投入（含10/6四档、10/7 13.2及12.98连续追跌），采用历史实际均价基准及确认成交价，排除独立短线和观察仓；10/7@13.7卖出回笼250股"
+            "note": "当前未结束周期正股净投入除以交易仓余额；历史已实现收益不重复叠加，期权不混入。"
           },
           "costDisplay": "历史均价基准滚动",
           "entrySetup": [
             "趋势波段"
           ],
           "entryExecStatus": "adhoc",
-          "actionExecStatus": null,
+          "actionExecStatus": "unknown",
           "exitReason": null,
           "episodeId": "EP-RAM-2026Q3",
           "compositeNetInvested": {
@@ -527,9 +527,9 @@
         {
           "sym": "IRE",
           "name": "Defiance 2x IREN · 2x AI云",
-          "qty": 300,
-          "cost": 7.88996,
-          "costDate": "9/30建底仓 / 10/1 8.58+8.81补 / 10/2 9.9+10.38止盈 / 10/2 9.23接回 / 10/5 8.93+8.77补仓 / 10/7 9.55止盈300 / 10/8 7.36加仓",
+          "qty": 400,
+          "cost": 7.59247,
+          "costDate": "9/30建底仓 / 10/1 8.58+8.81补 / 10/2 9.9+10.38止盈 / 10/2 9.23接回 / 10/5 8.93+8.77补仓 / 10/7 9.55止盈300 / 10/8 7.36加仓 / 10/8 6.70加仓",
           "lastPrice": 8.08,
           "lastPriceDate": "2026-10-07 收盘",
           "wtPct": 3,
@@ -549,18 +549,18 @@
             "支撑低吸"
           ],
           "execStatus": "unknown",
-          "oneLiner": "10/8按7.36加仓，继续原持仓周期。",
+          "oneLiner": "10/8先按7.36、后按6.70加仓，继续原周期。",
           "actualCostBasis": {
-            "value": 7.88996,
+            "value": 7.59247,
             "status": "确认",
-            "note": "按已确认交易仓买卖流水逐笔移动加权，10/8按7.36买入200后交易仓300；此前卖出成本不回写。"
+            "note": "按已确认交易仓买卖流水逐笔移动加权，10/8按7.36及6.70加仓后更新剩余均价；此前卖出成本不回写。"
           },
           "netInvestedCost": {
-            "value": 6.44283,
+            "value": 6.50712,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-IRE-2026Q3",
-            "note": "原未结束周期累计正股买入金额减卖出回款，除以当前交易仓300；不含期权。"
+            "note": "当前未结束周期正股净投入除以交易仓余额；历史已实现收益不重复叠加，期权不混入。"
           },
           "costDisplay": "实际成本",
           "entrySetup": [
@@ -610,54 +610,6 @@
           "tags": [
             "hold"
           ]
-        },
-        {
-          "sym": "LABU",
-          "name": "3x 做多生物科技ETF",
-          "qty": 10,
-          "cost": 213.39,
-          "costDate": "2026-10-08",
-          "lastPrice": 227.75,
-          "lastPriceDate": "2026-10-07 收盘",
-          "lastPriceSource": {
-            "type": "broker_market_quote",
-            "url": "https://www.schwab.wallst.com/schwab/Prospect/research/etfs/schwabETF/index.asp?symbol=LABU&type=holdings",
-            "marketDate": "2026-10-07",
-            "session": "close",
-            "price": 227.75,
-            "retrievedAt": "2026-10-08T22:21:39+08:00",
-            "note": "Schwab公开报价标注As of close 10/07/2026，与多个收盘价来源一致；不使用10/8买入价冒充实时行情。"
-          },
-          "strategy": [],
-          "options": [],
-          "tags": [
-            "hold"
-          ],
-          "status": [
-            "持有"
-          ],
-          "setup": [],
-          "entrySetup": [],
-          "entryExecStatus": "unknown",
-          "actionExecStatus": "unknown",
-          "execStatus": "unknown",
-          "oneLiner": "10/8按213.39建仓。",
-          "episodeId": "EP-LABU-MAIN-20261008",
-          "actualCostBasis": {
-            "value": 213.39,
-            "status": "确认",
-            "sourceType": "user_confirmation",
-            "note": "主账号首次买入，移动加权均价等于本笔每股成交价。"
-          },
-          "netInvestedCost": {
-            "value": 213.39,
-            "status": "确认",
-            "scope": "episode",
-            "episodeId": "EP-LABU-MAIN-20261008",
-            "note": "主账号新周期，正股净投入等于首次买入价。"
-          },
-          "costDisplay": "实际成本",
-          "exitReason": null
         }
       ],
       "positionAsOf": "2026-10-07",
@@ -3630,6 +3582,106 @@
         "confirmedAt": "2026-10-08T22:18:55+08:00",
         "evidence": "用户明确报告：主账号，10月8日买入IRE 200股、价格7.36；买入LABU 10股、价格213.39。没有提供精确成交时刻。"
       }
+    },
+    {
+      "executionId": "EX-USER-20261008-LABU-SELL-062",
+      "episodeId": "EP-LABU-MAIN-20261008",
+      "account": "main",
+      "sym": "LABU",
+      "side": "sell",
+      "qty": 10,
+      "price": 216.95,
+      "date": "2026-10-08",
+      "chinaDate": "2026-10-08",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "unknown",
+      "setup": [],
+      "purpose": "清仓回笼",
+      "note": "主号LABU按216.95全数清仓，用户表示随后将资金用于IRE/RAM低吸。",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-09T01:01:59+08:00",
+        "evidence": "主账号：1008盘中受到 OpenAI 收入不如预期的新闻冲击，科技股全面下跌。我将 LABU 在 216.95 的位置卖出了 10 股，转而将资金投入到抄底当中，ire6.7 买入了 100 股，ram 12.15 买入了 100 股"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-09T01:01:59+08:00",
+        "evidence": "用户明确报1008盘中；实际成交归属10/8，10/9消息发送时间不替代成交日期。"
+      },
+      "recordedAt": "2026-10-08T17:08:15.334Z"
+    },
+    {
+      "executionId": "EX-USER-20261008-IRE-BUY-063",
+      "episodeId": "EP-IRE-2026Q3",
+      "account": "main",
+      "sym": "IRE",
+      "side": "buy",
+      "qty": 100,
+      "price": 6.7,
+      "date": "2026-10-08",
+      "chinaDate": "2026-10-08",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "unknown",
+      "setup": [
+        "低吸"
+      ],
+      "purpose": "回笼资金低吸",
+      "note": "主号IRE按6.70加仓；用户报告新闻冲击背景下低吸，不据此推断情绪标签。",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-09T01:01:59+08:00",
+        "evidence": "主账号：1008盘中受到 OpenAI 收入不如预期的新闻冲击，科技股全面下跌。我将 LABU 在 216.95 的位置卖出了 10 股，转而将资金投入到抄底当中，ire6.7 买入了 100 股，ram 12.15 买入了 100 股"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-09T01:01:59+08:00",
+        "evidence": "用户明确报1008盘中；实际成交归属10/8，10/9消息发送时间不替代成交日期。"
+      },
+      "recordedAt": "2026-10-08T17:08:15.334Z"
+    },
+    {
+      "executionId": "EX-USER-20261008-RAM-BUY-064",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 100,
+      "price": 12.15,
+      "date": "2026-10-08",
+      "chinaDate": "2026-10-08",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "unknown",
+      "setup": [
+        "低吸"
+      ],
+      "purpose": "回笼资金低吸",
+      "note": "主号RAM按12.15加仓；用户报告新闻冲击背景下低吸，不据此推断情绪标签。",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-09T01:01:59+08:00",
+        "evidence": "主账号：1008盘中受到 OpenAI 收入不如预期的新闻冲击，科技股全面下跌。我将 LABU 在 216.95 的位置卖出了 10 股，转而将资金投入到抄底当中，ire6.7 买入了 100 股，ram 12.15 买入了 100 股"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-09T01:01:59+08:00",
+        "evidence": "用户明确报1008盘中；实际成交归属10/8，10/9消息发送时间不替代成交日期。"
+      },
+      "recordedAt": "2026-10-08T17:08:15.334Z"
     }
   ],
   "episodes": [
@@ -3643,7 +3695,7 @@
         "趋势波段"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 1199,
+      "currentQty": 1299,
       "exitReason": null,
       "exitDate": null,
       "entryDateNote": "期初已持有；真实首次建仓日未核实"
@@ -3682,7 +3734,7 @@
         "支撑低吸"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 300,
+      "currentQty": 400,
       "exitReason": null,
       "exitDate": null
     },
@@ -4057,14 +4109,15 @@
       "episodeId": "EP-LABU-MAIN-20261008",
       "sym": "LABU",
       "account": "main",
-      "status": "open",
+      "status": "closed",
       "entryDate": "2026-10-08",
       "entrySetup": [],
       "entryExecStatus": "unknown",
-      "currentQty": 10,
-      "exitDate": null,
-      "exitReason": null,
-      "entryExecutionId": "EX-USER-20261008-LABU-BUY-061"
+      "currentQty": 0,
+      "exitDate": "2026-10-08",
+      "exitReason": "清仓回笼后转投IRE/RAM低吸",
+      "entryExecutionId": "EX-USER-20261008-LABU-BUY-061",
+      "exitExecutionId": "EX-USER-20261008-LABU-SELL-062"
     }
   ],
   "closedTrades": [
@@ -5182,11 +5235,14 @@
       "reviewDate": "2026-10-08",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-08 复盘",
-      "title": "RAM减仓与买回备兑 · IRE加仓 · LABU建仓",
+      "title": "RAM减仓与买回备兑 · LABU清仓 · IRE/RAM低吸",
       "executionIds": [
         "EX-USER-20261007-RAM-SELL-059",
         "EX-USER-20261008-IRE-BUY-060",
-        "EX-USER-20261008-LABU-BUY-061"
+        "EX-USER-20261008-LABU-BUY-061",
+        "EX-USER-20261008-LABU-SELL-062",
+        "EX-USER-20261008-IRE-BUY-063",
+        "EX-USER-20261008-RAM-BUY-064"
       ],
       "plan": [
         "提前设置13.7限价，以降低存储仓单一标的仓位占比。",
@@ -5196,7 +5252,10 @@
         "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。",
         "主号IRE：按7.36加仓，继续原未结束持仓周期。",
         "主号LABU：按213.39建仓，与1号账号历史LABU周期独立。",
-        "主号RAM：按0.10买回2张16C、按0.05买回1张17C，释放对应备兑约束；正股未因此卖出，剩余14C/15C保持开放。"
+        "主号RAM：按0.10买回2张16C、按0.05买回1张17C，释放对应备兑约束；正股未因此卖出，剩余14C/15C保持开放。",
+        "用户报告背景：OpenAI收入不如预期的新闻冲击、科技股下跌。",
+        "主号LABU：按216.95全清；本轮按213.39建仓，正股成本收益约+1.7%。",
+        "主号IRE：按6.70继续加仓；主号RAM：按12.15加仓。用户表示将回笼资金投入低吸。"
       ],
       "good": [
         "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。"
@@ -5211,9 +5270,11 @@
       "recordedAt": "2026-10-08T10:38:51+08:00",
       "internalObservation": [
         "本次只确认实际成交日期10/8，精确成交时刻未知；不采用此前盘后触发推测。",
-        "10/8两笔买入有用户明确日期、数量和价格；时刻及执行定性未提供，不猜填。收盘后由唯一自动任务补必要评价。"
+        "10/8两笔买入有用户明确日期、数量和价格；时刻及执行定性未提供，不猜填。收盘后由唯一自动任务补必要评价。",
+        "本次三笔均按用户明确的10/8归属，10/9仅为报告时点；精确成交时刻未知。新闻背景为用户报告，未独立核实新闻真伪及其行情因果；不得当成已核实市场结论。",
+        "加仓执行状态未确认：不能仅凭下跌、新闻或同日回笼投入判为emo或plan。RAM此前13.5条件退出预案保留；本次未报告预案撤销或新增有效加仓上限。"
       ],
-      "updatedAt": "2026-10-08T23:55:36+08:00",
+      "updatedAt": "2026-10-08T17:08:15.334Z",
       "optionExecutionIds": [
         "OX-USER-20261008-RAM-BTC-16C-001",
         "OX-USER-20261008-RAM-BTC-17C-002"
@@ -6384,6 +6445,93 @@
       ],
       "oldOneLiner": "10/6~10/7连补后@13.7有序撤出减仓（预设限价、降单一仓位占比），14C备兑收租不变。",
       "oldAlertSub": "10/6多档补仓后回落 · 已达加仓上限·周内停加·持有观察"
+    },
+    {
+      "date": "2026-10-08",
+      "recordedAt": "2026-10-08T17:08:15.334Z",
+      "account": "main",
+      "reason": "按用户确认LABU全清、IRE/RAM各加仓100，滚动成本及周期；保留此前持仓和价格快照以备核对。",
+      "changes": [
+        {
+          "sym": "IRE",
+          "before": {
+            "qty": 300,
+            "actualCost": 7.88996,
+            "netInvestedCost": 6.44283
+          },
+          "after": {
+            "qty": 400,
+            "actualCost": 7.59247,
+            "netInvestedCost": 6.50712
+          }
+        },
+        {
+          "sym": "RAM",
+          "before": {
+            "qty": 1199,
+            "actualCost": 13.64814,
+            "netInvestedCost": 13.31028
+          },
+          "after": {
+            "qty": 1299,
+            "actualCost": 13.5328,
+            "netInvestedCost": 13.22095
+          }
+        }
+      ],
+      "closedHolding": {
+        "sym": "LABU",
+        "name": "3x 做多生物科技ETF",
+        "qty": 10,
+        "cost": 213.39,
+        "costDate": "2026-10-08",
+        "lastPrice": 227.75,
+        "lastPriceDate": "2026-10-07 收盘",
+        "lastPriceSource": {
+          "type": "broker_market_quote",
+          "url": "https://www.schwab.wallst.com/schwab/Prospect/research/etfs/schwabETF/index.asp?symbol=LABU&type=holdings",
+          "marketDate": "2026-10-07",
+          "session": "close",
+          "price": 227.75,
+          "retrievedAt": "2026-10-08T22:21:39+08:00",
+          "note": "Schwab公开报价标注As of close 10/07/2026，与多个收盘价来源一致；不使用10/8买入价冒充实时行情。"
+        },
+        "strategy": [],
+        "options": [],
+        "tags": [
+          "hold"
+        ],
+        "status": [
+          "持有"
+        ],
+        "setup": [],
+        "entrySetup": [],
+        "entryExecStatus": "unknown",
+        "actionExecStatus": "unknown",
+        "execStatus": "unknown",
+        "oneLiner": "10/8按213.39建仓。",
+        "episodeId": "EP-LABU-MAIN-20261008",
+        "actualCostBasis": {
+          "value": 213.39,
+          "status": "确认",
+          "sourceType": "user_confirmation",
+          "note": "主账号首次买入，移动加权均价等于本笔每股成交价。"
+        },
+        "netInvestedCost": {
+          "value": 213.39,
+          "status": "确认",
+          "scope": "episode",
+          "episodeId": "EP-LABU-MAIN-20261008",
+          "note": "主账号新周期，正股净投入等于首次买入价。"
+        },
+        "costDisplay": "实际成本",
+        "exitReason": null
+      },
+      "executionIds": [
+        "EX-USER-20261008-LABU-SELL-062",
+        "EX-USER-20261008-IRE-BUY-063",
+        "EX-USER-20261008-RAM-BUY-064"
+      ]
     }
   ],
   "stockConcentration": {
