@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "行情已更新至美东2026/10/7收盘：RAM 13.49(+1.81%)、CRWG 18.64(-7.08%)、CRDU 11.40(-0.78%)、IRE 8.08(-12.65%)、STXL 27.12(持平)、1号SNXX 15.74(+3.62%)、RKLX 18.01(-8.44%)；A股国庆休市跳过。",
-  asOfLabel: "行情：10/7收盘",
+  asOf: "成交已更新：主号RAM@13.7有序撤出减仓（预设限价、降仓位占比）；行情：10/7收盘已刷新（RAM 13.49、RKLX 18.01等）。",
+  asOfLabel: "成交：RAM@13.7有序撤出减仓 · 行情：10/7收盘",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1623,7 +1623,7 @@
             "趋势波段"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/7盘前连续追跌（13.2、12.98两笔）：13.2为疯狂情绪加仓、12.98再补，两次突破周内停加纪律，后续必须停手回归纪律；14C接受指派。",
+          oneLiner: "10/6~10/7连补后@13.7有序撤出减仓（预设限价、降单一仓位占比），14C备兑收租不变。",
           coverage: {
             status: "covered",
             statusText: "足额备兑",
@@ -1921,6 +1921,52 @@
     }
   ],
   closedTrades: [
+    {
+      date: "2026-10-08",
+      dateStart: "2026-10-08",
+      dateEnd: "2026-10-08",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-08",
+      trades: [
+        {
+          tradeId: "EP-RAM-2026Q3:2026-10-08",
+          episodeId: "EP-RAM-2026Q3",
+          sym: "RAM",
+          name: "2x DRAM (Roundhill T-Rex)",
+          acct: "主账号",
+          cost: 13.64813,
+          soldDate: "2026-10-08",
+          dateStart: "2026-10-08",
+          dateEnd: "2026-10-08",
+          isPartial: true,
+          closesEpisode: false,
+          totalRetPct: 0.38005,
+          result: "win",
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
+          reason: "部分减仓兑现",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261007-RAM-SELL-059",
+              date: "2026-10-08",
+              dateEnd: "2026-10-08",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 13.7,
+              cost: 13.64813,
+              costBasisType: "actual",
+              retPct: 0.38005,
+              note: "主号RAM有序撤出减仓：价位提前设置（限价13.7），因存储仓仓位占比过高、主动降低单一仓位；非情绪操作"
+            }
+          ]
+        }
+      ]
+    },
     {
       date: "2026-10-07",
       dateStart: "2026-10-07",
@@ -3404,28 +3450,31 @@
       reviewDate: "2026-10-07",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-07 复盘",
-      title: "RAM情绪加仓 · 突破周内停加纪律",
+      title: "RAM补仓后有序撤出 · 1号换仓",
       plan: [
         "10/6曾定周内不再加仓RAM；本笔10/7 13.2加仓为用户主动突破该纪律。",
         "本笔无事先交易计划，用户承认'有点上头'。",
         "1号小账号为快进快出博弈：SNXX反弹观察成色兑现即清仓。",
-        "1号小账号：RKLX 观察支撑位，低吸快进快出博弈；到止盈位/反弹成色验证后兑现。"
+        "1号小账号：RKLX 观察支撑位，低吸快进快出博弈；到止盈位/反弹成色验证后兑现。",
+        "限价13.7提前预设，回落前主动有序撤出，降低存储仓单一仓位占比。"
       ],
       execution: [
         "主号RAM：13.2情绪加仓（用户承认'有点上头'，记情绪交易），突破10/6所定周内停加纪律；后续回归纪律、周内不再加仓。",
         "主号RAM：12.98再追跌买入（未定性，疑似延续情绪加仓；再次突破周内停加纪律）。",
         "1号小账号SNXX：16.1清仓兑现（10/5建仓@15.695，反弹成色验证后快进快出落袋，约+2.6%）；现金回笼默认观望。",
-        "1号小账号RKLX：17.6支撑位抄底建仓（2x RKLB 杠杆，快进快出观察反弹成色）。"
+        "1号小账号RKLX：17.6支撑位抄底建仓（2x RKLB 杠杆，快进快出观察反弹成色）。",
+        "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。"
       ],
       good: [
-        "1号SNXX按反弹验证逻辑到价兑现，未恋战。"
+        "1号SNXX按反弹验证逻辑到价兑现，未恋战。",
+        "上下两段均有纪律：连补后按预设价有序撤出，未因追跌情绪死扛、主动控单一仓位。"
       ],
       issues: [
         "情绪期打破自定的周内停加纪律，需回归计划、避免连续追低。",
         "10/7两笔加仓（13.2、12.98）连续突破自定周内停加纪律、仓位显著抬升，需立即停手回归计划，避免跌破12继续摊平。"
       ],
       todo: [
-        "立即停手回归周内不再加仓纪律；14C备兑不变、到期前继续收租。",
+        "回归周内不再加仓、按预设位有序减仓控仓位；14C备兑不变、到期前继续收租。",
         "1号回笼现金默认观望，不做新仓；待用户明确去向。"
       ],
       execStatus: "emo",
@@ -3439,7 +3488,8 @@
         "1号小账号"
       ],
       saleExecutionIds: [
-        "EX-USER-20261007-SNXX-SELL-057"
+        "EX-USER-20261007-SNXX-SELL-057",
+        "EX-USER-20261007-RAM-SELL-059"
       ]
     },
     {

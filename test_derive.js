@@ -44,7 +44,12 @@ assert.equal(core.find(t => t.soldDate === '2026-09-21').totalRetPct, 7.26924);
 assert.equal(core.find(t => t.soldDate === '2026-10-02').totalRetPct, 5.51317);
 const withoutFutureBuy = structuredClone(ledger);
 withoutFutureBuy.executions = withoutFutureBuy.executions.filter(e => e.date < '2026-10-06');
-assert.deepEqual(derive(withoutFutureBuy).trades.filter(t => t.sym === 'RAM'), ram,
+// 历史卖出收益必须稳定：其后任何加仓/卖出不得回溯改变 <10/6 的已结算成本与收益。
+// 10/6 之后的新成交只允许作为当日新增条目（partial/close 卖出），不参与历史一致性比较。
+const histOnly = t => t.soldDate < '2026-10-06';
+assert.equal(
+  JSON.stringify(derive(withoutFutureBuy).trades.filter(t => t.sym === 'RAM').filter(histOnly)),
+  JSON.stringify(ram.filter(histOnly)),
   '后续夜盘加仓倒改了RAM历史收益');
 console.log('✅ 兑现派生通过：实际日期、移动均价、历史成本来源、清仓去重、缺项、持平、幂等');
 assert.equal(chinaExecutionTime({ timestamp: '2026-10-01T13:00:00-04:00' }).date, '2026-10-02');
