@@ -84,7 +84,7 @@ function check(html, ledger) {
   assert.ok(!nodes.reviewsBox.innerHTML.includes('待补观察'), '内部观察出现在复盘');
   const reviewSection = html.slice(html.indexOf('<section id="review"'), html.indexOf('</section>', html.indexOf('<section id="review"')));
   assert.ok(!/待补观察|待验证的观察|历史结单核对|历史补录|结单核对/.test(reviewSection + nodes.reviewsBox.innerHTML), '旧复盘内部内容仍在页面');
-  assert.ok(!/internalLegacyReviewNotes|internalObservation|internalExecution|RV-RECONCILE/.test(html), '内部记录嵌入网站产物');
+  assert.ok(!/internalLegacyReviewNotes|internalObservation|internalExecution|RV-RECONCILE|reviewDateOverrides|reviewAutomationState/.test(html), '内部记录嵌入网站产物');
   assert.ok(!nodes.closedDays.innerHTML.includes('未计费用') && !nodes.closedDays.innerHTML.includes('未扣费用'), '兑现卡片仍重复显示费用表述');
   assert.ok(!/数量待核实|时刻未记录|待复盘|后续处理待核实/.test(nodes.closedDays.innerHTML + nodes.reviewsBox.innerHTML), '旧状态或内部核对提示仍出现');
   assert.ok(!/券商结单补录|结单仍有观察仓|后者仍待核实/.test(nodes.closedDays.innerHTML + nodes.reviewsBox.innerHTML), '内部来源核对提示仍出现');

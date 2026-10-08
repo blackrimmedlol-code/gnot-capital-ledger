@@ -3,3 +3,4 @@
 
 # 依赖 / 缓存
 node_modules/
+__pycache__/

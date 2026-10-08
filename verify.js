@@ -224,12 +224,10 @@ sales.forEach(e => {
 derived.groups.forEach(d => d.trades.forEach(t => t.legs.forEach(l => {
   if (l.date !== d.date) { errors++; console.error('❌ 成交被归到错误交易日: ' + l.executionId); }
 })));
-const reviewSince = j.methodology && j.methodology.updatePolicy && j.methodology.updatePolicy.reviewRequiredFrom;
-if (reviewSince) j.executions.filter(e => e.date >= reviewSince).forEach(e => {
-  const linked = (j.reviews || []).some(r => r.date === e.date && (r.executionIds || []).includes(e.executionId));
-  if (!linked) { errors++; console.error('❌ 新成交未同步当日复盘: ' + e.executionId); }
+require('./review_dates').validateReviewLinks(j).forEach(problem => {
+  errors++; console.error('❌ ' + problem);
 });
-console.log('ℹ️ 同步检查: ' + sales.length + ' 条卖出与兑现视图对照，新交易检查对应日复盘');
+console.log('ℹ️ 同步检查: ' + sales.length + ' 条卖出与兑现视图对照，复盘按中国日期检查唯一归属');
 
 // 当前纪律只有一个来源；旧ID继续映射，避免历史引用断裂或重新执行停用规则。
 if (j.discipline && j.discipline.rules) {
@@ -268,6 +266,7 @@ const hashes = {
   build_public: sha256(path.join(ROOT, 'build_public.js')),
   derive: sha256(path.join(ROOT, 'derive.js')),
   presentation: sha256(path.join(ROOT, 'presentation.js')),
+  review_dates: sha256(path.join(ROOT, 'review_dates.js')),
   render_test: sha256(path.join(ROOT, 'test_render.js')),
   agents: sha256(path.join(ROOT, 'AGENTS.md'))
 };

@@ -46,7 +46,8 @@
       "reviewTimezone": "Asia/Shanghai",
       "missingValues": "内部保留null与缺项来源；公开价格/收益无法计算时显示—，缺精确时刻不显示占位提示，不能以0代替。",
       "acceptanceCommand": "node check_update.js",
-      "displayTradeTimezone": "Asia/Shanghai"
+      "displayTradeTimezone": "Asia/Shanghai",
+      "reviewDateValidation": "review_dates.js: 唯一公开复盘引用，按实际中国日期校验；明确成交日期优先于历史标签例外。"
     },
     "optionsAnalysis": {
       "scope": "coverage_only",
@@ -68,7 +69,7 @@
     },
     "reviewPresentation": {
       "timezone": "Asia/Shanghai",
-      "dateBasis": "中国复盘归属日，以用户确认的reviewDate为准；次日整理、录入或发布不自动顺延。卡片、排序、筛选、归档统一使用reviewDate，与实际成交日期独立；原始交易日/时间保留用于对账。",
+      "dateBasis": "新增成交按实际中国日期归属复盘；用户明确成交日期及精确带时区时刻优先。历史用户指定复盘归属仅按固定executionId记录例外，不扩展到新成交；录入时刻和原美东日不决定复盘日。",
       "internalVisibility": "结单核对、历史补录、内部观察仅存仓库，不进入网站加载数据"
     },
     "displayReturns": {
@@ -3475,10 +3476,11 @@
       },
       "chinaDate": "2026-10-08",
       "chinaDateSource": {
-        "type": "contemporaneous_user_report",
-        "reportedAt": "2026-10-08T10:12:27+08:00",
-        "evidence": "用户报告主号RAM卖250@13.7，提前设置价、有序撤出以降低仓位占比；未明确成交时刻，按美东10/7盘后近似归属"
-      }
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-08T10:33:39+08:00",
+        "evidence": "用户明确确认本笔RAM按13.7有序减仓在10月8日执行；没有提供精确成交时刻。"
+      },
+      "sourceDateStatus": "inferred_original_date_preserved"
     }
   ],
   "episodes": [
@@ -4971,31 +4973,27 @@
       "reviewDate": "2026-10-07",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-07 复盘",
-      "title": "RAM补仓后有序撤出 · 1号换仓",
+      "title": "RAM连续补仓 · 1号换仓",
       "executionIds": [
         "EX-USER-20261007-RAM-BUY-005",
         "EX-USER-20261007-RAM-BUY-006",
         "EX-USER-20261007-SNXX-SELL-057",
-        "EX-USER-20261007-RKLX-BUY-058",
-        "EX-USER-20261007-RAM-SELL-059"
+        "EX-USER-20261007-RKLX-BUY-058"
       ],
       "plan": [
         "10/6曾定周内不再加仓RAM；本笔10/7 13.2加仓为用户主动突破该纪律。",
         "本笔无事先交易计划，用户承认'有点上头'。",
         "1号小账号为快进快出博弈：SNXX反弹观察成色兑现即清仓。",
-        "1号小账号：RKLX 观察支撑位，低吸快进快出博弈；到止盈位/反弹成色验证后兑现。",
-        "限价13.7提前预设，回落前主动有序撤出，降低存储仓单一仓位占比。"
+        "1号小账号：RKLX 观察支撑位，低吸快进快出博弈；到止盈位/反弹成色验证后兑现。"
       ],
       "execution": [
         "主号RAM：13.2情绪加仓（用户承认'有点上头'，记情绪交易），突破10/6所定周内停加纪律；后续回归纪律、周内不再加仓。",
         "主号RAM：12.98再追跌买入（未定性，疑似延续情绪加仓；再次突破周内停加纪律）。",
         "1号小账号SNXX：16.1清仓兑现（10/5建仓@15.695，反弹成色验证后快进快出落袋，约+2.6%）；现金回笼默认观望。",
-        "1号小账号RKLX：17.6支撑位抄底建仓（2x RKLB 杠杆，快进快出观察反弹成色）。",
-        "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。"
+        "1号小账号RKLX：17.6支撑位抄底建仓（2x RKLB 杠杆，快进快出观察反弹成色）。"
       ],
       "good": [
-        "1号SNXX按反弹验证逻辑到价兑现，未恋战。",
-        "上下两段均有纪律：连补后按预设价有序撤出，未因追跌情绪死扛、主动控单一仓位。"
+        "1号SNXX按反弹验证逻辑到价兑现，未恋战。"
       ],
       "issues": [
         "情绪期打破自定的周内停加纪律，需回归计划、避免连续追低。",
@@ -5008,14 +5006,43 @@
       "execStatus": "emo",
       "reviewStatus": "in_progress",
       "recordedAt": "2026-10-07T14:42:55+08:00",
-      "reviewDateBasis": "对应美东10/7交易日的记录",
+      "reviewDateBasis": "用户确认历史复盘归属10/7；10/8新减仓独立归入10/8复盘",
       "internalExecution": [],
       "internalObservation": [
         "本笔13.2成交时刻未提供，按美东10/7交易日近似归属；行情仍10/6收盘快照，成交价不冒充实时行情。",
         "本笔12.98成交时刻未提供，按美东10/7交易日近似归属；执行状态暂记adhoc，用户若认情绪可改emo。",
         "本笔清仓时刻未提供，按美东10/7盘中近似归属；执行状态暂记adhoc。",
-        "本笔建仓时刻未提供，按美东10/7盘中近似归属；执行状态暂记adhoc（支撑位观察决策）。",
-        "本笔卖出时刻未提供，按美东10/7盘后近似归属；13.7高于10/7收盘13.49，疑似盘后限价单触发，精确时刻待确认。"
+        "本笔建仓时刻未提供，按美东10/7盘中近似归属；执行状态暂记adhoc（支撑位观察决策）。"
+      ],
+      "updatedAt": "2026-10-08T10:33:39+08:00"
+    },
+    {
+      "reviewId": "RV-20261008",
+      "date": "2026-10-08",
+      "reviewDate": "2026-10-08",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-08 复盘",
+      "title": "RAM按预设限价减仓 · 降低单一仓位占比",
+      "executionIds": [
+        "EX-USER-20261007-RAM-SELL-059"
+      ],
+      "plan": [
+        "提前设置13.7限价，以降低存储仓单一标的仓位占比。"
+      ],
+      "execution": [
+        "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。"
+      ],
+      "good": [
+        "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。"
+      ],
+      "issues": [],
+      "todo": [],
+      "execStatus": "plan",
+      "reviewStatus": "in_progress",
+      "reviewDateBasis": "用户明确确认本笔在10/8执行，归属实际中国日期；与原美东日期及录入时间独立。",
+      "recordedAt": "2026-10-08T10:38:51+08:00",
+      "internalObservation": [
+        "本次只确认实际成交日期10/8，精确成交时刻未知；不采用此前盘后触发推测。"
       ]
     }
   ],
@@ -5887,6 +5914,27 @@
         "statementTimestamp": "2026-10-02T02:56:21+08:00",
         "settlementDate": "2026-10-02"
       }
+    },
+    {
+      "ref": "EX-USER-20261007-RAM-SELL-059",
+      "field": "chinaDateSource/sourceDateStatus",
+      "before": {
+        "chinaDateSource": {
+          "type": "contemporaneous_user_report",
+          "reportedAt": "2026-10-08T10:12:27+08:00",
+          "evidence": "用户报告主号RAM卖250@13.7，提前设置价、有序撤出以降低仓位占比；未明确成交时刻，按美东10/7盘后近似归属"
+        }
+      },
+      "after": {
+        "chinaDateSource": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-08T10:33:39+08:00",
+          "evidence": "用户明确确认本笔RAM按13.7有序减仓在10月8日执行；没有提供精确成交时刻。"
+        },
+        "sourceDateStatus": "inferred_original_date_preserved"
+      },
+      "date": "2026-10-08",
+      "reason": "用户明确确认实际中国日期为10/8；原美东10/7为旧Agent近似推测，保留原字段用于溯源，不用报告时刻或价格关系推断成交时刻。"
     }
   ],
   "historicalNarrativeCorrections": [
@@ -6570,6 +6618,105 @@
       "after": "用户报告卖出IRE @9.55，剩余仓位持有；未提供卖出理由，原观望1周回升至10的计划提前兑现",
       "date": "2026-10-08",
       "reason": "公开成交备注去除裸数量及剩余数量；原始股数、来源证据及成交事实保留。"
+    },
+    {
+      "ref": "RV-20261007",
+      "field": "review_content_and_executionIds",
+      "before": {
+        "reviewId": "RV-20261007",
+        "date": "2026-10-07",
+        "reviewDate": "2026-10-07",
+        "reviewTimezone": "Asia/Shanghai",
+        "dateLabel": "2026-10-07 复盘",
+        "title": "RAM补仓后有序撤出 · 1号换仓",
+        "executionIds": [
+          "EX-USER-20261007-RAM-BUY-005",
+          "EX-USER-20261007-RAM-BUY-006",
+          "EX-USER-20261007-SNXX-SELL-057",
+          "EX-USER-20261007-RKLX-BUY-058",
+          "EX-USER-20261007-RAM-SELL-059"
+        ],
+        "plan": [
+          "10/6曾定周内不再加仓RAM；本笔10/7 13.2加仓为用户主动突破该纪律。",
+          "本笔无事先交易计划，用户承认'有点上头'。",
+          "1号小账号为快进快出博弈：SNXX反弹观察成色兑现即清仓。",
+          "1号小账号：RKLX 观察支撑位，低吸快进快出博弈；到止盈位/反弹成色验证后兑现。",
+          "限价13.7提前预设，回落前主动有序撤出，降低存储仓单一仓位占比。"
+        ],
+        "execution": [
+          "主号RAM：13.2情绪加仓（用户承认'有点上头'，记情绪交易），突破10/6所定周内停加纪律；后续回归纪律、周内不再加仓。",
+          "主号RAM：12.98再追跌买入（未定性，疑似延续情绪加仓；再次突破周内停加纪律）。",
+          "1号小账号SNXX：16.1清仓兑现（10/5建仓@15.695，反弹成色验证后快进快出落袋，约+2.6%）；现金回笼默认观望。",
+          "1号小账号RKLX：17.6支撑位抄底建仓（2x RKLB 杠杆，快进快出观察反弹成色）。",
+          "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。"
+        ],
+        "good": [
+          "1号SNXX按反弹验证逻辑到价兑现，未恋战。",
+          "上下两段均有纪律：连补后按预设价有序撤出，未因追跌情绪死扛、主动控单一仓位。"
+        ],
+        "issues": [
+          "情绪期打破自定的周内停加纪律，需回归计划、避免连续追低。",
+          "10/7两笔加仓（13.2、12.98）连续突破自定周内停加纪律、仓位显著抬升，需立即停手回归计划，避免跌破12继续摊平。"
+        ],
+        "todo": [
+          "回归周内不再加仓、按预设位有序减仓控仓位；14C备兑不变、到期前继续收租。",
+          "1号回笼现金默认观望，不做新仓；待用户明确去向。"
+        ],
+        "execStatus": "emo",
+        "reviewStatus": "in_progress",
+        "recordedAt": "2026-10-07T14:42:55+08:00",
+        "reviewDateBasis": "对应美东10/7交易日的记录",
+        "internalExecution": [],
+        "internalObservation": [
+          "本笔13.2成交时刻未提供，按美东10/7交易日近似归属；行情仍10/6收盘快照，成交价不冒充实时行情。",
+          "本笔12.98成交时刻未提供，按美东10/7交易日近似归属；执行状态暂记adhoc，用户若认情绪可改emo。",
+          "本笔清仓时刻未提供，按美东10/7盘中近似归属；执行状态暂记adhoc。",
+          "本笔建仓时刻未提供，按美东10/7盘中近似归属；执行状态暂记adhoc（支撑位观察决策）。",
+          "本笔卖出时刻未提供，按美东10/7盘后近似归属；13.7高于10/7收盘13.49，疑似盘后限价单触发，精确时刻待确认。"
+        ]
+      },
+      "afterReviewIds": [
+        "RV-20261007",
+        "RV-20261008"
+      ],
+      "date": "2026-10-08",
+      "reason": "用户确认RAM13.7减仓实际10/8执行，将对应计划、事实及评价独立归入10/8，10/7保留当日原加仓与1号换仓。"
     }
-  ]
+  ],
+  "reviewDateOverrides": [
+    {
+      "executionId": "EX-USER-20261006-STXL-BUY-001",
+      "reviewDate": "2026-10-06",
+      "source": {
+        "type": "user_confirmed_review_label",
+        "confirmedDate": "2026-10-08",
+        "evidence": "用户先前明确指定整篇RAM连续补仓/IRE部分止盈/STXL支撑抄底复盘归属10/6；保留原引用关系，不据此改实际成交日期。"
+      }
+    },
+    {
+      "executionId": "EX-USER-20261007-RKLX-BUY-058",
+      "reviewDate": "2026-10-07",
+      "source": {
+        "type": "user_confirmed_review_label",
+        "confirmedDate": "2026-10-08",
+        "evidence": "用户先前明确保留1号换仓所在历史复盘归属10/7；本次仅明确纠正RAM13.7减仓实际日期，未确认更改RKLX实际日期或历史复盘引用。"
+      }
+    }
+  ],
+  "reviewAutomationState": {
+    "automationId": "6ac70270f1ec81918a930ca004e1cf6d",
+    "enabled": true,
+    "confirmedAt": "2026-10-08T10:33:39+08:00",
+    "calendarTimezone": "America/New_York",
+    "displayTimezone": "Asia/Shanghai",
+    "normalTrigger": "16:30 America/New_York",
+    "earlyTrigger": "当日NYSE实际收盘后30分钟",
+    "firstScheduledChinaDate": "2026-10-09",
+    "calendarCheckedDate": "2026-10-08",
+    "calendarCoverageThrough": "2028-12-31",
+    "calendarSource": "https://www.nyse.com/trade/hours-calendars",
+    "lastSuccessfulCutoff": null,
+    "executionFingerprints": {},
+    "note": "用户已暂停另一Agent的自动复盘；本任务接手收盘评价和发布。记录Agent继续录入事实。启用不等于已经成功运行，成功截止游标待首轮真实上线验证后更新。"
+  }
 }
