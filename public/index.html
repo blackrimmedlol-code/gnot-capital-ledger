@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交已更新：主号RAM@13.7有序撤出减仓（预设限价、降仓位占比）；行情：10/7收盘已刷新（RAM 13.49、RKLX 18.01等）。",
-  asOfLabel: "成交：RAM@13.7有序撤出减仓 · 行情：10/7收盘",
+  asOf: "成交更新至10/8：主号IRE按7.36加仓、LABU按213.39建仓；持仓已同步，行情沿用10/7收盘快照。",
+  asOfLabel: "成交：10/8 IRE加仓 · LABU建仓；行情：10/7收盘",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1541,7 +1541,7 @@
     available: true,
     topSym: "RAM",
     level: "高",
-    holdingsAsOf: "2026-10-07",
+    holdingsAsOf: "2026-10-08",
     priceAsOf: "美东 2026-10-07 收盘"
   },
   accounts: [
@@ -1632,7 +1632,7 @@
           },
           weightRank: 1,
           weightLevel: "高",
-          stockWeightPct: 66.6
+          stockWeightPct: 57.4
         },
         {
           sym: "CRWG",
@@ -1667,9 +1667,9 @@
             isFullyBacked: true,
             sharesUnknown: false
           },
-          weightRank: 4,
+          weightRank: 6,
           weightLevel: "低",
-          stockWeightPct: 7.7
+          stockWeightPct: 6.6
         },
         {
           sym: "CRDU",
@@ -1705,12 +1705,12 @@
           },
           weightRank: 2,
           weightLevel: "低",
-          stockWeightPct: 14.1
+          stockWeightPct: 12.1
         },
         {
           sym: "IRE",
           name: "Defiance 2x IREN · 2x AI云",
-          cost: 8.94987,
+          cost: 7.88996,
           costNote: "实际成本",
           strategy: [
             "卫星仓·AI云"
@@ -1723,17 +1723,17 @@
           setup: [
             "支撑低吸"
           ],
-          execStatus: "adhoc",
-          oneLiner: "9.55部分止盈锁定利润，剩余仓位持有观察。",
+          execStatus: "unknown",
+          oneLiner: "10/8按7.36加仓，继续原持仓周期。",
           coverage: {
             status: "none",
             statusText: "无备兑",
             isFullyBacked: false,
             sharesUnknown: false
           },
-          weightRank: 5,
+          weightRank: 3,
           weightLevel: "低",
-          stockWeightPct: 3.3
+          stockWeightPct: 8.6
         },
         {
           sym: "STXL",
@@ -1757,9 +1757,32 @@
             isFullyBacked: false,
             sharesUnknown: false
           },
-          weightRank: 3,
+          weightRank: 5,
           weightLevel: "低",
-          stockWeightPct: 8.4
+          stockWeightPct: 7.2
+        },
+        {
+          sym: "LABU",
+          name: "3x 做多生物科技ETF",
+          cost: 213.39,
+          costNote: "实际成本",
+          strategy: [],
+          options: [],
+          tags: [
+            "hold"
+          ],
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "10/8按213.39建仓。",
+          coverage: {
+            status: "none",
+            statusText: "无备兑",
+            isFullyBacked: false,
+            sharesUnknown: false
+          },
+          weightRank: 4,
+          weightLevel: "低",
+          stockWeightPct: 8.1
         }
       ]
     },
@@ -3383,21 +3406,26 @@
       reviewDate: "2026-10-08",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-08 复盘",
-      title: "RAM按预设限价减仓 · 降低单一仓位占比",
+      title: "RAM预设限价减仓 · IRE加仓 · LABU建仓",
       plan: [
-        "提前设置13.7限价，以降低存储仓单一标的仓位占比。"
+        "提前设置13.7限价，以降低存储仓单一标的仓位占比。",
+        "IRE本次加仓及LABU建仓的事前计划未记录。"
       ],
       execution: [
-        "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。"
+        "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。",
+        "主号IRE：按7.36加仓，继续原未结束持仓周期。",
+        "主号LABU：按213.39建仓，与1号账号历史LABU周期独立。"
       ],
       good: [
         "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。"
       ],
       issues: [],
       todo: [],
-      execStatus: "plan",
+      execStatus: "unknown",
       symbols: [
-        "RAM"
+        "RAM",
+        "IRE",
+        "LABU"
       ],
       accounts: [
         "主账号"
