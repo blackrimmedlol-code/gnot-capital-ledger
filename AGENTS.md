@@ -3,6 +3,7 @@
 - 每次任务先读本文件及 `RULES_日常更新.md`，再读取最新台账中本次涉及的账户、标的、周期和有效计划。脚本可读完整 JSON，模型不必全量复盘。
 - 唯一事实来源：`data/ledger-full.json` 的 executions / episodes / accounts / reviews。`closedTrades` 是历史补充来源；网站兑现卡片由 `derive.js` 派生。
 - 新成交必须同步持仓、周期和当日 reviews，引用 executionId；不得只改持仓或聊天回复。
+- 已全清必须统一关闭本账户episode（status=closed/currentQty=0/exitDate/exitReason）；不得只填closeDate而仍open。跨账户同标的持仓不妨碍本周期清仓；verify拦截清仓状态矛盾。公开成交备注的裸写股数同样须脱敏。
 - 内部待补观察、历史补录与结单核对仅保留仓库，不进入公开复盘及页面数据。复盘与实际成交展示都按中国时间；原始来源日期/时区保留。带时区成交时间精确换算；仅有原日期则显示中国日期区间，不统一加一天。持仓策略备注只留仓库，不发布。
 - 复盘归属日优先采用用户确认的 reviewDate；次日整理、录入或发布不自动顺延。卡片日期、排序、筛选与归档统一读 reviewDate，按日期倒序，不能为了排序改成交日期。
 - 新成交的复盘归属按实际中国日期及唯一executionId校验，不能用原美东日期、最近卡片或同episode追加。用户明确确认成交日期时优先于历史标签例外；review_dates.js会阻止错日或重复引用。收盘自动复盘按RULES第8节执行，记录Agent继续同步已确认事实，不另开自动复盘任务。

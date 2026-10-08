@@ -74,6 +74,11 @@ function check(html, ledger) {
     assert.equal(l.date, d.date, '卖出被迁移到错误日期');
   }
   const dates = api.DATA.closedTrades.map(d => d.date);
+  const snxxClose = api.DATA.closedTrades.flatMap(d => d.trades).find(t => t.episodeId === 'EP-SNXX1-2026Q4');
+  assert.ok(snxxClose && snxxClose.closesEpisode && !snxxClose.isPartial && snxxClose.performanceEligible,
+    '已清仓SNXX页面仍按部分减仓展示');
+  assert.ok(snxxClose.reason.includes('清仓'), 'SNXX清仓说明丢失');
+  assert.ok(!JSON.stringify(snxxClose.legs).includes('SNXX 143'), '公开备注仍泄漏裸写股票数量');
   assert.equal(JSON.stringify(dates), JSON.stringify(expected.groups.map(d => d.date)), '兑现日期未倒序');
   const reviewIds = [...nodes.reviewsBox.innerHTML.matchAll(/data-review-id="([^"]+)"/g)].map(m => m[1]);
   const publicReviews = (ledger.reviews || []).filter(r => r.visibility !== 'internal');

@@ -46,6 +46,9 @@ j.closedTrades.forEach(d => d.trades.forEach(t => {
   if (!epSet.has(t.episodeId)) { refErr++; errors++; console.error(`❌ closedTrade 引用缺失 episode: ${t.tradeId} → ${t.episodeId}`); }
 }));
 if (!refErr) console.log('✅ 引用关系: 所有 execution / closedTrade 均指向存在的 episode');
+const episodeProblems = require('./derive').validateEpisodeStates(j);
+episodeProblems.forEach(problem => { errors++; console.error('❌ ' + problem); });
+if (!episodeProblems.length) console.log('✅ 清仓周期状态、统一退出字段与交易仓余额一致');
 
 // Historical actual-cost snapshots must link to the preserved source, never a current net cost.
 const checkpointIds = new Set();
@@ -108,6 +111,7 @@ j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const closedEpIds = new Set((j.episodes || []).filter(e => e.status === 'closed').map(e => e.episodeId));
   const ex = j.executions.filter(e => e.sym === h.sym && e.account === acctId && !closedEpIds.has(e.episodeId));
   if (ex.length === 0) {
+    if (h.qty === 0) return; // A retained zero-position row needs no active-cycle fills.
     warnings++; console.warn(`⚠️ ${h.sym}(${acctId}) 无 execution 流水，无法对账持仓（期初/买入/卖出缺失）`);
     return;
   }

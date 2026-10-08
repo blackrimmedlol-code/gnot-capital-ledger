@@ -61,6 +61,16 @@ if (/(?:^|["“（(\s,:：])\d+(?:,\d{3})*\s*[@＠]\s*\d+(?:\.\d+)?|剩余\s*\d+
   console.error('❌ 发布产物含数量@价格的紧凑成交写法（股票数量泄漏）');
 }
 
+// Raw bare quantities adjacent to a ticker also leak holdings, e.g. SNXX 143（...）.
+const ledger = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'ledger-full.json'), 'utf8'));
+const { shareCountPatterns } = require('./presentation');
+for (const event of ledger.executions || []) {
+  if (shareCountPatterns(event).some(pattern => pattern.test(html))) {
+    errors++;
+    console.error('❌ 发布产物含标的旁裸写股票数量: ' + event.executionId);
+  }
+}
+
 if (errors > 0) {
   console.error(`\n❌ 发布产物检查失败: ${errors} 处问题，阻止部署`);
   process.exit(1);

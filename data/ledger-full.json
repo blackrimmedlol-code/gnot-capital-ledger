@@ -3858,17 +3858,15 @@
       "episodeId": "EP-SNXX1-2026Q4",
       "sym": "SNXX",
       "account": "sat1",
-      "status": "open",
+      "status": "closed",
       "entryDate": "2026-10-05",
       "entrySetup": [
         "支撑位反弹"
       ],
       "entryExecStatus": "plan",
       "currentQty": 0,
-      "exitReason": null,
-      "exitDate": null,
-      "closeDate": "2026-10-07",
-      "closeReason": "清仓兑现（快进快出博弈到验证位落袋）"
+      "exitReason": "清仓兑现（快进快出博弈到验证位落袋）",
+      "exitDate": "2026-10-07"
     },
     {
       "episodeId": "EP-RAM-SCALP-20260916",
@@ -5935,6 +5933,42 @@
       },
       "date": "2026-10-08",
       "reason": "用户明确确认实际中国日期为10/8；原美东10/7为旧Agent近似推测，保留原字段用于溯源，不用报告时刻或价格关系推断成交时刻。"
+    },
+    {
+      "ref": "EP-SNXX1-2026Q4",
+      "field": "episode_close_state",
+      "before": {
+        "episodeId": "EP-SNXX1-2026Q4",
+        "sym": "SNXX",
+        "account": "sat1",
+        "status": "open",
+        "entryDate": "2026-10-05",
+        "entrySetup": [
+          "支撑位反弹"
+        ],
+        "entryExecStatus": "plan",
+        "currentQty": 0,
+        "exitReason": null,
+        "exitDate": null,
+        "closeDate": "2026-10-07",
+        "closeReason": "清仓兑现（快进快出博弈到验证位落袋）"
+      },
+      "after": {
+        "episodeId": "EP-SNXX1-2026Q4",
+        "sym": "SNXX",
+        "account": "sat1",
+        "status": "closed",
+        "entryDate": "2026-10-05",
+        "entrySetup": [
+          "支撑位反弹"
+        ],
+        "entryExecStatus": "plan",
+        "currentQty": 0,
+        "exitReason": "清仓兑现（快进快出博弈到验证位落袋）",
+        "exitDate": "2026-10-07"
+      },
+      "date": "2026-10-08",
+      "reason": "用户确认1号SNXX已全清；原买入143股和卖出143股、持仓0与closeDate均已存在，但status仍open且使用错误退出字段别名。统一为closed/exitDate/exitReason，不新增成交，不改变价格、数量或成交日期。"
     }
   ],
   "historicalNarrativeCorrections": [

@@ -24,4 +24,22 @@ function cleanExecutionNote(event) {
   const note = event.note || '';
   return positive(event.qty) ? note.replace(/[（(]\s*数量待核实\s*[）)]/g, '').trim() : note;
 }
-module.exports = { summarizeHoldings, cleanExecutionNote };
+const escapeRegex = s => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function shareCountPatterns(event) {
+  const sym = escapeRegex(event.sym || '');
+  if (!sym) return [];
+  const quantities = [...new Set([event.qty, event.analysisQty, event.observationQty].filter(positive))];
+  return quantities.flatMap(q => {
+    const qty = escapeRegex(q);
+    return [new RegExp('(' + sym + ')\\s+' + qty + '(?=[\\s（(，,；;）)]|$)', 'g'),
+      new RegExp(qty + '\\s*(?:股)?\\s*(' + sym + ')(?![A-Z])', 'g')];
+  });
+}
+function publicExecutionNote(event) {
+  let note = cleanExecutionNote(event);
+  for (const pattern of shareCountPatterns(event)) note = note.replace(pattern, '$1');
+  note = note.replace(/\d+(?:,\d{3})*\s*股/g, '部分仓位')
+    .replace(/\d+(?:,\d{3})*\s*[@＠]\s*(\d+(?:\.\d+)?)/g, '按$1');
+  return note.trim();
+}
+module.exports = { summarizeHoldings, cleanExecutionNote, publicExecutionNote, shareCountPatterns };

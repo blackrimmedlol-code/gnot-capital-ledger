@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 const { derive, presentChinaDates, chinaExecutionTime } = require('./derive.js'); // 成交兑现视图派生（事实来自 executions）
-const { summarizeHoldings } = require('./presentation.js');
+const { summarizeHoldings, publicExecutionNote } = require('./presentation.js');
 
 const ROOT = __dirname;
 const LEDGER_PATH = path.join(ROOT, 'data', 'ledger-full.json');
@@ -124,7 +124,8 @@ function publicClosedTrade(t) {
     'reason', 'setup', 'execStatus', 'oneLiner']);
   out.legs = t.legs.map(l => ({
     ...pick(l, ['executionId', 'date', 'dateEnd', 'datePrecision', 'timezone', 'time', 'price', 'cost', 'costBasisType', 'retPct']),
-    note: (l.note || '').replace(/[（(]\s*数量待核实\s*[）)]/g, '').trim()
+    note: publicExecutionNote({ ...ledger.executions.find(e => e.executionId === l.executionId), note: l.note })
+      .replace(/[（(]\s*数量待核实\s*[）)]/g, '').trim()
   }));
   return out;
 }

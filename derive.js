@@ -181,4 +181,39 @@ function presentChinaDates(derived, ledger) {
   return { trades, groups: [...days.values()].sort((a, b) => b.dateEnd.localeCompare(a.dateEnd) || b.date.localeCompare(a.date)) };
 }
 
-module.exports = { derive, chinaExecutionTime, presentChinaDates };
+function validateEpisodeStates(ledger) {
+  const problems = [];
+  for (const ep of ledger.episodes || []) {
+    if (ep.status === 'merged') continue;
+    const events = (ledger.executions || []).filter(e => e.episodeId === ep.episodeId &&
+      e.includeInPerformance !== false && e.analysisQty !== 0);
+    const sells = events.filter(e => e.side === 'sell');
+    if (ep.status === 'open' && (ep.exitDate || ep.closeDate || ep.exitReason || ep.closeReason ||
+        (ep.currentQty === 0 && sells.length))) {
+      problems.push('周期状态矛盾：已登记清仓/余额归零但仍为open: ' + ep.episodeId);
+    }
+    if (ep.status === 'closed' && (number(ep.currentQty) && ep.currentQty !== 0)) {
+      problems.push('周期状态矛盾：closed仍有交易仓余额: ' + ep.episodeId);
+    }
+    if (ep.status === 'closed' && !ep.exitDate) {
+      problems.push('清仓周期缺统一exitDate: ' + ep.episodeId);
+    }
+    // Only a complete zero-origin chain proves a position was fully sold.
+    // Opening snapshots/checkpoints or unknown quantities cannot be treated as zero.
+    const inherited = (ledger.openingPositions || []).some(o => o.account === ep.account && o.sym === ep.sym) ||
+      (ledger.costCheckpoints || []).some(c => c.episodeId === ep.episodeId);
+    const complete = !inherited && events.some(e => e.side === 'buy') &&
+      events.every(e => ['buy', 'sell'].includes(e.side) && positive(e.analysisQty === undefined ? e.qty : e.analysisQty));
+    if (complete) {
+      const balance = events.reduce((s, e) => s + (e.side === 'buy' ? 1 : -1) *
+        (e.analysisQty === undefined ? e.qty : e.analysisQty), 0);
+      if (ep.status === 'open' && sells.length && balance === 0)
+        problems.push('完整交易仓流水已归零但周期未关闭: ' + ep.episodeId);
+      if (ep.status === 'closed' && balance !== 0)
+        problems.push('清仓周期与完整交易仓流水不一致: ' + ep.episodeId);
+    }
+  }
+  return problems;
+}
+
+module.exports = { derive, chinaExecutionTime, presentChinaDates, validateEpisodeStates };
