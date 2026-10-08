@@ -1,4 +1,4 @@
-// Build-time presentation only: public summaries contain no quantities, money or exact weights.
+// Build-time presentation: public stock weights are permitted; quantities and money stay internal.
 const positive = v => typeof v === 'number' && Number.isFinite(v) && v > 0;
 function summarizeHoldings(account) {
   const holdings = account.holdings || [];
@@ -10,13 +10,16 @@ function summarizeHoldings(account) {
   });
   const rows = values.map(v => v === 0 ? { excluded: true } : {});
   const available = values.some(positive) && values.every(v => v === 0 || positive(v));
-  if (!available) return { available: false, topSym: null, level: null, holdings: rows };
+  if (!available) return { available: false, topSym: null, level: null,
+    holdings: rows.map(r => r.excluded ? r : { stockWeightPct: null }) };
   const total = values.reduce((s, v) => s + v, 0);
   const order = values.map((v, i) => i).filter(i => values[i] > 0).sort((a, b) => values[b] - values[a] || a - b);
   const level = v => v / total >= 0.5 ? '高' : v / total >= 0.25 ? '中' : '低';
   return {
     available: true, topSym: holdings[order[0]].sym, level: level(values[order[0]]),
-    holdings: holdings.map((h, i) => values[i] === 0 ? rows[i] : { weightRank: order.indexOf(i) + 1, weightLevel: level(values[i]) })
+    holdings: holdings.map((h, i) => values[i] === 0 ? rows[i] : {
+      weightRank: order.indexOf(i) + 1, weightLevel: level(values[i]),
+      stockWeightPct: Math.round(values[i] / total * 1000) / 10 })
   };
 }
 function cleanExecutionNote(event) {

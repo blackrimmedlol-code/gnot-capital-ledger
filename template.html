@@ -642,7 +642,7 @@
     <div class="sec-head">
       <span class="n">01</span>
       <h2>持仓监测</h2>
-      <span class="note">权重档位=账户内正股市值 · 沿用已记录行情快照</span>
+      <span class="note">权重=各账户内正股持仓市值占比 · 沿用已记录行情快照</span>
     </div>
     <div id="holdingsBox"></div>
   </section>
@@ -1547,7 +1547,7 @@
           var costStr = knownNumber(h.cost) ? (acct.market === "CN" ? "¥" : "$") + h.cost.toFixed(h.cost < 20 ? 3 : 2) : "—";
           if (h.costNote) costStr += '<div class="subcell" style="font-size:10px; color:var(--muted);">' + h.costNote + '</div>';
           var symCell = '<span class="sym">' + h.sym + '</span>';
-          if (h.weightLevel) symCell += '<span class="wt">' + htmlText(h.weightLevel) + '权重</span>';
+          symCell += '<span class="wt">' + (typeof h.stockWeightPct === 'number' && isFinite(h.stockWeightPct) ? h.stockWeightPct.toFixed(1) + '%' : '—') + '</span>';
           if (h.code) symCell += '<div class="desc">' + h.code + '</div>';
           symCell += '<div class="desc">' + h.name + '</div>';
           // 统一不显示具体持股数（隐私）

@@ -100,7 +100,7 @@ function attachCoverage(h) {
 function mapFields(holding, weight) {
   const h = { ...holding };
   delete h.strategyNote; // Keep strategy notes in the full ledger only.
-  delete h.wtPct; // Exact stock weights stay in the repository; public view shows levels/ranks only.
+  delete h.wtPct; // Old estimated/NAV weights are not the current account-stock denominator.
   Object.assign(h, weight || {});
   h.options = (h.options || []).map(g => ({ ...pick(g, ['exp', 'settled']),
     legs: (g.legs || []).map(l => pick(l, ['mult', 'strike', 'type', 'premium', 'naked'])) }));
@@ -113,7 +113,7 @@ function mapFields(holding, weight) {
     delete h.costDisplay;
   }
   return pick(h, ['sym', 'name', 'code', 'cost', 'costNote', 'strategy', 'options', 'tags', 'alerts',
-    'alertSub', 'setup', 'execStatus', 'oneLiner', 'reviewNote', 'coverage', 'weightRank', 'weightLevel']);
+    'alertSub', 'setup', 'execStatus', 'oneLiner', 'reviewNote', 'coverage', 'weightRank', 'weightLevel', 'stockWeightPct']);
 }
 function pick(obj, keys) {
   return Object.fromEntries(keys.filter(k => obj[k] !== undefined).map(k => [k, obj[k]]));

@@ -82,8 +82,12 @@ const { summarizeHoldings, cleanExecutionNote } = require('./presentation');
 const weights = { holdings: [{ sym: 'A', qty: 101, observationQty: 1, lastPrice: 2 }, { sym: 'B', qty: 100, lastPrice: 1 }] };
 assert.equal(summarizeHoldings(weights).topSym, 'A');
 assert.equal(summarizeHoldings(weights).level, '高');
+assert.deepEqual(summarizeHoldings(weights).holdings.map(h => h.stockWeightPct), [66.7, 33.3],
+  '权重分母不是账户内交易仓市值或未剔除观察股');
 const missingPrice = structuredClone(weights); missingPrice.holdings[1].lastPrice = null;
 assert.equal(summarizeHoldings(missingPrice).available, false, '忽略未知持仓而生成伪集中度');
+assert.ok(summarizeHoldings(missingPrice).holdings.every(h => h.stockWeightPct === null),
+  '缺行情仍生成部分账户的伪权重百分比');
 const onlyObservation = { holdings: [{ sym: 'OBS', qty: 200, analysisQty: 1, lastPrice: 1 }, { sym: 'CORE', qty: 100, lastPrice: 1 }] };
 assert.equal(summarizeHoldings(onlyObservation).topSym, 'CORE', '观察份额被计入交易仓集中度');
 const pureObservation = { holdings: [{ sym: 'OBS', qty: 1, analysisQty: 0, lastPrice: null }, { sym: 'CORE', qty: 100, lastPrice: 1 }] };

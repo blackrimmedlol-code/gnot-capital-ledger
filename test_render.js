@@ -57,7 +57,17 @@ function check(html, ledger) {
     JSON.stringify(expected.groups.map(d => [d.date, d.dateLabel])), '成交日期没有按中国时区转换');
   assert.ok(!nodes.holdingsBox.innerHTML.includes('策略备注'), '持仓仍显示策略备注');
   assert.ok(api.DATA.accounts.every(a => a.holdings.every(h => !h.strategyNote)), '策略备注仍进入页面数据');
-  assert.ok(api.DATA.accounts.every(a => a.holdings.every(h => h.wtPct === undefined)), '精确正股权重仍进入页面数据');
+  assert.ok(api.DATA.accounts.every(a => a.holdings.every(h => h.wtPct === undefined)), '旧估算/NAV权重误用为正股权重');
+  for (const a of api.DATA.accounts) {
+    const pct = a.holdings.map(h => h.stockWeightPct);
+    if (pct.length && pct.every(p => typeof p === 'number'))
+      assert.ok(Math.abs(pct.reduce((s, p) => s + p, 0) - 100) <= pct.length * 0.05 + 1e-9,
+        '账户内正股权重未按同一分母归一化');
+    for (const p of pct) if (typeof p === 'number')
+      assert.ok(nodes.holdingsBox.innerHTML.includes('<span class="wt">' + p.toFixed(1) + '%</span>'),
+        '持仓个股权重没有显示百分比');
+  }
+  assert.ok(!/高权重|中权重|低权重/.test(nodes.holdingsBox.innerHTML), '持仓仍显示权重档位');
   assert.ok(nodes.metricsBox.innerHTML.includes('主仓集中度') && !nodes.metricsBox.innerHTML.includes('CC 覆盖标的'), '顶部指标未更新');
   assert.ok(!/净资产待补|主仓74%|综合仓位/.test(nodes.metricsBox.innerHTML), '顶部仍使用旧仓位或内部待办');
   assert.equal(api.computeMetrics().uniqueHoldings, new Set(ledger.accounts.flatMap(a => a.holdings.filter(h => h.analysisQty !== 0 && h.qty !== h.observationQty).map(h => a.market + ':' + h.sym))).size, '跨账户同标的重复计数');
