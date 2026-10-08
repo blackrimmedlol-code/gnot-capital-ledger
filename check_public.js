@@ -55,6 +55,12 @@ if (proseLeaks) {
 }
 if (proseBad > 0) errors += proseBad;
 
+// 紧凑成交写法也可能带股数，如「（75@27.29）」；每股价格及「10/7@17.6」日期写法允许。
+if (/(?:^|["“（(\s,:：])\d+(?:,\d{3})*\s*[@＠]\s*\d+(?:\.\d+)?|剩余\s*\d+\s*(?=持有|保留)/m.test(html)) {
+  errors++;
+  console.error('❌ 发布产物含数量@价格的紧凑成交写法（股票数量泄漏）');
+}
+
 if (errors > 0) {
   console.error(`\n❌ 发布产物检查失败: ${errors} 处问题，阻止部署`);
   process.exit(1);
