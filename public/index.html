@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交更新至10/8：主号LABU全清后IRE/RAM低吸；RAM此前买回16C/17C已记录。行情沿用10/7收盘快照。",
-  asOfLabel: "成交：10月8日 · LABU清仓 · IRE/RAM加仓；行情：10/7收盘",
+  asOf: "成交与10/8复盘更新；RAM/IRE行情为10/8收盘报价，其余持仓沿用各自已记录行情日期。",
+  asOfLabel: "成交：10月8日 · 收盘复盘；RAM/IRE行情：10/8收盘，其他行情见持仓日期",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1542,7 +1542,7 @@
     topSym: "RAM",
     level: "高",
     holdingsAsOf: "2026-10-08",
-    priceAsOf: "美东 2026-10-07 收盘"
+    priceAsOf: "美东 2026-10-08 收盘 / 2026-10-07 收盘"
   },
   accounts: [
     {
@@ -1614,7 +1614,7 @@
           },
           weightRank: 1,
           weightLevel: "高",
-          stockWeightPct: 62.4
+          stockWeightPct: 61
         },
         {
           sym: "CRWG",
@@ -1651,7 +1651,7 @@
           },
           weightRank: 5,
           weightLevel: "低",
-          stockWeightPct: 6.6
+          stockWeightPct: 7.2
         },
         {
           sym: "CRDU",
@@ -1687,7 +1687,7 @@
           },
           weightRank: 2,
           weightLevel: "低",
-          stockWeightPct: 12.2
+          stockWeightPct: 13.3
         },
         {
           sym: "IRE",
@@ -1715,7 +1715,7 @@
           },
           weightRank: 3,
           weightLevel: "低",
-          stockWeightPct: 11.5
+          stockWeightPct: 10.6
         },
         {
           sym: "STXL",
@@ -1741,7 +1741,7 @@
           },
           weightRank: 4,
           weightLevel: "低",
-          stockWeightPct: 7.2
+          stockWeightPct: 7.9
         }
       ]
     },
@@ -3417,11 +3417,18 @@
         "主号IRE：按6.70继续加仓；主号RAM：按12.15加仓。用户表示将回笼资金投入低吸。"
       ],
       good: [
-        "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。"
+        "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。",
+        "LABU先按216.95完成正股清仓，再转向IRE/RAM低吸，清仓与新加仓分别记录；盈利不代替对新入场依据的评价。",
+        "RAM买回16C/17C解除了对应合约约束，并保留反弹约13.5后的二选一预案，尚未把条件预案当成已成交。"
       ],
-      issues: [],
+      issues: [
+        "RAM按13.7减仓后按12.15接回，仍保留部分净减仓成果，但回补抵消了一部分降低敞口的效果；更低买价不能单独证明风险下降。",
+        "RAM本次回补与此前周内停加约定之间没有明确计划变更留痕；IRE本次加仓未记录独立的事前额度和退出边界。以上属于计划证据不足，保持unknown，不据此判情绪交易。"
+      ],
       todo: [
-        "用户后续预案：等待RAM反弹至约13.5，再做covered call或直接清仓；尚未选择路径或报告新成交。"
+        "用户后续预案：等待RAM反弹至约13.5，再做covered call或直接清仓；尚未选择路径或报告新成交。",
+        "保留RAM约13.5的观察预案；若选择清仓，先同步处理仍开放的2张14C、3张15C及其担保义务，避免卖出正股后留下裸卖call。",
+        "收盘观察：RAM报价约12.1，仍低于约13.5的反弹观察位；IRE收盘6.83，低于7.36加仓价、高于6.70加仓价。两笔低吸的结果不同，按既有逻辑和仓位边界复核，不从短期盈亏倒推执行质量。"
       ],
       execStatus: "unknown",
       symbols: [

@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/8：主号LABU全清后IRE/RAM低吸；RAM此前买回16C/17C已记录。行情沿用10/7收盘快照。",
-  "asOfLabel": "成交：10月8日 · LABU清仓 · IRE/RAM加仓；行情：10/7收盘",
+  "asOf": "成交与10/8复盘更新；RAM/IRE行情为10/8收盘报价，其余持仓沿用各自已记录行情日期。",
+  "asOfLabel": "成交：10月8日 · 收盘复盘；RAM/IRE行情：10/8收盘，其他行情见持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -303,8 +303,8 @@
           "cost": 13.5328,
           "costDate": "原持续持仓；10/6四档13.70/13.85/13.55/13.42加仓；10/7 13.2情绪加仓（突破周内停加纪律）;10/7再12.98买49(追跌突破停加纪律);10/7@13.7有序撤出减仓(降仓位占比) / 10/8 12.15加仓",
           "stop": null,
-          "lastPrice": 13.49,
-          "lastPriceDate": "2026-10-07 收盘",
+          "lastPrice": 12.12,
+          "lastPriceDate": "2026-10-08 收盘",
           "wtPct": 71,
           "strategy": [
             "核心仓",
@@ -411,6 +411,13 @@
               "OX-USER-20261008-RAM-BTC-16C-001",
               "OX-USER-20261008-RAM-BTC-17C-002"
             ]
+          },
+          "lastPriceSource": {
+            "url": "https://ycharts.com/companies/RAM/price",
+            "asOf": "2026-10-08T16:00:00-04:00",
+            "kind": "regular_session_close",
+            "confidence": "medium",
+            "note": "YCharts明确标16:00价格12.12；ChartExchange为15:59:58成交12.11，Investing收盘12.13。因尾盘报价口径差异，公开评价只使用约12.1，不宣称唯一官方收盘。"
           }
         },
         {
@@ -530,8 +537,8 @@
           "qty": 400,
           "cost": 7.59247,
           "costDate": "9/30建底仓 / 10/1 8.58+8.81补 / 10/2 9.9+10.38止盈 / 10/2 9.23接回 / 10/5 8.93+8.77补仓 / 10/7 9.55止盈300 / 10/8 7.36加仓 / 10/8 6.70加仓",
-          "lastPrice": 8.08,
-          "lastPriceDate": "2026-10-07 收盘",
+          "lastPrice": 6.83,
+          "lastPriceDate": "2026-10-08 收盘",
           "wtPct": 3,
           "strategy": [
             "卫星仓·AI云"
@@ -570,7 +577,14 @@
           "actionExecStatus": "unknown",
           "exitReason": null,
           "episodeId": "EP-IRE-2026Q3",
-          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）"
+          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
+          "lastPriceSource": {
+            "url": "https://www.schwab.wallst.com/schwab/Prospect/research/etfs/schwabETF/index.asp?symbol=IRE&type=holdings",
+            "asOf": "2026-10-08T16:00:00-04:00",
+            "kind": "regular_session_close",
+            "confidence": "high",
+            "note": "Schwab明确As of close 10/08/2026，Investing历史表同为6.83；不使用ChartExchange 15:52的6.84或盘后买卖报价。"
+          }
         },
         {
           "sym": "STXL",
@@ -5258,14 +5272,21 @@
         "主号IRE：按6.70继续加仓；主号RAM：按12.15加仓。用户表示将回笼资金投入低吸。"
       ],
       "good": [
-        "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。"
+        "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。",
+        "LABU先按216.95完成正股清仓，再转向IRE/RAM低吸，清仓与新加仓分别记录；盈利不代替对新入场依据的评价。",
+        "RAM买回16C/17C解除了对应合约约束，并保留反弹约13.5后的二选一预案，尚未把条件预案当成已成交。"
       ],
-      "issues": [],
+      "issues": [
+        "RAM按13.7减仓后按12.15接回，仍保留部分净减仓成果，但回补抵消了一部分降低敞口的效果；更低买价不能单独证明风险下降。",
+        "RAM本次回补与此前周内停加约定之间没有明确计划变更留痕；IRE本次加仓未记录独立的事前额度和退出边界。以上属于计划证据不足，保持unknown，不据此判情绪交易。"
+      ],
       "todo": [
-        "用户后续预案：等待RAM反弹至约13.5，再做covered call或直接清仓；尚未选择路径或报告新成交。"
+        "用户后续预案：等待RAM反弹至约13.5，再做covered call或直接清仓；尚未选择路径或报告新成交。",
+        "保留RAM约13.5的观察预案；若选择清仓，先同步处理仍开放的2张14C、3张15C及其担保义务，避免卖出正股后留下裸卖call。",
+        "收盘观察：RAM报价约12.1，仍低于约13.5的反弹观察位；IRE收盘6.83，低于7.36加仓价、高于6.70加仓价。两笔低吸的结果不同，按既有逻辑和仓位边界复核，不从短期盈亏倒推执行质量。"
       ],
       "execStatus": "unknown",
-      "reviewStatus": "in_progress",
+      "reviewStatus": "complete",
       "reviewDateBasis": "用户明确确认本笔在10/8执行，归属实际中国日期；与原美东日期及录入时间独立。",
       "recordedAt": "2026-10-08T10:38:51+08:00",
       "internalObservation": [
@@ -5274,7 +5295,7 @@
         "本次三笔均按用户明确的10/8归属，10/9仅为报告时点；精确成交时刻未知。新闻背景为用户报告，未独立核实新闻真伪及其行情因果；不得当成已核实市场结论。",
         "加仓执行状态未确认：不能仅凭下跌、新闻或同日回笼投入判为emo或plan。RAM此前13.5条件退出预案保留；本次未报告预案撤销或新增有效加仓上限。"
       ],
-      "updatedAt": "2026-10-08T17:08:15.334Z",
+      "updatedAt": "2026-10-09T02:56:20.687Z",
       "optionExecutionIds": [
         "OX-USER-20261008-RAM-BTC-16C-001",
         "OX-USER-20261008-RAM-BTC-17C-002"
@@ -5291,7 +5312,53 @@
             "OX-USER-20261008-RAM-BTC-17C-002"
           ]
         }
-      ]
+      ],
+      "closingReview": {
+        "reviewedAt": "2026-10-09T02:56:20.687Z",
+        "cutoff": "2026-10-08T20:30:00Z",
+        "marketDate": "2026-10-08",
+        "scheduledAtNY": "2026-10-08T16:30:00-04:00",
+        "actualCloseNY": "2026-10-08T16:00:00-04:00",
+        "executionIds": [
+          "EX-USER-20261007-RAM-SELL-059",
+          "EX-USER-20261008-IRE-BUY-060",
+          "EX-USER-20261008-LABU-BUY-061",
+          "EX-USER-20261008-LABU-SELL-062",
+          "EX-USER-20261008-IRE-BUY-063",
+          "EX-USER-20261008-RAM-BUY-064"
+        ],
+        "optionExecutionIds": [
+          "OX-USER-20261008-RAM-BTC-16C-001",
+          "OX-USER-20261008-RAM-BTC-17C-002"
+        ],
+        "firstRun": true,
+        "confidence": {
+          "executionFacts": "high",
+          "planConsistency": "medium",
+          "newsCausality": "unverified"
+        },
+        "marketData": [
+          {
+            "sym": "RAM",
+            "date": "2026-10-08",
+            "price": 12.12,
+            "asOf": "2026-10-08T16:00:00-04:00",
+            "source": "https://ycharts.com/companies/RAM/price",
+            "confidence": "medium",
+            "note": "YCharts明确标16:00价格12.12；ChartExchange为15:59:58成交12.11，Investing收盘12.13。因尾盘报价口径差异，公开评价只使用约12.1，不宣称唯一官方收盘。"
+          },
+          {
+            "sym": "IRE",
+            "date": "2026-10-08",
+            "price": 6.83,
+            "asOf": "2026-10-08T16:00:00-04:00",
+            "source": "https://www.schwab.wallst.com/schwab/Prospect/research/etfs/schwabETF/index.asp?symbol=IRE&type=holdings",
+            "corroboratingSource": "https://ca.investing.com/etfs/ire-historical-data",
+            "confidence": "high",
+            "note": "Schwab明确As of close 10/08/2026，Investing历史表同为6.83；不使用ChartExchange 15:52的6.84或盘后买卖报价。"
+          }
+        ]
+      }
     }
   ],
   "openingPositions": [
@@ -7272,6 +7339,77 @@
       },
       "date": "2026-10-08",
       "reason": "关联卖出日期已确认，修正旧统一加一天的复盘标签。"
+    },
+    {
+      "ref": "RV-20261008",
+      "field": "closing_evaluation",
+      "before": {
+        "reviewId": "RV-20261008",
+        "date": "2026-10-08",
+        "reviewDate": "2026-10-08",
+        "reviewTimezone": "Asia/Shanghai",
+        "dateLabel": "2026-10-08 复盘",
+        "title": "RAM减仓与买回备兑 · LABU清仓 · IRE/RAM低吸",
+        "executionIds": [
+          "EX-USER-20261007-RAM-SELL-059",
+          "EX-USER-20261008-IRE-BUY-060",
+          "EX-USER-20261008-LABU-BUY-061",
+          "EX-USER-20261008-LABU-SELL-062",
+          "EX-USER-20261008-IRE-BUY-063",
+          "EX-USER-20261008-RAM-BUY-064"
+        ],
+        "plan": [
+          "提前设置13.7限价，以降低存储仓单一标的仓位占比。",
+          "IRE本次加仓及LABU建仓的事前计划未记录。"
+        ],
+        "execution": [
+          "主号RAM：13.7有序撤出减仓（预设限价、降仓位占比，执行状态plan）。",
+          "主号IRE：按7.36加仓，继续原未结束持仓周期。",
+          "主号LABU：按213.39建仓，与1号账号历史LABU周期独立。",
+          "主号RAM：按0.10买回2张16C、按0.05买回1张17C，释放对应备兑约束；正股未因此卖出，剩余14C/15C保持开放。",
+          "用户报告背景：OpenAI收入不如预期的新闻冲击、科技股下跌。",
+          "主号LABU：按216.95全清；本轮按213.39建仓，正股成本收益约+1.7%。",
+          "主号IRE：按6.70继续加仓；主号RAM：按12.15加仓。用户表示将回笼资金投入低吸。"
+        ],
+        "good": [
+          "按预设限价执行减仓，与降低单一仓位占比的已确认目的一致。"
+        ],
+        "issues": [],
+        "todo": [
+          "用户后续预案：等待RAM反弹至约13.5，再做covered call或直接清仓；尚未选择路径或报告新成交。"
+        ],
+        "execStatus": "unknown",
+        "reviewStatus": "in_progress",
+        "reviewDateBasis": "用户明确确认本笔在10/8执行，归属实际中国日期；与原美东日期及录入时间独立。",
+        "recordedAt": "2026-10-08T10:38:51+08:00",
+        "internalObservation": [
+          "本次只确认实际成交日期10/8，精确成交时刻未知；不采用此前盘后触发推测。",
+          "10/8两笔买入有用户明确日期、数量和价格；时刻及执行定性未提供，不猜填。收盘后由唯一自动任务补必要评价。",
+          "本次三笔均按用户明确的10/8归属，10/9仅为报告时点；精确成交时刻未知。新闻背景为用户报告，未独立核实新闻真伪及其行情因果；不得当成已核实市场结论。",
+          "加仓执行状态未确认：不能仅凭下跌、新闻或同日回笼投入判为emo或plan。RAM此前13.5条件退出预案保留；本次未报告预案撤销或新增有效加仓上限。"
+        ],
+        "updatedAt": "2026-10-08T17:08:15.334Z",
+        "optionExecutionIds": [
+          "OX-USER-20261008-RAM-BTC-16C-001",
+          "OX-USER-20261008-RAM-BTC-17C-002"
+        ],
+        "planAmendments": [
+          {
+            "amendmentId": "PA-RAM-20261008-REBOUND",
+            "recordedAt": "2026-10-08T23:55:36+08:00",
+            "effectiveFrom": "2026-10-08T23:52:25+08:00",
+            "source": "用户10/8 23:52确认",
+            "text": "等待RAM反弹至约13.5，再做coveredcall或直接清仓。后续预案不追溯作为本次买回的事前计划。",
+            "optionExecutionIds": [
+              "OX-USER-20261008-RAM-BTC-16C-001",
+              "OX-USER-20261008-RAM-BTC-17C-002"
+            ]
+          }
+        ]
+      },
+      "date": "2026-10-09",
+      "recordedAt": "2026-10-09T02:56:20.687Z",
+      "reason": "首次收盘增量评价；保留原计划、事实及条件预案，不改变成交日期、流水或执行标签。"
     }
   ],
   "reviewDateOverrides": [
