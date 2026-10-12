@@ -602,7 +602,7 @@
         <h1>持仓监测与交易复盘</h1>
         <p class="motto-compact">Fundamental Truth is not Alpha.</p>
       </div>
-      <span class="stamp">记录更新至 2026-10-08</span>
+      <span class="stamp">记录更新至 2026-10-12</span>
     </div>
   </div>
 </header>
@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交与10/8复盘更新；RAM/IRE行情为10/8收盘报价，其余持仓沿用各自已记录行情日期。",
-  asOfLabel: "成交：10月8日 · 收盘复盘；RAM/IRE行情：10/8收盘，其他行情见持仓日期",
+  asOf: "成交更新至10/12：主号IRE盘前清仓；其余行情沿用各持仓已记录的最近收盘快照。",
+  asOfLabel: "成交：10月12日 · IRE盘前清仓；行情：见各持仓日期",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1541,7 +1541,7 @@
     available: true,
     topSym: "RAM",
     level: "高",
-    holdingsAsOf: "2026-10-08",
+    holdingsAsOf: "2026-10-12",
     priceAsOf: "美东 2026-10-08 收盘 / 2026-10-07 收盘"
   },
   accounts: [
@@ -1614,7 +1614,7 @@
           },
           weightRank: 1,
           weightLevel: "高",
-          stockWeightPct: 61
+          stockWeightPct: 68.3
         },
         {
           sym: "CRWG",
@@ -1649,9 +1649,9 @@
             isFullyBacked: true,
             sharesUnknown: false
           },
-          weightRank: 5,
+          weightRank: 4,
           weightLevel: "低",
-          stockWeightPct: 7.2
+          stockWeightPct: 8.1
         },
         {
           sym: "CRDU",
@@ -1687,35 +1687,7 @@
           },
           weightRank: 2,
           weightLevel: "低",
-          stockWeightPct: 13.3
-        },
-        {
-          sym: "IRE",
-          name: "Defiance 2x IREN · 2x AI云",
-          cost: 7.59247,
-          costNote: "实际成本",
-          strategy: [
-            "卫星仓·AI云"
-          ],
-          options: [],
-          tags: [
-            "hold"
-          ],
-          alertSub: "2x 每日重置 · 高波动",
-          setup: [
-            "支撑低吸"
-          ],
-          execStatus: "unknown",
-          oneLiner: "10/8先按7.36、后按6.70加仓，继续原周期。",
-          coverage: {
-            status: "none",
-            statusText: "无备兑",
-            isFullyBacked: false,
-            sharesUnknown: false
-          },
-          weightRank: 3,
-          weightLevel: "低",
-          stockWeightPct: 10.6
+          stockWeightPct: 14.8
         },
         {
           sym: "STXL",
@@ -1739,9 +1711,9 @@
             isFullyBacked: false,
             sharesUnknown: false
           },
-          weightRank: 4,
+          weightRank: 3,
           weightLevel: "低",
-          stockWeightPct: 7.9
+          stockWeightPct: 8.8
         }
       ]
     },
@@ -1913,6 +1885,52 @@
     }
   ],
   closedTrades: [
+    {
+      date: "2026-10-12",
+      dateStart: "2026-10-12",
+      dateEnd: "2026-10-12",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-12",
+      trades: [
+        {
+          tradeId: "EP-IRE-2026Q3:2026-10-12",
+          episodeId: "EP-IRE-2026Q3",
+          sym: "IRE",
+          name: "Defiance 2x IREN · 2x AI云",
+          acct: "主账号",
+          cost: 7.59247,
+          soldDate: "2026-10-12",
+          dateStart: "2026-10-12",
+          dateEnd: "2026-10-12",
+          isPartial: false,
+          closesEpisode: true,
+          totalRetPct: -2.53501,
+          result: "loss",
+          cycleRetPct: 4.76465,
+          cycleResult: "win",
+          performanceEligible: true,
+          reason: "盘前开盘快速回落后按7.40清仓；用户认为原7.82卖出目标偏高",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261012-IRE-SELL-065",
+              date: "2026-10-12",
+              dateEnd: "2026-10-12",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 7.4,
+              cost: 7.59247,
+              costBasisType: "actual",
+              retPct: -2.535,
+              note: "主号IRE按7.40全数清仓。用户报告盘前开盘后快速跳水，原设7.82未成交，随后完成退出；“一堆人出逃”为用户盘面观察，不作为已核实行情因果。"
+            }
+          ]
+        }
+      ]
+    },
     {
       date: "2026-10-08",
       dateStart: "2026-10-08",
@@ -3396,6 +3414,35 @@
     }
   ],
   reviews: [
+    {
+      reviewId: "RV-20261012",
+      date: "2026-10-12",
+      reviewDate: "2026-10-12",
+      reviewTimezone: "Asia/Shanghai",
+      dateLabel: "2026-10-12 复盘",
+      title: "IRE盘前清仓",
+      plan: [
+        "用户称本次原设7.82卖出限价；此前仓库未记录这笔具体目标或分批方案，因此保留为本次挂单事实，不追溯改写成已确认的事前plan。"
+      ],
+      execution: [
+        "主号IRE：盘前按7.40卖出并清仓。用户观察盘前开盘快速跳水，认为原7.82目标偏高。"
+      ],
+      good: [],
+      issues: [],
+      todo: [
+        "用户给出的下次调整：退出意图明确且盘前拉高时优先兑现，避免把单一目标价设得过高；该调整先作为本次复盘经验，不因单一案例自动升级为通用纪律。"
+      ],
+      execStatus: "adhoc",
+      symbols: [
+        "IRE"
+      ],
+      accounts: [
+        "主账号"
+      ],
+      saleExecutionIds: [
+        "EX-USER-20261012-IRE-SELL-065"
+      ]
+    },
     {
       reviewId: "RV-20261008",
       date: "2026-10-08",

@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交与10/8复盘更新；RAM/IRE行情为10/8收盘报价，其余持仓沿用各自已记录行情日期。",
-  "asOfLabel": "成交：10月8日 · 收盘复盘；RAM/IRE行情：10/8收盘，其他行情见持仓日期",
+  "asOf": "成交更新至10/12：主号IRE盘前清仓；其余行情沿用各持仓已记录的最近收盘快照。",
+  "asOfLabel": "成交：10月12日 · IRE盘前清仓；行情：见各持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -534,9 +534,9 @@
         {
           "sym": "IRE",
           "name": "Defiance 2x IREN · 2x AI云",
-          "qty": 400,
+          "qty": 0,
           "cost": 7.59247,
-          "costDate": "9/30建底仓 / 10/1 8.58+8.81补 / 10/2 9.9+10.38止盈 / 10/2 9.23接回 / 10/5 8.93+8.77补仓 / 10/7 9.55止盈300 / 10/8 7.36加仓 / 10/8 6.70加仓",
+          "costDate": "9/30建底仓 / 10/1 8.58+8.81补 / 10/2 9.9+10.38止盈 / 10/2 9.23接回 / 10/5 8.93+8.77补仓 / 10/7 9.55止盈300 / 10/8 7.36加仓 / 10/8 6.70加仓 / 10/12盘前按7.40清仓",
           "lastPrice": 6.83,
           "lastPriceDate": "2026-10-08 收盘",
           "wtPct": 3,
@@ -544,38 +544,36 @@
             "卫星仓·AI云"
           ],
           "options": [],
-          "tags": [
-            "hold"
-          ],
+          "tags": [],
           "status": [
-            "持有"
+            "已清仓"
           ],
-          "alertSub": "2x 每日重置 · 高波动",
-          "note": "9/30 @9.23 建底仓；10/1 @8.58、@8.81 两档补、摊薄 8.87；10/2 @9.9、@10.38 分批止盈、@9.23 回调接回，摊薄 7.79——冲高两档兑现后等回调接回，持有观察；10/5 @8.93 加仓 100、摊薄 8.17——等回调接回后加码，持有多观；10/5 @8.77 再补 100、摊薄 8.32——望 1 周回升至 10（待观察）；10/7 9.55卖出300、剩余100持有——原观望1周回升至10的计划提前兑现",
+          "alertSub": "10/12盘前已清仓",
+          "note": "9/30 @9.23 建底仓；10/1 @8.58、@8.81 两档补、摊薄 8.87；10/2 @9.9、@10.38 分批止盈、@9.23 回调接回，摊薄 7.79——冲高两档兑现后等回调接回，持有观察；10/5 @8.93 加仓 100、摊薄 8.17——等回调接回后加码，持有多观；10/5 @8.77 再补 100、摊薄 8.32——望 1 周回升至 10（待观察）；10/7 9.55卖出300、剩余100持有——原观望1周回升至10的计划提前兑现；10/12盘前原设7.82，快速回落后按7.40清仓。",
           "setup": [
             "支撑低吸"
           ],
-          "execStatus": "unknown",
-          "oneLiner": "10/8先按7.36、后按6.70加仓，继续原周期。",
+          "execStatus": "adhoc",
+          "oneLiner": "10/12盘前按7.40清仓；用户复盘认为原7.82目标偏高，下次退出意图明确时优先把握盘前拉高。",
           "actualCostBasis": {
             "value": 7.59247,
             "status": "确认",
-            "note": "按已确认交易仓买卖流水逐笔移动加权，10/8按7.36及6.70加仓后更新剩余均价；此前卖出成本不回写。"
+            "note": "清仓前移动加权实际成本；本次7.40卖出按该成本核算本腿正股收益，忽略费用。"
           },
           "netInvestedCost": {
-            "value": 6.50712,
+            "value": 0,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-IRE-2026Q3",
-            "note": "当前未结束周期正股净投入除以交易仓余额；历史已实现收益不重复叠加，期权不混入。"
+            "note": "10/12清仓后当前正股净投入归零；历史已实现收益由流水派生，不回写本腿实际成本。"
           },
           "costDisplay": "实际成本",
           "entrySetup": [
             "支撑低吸"
           ],
           "entryExecStatus": "adhoc",
-          "actionExecStatus": "unknown",
-          "exitReason": null,
+          "actionExecStatus": "adhoc",
+          "exitReason": "盘前开盘快速回落后主动清仓；用户认为原7.82卖出目标偏高",
           "episodeId": "EP-IRE-2026Q3",
           "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
           "lastPriceSource": {
@@ -627,7 +625,7 @@
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-08"
+      "holdingsAsOf": "2026-10-12"
     },
     {
       "id": "sat1",
@@ -3696,6 +3694,39 @@
         "evidence": "用户明确报1008盘中；实际成交归属10/8，10/9消息发送时间不替代成交日期。"
       },
       "recordedAt": "2026-10-08T17:08:15.334Z"
+    },
+    {
+      "executionId": "EX-USER-20261012-IRE-SELL-065",
+      "episodeId": "EP-IRE-2026Q3",
+      "account": "main",
+      "sym": "IRE",
+      "side": "sell",
+      "qty": 400,
+      "price": 7.4,
+      "date": "2026-10-12",
+      "chinaDate": "2026-10-12",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "marketSession": "pre_market",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "adhoc",
+      "purpose": "清仓退出",
+      "exitReason": "盘前开盘快速回落后主动清仓；用户复盘认为原7.82卖出价偏高",
+      "note": "主号IRE按7.40全数清仓。用户报告盘前开盘后快速跳水，原设7.82未成交，随后完成退出；“一堆人出逃”为用户盘面观察，不作为已核实行情因果。",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-12T16:42:50+08:00",
+        "evidence": "7.4 卖出 400 股 IRE，盘前一开马上跳水一堆人出逃。下次应该盘前拉高就卖。设了 7.82 的位置还是太高了，下次不贪"
+      },
+      "chinaDateSource": {
+        "type": "contemporaneous_user_report",
+        "reportedAt": "2026-10-12T16:42:50+08:00",
+        "evidence": "用户在中国时间2026-10-12盘前开盘后当即报告本次成交；实际日期明确，精确成交时刻未提供。"
+      },
+      "recordedAt": "2026-10-12T16:42:50+08:00"
     }
   ],
   "episodes": [
@@ -3742,15 +3773,16 @@
       "episodeId": "EP-IRE-2026Q3",
       "sym": "IRE",
       "account": "main",
-      "status": "open",
+      "status": "closed",
       "entryDate": "2026-09-30",
       "entrySetup": [
         "支撑低吸"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 400,
-      "exitReason": null,
-      "exitDate": null
+      "currentQty": 0,
+      "exitReason": "盘前开盘快速回落后按7.40清仓；用户认为原7.82卖出目标偏高",
+      "exitDate": "2026-10-12",
+      "exitExecutionId": "EX-USER-20261012-IRE-SELL-065"
     },
     {
       "episodeId": "EP-AVGX-2026Q3",
@@ -5359,6 +5391,35 @@
           }
         ]
       }
+    },
+    {
+      "reviewId": "RV-20261012",
+      "date": "2026-10-12",
+      "reviewDate": "2026-10-12",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-12 复盘",
+      "title": "IRE盘前清仓",
+      "executionIds": [
+        "EX-USER-20261012-IRE-SELL-065"
+      ],
+      "plan": [
+        "用户称本次原设7.82卖出限价；此前仓库未记录这笔具体目标或分批方案，因此保留为本次挂单事实，不追溯改写成已确认的事前plan。"
+      ],
+      "execution": [
+        "主号IRE：盘前按7.40卖出并清仓。用户观察盘前开盘快速跳水，认为原7.82目标偏高。"
+      ],
+      "good": [],
+      "issues": [],
+      "todo": [
+        "用户给出的下次调整：退出意图明确且盘前拉高时优先兑现，避免把单一目标价设得过高；该调整先作为本次复盘经验，不因单一案例自动升级为通用纪律。"
+      ],
+      "execStatus": "adhoc",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-12T16:42:50+08:00",
+      "reviewDateBasis": "用户在中国时间10/12盘前成交后当即报告，归属实际中国日期10/12；精确时刻未知。",
+      "internalObservation": [
+        "“盘前一开马上跳水、一堆人出逃”为用户盘面观察，未独立核实其因果；收盘任务再补必要评价，不提前用盘前结果推导全日结论。"
+      ]
     }
   ],
   "openingPositions": [
@@ -6603,15 +6664,14 @@
   ],
   "stockConcentration": {
     "account": "main",
-    "positionAsOf": "2026-10-07",
-    "priceAsOf": "2026-10-07",
-    "denominator": "正股交易仓市值，不含现金、期权或观察股",
+    "positionAsOf": "2026-10-12",
+    "priceAsOf": "RAM截至10/8收盘；CRWG/CRDU/STXL截至10/7收盘",
+    "denominator": "正股交易仓市值，不含现金、期权、已清仓标的或观察股",
     "weights": {
-      "RAM": 70.64,
-      "CRWG": 6.74,
-      "CRDU": 12.36,
-      "IRE": 2.92,
-      "STXL": 7.35
+      "RAM": 68.27,
+      "CRWG": 8.08,
+      "CRDU": 14.83,
+      "STXL": 8.82
     }
   },
   "costCheckpoints": [

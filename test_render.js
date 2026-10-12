@@ -70,7 +70,10 @@ function check(html, ledger) {
   assert.ok(!/高权重|中权重|低权重/.test(nodes.holdingsBox.innerHTML), '持仓仍显示权重档位');
   assert.ok(nodes.metricsBox.innerHTML.includes('主仓集中度') && !nodes.metricsBox.innerHTML.includes('CC 覆盖标的'), '顶部指标未更新');
   assert.ok(!/净资产待补|主仓74%|综合仓位/.test(nodes.metricsBox.innerHTML), '顶部仍使用旧仓位或内部待办');
-  assert.equal(api.computeMetrics().uniqueHoldings, new Set(ledger.accounts.flatMap(a => a.holdings.filter(h => h.analysisQty !== 0 && h.qty !== h.observationQty).map(h => a.market + ':' + h.sym))).size, '跨账户同标的重复计数');
+  assert.equal(api.computeMetrics().uniqueHoldings, new Set(ledger.accounts.flatMap(a => a.holdings.filter(h => {
+    const tradeQty = h.analysisQty ?? (Number.isFinite(h.qty) ? h.qty - (h.observationQty || 0) : null);
+    return Number.isFinite(tradeQty) && tradeQty > 0;
+  }).map(h => a.market + ':' + h.sym))).size, '跨账户同标的重复计数');
   const expectedRules = ledger.discipline.rules.map(r => r.id).sort();
   const renderedRules = [...nodes.rulesBox.innerHTML.matchAll(/data-rule-id="([^"]+)"/g)].map(m => m[1]).sort();
   assert.deepEqual(renderedRules, expectedRules, '当前纪律未从唯一来源渲染');
