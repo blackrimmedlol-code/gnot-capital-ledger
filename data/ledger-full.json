@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/12：主号IRE盘前清仓；其余行情沿用各持仓已记录的最近收盘快照。",
-  "asOfLabel": "成交：10月12日 · IRE盘前清仓；行情：见各持仓日期",
+  "asOf": "成交更新至10/12：主号IRE清仓、2号SNXX最后补仓；行情沿用各持仓原快照。",
+  "asOfLabel": "成交：10月12日 · IRE清仓 / 2号SNXX补仓；行情：见各持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -742,9 +742,9 @@
         {
           "sym": "SNXX",
           "name": "Tradr 2X Long SNDK · 2x 闪迪",
-          "qty": 67,
-          "cost": 18.32,
-          "costDate": "2026-09-23",
+          "qty": 151,
+          "cost": 14.80424,
+          "costDate": "9/23按18.32建仓；10/12按12.00补仓",
           "lastPrice": 15.74,
           "lastPriceDate": "2026-10-07 收盘",
           "wtPct": 100,
@@ -758,33 +758,60 @@
           "status": [
             "持有"
           ],
-          "alertSub": "2x 每日重置 · 高波动标的",
+          "alertSub": "最后补仓已完成 · 后续只观望",
           "note": "9/23 18.32 接回调建仓（全仓情绪单，用户自评）",
           "setup": [
             "其他"
           ],
-          "execStatus": "emo",
-          "oneLiner": "大涨后回调接入，全仓2x主题博弈；按本人自评登记情绪交易。",
+          "execStatus": "unknown",
+          "oneLiner": "10/12按12.00完成最后一次补仓；后续只观望，不再补仓。",
           "actualCostBasis": {
-            "value": 18.32,
-            "note": "2026-09-23 建仓",
-            "status": "确认"
+            "value": 14.80424,
+            "status": "确认",
+            "note": "已确认67股按18.32建仓及84股按12.00补仓，按交易仓移动加权计算。"
           },
           "netInvestedCost": {
-            "value": 18.32,
-            "note": "与真实成本一致（无减仓摊薄）",
-            "status": "确认"
+            "value": 14.80424,
+            "status": "确认",
+            "scope": "episode",
+            "episodeId": "EP-SNXX-2026Q3",
+            "note": "当前周期尚无卖出；正股净投入每股成本与移动加权实际均价一致，期权不混入。"
           },
           "costDisplay": "实际成本",
           "entrySetup": [
             "其他"
           ],
           "entryExecStatus": "emo",
-          "actionExecStatus": null,
+          "actionExecStatus": "unknown",
           "exitReason": null,
-          "episodeId": "EP-SNXX-2026Q3"
+          "episodeId": "EP-SNXX-2026Q3",
+          "activePlan": {
+            "planId": "PLAN-SNXX2-20261012-OBSERVE",
+            "status": "active",
+            "createdAt": "2026-10-13T00:28:34+08:00",
+            "effectiveFrom": "2026-10-13T00:28:34+08:00",
+            "recordedAt": "2026-10-12T16:31:21.348Z",
+            "source": {
+              "type": "user_confirmation",
+              "reportedAt": "2026-10-13T00:28:34+08:00",
+              "confirmedAt": "2026-10-13T00:29:51+08:00",
+              "evidence": "用户报告2号账户按12买入84股，称为小账号最后一次补仓、后续只观望；随后确认代码snxx，记在12号。"
+            },
+            "scope": {
+              "account": "sat2",
+              "sym": "SNXX",
+              "episodeId": "EP-SNXX-2026Q3"
+            },
+            "noFurtherAdds": true,
+            "mode": "observe_only",
+            "note": "用户本次确认后的有效约束：本账户最后一次补仓，后续只观望。未确认具体退出价，不猜填；不追溯将本次成交标为plan，不影响其他账户SNXX。",
+            "relatedExecutionIds": [
+              "EX-USER-20261012-SNXX2-BUY-066"
+            ]
+          }
         }
-      ]
+      ],
+      "holdingsAsOf": "2026-10-12"
     },
     {
       "id": "cn",
@@ -3727,6 +3754,38 @@
         "evidence": "用户在中国时间2026-10-12盘前开盘后当即报告本次成交；实际日期明确，精确成交时刻未提供。"
       },
       "recordedAt": "2026-10-12T16:42:50+08:00"
+    },
+    {
+      "executionId": "EX-USER-20261012-SNXX2-BUY-066",
+      "episodeId": "EP-SNXX-2026Q3",
+      "account": "sat2",
+      "sym": "SNXX",
+      "side": "buy",
+      "qty": 84,
+      "price": 12,
+      "date": "2026-10-12",
+      "chinaDate": "2026-10-12",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "unknown",
+      "purpose": "最后一次补仓",
+      "note": "2号账户SNXX按12.00补仓；用户确认这是本账户最后一次补仓，后续只观望。未提供本次补仓事前计划或执行定性，不沿用原建仓emo标签。",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-13T00:28:34+08:00",
+        "confirmedAt": "2026-10-13T00:29:51+08:00",
+        "evidence": "用户报告2号账户按12买入84股，称为小账号最后一次补仓、后续只观望；随后确认代码snxx，记在12号。"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-13T00:29:51+08:00",
+        "evidence": "用户明确确认snxx，记在12号；10/13报告及录入时间不替代10/12成交归属。"
+      },
+      "recordedAt": "2026-10-12T16:31:21.348Z"
     }
   ],
   "episodes": [
@@ -3809,7 +3868,7 @@
         "其他"
       ],
       "entryExecStatus": "emo",
-      "currentQty": 67,
+      "currentQty": 151,
       "exitReason": null,
       "exitDate": null
     },
@@ -5398,20 +5457,23 @@
       "reviewDate": "2026-10-12",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-12 复盘",
-      "title": "IRE盘前清仓",
+      "title": "IRE盘前清仓 · 2号SNXX最后补仓",
       "executionIds": [
-        "EX-USER-20261012-IRE-SELL-065"
+        "EX-USER-20261012-IRE-SELL-065",
+        "EX-USER-20261012-SNXX2-BUY-066"
       ],
       "plan": [
         "用户称本次原设7.82卖出限价；此前仓库未记录这笔具体目标或分批方案，因此保留为本次挂单事实，不追溯改写成已确认的事前plan。"
       ],
       "execution": [
-        "主号IRE：盘前按7.40卖出并清仓。用户观察盘前开盘快速跳水，认为原7.82目标偏高。"
+        "主号IRE：盘前按7.40卖出并清仓。用户观察盘前开盘快速跳水，认为原7.82目标偏高。",
+        "2号小账号SNXX：按12.00补仓，继续原未结束周期；用户确认本次为最后一次补仓，后续只观望。"
       ],
       "good": [],
       "issues": [],
       "todo": [
-        "用户给出的下次调整：退出意图明确且盘前拉高时优先兑现，避免把单一目标价设得过高；该调整先作为本次复盘经验，不因单一案例自动升级为通用纪律。"
+        "用户给出的下次调整：退出意图明确且盘前拉高时优先兑现，避免把单一目标价设得过高；该调整先作为本次复盘经验，不因单一案例自动升级为通用纪律。",
+        "2号小账号SNXX：本次补仓后不再加仓，后续只观望；具体退出价尚未作出新约定。"
       ],
       "execStatus": "adhoc",
       "reviewStatus": "in_progress",
@@ -5419,7 +5481,25 @@
       "reviewDateBasis": "用户在中国时间10/12盘前成交后当即报告，归属实际中国日期10/12；精确时刻未知。",
       "internalObservation": [
         "“盘前一开马上跳水、一堆人出逃”为用户盘面观察，未独立核实其因果；收盘任务再补必要评价，不提前用盘前结果推导全日结论。"
-      ]
+      ],
+      "planAmendments": [
+        {
+          "amendmentId": "PA-SNXX2-20261012-OBSERVE",
+          "recordedAt": "2026-10-12T16:31:21.348Z",
+          "effectiveFrom": "2026-10-13T00:28:34+08:00",
+          "source": {
+            "type": "user_confirmation",
+            "reportedAt": "2026-10-13T00:28:34+08:00",
+            "confirmedAt": "2026-10-13T00:29:51+08:00",
+            "evidence": "用户报告2号账户按12买入84股，称为小账号最后一次补仓、后续只观望；随后确认代码snxx，记在12号。"
+          },
+          "text": "用户确认本账户最后一次补仓，后续只观望。该约束从本次确认后生效，不追溯改写本次入场计划或历史emo标签。",
+          "executionIds": [
+            "EX-USER-20261012-SNXX2-BUY-066"
+          ]
+        }
+      ],
+      "updatedAt": "2026-10-12T16:31:21.348Z"
     }
   ],
   "openingPositions": [
@@ -6660,6 +6740,59 @@
         "EX-USER-20261008-IRE-BUY-063",
         "EX-USER-20261008-RAM-BUY-064"
       ]
+    },
+    {
+      "account": "sat2",
+      "sym": "SNXX",
+      "date": "2026-10-12",
+      "recordedAt": "2026-10-12T16:31:21.348Z",
+      "reason": "新增已确认补仓，按移动加权成本更新，保留旧持仓快照",
+      "before": {
+        "sym": "SNXX",
+        "name": "Tradr 2X Long SNDK · 2x 闪迪",
+        "qty": 67,
+        "cost": 18.32,
+        "costDate": "2026-09-23",
+        "lastPrice": 15.74,
+        "lastPriceDate": "2026-10-07 收盘",
+        "wtPct": 100,
+        "strategy": [
+          "卫星仓·存储杠杆博弈"
+        ],
+        "options": [],
+        "tags": [
+          "hold"
+        ],
+        "status": [
+          "持有"
+        ],
+        "alertSub": "2x 每日重置 · 高波动标的",
+        "note": "9/23 18.32 接回调建仓（全仓情绪单，用户自评）",
+        "setup": [
+          "其他"
+        ],
+        "execStatus": "emo",
+        "oneLiner": "大涨后回调接入，全仓2x主题博弈；按本人自评登记情绪交易。",
+        "actualCostBasis": {
+          "value": 18.32,
+          "note": "2026-09-23 建仓",
+          "status": "确认"
+        },
+        "netInvestedCost": {
+          "value": 18.32,
+          "note": "与真实成本一致（无减仓摊薄）",
+          "status": "确认"
+        },
+        "costDisplay": "实际成本",
+        "entrySetup": [
+          "其他"
+        ],
+        "entryExecStatus": "emo",
+        "actionExecStatus": null,
+        "exitReason": null,
+        "episodeId": "EP-SNXX-2026Q3"
+      },
+      "executionId": "EX-USER-20261012-SNXX2-BUY-066"
     }
   ],
   "stockConcentration": {
