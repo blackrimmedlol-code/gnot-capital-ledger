@@ -7444,7 +7444,7 @@
     "calendarCheckedDate": "2026-10-08",
     "calendarCoverageThrough": "2028-12-31",
     "calendarSource": "https://www.nyse.com/trade/hours-calendars",
-    "lastSuccessfulCutoff": "2026-10-08T20:30:00Z",
+    "lastSuccessfulCutoff": "2026-10-09T20:30:00Z",
     "executionFingerprints": {
       "EX-STMT-20260930-RAM-BUY-P030-080": "ce56709480891cba43e6a8923cf8cdd49794f9e1ff76ecdcf6b78b33f3ac115c",
       "EX-20260917-CRDU-BUY-011": "2a4f90fabd62d4ffb2bb36805c7a4c086d4778c5f5dd58ff91c50664b0bef17c",
@@ -7543,12 +7543,10 @@
       "OX-USER-20261008-RAM-BTC-16C-001": "c3fffb42c522370496b7da0b5c4f5ff367e74895623eaff17570e7bcec94c78f",
       "OX-USER-20261008-RAM-BTC-17C-002": "7f24147c91ef7470c9f9a28569fb32cd0aac66b5f2f8254595c73a5bd76adbae"
     },
-    "note": "首次收盘复盘完成校验、部署与真实线上全文及渲染验证后推进成功游标；后续核对新ID与指纹变化，截止之后记录留下一轮。",
-    "lastSuccessfulMarketDate": "2026-10-08",
-    "lastSuccessfulReviewDates": [
-      "2026-10-08"
-    ],
-    "lastSuccessfulAt": "2026-10-09T02:58:27.662Z",
+    "note": "本轮无新增成交或内容更正，完成完整指纹核对后推进成功截止；后续继续核对新ID及指纹变化。",
+    "lastSuccessfulMarketDate": "2026-10-09",
+    "lastSuccessfulReviewDates": [],
+    "lastSuccessfulAt": "2026-10-12T08:41:41.388Z",
     "optionExecutionFingerprints": {
       "OX-USER-20261008-RAM-BTC-16C-001": "c3fffb42c522370496b7da0b5c4f5ff367e74895623eaff17570e7bcec94c78f",
       "OX-USER-20261008-RAM-BTC-17C-002": "7f24147c91ef7470c9f9a28569fb32cd0aac66b5f2f8254595c73a5bd76adbae"
@@ -7681,8 +7679,18 @@
         "最新复盘默认展开"
       ]
     },
-    "nextSchedule": "BEGIN:VEVENT\nDTSTART;TZID=America/New_York:20261009T163000\nRRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=16;BYMINUTE=30;BYSECOND=0\nEND:VEVENT",
-    "nextScheduleVerifiedAt": "2026-10-09T02:58:27.662Z"
+    "nextSchedule": "BEGIN:VEVENT\nDTSTART;TZID=America/New_York:20261012T163000\nRRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=16;BYMINUTE=30;BYSECOND=0\nEND:VEVENT",
+    "nextScheduleVerifiedAt": "2026-10-12T08:41:41.388Z",
+    "lastNoChangeRun": {
+      "marketDate": "2026-10-09",
+      "cutoff": "2026-10-09T20:30:00Z",
+      "checkedAt": "2026-10-12T08:41:41.388Z",
+      "previousCutoff": "2026-10-08T20:30:00Z",
+      "addedExecutionIds": [],
+      "changedExecutionIds": [],
+      "removedExecutionIds": [],
+      "note": "截至本轮收盘后30分钟，仓库没有新增成交、期权操作、补录或更正；公开页面无需新增复盘。调度已提前指向下一实际交易日。"
+    }
   },
   "optionExecutions": [
     {
