@@ -602,7 +602,7 @@
         <h1>持仓监测与交易复盘</h1>
         <p class="motto-compact">Fundamental Truth is not Alpha.</p>
       </div>
-      <span class="stamp">记录更新至 2026-10-12</span>
+      <span class="stamp">记录更新至 2026-10-13</span>
     </div>
   </div>
 </header>
@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交更新至10/12：主号IRE清仓、2号SNXX最后补仓；行情沿用各持仓原快照。",
-  asOfLabel: "成交：10月12日 · IRE清仓 / 2号SNXX补仓；行情：见各持仓日期",
+  asOf: "成交更新至10/13：主号RAM加减仓、STXL清仓；行情沿用各持仓原快照。",
+  asOfLabel: "成交：10月13日 · RAM加减仓 / STXL清仓；行情：见各持仓日期",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1541,7 +1541,7 @@
     available: true,
     topSym: "RAM",
     level: "高",
-    holdingsAsOf: "2026-10-12",
+    holdingsAsOf: "2026-10-13",
     priceAsOf: "美东 2026-10-08 收盘 / 2026-10-07 收盘"
   },
   accounts: [
@@ -1559,7 +1559,7 @@
         {
           sym: "RAM",
           name: "2x DRAM (Roundhill T-Rex)",
-          cost: 13.5328,
+          cost: 12.83872,
           costNote: "历史均价基准滚动",
           strategy: [
             "核心仓",
@@ -1605,7 +1605,7 @@
             "趋势波段"
           ],
           execStatus: "unknown",
-          oneLiner: "10/8买回16C/17C后按12.15加仓；保留14C/15C及反弹约13.5后的备兑或退出预案。",
+          oneLiner: "10/13先按10.28加仓、10.10减仓，观察企稳后按10.187再次加仓博弈CPI；保留开放14C/15C。",
           coverage: {
             status: "covered",
             statusText: "足额备兑",
@@ -1614,7 +1614,7 @@
           },
           weightRank: 1,
           weightLevel: "高",
-          stockWeightPct: 68.3
+          stockWeightPct: 75.6
         },
         {
           sym: "CRWG",
@@ -1649,9 +1649,9 @@
             isFullyBacked: true,
             sharesUnknown: false
           },
-          weightRank: 4,
+          weightRank: 3,
           weightLevel: "低",
-          stockWeightPct: 8.1
+          stockWeightPct: 8.6
         },
         {
           sym: "CRDU",
@@ -1687,33 +1687,7 @@
           },
           weightRank: 2,
           weightLevel: "低",
-          stockWeightPct: 14.8
-        },
-        {
-          sym: "STXL",
-          name: "Defiance 2x Long STX · 2x 希捷",
-          cost: 27.29,
-          strategy: [
-            "支撑低吸"
-          ],
-          options: [],
-          tags: [
-            "hold"
-          ],
-          setup: [
-            "支撑低吸"
-          ],
-          execStatus: "plan",
-          oneLiner: "支撑位抄底建仓（按27.29，当日=27.27 低点区）；预期快进快出，用反弹验证成色。",
-          coverage: {
-            status: "none",
-            statusText: "无备兑",
-            isFullyBacked: false,
-            sharesUnknown: false
-          },
-          weightRank: 3,
-          weightLevel: "低",
-          stockWeightPct: 8.8
+          stockWeightPct: 15.8
         }
       ]
     },
@@ -1885,6 +1859,89 @@
     }
   ],
   closedTrades: [
+    {
+      date: "2026-10-13",
+      dateStart: "2026-10-13",
+      dateEnd: "2026-10-13",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-13",
+      trades: [
+        {
+          tradeId: "EP-RAM-2026Q3:2026-10-13",
+          episodeId: "EP-RAM-2026Q3",
+          sym: "RAM",
+          name: "2x DRAM (Roundhill T-Rex)",
+          acct: "主账号",
+          cost: 13.30029,
+          soldDate: "2026-10-13",
+          dateStart: "2026-10-13",
+          dateEnd: "2026-10-13",
+          isPartial: true,
+          closesEpisode: false,
+          totalRetPct: -24.06181,
+          result: "loss",
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
+          reason: "部分减仓兑现",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261013-RAM-SELL-068",
+              date: "2026-10-13",
+              dateEnd: "2026-10-13",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 10.1,
+              cost: 13.30029,
+              costBasisType: "actual",
+              retPct: -24.06182,
+              note: "按10.10部分卖出，原持仓周期仍继续；未提供该笔单独退出理由或事前预案。"
+            }
+          ]
+        },
+        {
+          tradeId: "EP-STXL-2026Q4:2026-10-13",
+          episodeId: "EP-STXL-2026Q4",
+          sym: "STXL",
+          name: "Defiance 2x Long STX · 2x 希捷",
+          acct: "主账号",
+          cost: 27.29,
+          soldDate: "2026-10-13",
+          dateStart: "2026-10-13",
+          dateEnd: "2026-10-13",
+          isPartial: false,
+          closesEpisode: true,
+          totalRetPct: -24.40454,
+          result: "loss",
+          cycleRetPct: -24.40454,
+          cycleResult: "loss",
+          performanceEligible: true,
+          reason: "触及用户所述20.63止损位并伴有情绪波动，全部清仓",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261013-STXL-SELL-070",
+              date: "2026-10-13",
+              dateEnd: "2026-10-13",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 20.63,
+              cost: 27.29,
+              costBasisType: "actual",
+              retPct: -24.40454,
+              note: "用户确认按20.63全清，称触及止损位并伴有情绪波动；既有仓库未记录该具体止损价，不追溯改写为事前plan。"
+            }
+          ]
+        }
+      ]
+    },
     {
       date: "2026-10-12",
       dateStart: "2026-10-12",
@@ -3414,6 +3471,44 @@
     }
   ],
   reviews: [
+    {
+      reviewId: "RV-20261013",
+      date: "2026-10-13",
+      reviewDate: "2026-10-13",
+      reviewTimezone: "Asia/Shanghai",
+      dateLabel: "2026-10-13 复盘",
+      title: "RAM加减仓与CPI博弈 · STXL止损清仓",
+      plan: [
+        "RAM既有约13.5反弹后备兑或清仓预案保留；本次新增交易未提供独立的事前额度和退出边界，不追溯改写原计划。",
+        "STXL用户本次报告20.63为止损位；此前仓库没有该具体价格的事前记录，保留本次报告来源。"
+      ],
+      execution: [
+        "主号RAM：先按10.28加仓，再按10.10部分减仓，观察企稳后按10.187再次加仓，用户目的为博弈其所称明天CPI。",
+        "主号STXL：按20.63全部清仓，用户说明触及止损位，同时伴有情绪波动。",
+        "用户对本日恢复操作的自评：虽然等待回调到位，但过多情绪。RAM各腿未单独指定情绪标签；STXL本人明确确认存在情绪影响。"
+      ],
+      good: [
+        "STXL已按用户所述止损边界结束周期；触及退出条件和情绪影响同时保留，不因亏损而否定退出行为。"
+      ],
+      issues: [
+        "RAM本批先加、后减、再加，最终持仓净增加；等待价格到位没有消除本人报告的情绪影响，事件博弈的额度和退出边界尚未留下独立事前证据。"
+      ],
+      todo: [
+        "后续评价对照RAM新加仓的事件依据和退出边界，不用期权回收或单笔盈亏替代执行质量判断；此建议不自动成为新的持仓约束。"
+      ],
+      execStatus: "emo",
+      symbols: [
+        "RAM",
+        "STXL"
+      ],
+      accounts: [
+        "主账号"
+      ],
+      saleExecutionIds: [
+        "EX-USER-20261013-RAM-SELL-068",
+        "EX-USER-20261013-STXL-SELL-070"
+      ]
+    },
     {
       reviewId: "RV-20261012",
       date: "2026-10-12",

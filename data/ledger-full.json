@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/12：主号IRE清仓、2号SNXX最后补仓；行情沿用各持仓原快照。",
-  "asOfLabel": "成交：10月12日 · IRE清仓 / 2号SNXX补仓；行情：见各持仓日期",
+  "asOf": "成交更新至10/13：主号RAM加减仓、STXL清仓；行情沿用各持仓原快照。",
+  "asOfLabel": "成交：10月13日 · RAM加减仓 / STXL清仓；行情：见各持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -299,9 +299,9 @@
         {
           "sym": "RAM",
           "name": "2x DRAM (Roundhill T-Rex)",
-          "qty": 1299,
-          "cost": 13.5328,
-          "costDate": "原持续持仓；10/6四档13.70/13.85/13.55/13.42加仓；10/7 13.2情绪加仓（突破周内停加纪律）;10/7再12.98买49(追跌突破停加纪律);10/7@13.7有序撤出减仓(降仓位占比) / 10/8 12.15加仓",
+          "qty": 1349,
+          "cost": 12.83872,
+          "costDate": "原持续持仓；最新10/13按10.28加仓、10.10减仓、10.187再加仓",
           "stop": null,
           "lastPrice": 12.12,
           "lastPriceDate": "2026-10-08 收盘",
@@ -357,20 +357,20 @@
             "趋势波段"
           ],
           "execStatus": "unknown",
-          "oneLiner": "10/8买回16C/17C后按12.15加仓；保留14C/15C及反弹约13.5后的备兑或退出预案。",
+          "oneLiner": "10/13先按10.28加仓、10.10减仓，观察企稳后按10.187再次加仓博弈CPI；保留开放14C/15C。",
           "strategyNote": "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。；10/6盘中13.70、夜盘13.85及13.55、13.42四档连续补仓（摊薄约13.71），10/7 13.2情绪加仓，突破周内停加纪律（用户已认知），后续回归周内不再加仓。；10/7 12.98再买49追跌",
           "actualCostBasis": {
-            "value": 13.5328,
+            "value": 12.83872,
             "status": "确认",
-            "note": "沿用已有历史实际均价基准及后续确认流水，10/8按12.15加仓后逐笔移动加权；不改此前卖出成本。",
+            "note": "沿历史实际均价基准及后续确认流水逐笔移动加权；10/13按10.28加仓、10.10减仓后按10.187再加仓，不回写此前卖出成本。",
             "sourceType": "historical_actual_checkpoint"
           },
           "netInvestedCost": {
-            "value": 13.22095,
+            "value": 13.13152,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-RAM-2026Q3",
-            "note": "当前未结束周期正股净投入除以交易仓余额；历史已实现收益不重复叠加，期权不混入。"
+            "note": "按同一周期正股期初成本加买入减卖出现金流除以剩余交易仓余额；期权回收不冲抵，不重复叠加历史已实现盈亏。"
           },
           "costDisplay": "历史均价基准滚动",
           "entrySetup": [
@@ -587,7 +587,7 @@
         {
           "sym": "STXL",
           "name": "Defiance 2x Long STX · 2x 希捷",
-          "qty": 75,
+          "qty": 0,
           "cost": 27.29,
           "costDate": "10/6支撑位抄底建仓",
           "lastPrice": 27.12,
@@ -597,14 +597,14 @@
             "支撑低吸"
           ],
           "status": [
-            "持有"
+            "已清仓"
           ],
           "setup": [
             "支撑低吸"
           ],
-          "execStatus": "plan",
+          "execStatus": "emo",
           "episodeId": "EP-STXL-2026Q4",
-          "oneLiner": "支撑位抄底建仓（按27.29，当日=27.27 低点区）；预期快进快出，用反弹验证成色。",
+          "oneLiner": "10/13按20.63触及用户所述止损位全清，伴有本人确认的情绪波动。",
           "actualCostBasis": {
             "value": 27.29,
             "status": "确认",
@@ -620,12 +620,14 @@
           },
           "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
           "tags": [
-            "hold"
-          ]
+            "closed"
+          ],
+          "actionExecStatus": "emo",
+          "exitReason": "触及用户所述20.63止损位并伴有情绪波动，全部清仓"
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-12"
+      "holdingsAsOf": "2026-10-13"
     },
     {
       "id": "sat1",
@@ -3786,6 +3788,159 @@
         "evidence": "用户明确确认snxx，记在12号；10/13报告及录入时间不替代10/12成交归属。"
       },
       "recordedAt": "2026-10-12T16:31:21.348Z"
+    },
+    {
+      "executionId": "EX-USER-20261013-RAM-BUY-067",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 100,
+      "price": 10.28,
+      "date": "2026-10-13",
+      "chinaDate": "2026-10-13",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "unknown",
+      "purpose": "等待回调后加仓",
+      "note": "用户称等待跌到位后恢复操作，并自评本日过多情绪；没有逐笔指定情绪标签。",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-14T03:04:55+08:00",
+        "confirmedAt": "2026-10-14T03:10:34+08:00",
+        "evidence": "用户明确归属1013；RAM按10.28买100股、10.10卖250股、观察企稳后买200股，后确认价格为10.187；STXL按20.63触及止损并有情绪影响，后确认全部75股卖出。"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "reportedAt": "2026-10-14T03:04:55+08:00",
+        "confirmedAt": "2026-10-14T03:10:34+08:00",
+        "evidence": "用户明确写1013，本批按10月13日成交归属；10月14日为报告与确认时点，精确成交时刻未提供。"
+      },
+      "recordedAt": "2026-10-13T19:13:03.687Z",
+      "selfAssessment": {
+        "scope": "daily_batch",
+        "text": "虽然等跌到位了，但过多情绪",
+        "source": {
+          "type": "user_confirmation",
+          "reportedAt": "2026-10-14T03:04:55+08:00",
+          "confirmedAt": "2026-10-14T03:10:34+08:00",
+          "evidence": "用户明确归属1013；RAM按10.28买100股、10.10卖250股、观察企稳后买200股，后确认价格为10.187；STXL按20.63触及止损并有情绪影响，后确认全部75股卖出。"
+        }
+      }
+    },
+    {
+      "executionId": "EX-USER-20261013-RAM-SELL-068",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "sell",
+      "qty": 250,
+      "price": 10.1,
+      "date": "2026-10-13",
+      "chinaDate": "2026-10-13",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "unknown",
+      "purpose": "部分减仓",
+      "note": "按10.10部分卖出，原持仓周期仍继续；未提供该笔单独退出理由或事前预案。",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-14T03:04:55+08:00",
+        "confirmedAt": "2026-10-14T03:10:34+08:00",
+        "evidence": "用户明确归属1013；RAM按10.28买100股、10.10卖250股、观察企稳后买200股，后确认价格为10.187；STXL按20.63触及止损并有情绪影响，后确认全部75股卖出。"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "reportedAt": "2026-10-14T03:04:55+08:00",
+        "confirmedAt": "2026-10-14T03:10:34+08:00",
+        "evidence": "用户明确写1013，本批按10月13日成交归属；10月14日为报告与确认时点，精确成交时刻未提供。"
+      },
+      "recordedAt": "2026-10-13T19:13:03.687Z"
+    },
+    {
+      "executionId": "EX-USER-20261013-RAM-BUY-069",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "buy",
+      "qty": 200,
+      "price": 10.187,
+      "date": "2026-10-13",
+      "chinaDate": "2026-10-13",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "unknown",
+      "purpose": "企稳观察后事件博弈加仓",
+      "note": "用户观察企稳后加仓，目的为博弈其所称明天CPI；原报告18.187经用户确认更正为10.187。",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-14T03:04:55+08:00",
+        "confirmedAt": "2026-10-14T03:10:34+08:00",
+        "evidence": "用户明确归属1013；RAM按10.28买100股、10.10卖250股、观察企稳后买200股，后确认价格为10.187；STXL按20.63触及止损并有情绪影响，后确认全部75股卖出。"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "reportedAt": "2026-10-14T03:04:55+08:00",
+        "confirmedAt": "2026-10-14T03:10:34+08:00",
+        "evidence": "用户明确写1013，本批按10月13日成交归属；10月14日为报告与确认时点，精确成交时刻未提供。"
+      },
+      "recordedAt": "2026-10-13T19:13:03.687Z"
+    },
+    {
+      "executionId": "EX-USER-20261013-STXL-SELL-070",
+      "episodeId": "EP-STXL-2026Q4",
+      "account": "main",
+      "sym": "STXL",
+      "side": "sell",
+      "qty": 75,
+      "price": 20.63,
+      "date": "2026-10-13",
+      "chinaDate": "2026-10-13",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "actionExecStatus": "emo",
+      "purpose": "止损清仓",
+      "note": "用户确认按20.63全清，称触及止损位并伴有情绪波动；既有仓库未记录该具体止损价，不追溯改写为事前plan。",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-14T03:04:55+08:00",
+        "confirmedAt": "2026-10-14T03:10:34+08:00",
+        "evidence": "用户明确归属1013；RAM按10.28买100股、10.10卖250股、观察企稳后买200股，后确认价格为10.187；STXL按20.63触及止损并有情绪影响，后确认全部75股卖出。"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "reportedAt": "2026-10-14T03:04:55+08:00",
+        "confirmedAt": "2026-10-14T03:10:34+08:00",
+        "evidence": "用户明确写1013，本批按10月13日成交归属；10月14日为报告与确认时点，精确成交时刻未提供。"
+      },
+      "recordedAt": "2026-10-13T19:13:03.687Z",
+      "exitReason": "触及用户所述20.63止损位并伴有情绪波动，全部清仓",
+      "selfAssessment": {
+        "scope": "execution",
+        "text": "到达止损位+有些情绪波动割肉",
+        "source": {
+          "type": "user_confirmation",
+          "reportedAt": "2026-10-14T03:04:55+08:00",
+          "confirmedAt": "2026-10-14T03:10:34+08:00",
+          "evidence": "用户明确归属1013；RAM按10.28买100股、10.10卖250股、观察企稳后买200股，后确认价格为10.187；STXL按20.63触及止损并有情绪影响，后确认全部75股卖出。"
+        }
+      }
     }
   ],
   "episodes": [
@@ -3799,7 +3954,7 @@
         "趋势波段"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 1299,
+      "currentQty": 1349,
       "exitReason": null,
       "exitDate": null,
       "entryDateNote": "期初已持有；真实首次建仓日未核实"
@@ -4190,16 +4345,17 @@
       "episodeId": "EP-STXL-2026Q4",
       "sym": "STXL",
       "account": "main",
-      "status": "open",
+      "status": "closed",
       "entryDate": "2026-10-06",
       "entrySetup": [
         "支撑低吸"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 75,
-      "exitReason": null,
-      "exitDate": null,
-      "entryDateNote": "支撑位抄底建仓，预期快进快出"
+      "currentQty": 0,
+      "exitReason": "触及用户所述20.63止损位并伴有情绪波动，全部清仓",
+      "exitDate": "2026-10-13",
+      "entryDateNote": "支撑位抄底建仓，预期快进快出",
+      "exitExecutionId": "EX-USER-20261013-STXL-SELL-070"
     },
     {
       "episodeId": "EP-RKLX1-2026Q4",
@@ -5547,6 +5703,49 @@
           }
         ]
       }
+    },
+    {
+      "reviewId": "RV-20261013",
+      "date": "2026-10-13",
+      "reviewDate": "2026-10-13",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-13 复盘",
+      "title": "RAM加减仓与CPI博弈 · STXL止损清仓",
+      "executionIds": [
+        "EX-USER-20261013-RAM-BUY-067",
+        "EX-USER-20261013-RAM-SELL-068",
+        "EX-USER-20261013-RAM-BUY-069",
+        "EX-USER-20261013-STXL-SELL-070"
+      ],
+      "plan": [
+        "RAM既有约13.5反弹后备兑或清仓预案保留；本次新增交易未提供独立的事前额度和退出边界，不追溯改写原计划。",
+        "STXL用户本次报告20.63为止损位；此前仓库没有该具体价格的事前记录，保留本次报告来源。"
+      ],
+      "execution": [
+        "主号RAM：先按10.28加仓，再按10.10部分减仓，观察企稳后按10.187再次加仓，用户目的为博弈其所称明天CPI。",
+        "主号STXL：按20.63全部清仓，用户说明触及止损位，同时伴有情绪波动。",
+        "用户对本日恢复操作的自评：虽然等待回调到位，但过多情绪。RAM各腿未单独指定情绪标签；STXL本人明确确认存在情绪影响。"
+      ],
+      "good": [
+        "STXL已按用户所述止损边界结束周期；触及退出条件和情绪影响同时保留，不因亏损而否定退出行为。"
+      ],
+      "issues": [
+        "RAM本批先加、后减、再加，最终持仓净增加；等待价格到位没有消除本人报告的情绪影响，事件博弈的额度和退出边界尚未留下独立事前证据。"
+      ],
+      "todo": [
+        "后续评价对照RAM新加仓的事件依据和退出边界，不用期权回收或单笔盈亏替代执行质量判断；此建议不自动成为新的持仓约束。"
+      ],
+      "execStatus": "emo",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-13T19:13:03.687Z",
+      "updatedAt": "2026-10-13T19:13:03.687Z",
+      "reviewDateBasis": "用户明确以1013归属本批成交；10/14是报告及价格/全清确认时点，不以录入时间顺延。",
+      "internalObservation": [
+        "用户确认RAM最后买入价为10.187，原报告18.187只保留为来源更正记录。",
+        "用户表示STXL退出后用资金做期权回收了亏损；未提供合约、方向、数量、成交价格或日期，保存本人说明，不伪造optionExecutions、不冲抵正股表现。",
+        "RAM本人自评过多情绪适用于当天批次，未逐腿定位；各actionExecStatus保留unknown，STXL明确情绪影响保留emo。",
+        "CPI明天为用户的交易意图原话；本轮未核实发布日，不将该表述当成官方日历结论。"
+      ]
     }
   ],
   "openingPositions": [
@@ -6582,6 +6781,18 @@
       },
       "date": "2026-10-08",
       "reason": "用户明确确认实际中国日期；收窄旧美东原日期推算的可能区间，原始date/time/timezone及成交数量价格保留。"
+    },
+    {
+      "executionId": "EX-USER-20261013-RAM-BUY-069",
+      "field": "price",
+      "originalValue": 18.187,
+      "correctedValue": 10.187,
+      "recordedAt": "2026-10-13T19:13:03.687Z",
+      "source": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-14T03:10:34+08:00",
+        "evidence": "询问是否为10.187，用户回复：1，是的，是10.187。"
+      }
     }
   ],
   "historicalNarrativeCorrections": [
@@ -6840,6 +7051,191 @@
         "episodeId": "EP-SNXX-2026Q3"
       },
       "executionId": "EX-USER-20261012-SNXX2-BUY-066"
+    },
+    {
+      "account": "main",
+      "sym": "RAM",
+      "date": "2026-10-13",
+      "recordedAt": "2026-10-13T19:13:03.687Z",
+      "reason": "用户确认新成交后同步持仓，保留此前持仓与计划快照",
+      "before": {
+        "sym": "RAM",
+        "name": "2x DRAM (Roundhill T-Rex)",
+        "qty": 1299,
+        "cost": 13.5328,
+        "costDate": "原持续持仓；10/6四档13.70/13.85/13.55/13.42加仓；10/7 13.2情绪加仓（突破周内停加纪律）;10/7再12.98买49(追跌突破停加纪律);10/7@13.7有序撤出减仓(降仓位占比) / 10/8 12.15加仓",
+        "stop": null,
+        "lastPrice": 12.12,
+        "lastPriceDate": "2026-10-08 收盘",
+        "wtPct": 71,
+        "strategy": [
+          "核心仓",
+          "CC收租"
+        ],
+        "options": [
+          {
+            "exp": "2026-10-16",
+            "legs": [
+              {
+                "mult": 1,
+                "strike": 14,
+                "type": "C",
+                "premium": 1.36,
+                "note": "9/19加卖"
+              },
+              {
+                "mult": 1,
+                "strike": 14,
+                "type": "C",
+                "premium": 1.125,
+                "note": ""
+              },
+              {
+                "mult": 2,
+                "strike": 15,
+                "type": "C",
+                "premium": 0.95,
+                "note": ""
+              },
+              {
+                "mult": 1,
+                "strike": 15,
+                "type": "C",
+                "premium": 1.1,
+                "note": "9/19加卖"
+              }
+            ]
+          }
+        ],
+        "tags": [
+          "hold"
+        ],
+        "status": [
+          "持有"
+        ],
+        "alerts": [],
+        "alertSub": "等待反弹至约13.5 · 备兑或退出预案",
+        "setup": [
+          "趋势波段"
+        ],
+        "execStatus": "unknown",
+        "oneLiner": "10/8买回16C/17C后按12.15加仓；保留14C/15C及反弹约13.5后的备兑或退出预案。",
+        "strategyNote": "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。；10/6盘中13.70、夜盘13.85及13.55、13.42四档连续补仓（摊薄约13.71），10/7 13.2情绪加仓，突破周内停加纪律（用户已认知），后续回归周内不再加仓。；10/7 12.98再买49追跌",
+        "actualCostBasis": {
+          "value": 13.5328,
+          "status": "确认",
+          "note": "沿用已有历史实际均价基准及后续确认流水，10/8按12.15加仓后逐笔移动加权；不改此前卖出成本。",
+          "sourceType": "historical_actual_checkpoint"
+        },
+        "netInvestedCost": {
+          "value": 13.22095,
+          "status": "确认",
+          "scope": "episode",
+          "episodeId": "EP-RAM-2026Q3",
+          "note": "当前未结束周期正股净投入除以交易仓余额；历史已实现收益不重复叠加，期权不混入。"
+        },
+        "costDisplay": "历史均价基准滚动",
+        "entrySetup": [
+          "趋势波段"
+        ],
+        "entryExecStatus": "adhoc",
+        "actionExecStatus": "unknown",
+        "exitReason": null,
+        "episodeId": "EP-RAM-2026Q3",
+        "compositeNetInvested": {
+          "value": null,
+          "status": "本轮不核算",
+          "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
+        },
+        "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
+        "activePlan": {
+          "planId": "PLAN-RAM-20261008-REBOUND",
+          "status": "active",
+          "createdAt": "2026-10-08T23:52:25+08:00",
+          "effectiveFrom": "2026-10-08T23:52:25+08:00",
+          "source": {
+            "type": "user_confirmation",
+            "reportedAt": "2026-10-08T23:52:25+08:00",
+            "evidence": "释放空间，等反弹回13.5左右再做coveredcall或直接清仓"
+          },
+          "trigger": {
+            "underlyingPriceApprox": 13.5,
+            "kind": "user_observation_level",
+            "isPlacedOrder": false
+          },
+          "alternatives": [
+            "再卖covered call",
+            "直接清仓"
+          ],
+          "selectedAlternative": null,
+          "note": "这是后续二选一预案，未确认挂单、再卖call或卖出正股。选清仓时须核对仍开放14C/15C的备兑义务，不能把解除部分call当全仓解除。",
+          "relatedOptionExecutionIds": [
+            "OX-USER-20261008-RAM-BTC-16C-001",
+            "OX-USER-20261008-RAM-BTC-17C-002"
+          ]
+        },
+        "lastPriceSource": {
+          "url": "https://ycharts.com/companies/RAM/price",
+          "asOf": "2026-10-08T16:00:00-04:00",
+          "kind": "regular_session_close",
+          "confidence": "medium",
+          "note": "YCharts明确标16:00价格12.12；ChartExchange为15:59:58成交12.11，Investing收盘12.13。因尾盘报价口径差异，公开评价只使用约12.1，不宣称唯一官方收盘。"
+        }
+      },
+      "executionIds": [
+        "EX-USER-20261013-RAM-BUY-067",
+        "EX-USER-20261013-RAM-SELL-068",
+        "EX-USER-20261013-RAM-BUY-069"
+      ]
+    },
+    {
+      "account": "main",
+      "sym": "STXL",
+      "date": "2026-10-13",
+      "recordedAt": "2026-10-13T19:13:03.687Z",
+      "reason": "用户确认新成交后同步持仓，保留此前持仓与计划快照",
+      "before": {
+        "sym": "STXL",
+        "name": "Defiance 2x Long STX · 2x 希捷",
+        "qty": 75,
+        "cost": 27.29,
+        "costDate": "10/6支撑位抄底建仓",
+        "lastPrice": 27.12,
+        "lastPriceDate": "2026-10-07 收盘",
+        "wtPct": 7,
+        "strategy": [
+          "支撑低吸"
+        ],
+        "status": [
+          "持有"
+        ],
+        "setup": [
+          "支撑低吸"
+        ],
+        "execStatus": "plan",
+        "episodeId": "EP-STXL-2026Q4",
+        "oneLiner": "支撑位抄底建仓（按27.29，当日=27.27 低点区）；预期快进快出，用反弹验证成色。",
+        "actualCostBasis": {
+          "value": 27.29,
+          "status": "确认",
+          "note": "一次性建仓，摊薄=成交价",
+          "sourceType": "user_confirmation"
+        },
+        "netInvestedCost": {
+          "value": 27.29,
+          "status": "确认",
+          "scope": "episode",
+          "episodeId": "EP-STXL-2026Q4",
+          "note": "一次性买入，正股净投入=成交价"
+        },
+        "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
+        "tags": [
+          "hold"
+        ]
+      },
+      "executionIds": [
+        "EX-USER-20261013-STXL-SELL-070"
+      ]
     }
   ],
   "stockConcentration": {
