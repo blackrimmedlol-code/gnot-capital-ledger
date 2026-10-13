@@ -7684,7 +7684,7 @@
     "calendarCheckedDate": "2026-10-08",
     "calendarCoverageThrough": "2028-12-31",
     "calendarSource": "https://www.nyse.com/trade/hours-calendars",
-    "lastSuccessfulCutoff": "2026-10-09T20:30:00Z",
+    "lastSuccessfulCutoff": "2026-10-12T20:30:00Z",
     "executionFingerprints": {
       "EX-STMT-20260930-RAM-BUY-P030-080": "ce56709480891cba43e6a8923cf8cdd49794f9e1ff76ecdcf6b78b33f3ac115c",
       "EX-20260917-CRDU-BUY-011": "2a4f90fabd62d4ffb2bb36805c7a4c086d4778c5f5dd58ff91c50664b0bef17c",
@@ -7780,13 +7780,17 @@
       "EX-USER-20261008-LABU-SELL-062": "32ae891ba8b3233478a869c8813b8cd3f0a73606f627b9579eee42d197018832",
       "EX-USER-20261008-IRE-BUY-063": "268657966a89562a65c5d4d520ed6a8097c1ae3847a6e9b48cb4f5e48529387e",
       "EX-USER-20261008-RAM-BUY-064": "607ab69d70753e9919a92ab84de437561e68dbaf50eaedebe8abaf5a6e83a336",
+      "EX-USER-20261012-IRE-SELL-065": "2a6fdc5b37fd3c8564b432232aa0a8b19874ec51aac2543f34a9dbc3fd45eaca",
+      "EX-USER-20261012-SNXX2-BUY-066": "f3f4bbd939ee72f187aef3bc9a29eba2e805e49fad5d8916587c2bb4495c84b0",
       "OX-USER-20261008-RAM-BTC-16C-001": "c3fffb42c522370496b7da0b5c4f5ff367e74895623eaff17570e7bcec94c78f",
       "OX-USER-20261008-RAM-BTC-17C-002": "7f24147c91ef7470c9f9a28569fb32cd0aac66b5f2f8254595c73a5bd76adbae"
     },
-    "note": "本轮无新增成交或内容更正，完成完整指纹核对后推进成功截止；后续继续核对新ID及指纹变化。",
-    "lastSuccessfulMarketDate": "2026-10-09",
-    "lastSuccessfulReviewDates": [],
-    "lastSuccessfulAt": "2026-10-12T08:41:41.388Z",
+    "note": "本轮处理10/12两笔新增正股成交，完成对应收盘复盘、相关收盘价更新、公开脱敏构建及真实线上运行验证；后续继续核对新ID及指纹变化。",
+    "lastSuccessfulMarketDate": "2026-10-12",
+    "lastSuccessfulReviewDates": [
+      "2026-10-12"
+    ],
+    "lastSuccessfulAt": "2026-10-13T08:44:31Z",
     "optionExecutionFingerprints": {
       "OX-USER-20261008-RAM-BTC-16C-001": "c3fffb42c522370496b7da0b5c4f5ff367e74895623eaff17570e7bcec94c78f",
       "OX-USER-20261008-RAM-BTC-17C-002": "7f24147c91ef7470c9f9a28569fb32cd0aac66b5f2f8254595c73a5bd76adbae"
@@ -7797,7 +7801,8 @@
       "RV-RECONCILE-20261006": "80523c9956b51b628b146456b8422f2d4e9a6882493cade61b011c230559d8e1",
       "RV-20261006": "3757c356ee209f00d5633b3090d6be25570de8534b3b15b15cf16da4eb054e4a",
       "RV-20261007": "ec80d91ca5d8157645045551809e77c3f6f624830b9f3c9291ed132ff4b24555",
-      "RV-20261008": "cf7ed3063094d8a92f97cccca7dc0ebbc11e88fcab85c75be0cf6dd9efdb1edc"
+      "RV-20261008": "cf7ed3063094d8a92f97cccca7dc0ebbc11e88fcab85c75be0cf6dd9efdb1edc",
+      "RV-20261012": "65a23ba792eed4e1158a325e8c65f58678cc580d7689a1b0007b3cad5b4d0659"
     },
     "initialBaseline": {
       "createdAt": "2026-10-09T02:58:27.662Z",
@@ -7907,20 +7912,39 @@
       "note": "首轮核对当前最近美股交易时段和截至截止点的仓库记录；10/8补收盘评价。既有历史流水仅核对引用并初始化内容基准，未重跑历史迁移或重写旧复盘。历史基准任一成交更正仍须按内容指纹复核。"
     },
     "lastVerifiedPublication": {
-      "commit": "8cebd445b1483bd604b87b5585a17ac87ca90381",
-      "workflowRunId": 37876982130,
-      "verifiedAt": "2026-10-09T02:58:27.662Z",
+      "commit": "0d2be7db11ce7d4af349b8e4eede86fe1ae0727c",
+      "workflowRunId": 38370921953,
+      "verifiedAt": "2026-10-13T08:44:31Z",
       "url": "https://blackrimmedlol-code.github.io/gnot-capital-ledger/",
       "checks": [
         "Actions success",
         "真实线上HTML test_render.js",
-        "10/8复盘全文与仓库一致",
+        "10/12复盘全文与仓库一致",
         "关联卖出",
         "最新复盘默认展开"
       ]
     },
-    "nextSchedule": "BEGIN:VEVENT\nDTSTART;TZID=America/New_York:20261012T163000\nRRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=16;BYMINUTE=30;BYSECOND=0\nEND:VEVENT",
-    "nextScheduleVerifiedAt": "2026-10-12T08:41:41.388Z",
+    "nextSchedule": "BEGIN:VEVENT\nDTSTART;TZID=America/New_York:20261013T163000\nRRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=16;BYMINUTE=30;BYSECOND=0\nEND:VEVENT",
+    "nextScheduleVerifiedAt": "2026-10-13T08:35:07.251305Z",
+    "lastCompletedRun": {
+      "marketDate": "2026-10-12",
+      "cutoff": "2026-10-12T20:30:00Z",
+      "checkedAt": "2026-10-13T08:44:31Z",
+      "previousCutoff": "2026-10-09T20:30:00Z",
+      "addedExecutionIds": [
+        "EX-USER-20261012-IRE-SELL-065",
+        "EX-USER-20261012-SNXX2-BUY-066"
+      ],
+      "changedExecutionIds": [],
+      "removedExecutionIds": [],
+      "reviewDates": [
+        "2026-10-12"
+      ],
+      "updatedHoldingPrices": [
+        "sat2:SNXX"
+      ],
+      "note": "已完成10/12新增成交收盘评价；IRE周期保持关闭，2号SNXX保持最后补仓后只观望约束。"
+    },
     "lastNoChangeRun": {
       "marketDate": "2026-10-09",
       "cutoff": "2026-10-09T20:30:00Z",
