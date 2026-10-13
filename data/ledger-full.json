@@ -745,8 +745,8 @@
           "qty": 151,
           "cost": 14.80424,
           "costDate": "9/23按18.32建仓；10/12按12.00补仓",
-          "lastPrice": 15.74,
-          "lastPriceDate": "2026-10-07 收盘",
+          "lastPrice": 12.06,
+          "lastPriceDate": "2026-10-12 收盘",
           "wtPct": 100,
           "strategy": [
             "卫星仓·存储杠杆博弈"
@@ -5469,14 +5469,21 @@
         "主号IRE：盘前按7.40卖出并清仓。用户观察盘前开盘快速跳水，认为原7.82目标偏高。",
         "2号小账号SNXX：按12.00补仓，继续原未结束周期；用户确认本次为最后一次补仓，后续只观望。"
       ],
-      "good": [],
-      "issues": [],
+      "good": [
+        "IRE原7.82限价未成交、盘前走势转弱后，改按7.40完成清仓；退出意图已经明确时没有继续等待单一理想价，执行上及时结束了本轮周期。",
+        "SNXX补仓后明确建立“不再加仓、后续只观望”的账户级边界；该约束从确认时起生效，有助于阻止继续摊低成本，但不追溯包装成本次买入的事前计划。"
+      ],
+      "issues": [
+        "IRE此前只挂单一7.82目标，仓库没有分批或价格失效后的替代路径；这降低了盘前快速波动中的成交稳健性。问题在执行预案不足，不以收盘低于卖价反推本次一定正确。",
+        "SNXX本次补仓未留下独立的事前setup、额度及退出依据；在2倍产品当日高波动背景下，成交继续标为unknown，不据此判定为情绪交易。"
+      ],
       "todo": [
         "用户给出的下次调整：退出意图明确且盘前拉高时优先兑现，避免把单一目标价设得过高；该调整先作为本次复盘经验，不因单一案例自动升级为通用纪律。",
-        "2号小账号SNXX：本次补仓后不再加仓，后续只观望；具体退出价尚未作出新约定。"
+        "2号小账号SNXX：本次补仓后不再加仓，后续只观望；具体退出价尚未作出新约定，不猜填新的止损或止盈条件。",
+        "收盘口径：IRE常规交易时段收于6.46，SNXX于16:00报12.06。前者仅用于确认当日波动背景，后者与12.00成交价接近；两者都不作为执行质量的倒推依据。"
       ],
       "execStatus": "adhoc",
-      "reviewStatus": "in_progress",
+      "reviewStatus": "complete",
       "recordedAt": "2026-10-12T16:42:50+08:00",
       "reviewDateBasis": "用户在中国时间10/12盘前成交后当即报告，归属实际中国日期10/12；精确时刻未知。",
       "internalObservation": [
@@ -5499,7 +5506,47 @@
           ]
         }
       ],
-      "updatedAt": "2026-10-12T16:31:21.348Z"
+      "updatedAt": "2026-10-13T08:36:58Z",
+      "closingReview": {
+        "reviewedAt": "2026-10-13T08:36:58Z",
+        "cutoff": "2026-10-12T20:30:00Z",
+        "marketDate": "2026-10-12",
+        "scheduledAtNY": "2026-10-12T16:30:00-04:00",
+        "actualCloseNY": "2026-10-12T16:00:00-04:00",
+        "executionIds": [
+          "EX-USER-20261012-IRE-SELL-065",
+          "EX-USER-20261012-SNXX2-BUY-066"
+        ],
+        "optionExecutionIds": [],
+        "firstRun": false,
+        "confidence": {
+          "executionFacts": "high",
+          "planConsistency": "medium",
+          "marketData": "high"
+        },
+        "marketData": [
+          {
+            "sym": "IRE",
+            "date": "2026-10-12",
+            "price": 6.46,
+            "asOf": "2026-10-12T16:00:00-04:00",
+            "source": "https://www.schwab.wallst.com/Prospect/Research/etfs/portfolio.asp?symbol=ire",
+            "corroboratingSource": "https://ca.investing.com/etfs/ire-historical-data",
+            "confidence": "high",
+            "note": "Schwab明确As of close 10/12/2026为6.46，Investing历史表同为6.46；只作当日波动背景，不以卖后走势倒推执行质量。"
+          },
+          {
+            "sym": "SNXX",
+            "date": "2026-10-12",
+            "price": 12.06,
+            "asOf": "2026-10-12T16:00:00-04:00",
+            "source": "https://ycharts.com/companies/SNXX/price",
+            "corroboratingSource": "https://chartexchange.com/symbol/bats-snxx/historical/",
+            "confidence": "high",
+            "note": "YCharts明确Oct 12 16:00价格12.06，ChartExchange 15:59:56同为12.06；采用常规交易时段时点，不使用盘后报价。"
+          }
+        ]
+      }
     }
   ],
   "openingPositions": [
