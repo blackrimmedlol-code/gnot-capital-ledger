@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/13：RAM加减仓及14C买回、STXL清仓；行情沿用各持仓原快照。",
-  "asOfLabel": "成交：10月13日 · RAM加减仓 / 14C买回 / STXL清仓；行情：见各持仓日期",
+  "asOf": "成交更新至10/14：RAM减仓只留备兑担保仓、SOXL建仓并保留现金；行情见各持仓快照。",
+  "asOfLabel": "成交：10月14日 · RAM减仓 / SOXL建仓；行情：见各持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -299,12 +299,12 @@
         {
           "sym": "RAM",
           "name": "2x DRAM (Roundhill T-Rex)",
-          "qty": 1349,
+          "qty": 300,
           "cost": 12.83872,
-          "costDate": "原持续持仓；最新10/13按10.28加仓、10.10减仓、10.187再加仓",
+          "costDate": "10/14按10.45减仓，剩余交易仓均价不变",
           "stop": null,
-          "lastPrice": 12.12,
-          "lastPriceDate": "2026-10-08 收盘",
+          "lastPrice": 10.36,
+          "lastPriceDate": "2026-10-13 收盘",
           "wtPct": 71,
           "strategy": [
             "核心仓",
@@ -338,32 +338,32 @@
             "持有"
           ],
           "alerts": [],
-          "alertSub": "等待反弹至约13.5 · 备兑或退出预案",
+          "alertSub": "仅保留15C备兑担保仓",
           "setup": [
             "趋势波段"
           ],
-          "execStatus": "unknown",
-          "oneLiner": "10/13按10.28加仓、10.10减仓、10.187再加仓；按0.02买回10/16到期的2张14C，剩余15C保持开放。",
+          "execStatus": "plan",
+          "oneLiner": "10/14按10.45减仓，剩余正股担保3张10/16到期15C；非备兑敞口转向SOXL，保留现金应对CPI。",
           "strategyNote": "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。；10/6盘中13.70、夜盘13.85及13.55、13.42四档连续补仓（摊薄约13.71），10/7 13.2情绪加仓，突破周内停加纪律（用户已认知），后续回归周内不再加仓。；10/7 12.98再买49追跌",
           "actualCostBasis": {
             "value": 12.83872,
             "status": "确认",
-            "note": "沿历史实际均价基准及后续确认流水逐笔移动加权；10/13按10.28加仓、10.10减仓后按10.187再加仓，不回写此前卖出成本。",
+            "note": "历史实际均价基准滚动的交易仓移动加权成本；普通卖出不改变剩余均价，观察份额不进入绩效成本。",
             "sourceType": "historical_actual_checkpoint"
           },
           "netInvestedCost": {
-            "value": 13.13152,
+            "value": 22.54823,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-RAM-2026Q3",
-            "note": "按同一周期正股期初成本加买入减卖出现金流除以剩余交易仓余额；期权回收不冲抵，不重复叠加历史已实现盈亏。"
+            "note": "同一周期正股净投入除以剩余交易仓数量，观察份额和期权不混入；亏损减仓会提高净投入每股口径，不等于实际买入均价。"
           },
           "costDisplay": "历史均价基准滚动",
           "entrySetup": [
             "趋势波段"
           ],
           "entryExecStatus": "adhoc",
-          "actionExecStatus": "unknown",
+          "actionExecStatus": "plan",
           "exitReason": null,
           "episodeId": "EP-RAM-2026Q3",
           "compositeNetInvested": {
@@ -373,43 +373,45 @@
           },
           "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
           "activePlan": {
-            "planId": "PLAN-RAM-20261008-REBOUND",
+            "planId": "PLAN-RAM-20261014-COVERED-RESIDUAL",
             "status": "active",
-            "createdAt": "2026-10-08T23:52:25+08:00",
-            "effectiveFrom": "2026-10-08T23:52:25+08:00",
+            "createdAt": "2026-10-14T11:12:09+08:00",
+            "effectiveFrom": "2026-10-14T11:12:09+08:00",
+            "recordedAt": "2026-10-14T03:20:33.663Z",
             "source": {
               "type": "user_confirmation",
-              "reportedAt": "2026-10-08T23:52:25+08:00",
-              "evidence": "释放空间，等反弹回13.5左右再做coveredcall或直接清仓"
+              "reportedAt": "2026-10-14T11:12:09+08:00",
+              "evidence": "1014操作：10.45卖出1050股RAM，仅保留备兑的300股。按原计划换仓位到soxl；在129.67买入50股soxl，其他保留现金应对CPI可能带来的冲击。本周计划：如果周三CPI超过0.25% MoM，导致大跌，在周三买入1次；如果周四PPI继续热，在周五买入1次。周四有Warsh在曼谷的讲话（美东23:30）。"
             },
-            "trigger": {
-              "underlyingPriceApprox": 13.5,
-              "kind": "user_observation_level",
-              "isPlacedOrder": false
+            "scope": {
+              "account": "main",
+              "sym": "RAM",
+              "episodeId": "EP-RAM-2026Q3"
             },
-            "alternatives": [
-              "再卖covered call",
-              "直接清仓"
+            "retainCoveredStockOnly": true,
+            "relatedExecutionIds": [
+              "EX-USER-20261014-RAM-SELL-071"
             ],
-            "selectedAlternative": null,
-            "note": "原约13.5反弹后二选一预案保留；10/13买回14C后仅剩15C开放。若选正股清仓仍须处理15C备兑义务，本次买回不代表全部解除。",
-            "relatedOptionExecutionIds": [
-              "OX-USER-20261008-RAM-BTC-16C-001",
-              "OX-USER-20261008-RAM-BTC-17C-002",
-              "OX-USER-20261013-RAM-BTC-14C-003"
-            ],
-            "lastCoverageUpdate": {
-              "executionId": "OX-USER-20261013-RAM-BTC-14C-003",
-              "recordedAt": "2026-10-13T19:33:40.640Z",
-              "note": "仅同步当前开放合约描述，未更改原触发价、备兑/退出二选一决策或生效时点。"
-            }
+            "supersedesPlanId": "PLAN-RAM-20261008-REBOUND",
+            "note": "用户本次明确仅保留既有15C担保仓，取代约13.5反弹后二选一预案；未报告接受指派、再卖call或进一步卖出剩余担保股。"
           },
           "lastPriceSource": {
             "url": "https://ycharts.com/companies/RAM/price",
-            "asOf": "2026-10-08T16:00:00-04:00",
-            "kind": "regular_session_close",
+            "asOf": "2026-10-13T16:00:00-04:00",
+            "kind": "regular_session_close_snapshot",
             "confidence": "medium",
-            "note": "YCharts明确标16:00价格12.12；ChartExchange为15:59:58成交12.11，Investing收盘12.13。因尾盘报价口径差异，公开评价只使用约12.1，不宣称唯一官方收盘。"
+            "note": "YCharts明确Oct 13 16:00报价10.36；其他历史源为10.37，采用有时点的10.36快照，不宣称唯一官方成交收盘价、不用10.45成交价替代行情。"
+          },
+          "analysisQty": 299,
+          "observationQty": 1,
+          "allocationSource": {
+            "type": "confirmed_observation_and_reconciled_raw_flow",
+            "confirmedObservationDate": "2026-10-06",
+            "sourceId": "futu-main-20260930",
+            "openingAsOf": "2026-09-21",
+            "evidence": "RAM期初原始901股中已确认1股观察仓、900股交易仓；后续原始流水净增449股，本次卖1050后实股300、交易仓299、观察1，与用户报告剩余300一致。观察股保留历史用途，仅担保计算纳入实股，不虚构新增成交。",
+            "reportedAt": "2026-10-14T11:12:09+08:00",
+            "recordedAt": "2026-10-14T03:20:33.663Z"
           }
         },
         {
@@ -616,10 +618,135 @@
           ],
           "actionExecStatus": "emo",
           "exitReason": "触及用户所述20.63止损位并伴有情绪波动，全部清仓"
+        },
+        {
+          "sym": "SOXL",
+          "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
+          "qty": 50,
+          "cost": 129.67,
+          "costDate": "10/14按129.67建仓",
+          "lastPrice": 127.58,
+          "lastPriceDate": "2026-10-13 收盘",
+          "lastPriceSource": {
+            "url": "https://ycharts.com/companies/SOXL/price",
+            "asOf": "2026-10-13T16:00:00-04:00",
+            "kind": "regular_session_close_snapshot",
+            "confidence": "medium",
+            "note": "YCharts明确Oct 13 16:00报价127.58；其他历史源127.57/127.76口径有差异，采用此有时点快照，不用129.67成交价冒充行情。"
+          },
+          "strategy": [
+            "半导体杠杆交易",
+            "事件条件买入"
+          ],
+          "options": [],
+          "tags": [
+            "hold"
+          ],
+          "status": [
+            "持有"
+          ],
+          "setup": [
+            "板块杠杆交易"
+          ],
+          "entrySetup": [
+            "板块杠杆交易"
+          ],
+          "execStatus": "plan",
+          "entryExecStatus": "plan",
+          "actionExecStatus": "plan",
+          "episodeId": "EP-SOXL-MAIN-20261014",
+          "exitReason": null,
+          "alertSub": "留现金等待CPI / PPI条件机会",
+          "oneLiner": "按129.67建立SOXL新仓；CPI超0.25%且引发大跌时周三买入一次，PPI继续热时周五买入一次，其余保留现金。",
+          "actualCostBasis": {
+            "value": 129.67,
+            "status": "确认",
+            "note": "一次性确认建仓，按实际每股成交价记录。",
+            "sourceType": "user_confirmation"
+          },
+          "netInvestedCost": {
+            "value": 129.67,
+            "status": "确认",
+            "scope": "episode",
+            "episodeId": "EP-SOXL-MAIN-20261014",
+            "note": "当前仅有一笔正股买入，与实际均价相同。"
+          },
+          "costDisplay": "实际成本",
+          "activePlan": {
+            "planId": "PLAN-SOXL-20261014-CPI-PPI",
+            "status": "active",
+            "createdAt": "2026-10-14T11:12:09+08:00",
+            "effectiveFrom": "2026-10-14T11:12:09+08:00",
+            "recordedAt": "2026-10-14T03:20:33.663Z",
+            "source": {
+              "type": "user_confirmation",
+              "reportedAt": "2026-10-14T11:12:09+08:00",
+              "evidence": "1014操作：10.45卖出1050股RAM，仅保留备兑的300股。按原计划换仓位到soxl；在129.67买入50股soxl，其他保留现金应对CPI可能带来的冲击。本周计划：如果周三CPI超过0.25% MoM，导致大跌，在周三买入1次；如果周四PPI继续热，在周五买入1次。周四有Warsh在曼谷的讲话（美东23:30）。"
+            },
+            "scope": {
+              "account": "main",
+              "sym": "SOXL",
+              "episodeId": "EP-SOXL-MAIN-20261014",
+              "marketWeekStart": "2026-10-12",
+              "marketWeekEnd": "2026-10-16"
+            },
+            "preserveCash": true,
+            "placeOrdersAutomatically": false,
+            "branches": [
+              {
+                "branchId": "CPI-WED",
+                "releaseAt": "2026-10-14T08:30:00-04:00",
+                "releaseAtShanghai": "2026-10-14T20:30:00+08:00",
+                "indicator": "CPI",
+                "measure": "MoM",
+                "cpiVariant": null,
+                "comparator": ">",
+                "thresholdPct": 0.25,
+                "marketCondition": "数据导致大跌（用户定性条件，未提供数值定义）",
+                "buyMarketDate": "2026-10-14",
+                "maxBuys": 1,
+                "completedBuys": 0,
+                "qty": null,
+                "amount": null,
+                "note": "须同时满足CPI环比超过0.25%与引发大跌，再在周三买入一次；整体/核心CPI口径未指定，不猜填。"
+              },
+              {
+                "branchId": "PPI-FRI",
+                "releaseAt": "2026-10-15T08:30:00-04:00",
+                "releaseAtShanghai": "2026-10-15T20:30:00+08:00",
+                "indicator": "PPI",
+                "measure": null,
+                "heatThresholdPct": null,
+                "marketCondition": "周四PPI继续热（用户定性条件）",
+                "buyMarketDate": "2026-10-16",
+                "maxBuys": 1,
+                "completedBuys": 0,
+                "qty": null,
+                "amount": null,
+                "note": "周四PPI继续热时在周五买入一次；未擅自要求此前CPI分支先成交，具体PPI口径/热度数值/每次额度未提供。"
+              }
+            ],
+            "calendarEvidence": {
+              "source": "https://www.bls.gov/schedule/2026/10_sched_list.htm",
+              "verifiedAt": "2026-10-14T03:20:33.663Z",
+              "note": "BLS明确10/14 CPI、10/15 PPI均于美东08:30发布；只核实计划事件日，不将条件预案记为成交。"
+            },
+            "observedEvents": [
+              {
+                "event": "Warsh曼谷对谈",
+                "eventAt": "2026-10-15T23:30:00-04:00",
+                "eventAtShanghai": "2026-10-16T11:30:00+08:00",
+                "source": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+                "verifiedAt": "2026-10-14T03:20:33.663Z",
+                "note": "官方日历明确美东10/15 23:30；与IMF总裁的曼谷对谈。不是另一个自动买入条件。"
+              }
+            ],
+            "note": "本周CPI/PPI条件买入预案从用户本次确认后生效；当前50股建仓发生在事件发布前，不占用这两个条件次数，未确认每次买入额度或退出位。"
+          }
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-13"
+      "holdingsAsOf": "2026-10-14"
     },
     {
       "id": "sat1",
@@ -3933,6 +4060,98 @@
           "evidence": "用户明确归属1013；RAM按10.28买100股、10.10卖250股、观察企稳后买200股，后确认价格为10.187；STXL按20.63触及止损并有情绪影响，后确认全部75股卖出。"
         }
       }
+    },
+    {
+      "account": "main",
+      "date": "2026-10-14",
+      "chinaDate": "2026-10-14",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-14T11:12:09+08:00",
+        "evidence": "1014操作：10.45卖出1050股RAM，仅保留备兑的300股。按原计划换仓位到soxl；在129.67买入50股soxl，其他保留现金应对CPI可能带来的冲击。本周计划：如果周三CPI超过0.25% MoM，导致大跌，在周三买入1次；如果周四PPI继续热，在周五买入1次。周四有Warsh在曼谷的讲话（美东23:30）。"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "reportedAt": "2026-10-14T11:12:09+08:00",
+        "evidence": "用户明确标记1014操作，采用实际中国日期2026-10-14；具体成交时刻未提供。"
+      },
+      "recordedAt": "2026-10-14T03:20:33.663Z",
+      "actionExecStatus": "plan",
+      "planEvidence": {
+        "type": "user_reported_plan_execution",
+        "source": {
+          "type": "user_confirmation",
+          "reportedAt": "2026-10-14T11:12:09+08:00",
+          "evidence": "1014操作：10.45卖出1050股RAM，仅保留备兑的300股。按原计划换仓位到soxl；在129.67买入50股soxl，其他保留现金应对CPI可能带来的冲击。本周计划：如果周三CPI超过0.25% MoM，导致大跌，在周三买入1次；如果周四PPI继续热，在周五买入1次。周四有Warsh在曼谷的讲话（美东23:30）。"
+        },
+        "priorDirection": {
+          "type": "prior_user_confirmation",
+          "reportedAt": "2026-10-13T17:47:20Z",
+          "evidence": "用户在此前换仓讨论中明确“RAM换到soxl”。历史对话检索核实方向先于本次成交报告；当时没有确认具体股数或成交价。",
+          "scope": "rotation_direction_only"
+        },
+        "note": "plan表示已确认换仓方向的执行；本次具体数量和价格首次报告，不追溯创建旧额度或旧挂单。"
+      },
+      "executionId": "EX-USER-20261014-RAM-SELL-071",
+      "episodeId": "EP-RAM-2026Q3",
+      "sym": "RAM",
+      "side": "sell",
+      "qty": 1050,
+      "price": 10.45,
+      "purpose": "降低RAM敞口并保留备兑担保仓",
+      "note": "按10.45减仓，保留现有15C担保仓；退出非备兑部分后转向SOXL并保留现金，原持仓周期继续。"
+    },
+    {
+      "account": "main",
+      "date": "2026-10-14",
+      "chinaDate": "2026-10-14",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-14T11:12:09+08:00",
+        "evidence": "1014操作：10.45卖出1050股RAM，仅保留备兑的300股。按原计划换仓位到soxl；在129.67买入50股soxl，其他保留现金应对CPI可能带来的冲击。本周计划：如果周三CPI超过0.25% MoM，导致大跌，在周三买入1次；如果周四PPI继续热，在周五买入1次。周四有Warsh在曼谷的讲话（美东23:30）。"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "reportedAt": "2026-10-14T11:12:09+08:00",
+        "evidence": "用户明确标记1014操作，采用实际中国日期2026-10-14；具体成交时刻未提供。"
+      },
+      "recordedAt": "2026-10-14T03:20:33.663Z",
+      "actionExecStatus": "plan",
+      "planEvidence": {
+        "type": "user_reported_plan_execution",
+        "source": {
+          "type": "user_confirmation",
+          "reportedAt": "2026-10-14T11:12:09+08:00",
+          "evidence": "1014操作：10.45卖出1050股RAM，仅保留备兑的300股。按原计划换仓位到soxl；在129.67买入50股soxl，其他保留现金应对CPI可能带来的冲击。本周计划：如果周三CPI超过0.25% MoM，导致大跌，在周三买入1次；如果周四PPI继续热，在周五买入1次。周四有Warsh在曼谷的讲话（美东23:30）。"
+        },
+        "priorDirection": {
+          "type": "prior_user_confirmation",
+          "reportedAt": "2026-10-13T17:47:20Z",
+          "evidence": "用户在此前换仓讨论中明确“RAM换到soxl”。历史对话检索核实方向先于本次成交报告；当时没有确认具体股数或成交价。",
+          "scope": "rotation_direction_only"
+        },
+        "note": "plan表示已确认换仓方向的执行；本次具体数量和价格首次报告，不追溯创建旧额度或旧挂单。"
+      },
+      "executionId": "EX-USER-20261014-SOXL-BUY-072",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 50,
+      "price": 129.67,
+      "purpose": "按已确认方向换入SOXL并保留现金",
+      "note": "按129.67建立主号SOXL新周期；剩余回笼资金保留现金应对CPI冲击，未报告现金余额，不反推账户仓位。"
     }
   ],
   "episodes": [
@@ -3946,7 +4165,7 @@
         "趋势波段"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 1349,
+      "currentQty": 299,
       "exitReason": null,
       "exitDate": null,
       "entryDateNote": "期初已持有；真实首次建仓日未核实"
@@ -4371,6 +4590,21 @@
       "exitReason": "清仓回笼后转投IRE/RAM低吸",
       "entryExecutionId": "EX-USER-20261008-LABU-BUY-061",
       "exitExecutionId": "EX-USER-20261008-LABU-SELL-062"
+    },
+    {
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "sym": "SOXL",
+      "account": "main",
+      "status": "open",
+      "entryDate": "2026-10-14",
+      "entrySetup": [
+        "板块杠杆交易"
+      ],
+      "entryExecStatus": "plan",
+      "currentQty": 50,
+      "exitReason": null,
+      "exitDate": null,
+      "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
     }
   ],
   "closedTrades": [
@@ -5742,6 +5976,108 @@
       ],
       "optionExecutionIds": [
         "OX-USER-20261013-RAM-BTC-14C-003"
+      ]
+    },
+    {
+      "reviewId": "RV-20261014",
+      "date": "2026-10-14",
+      "reviewDate": "2026-10-14",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-14 复盘",
+      "title": "RAM减至备兑仓 · 换入SOXL并留现金",
+      "executionIds": [
+        "EX-USER-20261014-RAM-SELL-071",
+        "EX-USER-20261014-SOXL-BUY-072"
+      ],
+      "plan": [
+        "此前已明确RAM转SOXL的方向；本次确认执行换仓，减RAM后仅保留现有15C担保仓，剩余资金保留现金应对CPI。具体成交价和数量首次在本次报告中确认。"
+      ],
+      "execution": [
+        "主号RAM：按10.45减仓，保留担保3张10/16到期15C的正股，原周期继续。",
+        "主号SOXL：按129.67建仓，独立新周期；其余保留现金应对CPI可能冲击。"
+      ],
+      "good": [
+        "将RAM非备兑敞口收缩后只将部分回笼资金转入SOXL，保留现金应对事件波动；没有把全部减仓资金即时置换。"
+      ],
+      "issues": [],
+      "todo": [
+        "本周预案：周三CPI MoM超过0.25%且引发大跌时，周三买入一次；周四PPI继续热时，周五买入一次。以上为条件预案，尚未成交。",
+        "事件时点：10/14 CPI、10/15 PPI均于20:30发布；Warsh曼谷对谈为10/16 11:30，对应美东周四23:30。"
+      ],
+      "execStatus": "plan",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-14T03:20:33.663Z",
+      "updatedAt": "2026-10-14T03:20:33.663Z",
+      "reviewDateBasis": "用户明确标记1014操作，采用实际成交归属10/14；未提供精确成交时刻。",
+      "planAmendments": [
+        {
+          "amendmentId": "PA-RAM-20261014-COVERED-RESIDUAL",
+          "recordedAt": "2026-10-14T03:20:33.663Z",
+          "effectiveFrom": "2026-10-14T11:12:09+08:00",
+          "source": {
+            "type": "user_confirmation",
+            "reportedAt": "2026-10-14T11:12:09+08:00",
+            "evidence": "1014操作：10.45卖出1050股RAM，仅保留备兑的300股。按原计划换仓位到soxl；在129.67买入50股soxl，其他保留现金应对CPI可能带来的冲击。本周计划：如果周三CPI超过0.25% MoM，导致大跌，在周三买入1次；如果周四PPI继续热，在周五买入1次。周四有Warsh在曼谷的讲话（美东23:30）。"
+          },
+          "priorPlanId": "PLAN-RAM-20261008-REBOUND",
+          "priorPlan": {
+            "planId": "PLAN-RAM-20261008-REBOUND",
+            "status": "active",
+            "createdAt": "2026-10-08T23:52:25+08:00",
+            "effectiveFrom": "2026-10-08T23:52:25+08:00",
+            "source": {
+              "type": "user_confirmation",
+              "reportedAt": "2026-10-08T23:52:25+08:00",
+              "evidence": "释放空间，等反弹回13.5左右再做coveredcall或直接清仓"
+            },
+            "trigger": {
+              "underlyingPriceApprox": 13.5,
+              "kind": "user_observation_level",
+              "isPlacedOrder": false
+            },
+            "alternatives": [
+              "再卖covered call",
+              "直接清仓"
+            ],
+            "selectedAlternative": null,
+            "note": "原约13.5反弹后二选一预案保留；10/13买回14C后仅剩15C开放。若选正股清仓仍须处理15C备兑义务，本次买回不代表全部解除。",
+            "relatedOptionExecutionIds": [
+              "OX-USER-20261008-RAM-BTC-16C-001",
+              "OX-USER-20261008-RAM-BTC-17C-002",
+              "OX-USER-20261013-RAM-BTC-14C-003"
+            ],
+            "lastCoverageUpdate": {
+              "executionId": "OX-USER-20261013-RAM-BTC-14C-003",
+              "recordedAt": "2026-10-13T19:33:40.640Z",
+              "note": "仅同步当前开放合约描述，未更改原触发价、备兑/退出二选一决策或生效时点。"
+            }
+          },
+          "text": "本次用户确认RAM仅保留15C担保仓，已在10.45执行非备兑敞口减仓；取代此前约13.5反弹后二选一预案，原预案留痕。",
+          "executionIds": [
+            "EX-USER-20261014-RAM-SELL-071"
+          ]
+        },
+        {
+          "amendmentId": "PA-SOXL-20261014-CPI-PPI",
+          "recordedAt": "2026-10-14T03:20:33.663Z",
+          "effectiveFrom": "2026-10-14T11:12:09+08:00",
+          "source": {
+            "type": "user_confirmation",
+            "reportedAt": "2026-10-14T11:12:09+08:00",
+            "evidence": "1014操作：10.45卖出1050股RAM，仅保留备兑的300股。按原计划换仓位到soxl；在129.67买入50股soxl，其他保留现金应对CPI可能带来的冲击。本周计划：如果周三CPI超过0.25% MoM，导致大跌，在周三买入1次；如果周四PPI继续热，在周五买入1次。周四有Warsh在曼谷的讲话（美东23:30）。"
+          },
+          "text": "本次确认后续CPI/PPI条件买入与保留现金预案；现有SOXL建仓不占后续条件买入次数，不自动生成挂单。",
+          "executionIds": [
+            "EX-USER-20261014-SOXL-BUY-072"
+          ],
+          "planId": "PLAN-SOXL-20261014-CPI-PPI"
+        }
+      ],
+      "internalObservation": [
+        "RAM实股300/交易仓299/观察1来自既有期初与完整流水，不虚构缺失买入；备兑用实股，绩效和集中度仍排除观察份额。",
+        "历史对话提供换仓方向的事前证据，不能视作已确认具体1050/50股额度或10.45/129.67挂单；plan仅依据方向与本人本次确认。",
+        "CPI整体/核心、PPI具体热度阈值及两次买入额度未提供，内部保留null，不擅自指定；无需新增定时任务。",
+        "未提供现金余额/NAV，不根据减仓回笼金额生成完整账户现金或仓位百分比。"
       ]
     }
   ],
@@ -7365,6 +7701,130 @@
         }
       },
       "optionExecutionId": "OX-USER-20261013-RAM-BTC-14C-003"
+    },
+    {
+      "account": "main",
+      "sym": "RAM",
+      "date": "2026-10-14",
+      "recordedAt": "2026-10-14T03:20:33.663Z",
+      "reason": "登记真实减仓并将原交易仓数量口径规范为实股/交易仓/观察份额三项；原数量链和历史收益不变。",
+      "before": {
+        "sym": "RAM",
+        "name": "2x DRAM (Roundhill T-Rex)",
+        "qty": 1349,
+        "cost": 12.83872,
+        "costDate": "原持续持仓；最新10/13按10.28加仓、10.10减仓、10.187再加仓",
+        "stop": null,
+        "lastPrice": 12.12,
+        "lastPriceDate": "2026-10-08 收盘",
+        "wtPct": 71,
+        "strategy": [
+          "核心仓",
+          "CC收租"
+        ],
+        "options": [
+          {
+            "exp": "2026-10-16",
+            "legs": [
+              {
+                "mult": 2,
+                "strike": 15,
+                "type": "C",
+                "premium": 0.95,
+                "note": ""
+              },
+              {
+                "mult": 1,
+                "strike": 15,
+                "type": "C",
+                "premium": 1.1,
+                "note": "9/19加卖"
+              }
+            ]
+          }
+        ],
+        "tags": [
+          "hold"
+        ],
+        "status": [
+          "持有"
+        ],
+        "alerts": [],
+        "alertSub": "等待反弹至约13.5 · 备兑或退出预案",
+        "setup": [
+          "趋势波段"
+        ],
+        "execStatus": "unknown",
+        "oneLiner": "10/13按10.28加仓、10.10减仓、10.187再加仓；按0.02买回10/16到期的2张14C，剩余15C保持开放。",
+        "strategyNote": "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。；10/6盘中13.70、夜盘13.85及13.55、13.42四档连续补仓（摊薄约13.71），10/7 13.2情绪加仓，突破周内停加纪律（用户已认知），后续回归周内不再加仓。；10/7 12.98再买49追跌",
+        "actualCostBasis": {
+          "value": 12.83872,
+          "status": "确认",
+          "note": "沿历史实际均价基准及后续确认流水逐笔移动加权；10/13按10.28加仓、10.10减仓后按10.187再加仓，不回写此前卖出成本。",
+          "sourceType": "historical_actual_checkpoint"
+        },
+        "netInvestedCost": {
+          "value": 13.13152,
+          "status": "确认",
+          "scope": "episode",
+          "episodeId": "EP-RAM-2026Q3",
+          "note": "按同一周期正股期初成本加买入减卖出现金流除以剩余交易仓余额；期权回收不冲抵，不重复叠加历史已实现盈亏。"
+        },
+        "costDisplay": "历史均价基准滚动",
+        "entrySetup": [
+          "趋势波段"
+        ],
+        "entryExecStatus": "adhoc",
+        "actionExecStatus": "unknown",
+        "exitReason": null,
+        "episodeId": "EP-RAM-2026Q3",
+        "compositeNetInvested": {
+          "value": null,
+          "status": "本轮不核算",
+          "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
+        },
+        "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
+        "activePlan": {
+          "planId": "PLAN-RAM-20261008-REBOUND",
+          "status": "active",
+          "createdAt": "2026-10-08T23:52:25+08:00",
+          "effectiveFrom": "2026-10-08T23:52:25+08:00",
+          "source": {
+            "type": "user_confirmation",
+            "reportedAt": "2026-10-08T23:52:25+08:00",
+            "evidence": "释放空间，等反弹回13.5左右再做coveredcall或直接清仓"
+          },
+          "trigger": {
+            "underlyingPriceApprox": 13.5,
+            "kind": "user_observation_level",
+            "isPlacedOrder": false
+          },
+          "alternatives": [
+            "再卖covered call",
+            "直接清仓"
+          ],
+          "selectedAlternative": null,
+          "note": "原约13.5反弹后二选一预案保留；10/13买回14C后仅剩15C开放。若选正股清仓仍须处理15C备兑义务，本次买回不代表全部解除。",
+          "relatedOptionExecutionIds": [
+            "OX-USER-20261008-RAM-BTC-16C-001",
+            "OX-USER-20261008-RAM-BTC-17C-002",
+            "OX-USER-20261013-RAM-BTC-14C-003"
+          ],
+          "lastCoverageUpdate": {
+            "executionId": "OX-USER-20261013-RAM-BTC-14C-003",
+            "recordedAt": "2026-10-13T19:33:40.640Z",
+            "note": "仅同步当前开放合约描述，未更改原触发价、备兑/退出二选一决策或生效时点。"
+          }
+        },
+        "lastPriceSource": {
+          "url": "https://ycharts.com/companies/RAM/price",
+          "asOf": "2026-10-08T16:00:00-04:00",
+          "kind": "regular_session_close",
+          "confidence": "medium",
+          "note": "YCharts明确标16:00价格12.12；ChartExchange为15:59:58成交12.11，Investing收盘12.13。因尾盘报价口径差异，公开评价只使用约12.1，不宣称唯一官方收盘。"
+        }
+      },
+      "executionId": "EX-USER-20261014-RAM-SELL-071"
     }
   ],
   "stockConcentration": {

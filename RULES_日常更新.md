@@ -7,6 +7,7 @@
 - `data/ledger-full.json` 是唯一事实来源。executions 记录实际成交；episodes 记录周期；accounts 记录当前持仓；reviews 记录对应日复盘。保留唯一 ID 和来源，不猜填，不根据权重或期末余额反推流水。
 - 补录优先读取已提供的券商结单。保存来源页码、原始时区和时间；本次富途结单明确使用香港时间，须转换美东日期。订单汇总与其分笔成交只能计一次；用 brokerFills 保存拆分信息，不重复追加汇总和明细。
 - 用户2026/10/6确认：额外单股为价格观察仓，不计交易表现、交易仓集中度或清仓判断。原始 qty 保留用于券商对账；analysisQty + observationQty 必须等于 qty。纯观察事件 includeInPerformance=false，不进入兑现卡片。仅已确认观察份额排除，不按 qty=1 自动删除所有小额成交。
+- **持仓实股与交易仓口径（2026-10-14）**：有已确认观察份额的holdings也使用qty=实股总数、analysisQty=交易仓数量、observationQty=观察数量，保存allocationSource；实股按期初与原始qty流水对账，交易仓按analysisQty流水对账。移动加权成本、净投入成本分母、episodes.currentQty及集中度用交易仓数量；备兑担保用实际持有实股数量，观察股不参与绩效但可以担保call。此前RAM的holdings.qty是排除1股观察仓后的交易仓口径，10/14首次明确分记：卖1050后实股300/交易仓299/观察1，旧持仓快照留holdingCorrections，不虚构买入或改变历史成交成本。
 - 结单是历史快照，不能覆盖较新持仓。差异保存到 reconciliations，附 sourceDocuments / statementPositions 证据；未核实差额成交不猜填，相关最新成本不得标为确认。期初持仓用 openingPositions，不伪造为当日买入。原值保存于 sourceCorrections。
 - `closedTrades` 保留历史成本口径和评语，展示由 `derive.js` 派生；不要手工维护另一套数量/价格。按实际成交日及 episode 分组，每条交易仓卖出出现一次，纯观察仓排除；跨日分批不能全部挪到最后一天。
 - reviews.date 保留原关联日供来源追溯，不再用它与executions.date的美东日相等来校验“当日复盘”。reviewDate/reviewTimezone 是中国复盘归属日/Asia/Shanghai，展示为“YYYY-MM-DD 复盘”。新增成交按实际中国日期决定复盘归属，不能用最近卡片、相同episode或美东交易日拼入旧复盘。recordedAt 单独保存实际录入时刻；不能把归属日伪装成录入时间，不用报告时刻代替成交时刻。旧卡片日期换算保留于 legacyReviewDisplayDates，不把构建时间改成行情时间。

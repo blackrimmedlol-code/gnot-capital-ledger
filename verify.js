@@ -89,6 +89,12 @@ if (!dupErr && !dupWarn) console.log('✅ 疑似重复成交: 无');
 // ---- 5. 持仓余额对账（期初0 + 买入 - 卖出 = 当前持仓；qty 缺失标注无法完整对账） ----
 function acctIdOf(acct) { return acct.id || acct.name; }
 function analysisQty(e) { return e.analysisQty === undefined ? e.qty : e.analysisQty; }
+// A holding can contain confirmed observation shares used as real call collateral.
+// Performance and cost denominators use trading shares; collateral uses physical qty.
+function holdingTradingQty(h) {
+  return h.analysisQty !== undefined ? h.analysisQty :
+    (Number.isFinite(h.qty) ? h.qty - (h.observationQty || 0) : h.qty);
+}
 // Allocations preserve actual broker quantities; observations cannot become fake sells.
 j.executions.forEach(e => {
   if (e.analysisQty !== undefined && (!Number.isFinite(e.analysisQty) || e.analysisQty < 0 ||
@@ -108,6 +114,12 @@ function pendingBalance(acct, sym, calculated, reported) {
 }
 j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const acctId = acctIdOf(a);
+  const holdingQty = holdingTradingQty(h);
+  if (h.analysisQty !== undefined && (!Number.isFinite(h.qty) || !Number.isFinite(h.analysisQty) ||
+      !Number.isFinite(h.observationQty) || h.analysisQty < 0 || h.observationQty < 0 ||
+      h.analysisQty + h.observationQty !== h.qty || !h.allocationSource)) {
+    errors++; console.error('❌ 持仓观察份额分配无效: ' + h.sym + '(' + acctId + ')');
+  }
   const closedEpIds = new Set((j.episodes || []).filter(e => e.status === 'closed').map(e => e.episodeId));
   const ex = j.executions.filter(e => e.sym === h.sym && e.account === acctId && !closedEpIds.has(e.episodeId));
   if (ex.length === 0) {
@@ -125,11 +137,18 @@ j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const openings = (j.openingPositions || []).filter(o => o.account === acctId && o.sym === h.sym);
   const openingQty = openings.reduce((s, o) => s + analysisQty(o), 0);
   const calculated = openingQty + buys - sells;
-  if (calculated !== h.qty) {
-    if (pendingBalance(acctId, h.sym, calculated, h.qty)) {
+  if (h.analysisQty !== undefined) {
+    const physicalQty = openings.reduce((s, o) => s + o.qty, 0) +
+      ex.reduce((s, e) => s + (e.side === 'buy' ? 1 : -1) * e.qty, 0);
+    if (physicalQty !== h.qty) {
+      errors++; console.error('❌ 持仓实股对账失败: ' + h.sym + '(' + acctId + ')');
+    }
+  }
+  if (calculated !== holdingQty) {
+    if (pendingBalance(acctId, h.sym, calculated, holdingQty)) {
       warnings++; console.warn(`⚠️ ${h.sym}(${acctId}) 已留痕的余额差异: 结单/已知流水${calculated}，较新记录${h.qty}；后续成交待补`);
     } else {
-      errors++; console.error(`❌ ${h.sym}(${acctId}) 持仓对账失败: 期初${openingQty} + 买${buys} - 卖${sells} = ${calculated} ≠ 当前${h.qty}`);
+      errors++; console.error(`❌ ${h.sym}(${acctId}) 持仓对账失败: 期初${openingQty} + 买${buys} - 卖${sells} = ${calculated} ≠ 当前交易仓${holdingQty}`);
     }
   }
 }));
@@ -138,13 +157,14 @@ console.log('✅ 持仓对账: 流水完整者已核对（买卖差=当前持仓
 // ---- 6. 成本一致性（流水完整 + netInvestedCost 非 null 时重算核对正股净投入） ----
 j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const ni = h.netInvestedCost;
+  const holdingQty = holdingTradingQty(h);
   if (!ni || ni.value === null) return;
   const closedEpIds6 = new Set((j.episodes || []).filter(e => e.status === 'closed').map(e => e.episodeId));
   const ex = j.executions.filter(e => e.sym === h.sym && e.account === acctIdOf(a) && !closedEpIds6.has(e.episodeId));
   const allKnown = ex.length > 0 && ex.every(e => e.qty !== null && e.qty !== undefined);
-  if (!allKnown || !h.qty) return; // 流水不完整跳过硬核对
+  if (!allKnown || !holdingQty) return; // 流水不完整跳过硬核对
   const calculated = ex.reduce((s, e) => s + (e.side === 'buy' ? analysisQty(e) : -analysisQty(e)), 0);
-  if (pendingBalance(acctIdOf(a), h.sym, calculated, h.qty)) {
+  if (pendingBalance(acctIdOf(a), h.sym, calculated, holdingQty)) {
     if (ni.status === '确认' || (h.actualCostBasis && h.actualCostBasis.status === '确认')) {
       errors++; console.error(`❌ ${h.sym} 余额差异未解决，不能将最新成本标为确认`);
     }
@@ -159,7 +179,7 @@ j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const buyAmt = costEvents.filter(e => e.side === 'buy').reduce((s, e) => s + analysisQty(e) * e.price, 0);
   const sellAmt = costEvents.filter(e => e.side === 'sell').reduce((s, e) => s + analysisQty(e) * e.price, 0);
   const openingAmt = openings.reduce((s, o) => s + analysisQty(o) * o.actualCostBasis, 0);
-  const recomputed = Math.round((openingAmt + buyAmt - sellAmt) / h.qty * 100000) / 100000;
+  const recomputed = Math.round((openingAmt + buyAmt - sellAmt) / holdingQty * 100000) / 100000;
   if (Math.abs(recomputed - ni.value) > 0.001) {
     errors++; console.error(`❌ ${h.sym} netInvestedCost=${ni.value} 与流水重算 ${recomputed} 不一致`);
   }

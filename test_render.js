@@ -59,6 +59,17 @@ function check(html, ledger) {
   assert.ok(api.DATA.accounts.every(a => a.holdings.every(h => !h.strategyNote)), '策略备注仍进入页面数据');
   assert.ok(api.DATA.accounts.every(a => a.holdings.every(h => h.wtPct === undefined)), '旧估算/NAV权重误用为正股权重');
   for (const a of api.DATA.accounts) {
+    const fullAccount = ledger.accounts.find(full => full.id === a.id);
+    for (const h of a.holdings) {
+      const full = fullAccount.holdings.find(item => item.sym === h.sym);
+      const contracts = (full.options || []).filter(g => !g.settled).reduce((n, g) =>
+        n + (g.legs || []).filter(l => l.type === 'C').reduce((n, l) => n + (l.mult || 0), 0), 0);
+      if (contracts && Number.isFinite(full.qty))
+        assert.equal(h.coverage.isFullyBacked, full.qty >= contracts * 100,
+          '备兑担保必须按实股数量，不能排除仍持有的观察股');
+      assert.equal(h.analysisQty, undefined, '交易股数进入公开数据');
+      assert.equal(h.observationQty, undefined, '观察股数进入公开数据');
+    }
     const pct = a.holdings.map(h => h.stockWeightPct);
     if (pct.length && pct.every(p => typeof p === 'number'))
       assert.ok(Math.abs(pct.reduce((s, p) => s + p, 0) - 100) <= pct.length * 0.05 + 1e-9,

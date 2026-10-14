@@ -43,6 +43,24 @@ try {
   fs.mkdirSync(path.join(temp, 'data'));
   for (const f of ['verify.js', 'derive.js', 'presentation.js', 'review_dates.js', 'template.html', 'RULES_日常更新.md']) fs.copyFileSync(path.join(__dirname, f), path.join(temp, f));
   const baseline = JSON.parse(JSON.stringify(ledger));
+  // RAM's confirmed observation share is real collateral, not a fictitious trade.
+  const allocated = JSON.parse(JSON.stringify(ledger));
+  const ram = allocated.accounts.find(a => a.id === 'main').holdings.find(h => h.sym === 'RAM');
+  if (ram.analysisQty !== undefined) {
+    fs.writeFileSync(path.join(temp, 'data/ledger-full.json'), JSON.stringify(allocated));
+    let result = spawnSync(process.execPath, ['verify.js'], { cwd: temp, encoding: 'utf8' });
+    assert.strictEqual(result.status, 0, result.stdout + result.stderr);
+    ram.qty += 1;
+    fs.writeFileSync(path.join(temp, 'data/ledger-full.json'), JSON.stringify(allocated));
+    result = spawnSync(process.execPath, ['verify.js'], { cwd: temp, encoding: 'utf8' });
+    assert.notStrictEqual(result.status, 0, 'Unexplained physical-share difference passed');
+    assert((result.stdout + result.stderr).includes('持仓观察份额分配无效'));
+    ram.observationQty += 1;
+    fs.writeFileSync(path.join(temp, 'data/ledger-full.json'), JSON.stringify(allocated));
+    result = spawnSync(process.execPath, ['verify.js'], { cwd: temp, encoding: 'utf8' });
+    assert.notStrictEqual(result.status, 0, 'Invented observation share passed');
+    assert((result.stdout + result.stderr).includes('持仓实股对账失败'));
+  }
   const baselineHolding = baseline.accounts.find(a => a.id === 'main').holdings.find(h => h.sym === 'CRWG');
   baselineHolding.qty = 101;
   baselineHolding.actualCostBasis = { value: null, status: '待核实' };
