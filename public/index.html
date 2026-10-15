@@ -602,7 +602,7 @@
         <h1>持仓监测与交易复盘</h1>
         <p class="motto-compact">Fundamental Truth is not Alpha.</p>
       </div>
-      <span class="stamp">记录更新至 2026-10-14</span>
+      <span class="stamp">记录更新至 2026-10-15</span>
     </div>
   </div>
 </header>
@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交更新至10/14：RAM减仓只留备兑担保仓、SOXL建仓并保留现金；行情见各持仓快照。",
-  asOfLabel: "成交：10月14日 · RAM减仓 / SOXL建仓；行情：见各持仓日期",
+  asOf: "成交更新至10/15：SOXL持续回补；行情沿用各持仓快照。",
+  asOfLabel: "成交：10月15日 · SOXL回补；行情：见各持仓日期",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1540,8 +1540,8 @@
   mainConcentration: {
     available: true,
     topSym: "SOXL",
-    level: "中",
-    holdingsAsOf: "2026-10-14",
+    level: "高",
+    holdingsAsOf: "2026-10-15",
     priceAsOf: "美东 2026-10-13 收盘 / 2026-10-07 收盘 / 2026-10-08 收盘"
   },
   accounts: [
@@ -1602,7 +1602,7 @@
           },
           weightRank: 3,
           weightLevel: "低",
-          stockWeightPct: 21
+          stockWeightPct: 12.3
         },
         {
           sym: "CRWG",
@@ -1639,7 +1639,7 @@
           },
           weightRank: 4,
           weightLevel: "低",
-          stockWeightPct: 12.6
+          stockWeightPct: 7.4
         },
         {
           sym: "CRDU",
@@ -1675,12 +1675,12 @@
           },
           weightRank: 2,
           weightLevel: "低",
-          stockWeightPct: 23.2
+          stockWeightPct: 13.6
         },
         {
           sym: "SOXL",
           name: "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          cost: 129.67,
+          cost: 119.24198,
           costNote: "实际成本",
           strategy: [
             "半导体杠杆交易",
@@ -1694,8 +1694,8 @@
           setup: [
             "板块杠杆交易"
           ],
-          execStatus: "plan",
-          oneLiner: "按129.67建立SOXL新仓；CPI超0.25%且引发大跌时周三买入一次，PPI继续热时周五买入一次，其余保留现金。",
+          execStatus: "adhoc",
+          oneLiner: "10/14建仓并回补，10/15按105.90继续买入；112.35新增部分计划反弹后退出，原PPI条件预案留痕。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1703,8 +1703,8 @@
             sharesUnknown: false
           },
           weightRank: 1,
-          weightLevel: "中",
-          stockWeightPct: 43.2
+          weightLevel: "高",
+          stockWeightPct: 66.6
         }
       ]
     },
@@ -3535,6 +3535,29 @@
   ],
   reviews: [
     {
+      reviewId: "RV-20261015",
+      date: "2026-10-15",
+      reviewDate: "2026-10-15",
+      reviewTimezone: "Asia/Shanghai",
+      dateLabel: "2026-10-15 复盘",
+      title: "SOXL继续回补",
+      plan: [],
+      execution: [
+        "主号SOXL：按105.90买入，继续降低移动加权均价。"
+      ],
+      good: [],
+      issues: [],
+      todo: [],
+      execStatus: "adhoc",
+      symbols: [
+        "SOXL"
+      ],
+      accounts: [
+        "主账号"
+      ],
+      saleExecutionIds: []
+    },
+    {
       reviewId: "RV-20261014",
       date: "2026-10-14",
       reviewDate: "2026-10-14",
@@ -3546,14 +3569,16 @@
       ],
       execution: [
         "主号RAM：按10.45减仓，保留担保3张10/16到期15C的正股，原周期继续。",
-        "主号SOXL：按129.67建仓，独立新周期；其余保留现金应对CPI可能冲击。"
+        "主号SOXL：按129.67建仓，独立新周期；其余保留现金应对CPI可能冲击。",
+        "主号SOXL：按119.50少量回补，降低移动加权成本，保留部分资金等待PPI数据。",
+        "主号SOXL：按112.35买入，继续降低移动加权均价。本次新增部分计划反弹后退出，未指定退出价。"
       ],
       good: [
         "将RAM非备兑敞口收缩后只将部分回笼资金转入SOXL，保留现金应对事件波动；没有把全部减仓资金即时置换。"
       ],
       issues: [],
       todo: [
-        "本周预案：周三CPI MoM超过0.25%且引发大跌时，周三买入一次；周四PPI继续热时，周五买入一次。以上为条件预案，尚未成交。",
+        "本周原条件预案保留：CPI MoM超过0.25%且引发大跌时周三买入一次；PPI继续热时周五买入一次。本次119.50回补已登记，但未确认是否属于CPI分支；其余资金继续等待PPI。",
         "事件时点：10/14 CPI、10/15 PPI均于20:30发布；Warsh曼谷对谈为10/16 11:30，对应美东周四23:30。"
       ],
       execStatus: "plan",

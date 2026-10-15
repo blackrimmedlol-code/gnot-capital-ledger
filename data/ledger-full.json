@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/14：RAM减仓只留备兑担保仓、SOXL建仓并保留现金；行情见各持仓快照。",
-  "asOfLabel": "成交：10月14日 · RAM减仓 / SOXL建仓；行情：见各持仓日期",
+  "asOf": "成交更新至10/15：SOXL持续回补；行情沿用各持仓快照。",
+  "asOfLabel": "成交：10月15日 · SOXL回补；行情：见各持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -622,9 +622,9 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 50,
-          "cost": 129.67,
-          "costDate": "10/14按129.67建仓",
+          "qty": 131,
+          "cost": 119.24198,
+          "costDate": "10/14建仓及回补，10/15按105.90继续买入",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
           "lastPriceSource": {
@@ -651,25 +651,25 @@
           "entrySetup": [
             "板块杠杆交易"
           ],
-          "execStatus": "plan",
+          "execStatus": "adhoc",
           "entryExecStatus": "plan",
-          "actionExecStatus": "plan",
+          "actionExecStatus": "adhoc",
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
           "alertSub": "留现金等待CPI / PPI条件机会",
-          "oneLiner": "按129.67建立SOXL新仓；CPI超0.25%且引发大跌时周三买入一次，PPI继续热时周五买入一次，其余保留现金。",
+          "oneLiner": "10/14建仓并回补，10/15按105.90继续买入；112.35新增部分计划反弹后退出，原PPI条件预案留痕。",
           "actualCostBasis": {
-            "value": 129.67,
+            "value": 119.24198,
             "status": "确认",
-            "note": "一次性确认建仓，按实际每股成交价记录。",
+            "note": "本周期四笔已确认正股买入移动加权；无卖出，净投入每股成本与实际均价相同。",
             "sourceType": "user_confirmation"
           },
           "netInvestedCost": {
-            "value": 129.67,
+            "value": 119.24198,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
-            "note": "当前仅有一笔正股买入，与实际均价相同。"
+            "note": "本周期四笔已确认正股买入移动加权；无卖出，净投入每股成本与实际均价相同。"
           },
           "costDisplay": "实际成本",
           "activePlan": {
@@ -741,12 +741,34 @@
                 "note": "官方日历明确美东10/15 23:30；与IMF总裁的曼谷对谈。不是另一个自动买入条件。"
               }
             ],
-            "note": "本周CPI/PPI条件买入预案从用户本次确认后生效；当前50股建仓发生在事件发布前，不占用这两个条件次数，未确认每次买入额度或退出位。"
+            "note": "本周CPI/PPI条件买入预案从用户本次确认后生效；当前50股建仓发生在事件发布前，不占用这两个条件次数，未确认每次买入额度或退出位。",
+            "lastExecutionUpdate": {
+              "executionId": "EX-USER-20261015-SOXL-BUY-075",
+              "recordedAt": "2026-10-15T01:41:21.645694+00:00",
+              "note": "新增实际买入已登记；用户未明确确认其对应CPI/PPI分支，不自动扣减原分支次数。"
+            },
+            "tacticalExits": [
+              {
+                "executionId": "EX-USER-20261014-SOXL-BUY-074",
+                "scope": "this_execution_only",
+                "qty": 34,
+                "trigger": "有反弹",
+                "price": null,
+                "isPlacedOrder": false,
+                "note": "仅适用于本笔34股；未确认退出价，不扩大到全部SOXL持仓。",
+                "source": {
+                  "type": "user_confirmation",
+                  "reportedAt": "2026-10-15T00:18:34+08:00",
+                  "evidence": "再买入34股soxl112.35，拉平均价，这部分有反弹就会出"
+                },
+                "recordedAt": "2026-10-15T01:41:21.645694+00:00"
+              }
+            ]
           }
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-14"
+      "holdingsAsOf": "2026-10-15"
     },
     {
       "id": "sat1",
@@ -4152,6 +4174,117 @@
       "price": 129.67,
       "purpose": "按已确认方向换入SOXL并保留现金",
       "note": "按129.67建立主号SOXL新周期；剩余回笼资金保留现金应对CPI冲击，未报告现金余额，不反推账户仓位。"
+    },
+    {
+      "account": "main",
+      "date": "2026-10-14",
+      "chinaDate": "2026-10-14",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-14T22:38:25+08:00",
+        "evidence": "主账号1014，买入25股soxl119.5，小仓位拉平下，再留一部分等ppi数据"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "reportedAt": "2026-10-14T22:38:25+08:00",
+        "evidence": "用户明确1014主账号操作；精确成交时刻未提供。"
+      },
+      "recordedAt": "2026-10-14T14:39:58.041980+00:00",
+      "actionExecStatus": "adhoc",
+      "executionId": "EX-USER-20261014-SOXL-BUY-073",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 25,
+      "price": 119.5,
+      "purpose": "少量回补，保留资金等待PPI",
+      "note": "用户确认少量回补；未明确本笔属于CPI条件分支，不自动扣减其次数。"
+    },
+    {
+      "account": "main",
+      "date": "2026-10-14",
+      "chinaDate": "2026-10-14",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-15T09:40:41+08:00",
+        "evidence": "上2笔是在1014；1015主账号买入22股soxl105..9。都可以推到公开仓库",
+        "originalReport": {
+          "type": "user_confirmation",
+          "reportedAt": "2026-10-15T00:18:34+08:00",
+          "evidence": "再买入34股soxl112.35，拉平均价，这部分有反弹就会出"
+        }
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "reportedAt": "2026-10-15T09:40:41+08:00",
+        "evidence": "用户明确确认前两笔25股及34股归属10/14，新增22股归属10/15；精确成交时刻未提供。"
+      },
+      "recordedAt": "2026-10-15T01:41:21.645694+00:00",
+      "actionExecStatus": "adhoc",
+      "executionId": "EX-USER-20261014-SOXL-BUY-074",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 34,
+      "price": 112.35,
+      "purpose": "少量回补拉低均价，本笔反弹后退出",
+      "note": "少量回补拉低均价，本笔反弹后退出",
+      "exitPlan": {
+        "scope": "this_execution_only",
+        "qty": 34,
+        "trigger": "有反弹",
+        "price": null,
+        "isPlacedOrder": false,
+        "note": "仅适用于本笔34股；未确认退出价，不扩大到全部SOXL持仓。"
+      }
+    },
+    {
+      "account": "main",
+      "date": "2026-10-15",
+      "chinaDate": "2026-10-15",
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-15T09:40:41+08:00",
+        "evidence": "上2笔是在1014；1015主账号买入22股soxl105..9。都可以推到公开仓库"
+      },
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "reportedAt": "2026-10-15T09:40:41+08:00",
+        "evidence": "用户明确确认前两笔25股及34股归属10/14，新增22股归属10/15；精确成交时刻未提供。"
+      },
+      "recordedAt": "2026-10-15T01:41:21.645694+00:00",
+      "actionExecStatus": "adhoc",
+      "executionId": "EX-USER-20261015-SOXL-BUY-075",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 22,
+      "price": 105.9,
+      "purpose": "继续买入SOXL",
+      "note": "继续买入SOXL",
+      "priceNormalization": {
+        "raw": "105..9",
+        "normalized": 105.9,
+        "reason": "重复小数点按105.90录入，原文留存。"
+      }
     }
   ],
   "episodes": [
@@ -4601,7 +4734,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 50,
+      "currentQty": 131,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -5474,6 +5607,29 @@
   ],
   "reviews": [
     {
+      "reviewId": "RV-20261015",
+      "date": "2026-10-15",
+      "reviewDate": "2026-10-15",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-15 复盘",
+      "title": "SOXL继续回补",
+      "executionIds": [
+        "EX-USER-20261015-SOXL-BUY-075"
+      ],
+      "plan": [],
+      "execution": [
+        "主号SOXL：按105.90买入，继续降低移动加权均价。"
+      ],
+      "good": [],
+      "issues": [],
+      "todo": [],
+      "execStatus": "adhoc",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-15T01:41:21.645694+00:00",
+      "reviewDateBasis": "用户明确确认10/15主账号成交，时刻未提供。",
+      "updatedAt": "2026-10-15T01:41:21.645694+00:00"
+    },
+    {
       "reviewId": "RV-20261005",
       "date": "2026-10-05",
       "dateLabel": "2026-10-05 复盘",
@@ -5987,27 +6143,31 @@
       "title": "RAM减至备兑仓 · 换入SOXL并留现金",
       "executionIds": [
         "EX-USER-20261014-RAM-SELL-071",
-        "EX-USER-20261014-SOXL-BUY-072"
+        "EX-USER-20261014-SOXL-BUY-072",
+        "EX-USER-20261014-SOXL-BUY-073",
+        "EX-USER-20261014-SOXL-BUY-074"
       ],
       "plan": [
         "此前已明确RAM转SOXL的方向；本次确认执行换仓，减RAM后仅保留现有15C担保仓，剩余资金保留现金应对CPI。具体成交价和数量首次在本次报告中确认。"
       ],
       "execution": [
         "主号RAM：按10.45减仓，保留担保3张10/16到期15C的正股，原周期继续。",
-        "主号SOXL：按129.67建仓，独立新周期；其余保留现金应对CPI可能冲击。"
+        "主号SOXL：按129.67建仓，独立新周期；其余保留现金应对CPI可能冲击。",
+        "主号SOXL：按119.50少量回补，降低移动加权成本，保留部分资金等待PPI数据。",
+        "主号SOXL：按112.35买入，继续降低移动加权均价。本次新增部分计划反弹后退出，未指定退出价。"
       ],
       "good": [
         "将RAM非备兑敞口收缩后只将部分回笼资金转入SOXL，保留现金应对事件波动；没有把全部减仓资金即时置换。"
       ],
       "issues": [],
       "todo": [
-        "本周预案：周三CPI MoM超过0.25%且引发大跌时，周三买入一次；周四PPI继续热时，周五买入一次。以上为条件预案，尚未成交。",
+        "本周原条件预案保留：CPI MoM超过0.25%且引发大跌时周三买入一次；PPI继续热时周五买入一次。本次119.50回补已登记，但未确认是否属于CPI分支；其余资金继续等待PPI。",
         "事件时点：10/14 CPI、10/15 PPI均于20:30发布；Warsh曼谷对谈为10/16 11:30，对应美东周四23:30。"
       ],
       "execStatus": "plan",
       "reviewStatus": "in_progress",
       "recordedAt": "2026-10-14T03:20:33.663Z",
-      "updatedAt": "2026-10-14T03:20:33.663Z",
+      "updatedAt": "2026-10-15T01:41:21.645694+00:00",
       "reviewDateBasis": "用户明确标记1014操作，采用实际成交归属10/14；未提供精确成交时刻。",
       "planAmendments": [
         {
@@ -6071,13 +6231,28 @@
             "EX-USER-20261014-SOXL-BUY-072"
           ],
           "planId": "PLAN-SOXL-20261014-CPI-PPI"
+        },
+        {
+          "amendmentId": "PA-SOXL-20261014-TACTICAL-EXIT",
+          "recordedAt": "2026-10-15T01:41:21.645694+00:00",
+          "effectiveFrom": "2026-10-15T00:18:34+08:00",
+          "source": {
+            "type": "user_confirmation",
+            "reportedAt": "2026-10-15T00:18:34+08:00",
+            "evidence": "再买入34股soxl112.35，拉平均价，这部分有反弹就会出"
+          },
+          "executionIds": [
+            "EX-USER-20261014-SOXL-BUY-074"
+          ],
+          "text": "本笔新增部分反弹后退出；仅适用于此次回补，不将计划扩大到全部持仓，不设定未确认的目标价。"
         }
       ],
       "internalObservation": [
         "RAM实股300/交易仓299/观察1来自既有期初与完整流水，不虚构缺失买入；备兑用实股，绩效和集中度仍排除观察份额。",
         "历史对话提供换仓方向的事前证据，不能视作已确认具体1050/50股额度或10.45/129.67挂单；plan仅依据方向与本人本次确认。",
         "CPI整体/核心、PPI具体热度阈值及两次买入额度未提供，内部保留null，不擅自指定；无需新增定时任务。",
-        "未提供现金余额/NAV，不根据减仓回笼金额生成完整账户现金或仓位百分比。"
+        "未提供现金余额/NAV，不根据减仓回笼金额生成完整账户现金或仓位百分比。",
+        "本次加仓按临时判断adhoc记录；用户未明确确认CPI条件触发，保留原分支次数，不追溯包装为plan。"
       ]
     }
   ],
