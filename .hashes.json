@@ -1,5 +1,5 @@
 {
-  "ledger": "56948824fd2afb1e",
+  "ledger": "ceb803f32b329eac",
   "template": "dfa0d2bd52559de3",
   "rules": "5ed666e1767d9313",
   "build_public": "6c84ec5a8f6552d0",
@@ -8,5 +8,5 @@
   "review_dates": "5e3bdd913b029de9",
   "render_test": "0803692e3b6c89ac",
   "agents": "8b06ec3e0a9a44bb",
-  "generatedAt": "2026-10-15T01:41:21.967Z"
+  "generatedAt": "2026-10-15T16:18:54.386Z"
 }

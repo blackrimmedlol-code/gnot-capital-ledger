@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交更新至10/15：SOXL持续回补；行情沿用各持仓快照。",
-  asOfLabel: "成交：10月15日 · SOXL回补；行情：见各持仓日期",
+  asOf: "成交更新至10/15：SOXL继续回补、1号RKLX清仓转GDXU、主号CRDU解除备兑；行情见各持仓快照。",
+  asOfLabel: "成交：10月15日 · SOXL回补 / 1号换仓 / CRDU解除备兑；行情：见各持仓日期",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1648,29 +1648,20 @@
           costNote: "实际成本",
           strategy: [
             "核心仓",
-            "CC收租"
+            "正股持有"
           ],
-          options: [
-            {
-              exp: "2026-10-16",
-              legs: [
-                {
-                  mult: 3,
-                  strike: 7,
-                  type: "C"
-                }
-              ]
-            }
-          ],
+          options: [],
           tags: [
             "hold"
           ],
+          alertSub: "已解除备兑，继续持有正股",
           setup: [],
           execStatus: "unknown",
+          oneLiner: "10/15按0.35买回全部3张10/16到期7C，解除备兑限制；用户长期仍看好上涨，继续持有正股。",
           coverage: {
-            status: "covered",
-            statusText: "足额备兑",
-            isFullyBacked: true,
+            status: "none",
+            statusText: "无备兑",
+            isFullyBacked: false,
             sharesUnknown: false
           },
           weightRank: 2,
@@ -1719,32 +1710,28 @@
       navNote: "USD · 满仓",
       holdings: [
         {
-          sym: "RKLX",
-          name: "Defiance 2X RKLB · 2x 火箭实验室",
-          cost: 17.6,
+          sym: "GDXU",
+          name: "GDXU",
+          cost: 90.09,
           costNote: "实际成本",
           strategy: [
-            "卫星仓·2x RKLB 杠杆博弈"
+            "长期持仓"
           ],
           options: [],
           tags: [
             "hold"
           ],
-          alertSub: "2x 每日重置 · 高波动标的",
-          setup: [
-            "支撑位反弹"
-          ],
+          alertSub: "用户定位：长期持有",
+          setup: [],
           execStatus: "adhoc",
-          oneLiner: "10/7@17.6支撑位抄底建仓（1号小账号新开，2x RKLB 杠杆快进快出博弈）；观察反弹成色。",
+          oneLiner: "10/15按90.09建仓，用户确认作为长期持仓。",
           coverage: {
             status: "none",
             statusText: "无备兑",
             isFullyBacked: false,
             sharesUnknown: false
           },
-          weightRank: 1,
-          weightLevel: "高",
-          stockWeightPct: 100
+          stockWeightPct: null
         }
       ]
     },
@@ -1876,6 +1863,52 @@
     }
   ],
   closedTrades: [
+    {
+      date: "2026-10-15",
+      dateStart: "2026-10-15",
+      dateEnd: "2026-10-15",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-15",
+      trades: [
+        {
+          tradeId: "EP-RKLX1-2026Q4:2026-10-15",
+          episodeId: "EP-RKLX1-2026Q4",
+          sym: "RKLX",
+          name: "Defiance 2X RKLB · 2x 火箭实验室",
+          acct: "1号小账号",
+          cost: 17.6,
+          soldDate: "2026-10-15",
+          dateStart: "2026-10-15",
+          dateEnd: "2026-10-15",
+          isPartial: false,
+          closesEpisode: true,
+          totalRetPct: -43.75,
+          result: "loss",
+          cycleRetPct: -43.75,
+          cycleResult: "loss",
+          performanceEligible: true,
+          reason: "用户报告中子号延期负面，不再等待，按9.90全部清仓。",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261015-RKLX-SELL-076",
+              date: "2026-10-15",
+              dateEnd: "2026-10-15",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 9.9,
+              cost: 17.6,
+              costBasisType: "actual",
+              retPct: -43.75,
+              note: "按9.90全部清仓；用户报告中子号延期负面，因此不再等待。"
+            }
+          ]
+        }
+      ]
+    },
     {
       date: "2026-10-14",
       dateStart: "2026-10-14",
@@ -3540,22 +3573,30 @@
       reviewDate: "2026-10-15",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-15 复盘",
-      title: "SOXL继续回补",
+      title: "SOXL继续回补 · 1号换仓GDXU · CRDU解除备兑",
       plan: [],
       execution: [
-        "主号SOXL：按105.90买入，继续降低移动加权均价。"
+        "主号SOXL：按105.90买入，继续降低移动加权均价。",
+        "1号账户RKLX：按9.90全部清仓；用户报告中子号延期负面，决定不再等待。",
+        "1号账户GDXU：按90.09建立独立新周期，用户定位为长期持仓。",
+        "主号CRDU：按0.35买回全部3张10/16到期7C，解除备兑限制，继续持有正股；正股数量和实际成本不变。"
       ],
       good: [],
       issues: [],
       todo: [],
       execStatus: "adhoc",
       symbols: [
-        "SOXL"
+        "SOXL",
+        "RKLX",
+        "GDXU"
       ],
       accounts: [
-        "主账号"
+        "主账号",
+        "1号小账号"
       ],
-      saleExecutionIds: []
+      saleExecutionIds: [
+        "EX-USER-20261015-RKLX-SELL-076"
+      ]
     },
     {
       reviewId: "RV-20261014",

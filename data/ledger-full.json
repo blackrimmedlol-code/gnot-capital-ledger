@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/15：SOXL持续回补；行情沿用各持仓快照。",
-  "asOfLabel": "成交：10月15日 · SOXL回补；行情：见各持仓日期",
+  "asOf": "成交更新至10/15：SOXL继续回补、1号RKLX清仓转GDXU、主号CRDU解除备兑；行情见各持仓快照。",
+  "asOfLabel": "成交：10月15日 · SOXL回补 / 1号换仓 / CRDU解除备兑；行情：见各持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -480,28 +480,16 @@
           "wtPct": 12,
           "strategy": [
             "核心仓",
-            "CC收租"
+            "正股持有"
           ],
-          "options": [
-            {
-              "exp": "2026-10-16",
-              "legs": [
-                {
-                  "mult": 3,
-                  "strike": 7,
-                  "type": "C",
-                  "note": "备兑持有；期权盈亏不纳入本轮复盘"
-                }
-              ]
-            }
-          ],
+          "options": [],
           "tags": [
             "hold"
           ],
           "status": [
             "持有"
           ],
-          "strategyNote": "10/16 7C 深度实值，正股+权利金接受 @7 行权落袋；若趋势观点延续，可评估买回部分 call 解锁上行（O5）。",
+          "strategyNote": "原接受7C指派的安排已被用户确认的全部买回操作取代；当前无开放卖call，正股不再封顶。",
           "actualCostBasis": {
             "value": 6.71493,
             "status": "确认",
@@ -515,7 +503,7 @@
           "costDisplay": "实际成本",
           "entrySetup": [],
           "entryExecStatus": "unknown",
-          "actionExecStatus": null,
+          "actionExecStatus": "adhoc",
           "exitReason": null,
           "episodeId": "EP-CRDU-2026Q3",
           "compositeNetInvested": {
@@ -523,7 +511,36 @@
             "status": "本轮不核算",
             "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
-          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）"
+          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
+          "alertSub": "已解除备兑，继续持有正股",
+          "oneLiner": "10/15按0.35买回全部3张10/16到期7C，解除备兑限制；用户长期仍看好上涨，继续持有正股。",
+          "activePlan": {
+            "planId": "PLAN-CRDU-20261015-UNCAPPED-HOLD",
+            "status": "active",
+            "createdAt": "2026-10-16T00:14:42+08:00",
+            "effectiveFrom": "2026-10-16T00:14:42+08:00",
+            "recordedAt": "2026-10-15T16:18:54.193Z",
+            "source": {
+              "type": "user_confirmation",
+              "reportedAt": "2026-10-16T00:14:42+08:00",
+              "evidence": "主账号crdu的covered call全部买回，单张0.35，买回来3张，等于现在把它转换成正常持仓了，长期还是看好它上涨",
+              "dateConfirmation": {
+                "type": "explicit_user_confirmation",
+                "confirmedAt": "2026-10-16T00:17:05+08:00",
+                "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+              }
+            },
+            "scope": {
+              "account": "main",
+              "sym": "CRDU",
+              "episodeId": "EP-CRDU-2026Q3"
+            },
+            "holdingRole": "继续持有正股，长期看好上涨",
+            "relatedOptionExecutionIds": [
+              "OX-USER-20261015-CRDU-BTC-7C-004"
+            ],
+            "note": "替代原接受7C指派的安排；未确认具体持有期限、目标价、加仓或再次备兑计划，不自行添加。"
+          }
         },
         {
           "sym": "IRE",
@@ -828,7 +845,7 @@
         {
           "sym": "RKLX",
           "name": "Defiance 2X RKLB · 2x 火箭实验室",
-          "qty": 131,
+          "qty": 0,
           "cost": 17.6,
           "costDate": "10/7 支撑位抄底建仓（1号小账号新开）",
           "lastPrice": 18.01,
@@ -838,27 +855,25 @@
             "卫星仓·2x RKLB 杠杆博弈"
           ],
           "options": [],
-          "tags": [
-            "hold"
-          ],
+          "tags": [],
           "status": [
-            "持有"
+            "已清仓"
           ],
-          "alertSub": "2x 每日重置 · 高波动标的",
+          "alertSub": "已清仓",
           "setup": [
             "支撑位反弹"
           ],
           "execStatus": "adhoc",
-          "oneLiner": "10/7@17.6支撑位抄底建仓（1号小账号新开，2x RKLB 杠杆快进快出博弈）；观察反弹成色。",
+          "oneLiner": "10/15按9.90全部清仓，用户报告中子号延期负面，不再等待。",
           "actualCostBasis": {
             "value": 17.6,
             "note": "10/7@17.6新建仓，初始成本=买入价",
             "status": "确认"
           },
           "netInvestedCost": {
-            "value": 17.6,
-            "note": "10/7@17.6新开正股净投入",
-            "status": "确认"
+            "value": null,
+            "status": "已清仓，不适用",
+            "note": "剩余数量为零，不生成每股净投入成本；实际成本及已实现结果由原流水派生。"
           },
           "costDisplay": "实际成本",
           "entrySetup": [
@@ -866,10 +881,80 @@
           ],
           "entryExecStatus": "adhoc",
           "actionExecStatus": "adhoc",
-          "exitReason": null,
+          "exitReason": "用户报告中子号延期负面，不再等待，按9.90全部清仓。",
           "episodeId": "EP-RKLX1-2026Q4"
+        },
+        {
+          "sym": "GDXU",
+          "name": "GDXU",
+          "qty": 14,
+          "cost": 90.09,
+          "costDate": "10/15按90.09建仓",
+          "lastPrice": null,
+          "lastPriceDate": null,
+          "strategy": [
+            "长期持仓"
+          ],
+          "options": [],
+          "tags": [
+            "hold"
+          ],
+          "status": [
+            "持有"
+          ],
+          "setup": [],
+          "entrySetup": [],
+          "execStatus": "adhoc",
+          "entryExecStatus": "adhoc",
+          "actionExecStatus": "adhoc",
+          "episodeId": "EP-GDXU-SAT1-20261015",
+          "exitReason": null,
+          "alertSub": "用户定位：长期持有",
+          "oneLiner": "10/15按90.09建仓，用户确认作为长期持仓。",
+          "actualCostBasis": {
+            "value": 90.09,
+            "status": "确认",
+            "sourceType": "user_confirmation",
+            "note": "本周期首次买入的实际每股成交价。"
+          },
+          "netInvestedCost": {
+            "value": 90.09,
+            "status": "确认",
+            "scope": "episode",
+            "episodeId": "EP-GDXU-SAT1-20261015",
+            "note": "当前仅本笔正股买入，每股净投入与实际均价一致；与此前主账号GDXU周期分开。"
+          },
+          "costDisplay": "实际成本",
+          "activePlan": {
+            "planId": "PLAN-GDXU-SAT1-20261015-LONG",
+            "status": "active",
+            "createdAt": "2026-10-15T16:05:46+08:00",
+            "effectiveFrom": "2026-10-15T16:05:46+08:00",
+            "recordedAt": "2026-10-15T16:18:54.193Z",
+            "source": {
+              "type": "user_confirmation",
+              "reportedAt": "2026-10-15T16:05:46+08:00",
+              "evidence": "1号小账号9.9卖出所有RKLX，中子号延期负面不再等待；90.09买入14股gdxu，作为长期持仓",
+              "dateConfirmation": {
+                "type": "explicit_user_confirmation",
+                "confirmedAt": "2026-10-16T00:17:05+08:00",
+                "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+              }
+            },
+            "scope": {
+              "account": "sat1",
+              "sym": "GDXU",
+              "episodeId": "EP-GDXU-SAT1-20261015"
+            },
+            "holdingRole": "长期持仓",
+            "horizonEnd": null,
+            "targetPrice": null,
+            "stopPrice": null,
+            "note": "长期持有为用户本次确认的定位；未提供具体期限、增减仓额度或退出价格，不自行增加约束，也不追溯包装为事前计划。"
+          }
         }
-      ]
+      ],
+      "holdingsAsOf": "2026-10-15"
     },
     {
       "id": "sat2",
@@ -4285,6 +4370,82 @@
         "normalized": 105.9,
         "reason": "重复小数点按105.90录入，原文留存。"
       }
+    },
+    {
+      "account": "sat1",
+      "date": "2026-10-15",
+      "chinaDate": "2026-10-15",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-16T00:17:05+08:00",
+        "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "currency": "USD",
+      "fee": null,
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-15T16:05:46+08:00",
+        "evidence": "1号小账号9.9卖出所有RKLX，中子号延期负面不再等待；90.09买入14股gdxu，作为长期持仓",
+        "dateConfirmation": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-16T00:17:05+08:00",
+          "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+        }
+      },
+      "recordedAt": "2026-10-15T16:18:54.193Z",
+      "actionExecStatus": "adhoc",
+      "executionId": "EX-USER-20261015-RKLX-SELL-076",
+      "episodeId": "EP-RKLX1-2026Q4",
+      "sym": "RKLX",
+      "side": "sell",
+      "qty": 131,
+      "price": 9.9,
+      "purpose": "结束原持仓周期",
+      "note": "按9.90全部清仓；用户报告中子号延期负面，因此不再等待。",
+      "quantitySource": {
+        "type": "user_confirmed_full_close_and_existing_position",
+        "evidence": "用户明确全部卖出；当前持仓及原周期均为131股，对应已登记买入，无缺失数量推断。"
+      }
+    },
+    {
+      "account": "sat1",
+      "date": "2026-10-15",
+      "chinaDate": "2026-10-15",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-16T00:17:05+08:00",
+        "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "currency": "USD",
+      "fee": null,
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-15T16:05:46+08:00",
+        "evidence": "1号小账号9.9卖出所有RKLX，中子号延期负面不再等待；90.09买入14股gdxu，作为长期持仓",
+        "dateConfirmation": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-16T00:17:05+08:00",
+          "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+        }
+      },
+      "recordedAt": "2026-10-15T16:18:54.193Z",
+      "actionExecStatus": "adhoc",
+      "executionId": "EX-USER-20261015-GDXU-BUY-077",
+      "episodeId": "EP-GDXU-SAT1-20261015",
+      "sym": "GDXU",
+      "side": "buy",
+      "qty": 14,
+      "price": 90.09,
+      "purpose": "建立用户确认的长期持有仓",
+      "note": "按90.09建立1号账户GDXU独立新周期；用户定位为长期持仓，不套用账户旧快进快出角色。"
     }
   ],
   "episodes": [
@@ -4706,9 +4867,11 @@
       "sym": "RKLX",
       "account": "sat1",
       "name": "1号RKLX支撑位建仓",
-      "status": "open",
-      "currentQty": 131,
-      "openedDate": "2026-10-07"
+      "status": "closed",
+      "currentQty": 0,
+      "openedDate": "2026-10-07",
+      "exitDate": "2026-10-15",
+      "exitReason": "用户报告中子号延期负面，不再等待，按9.90全部清仓。"
     },
     {
       "episodeId": "EP-LABU-MAIN-20261008",
@@ -4738,6 +4901,20 @@
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
+    },
+    {
+      "episodeId": "EP-GDXU-SAT1-20261015",
+      "sym": "GDXU",
+      "account": "sat1",
+      "status": "open",
+      "entryDate": "2026-10-15",
+      "entrySetup": [],
+      "entryExecStatus": "adhoc",
+      "currentQty": 14,
+      "exitDate": null,
+      "exitReason": null,
+      "holdingRole": "长期持仓",
+      "note": "用户本次确认长期定位，不因小账号默认套用短线退出方式。"
     }
   ],
   "closedTrades": [
@@ -5612,13 +5789,18 @@
       "reviewDate": "2026-10-15",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-15 复盘",
-      "title": "SOXL继续回补",
+      "title": "SOXL继续回补 · 1号换仓GDXU · CRDU解除备兑",
       "executionIds": [
-        "EX-USER-20261015-SOXL-BUY-075"
+        "EX-USER-20261015-SOXL-BUY-075",
+        "EX-USER-20261015-RKLX-SELL-076",
+        "EX-USER-20261015-GDXU-BUY-077"
       ],
       "plan": [],
       "execution": [
-        "主号SOXL：按105.90买入，继续降低移动加权均价。"
+        "主号SOXL：按105.90买入，继续降低移动加权均价。",
+        "1号账户RKLX：按9.90全部清仓；用户报告中子号延期负面，决定不再等待。",
+        "1号账户GDXU：按90.09建立独立新周期，用户定位为长期持仓。",
+        "主号CRDU：按0.35买回全部3张10/16到期7C，解除备兑限制，继续持有正股；正股数量和实际成本不变。"
       ],
       "good": [],
       "issues": [],
@@ -5627,7 +5809,62 @@
       "reviewStatus": "in_progress",
       "recordedAt": "2026-10-15T01:41:21.645694+00:00",
       "reviewDateBasis": "用户明确确认10/15主账号成交，时刻未提供。",
-      "updatedAt": "2026-10-15T01:41:21.645694+00:00"
+      "updatedAt": "2026-10-15T16:18:54.193Z",
+      "optionExecutionIds": [
+        "OX-USER-20261015-CRDU-BTC-7C-004"
+      ],
+      "planAmendments": [
+        {
+          "amendmentId": "PA-GDXU-SAT1-20261015-LONG",
+          "recordedAt": "2026-10-15T16:18:54.193Z",
+          "effectiveFrom": "2026-10-15T16:05:46+08:00",
+          "source": {
+            "type": "user_confirmation",
+            "reportedAt": "2026-10-15T16:05:46+08:00",
+            "evidence": "1号小账号9.9卖出所有RKLX，中子号延期负面不再等待；90.09买入14股gdxu，作为长期持仓",
+            "dateConfirmation": {
+              "type": "explicit_user_confirmation",
+              "confirmedAt": "2026-10-16T00:17:05+08:00",
+              "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+            }
+          },
+          "planId": "PLAN-GDXU-SAT1-20261015-LONG",
+          "executionIds": [
+            "EX-USER-20261015-GDXU-BUY-077"
+          ],
+          "text": "本次确认GDXU长期持有定位；不套用1号账户历史快进快出角色，不追溯写成事前依据。"
+        },
+        {
+          "amendmentId": "PA-CRDU-20261015-UNCAPPED-HOLD",
+          "recordedAt": "2026-10-15T16:18:54.193Z",
+          "effectiveFrom": "2026-10-16T00:14:42+08:00",
+          "source": {
+            "type": "user_confirmation",
+            "reportedAt": "2026-10-16T00:14:42+08:00",
+            "evidence": "主账号crdu的covered call全部买回，单张0.35，买回来3张，等于现在把它转换成正常持仓了，长期还是看好它上涨",
+            "dateConfirmation": {
+              "type": "explicit_user_confirmation",
+              "confirmedAt": "2026-10-16T00:17:05+08:00",
+              "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+            }
+          },
+          "planId": "PLAN-CRDU-20261015-UNCAPPED-HOLD",
+          "priorPlan": {
+            "strategyNote": "10/16 7C 深度实值，正股+权利金接受 @7 行权落袋；若趋势观点延续，可评估买回部分 call 解锁上行（O5）。",
+            "activePlan": null
+          },
+          "optionExecutionIds": [
+            "OX-USER-20261015-CRDU-BTC-7C-004"
+          ],
+          "text": "用户已买回全部CRDU卖call，取代原接受7C指派安排，继续持有正股且长期看好上涨。"
+        }
+      ],
+      "internalObservation": [
+        "中子号延期为用户提供的退出背景，本轮登记不将其表述为已独立核实的新闻事实。",
+        "本批精确成交时刻未提供，保留null；用户已明确确认两批均归属10/15，不以10/16录入时点顺延。",
+        "GDXU未取得独立行情快照，lastPrice及lastPriceDate保留null，不用90.09成交价冒充收盘价。",
+        "CRDU期权买回不改变正股成本或正股收益，不追补历史权利金或推算组合盈亏；原接受指派安排保留历史快照。"
+      ]
     },
     {
       "reviewId": "RV-20261005",
@@ -8000,6 +8237,121 @@
         }
       },
       "executionId": "EX-USER-20261014-RAM-SELL-071"
+    },
+    {
+      "account": "sat1",
+      "sym": "RKLX",
+      "date": "2026-10-15",
+      "recordedAt": "2026-10-15T16:18:54.193Z",
+      "executionId": "EX-USER-20261015-RKLX-SELL-076",
+      "reason": "用户确认按9.90全部卖出，关闭原周期并保留原持仓快照。",
+      "before": {
+        "sym": "RKLX",
+        "name": "Defiance 2X RKLB · 2x 火箭实验室",
+        "qty": 131,
+        "cost": 17.6,
+        "costDate": "10/7 支撑位抄底建仓（1号小账号新开）",
+        "lastPrice": 18.01,
+        "lastPriceDate": "2026-10-07 收盘",
+        "wtPct": 100,
+        "strategy": [
+          "卫星仓·2x RKLB 杠杆博弈"
+        ],
+        "options": [],
+        "tags": [
+          "hold"
+        ],
+        "status": [
+          "持有"
+        ],
+        "alertSub": "2x 每日重置 · 高波动标的",
+        "setup": [
+          "支撑位反弹"
+        ],
+        "execStatus": "adhoc",
+        "oneLiner": "10/7@17.6支撑位抄底建仓（1号小账号新开，2x RKLB 杠杆快进快出博弈）；观察反弹成色。",
+        "actualCostBasis": {
+          "value": 17.6,
+          "note": "10/7@17.6新建仓，初始成本=买入价",
+          "status": "确认"
+        },
+        "netInvestedCost": {
+          "value": 17.6,
+          "note": "10/7@17.6新开正股净投入",
+          "status": "确认"
+        },
+        "costDisplay": "实际成本",
+        "entrySetup": [
+          "支撑位反弹"
+        ],
+        "entryExecStatus": "adhoc",
+        "actionExecStatus": "adhoc",
+        "exitReason": null,
+        "episodeId": "EP-RKLX1-2026Q4"
+      }
+    },
+    {
+      "account": "main",
+      "sym": "CRDU",
+      "date": "2026-10-15",
+      "recordedAt": "2026-10-15T16:18:54.193Z",
+      "optionExecutionId": "OX-USER-20261015-CRDU-BTC-7C-004",
+      "reason": "用户买回全部开放卖call，解除备兑并继续持有正股；保留旧指派安排和合约快照。",
+      "before": {
+        "sym": "CRDU",
+        "name": "2x Credo (Tradr)",
+        "qty": 300,
+        "cost": 6.71493,
+        "lastPrice": 11.4,
+        "lastPriceDate": "2026-10-07 收盘",
+        "wtPct": 12,
+        "strategy": [
+          "核心仓",
+          "CC收租"
+        ],
+        "options": [
+          {
+            "exp": "2026-10-16",
+            "legs": [
+              {
+                "mult": 3,
+                "strike": 7,
+                "type": "C",
+                "note": "备兑持有；期权盈亏不纳入本轮复盘"
+              }
+            ]
+          }
+        ],
+        "tags": [
+          "hold"
+        ],
+        "status": [
+          "持有"
+        ],
+        "strategyNote": "10/16 7C 深度实值，正股+权利金接受 @7 行权落袋；若趋势观点延续，可评估买回部分 call 解锁上行（O5）。",
+        "actualCostBasis": {
+          "value": 6.71493,
+          "status": "确认",
+          "note": "结单正股移动加权均价，排除用户确认的观察份额，未计费用"
+        },
+        "netInvestedCost": {
+          "value": 6.506,
+          "status": "确认",
+          "note": "交易仓正股净投入摊薄，排除观察份额，未计费用、未含期权"
+        },
+        "costDisplay": "实际成本",
+        "entrySetup": [],
+        "entryExecStatus": "unknown",
+        "actionExecStatus": null,
+        "exitReason": null,
+        "episodeId": "EP-CRDU-2026Q3",
+        "compositeNetInvested": {
+          "value": null,
+          "status": "本轮不核算",
+          "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
+        },
+        "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）"
+      }
     }
   ],
   "stockConcentration": {
@@ -9346,6 +9698,71 @@
         "evidence": "用户提供1016 14C，与现有两张2026-10-16到期14C一致；全部买回。"
       },
       "recordedAt": "2026-10-13T19:33:40.640Z"
+    },
+    {
+      "executionId": "OX-USER-20261015-CRDU-BTC-7C-004",
+      "account": "main",
+      "sym": "CRDU",
+      "instrumentType": "option",
+      "action": "buy_to_close",
+      "side": "buy",
+      "positionEffect": "close",
+      "contracts": 3,
+      "contractMultiplier": 100,
+      "strike": 7,
+      "optionType": "C",
+      "exp": "2026-10-16",
+      "price": 0.35,
+      "priceUnit": "USD per underlying share",
+      "currency": "USD",
+      "date": "2026-10-15",
+      "chinaDate": "2026-10-15",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-16T00:17:05+08:00",
+        "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "status": "confirmed",
+      "actionExecStatus": "adhoc",
+      "includeInStockPerformance": false,
+      "stockEpisodeId": "EP-CRDU-2026Q3",
+      "fee": null,
+      "closedLegs": [
+        {
+          "mult": 3,
+          "strike": 7,
+          "type": "C",
+          "note": "备兑持有；期权盈亏不纳入本轮复盘"
+        }
+      ],
+      "source": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-16T00:14:42+08:00",
+        "evidence": "主账号crdu的covered call全部买回，单张0.35，买回来3张，等于现在把它转换成正常持仓了，长期还是看好它上涨",
+        "dateConfirmation": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-16T00:17:05+08:00",
+          "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+        }
+      },
+      "priceSource": {
+        "type": "user_confirmation",
+        "reportedAt": "2026-10-16T00:14:42+08:00",
+        "evidence": "主账号crdu的covered call全部买回，单张0.35，买回来3张，等于现在把它转换成正常持仓了，长期还是看好它上涨",
+        "dateConfirmation": {
+          "type": "explicit_user_confirmation",
+          "confirmedAt": "2026-10-16T00:17:05+08:00",
+          "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+        }
+      },
+      "expirySource": {
+        "type": "matched_all_existing_open_contracts",
+        "evidence": "用户确认买回全部3张CRDU卖call；仓库唯一开放组为2026-10-16到期的3张7C，与全部买回数量一致。"
+      },
+      "recordedAt": "2026-10-15T16:18:54.193Z"
     }
   ]
 }
