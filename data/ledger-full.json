@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/15：SOXL继续回补、1号RKLX清仓转GDXU、主号CRDU解除备兑；行情见各持仓快照。",
-  "asOfLabel": "成交：10月15日 · SOXL回补 / 1号换仓 / CRDU解除备兑；行情：见各持仓日期",
+  "asOf": "成交更新至10/16：1号GDXU清仓并新开INTW；各账户行情保留原快照。",
+  "asOfLabel": "成交：10月16日 · 1号GDXU清仓 / INTW建仓；行情：见各持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -887,7 +887,7 @@
         {
           "sym": "GDXU",
           "name": "GDXU",
-          "qty": 14,
+          "qty": 0,
           "cost": 90.09,
           "costDate": "10/15按90.09建仓",
           "lastPrice": null,
@@ -896,21 +896,19 @@
             "长期持仓"
           ],
           "options": [],
-          "tags": [
-            "hold"
-          ],
+          "tags": [],
           "status": [
-            "持有"
+            "已清仓"
           ],
           "setup": [],
           "entrySetup": [],
           "execStatus": "adhoc",
           "entryExecStatus": "adhoc",
-          "actionExecStatus": "adhoc",
+          "actionExecStatus": "unknown",
           "episodeId": "EP-GDXU-SAT1-20261015",
-          "exitReason": null,
-          "alertSub": "用户定位：长期持有",
-          "oneLiner": "10/15按90.09建仓，用户确认作为长期持仓。",
+          "exitReason": "用户确认按99.00全部卖出，具体退出原因未提供。",
+          "alertSub": "已清仓",
+          "oneLiner": "10/16按99.00全部清仓，原周期结束。",
           "actualCostBasis": {
             "value": 90.09,
             "status": "确认",
@@ -918,19 +916,17 @@
             "note": "本周期首次买入的实际每股成交价。"
           },
           "netInvestedCost": {
-            "value": 90.09,
-            "status": "确认",
-            "scope": "episode",
-            "episodeId": "EP-GDXU-SAT1-20261015",
-            "note": "当前仅本笔正股买入，每股净投入与实际均价一致；与此前主账号GDXU周期分开。"
+            "value": null,
+            "status": "已清仓，不适用",
+            "note": "剩余数量为零，不生成每股净投入成本；原实际成本和已实现结果由流水保留。"
           },
           "costDisplay": "实际成本",
           "activePlan": {
             "planId": "PLAN-GDXU-SAT1-20261015-LONG",
-            "status": "active",
+            "status": "ended",
             "createdAt": "2026-10-15T16:05:46+08:00",
             "effectiveFrom": "2026-10-15T16:05:46+08:00",
-            "recordedAt": "2026-10-15T16:18:54.193Z",
+            "recordedAt": "2026-10-16T14:40:44.716Z",
             "source": {
               "type": "user_confirmation",
               "reportedAt": "2026-10-15T16:05:46+08:00",
@@ -950,11 +946,62 @@
             "horizonEnd": null,
             "targetPrice": null,
             "stopPrice": null,
-            "note": "长期持有为用户本次确认的定位；未提供具体期限、增减仓额度或退出价格，不自行增加约束，也不追溯包装为事前计划。"
+            "note": "长期持有为用户本次确认的定位；未提供具体期限、增减仓额度或退出价格，不自行增加约束，也不追溯包装为事前计划。",
+            "endedOn": "2026-10-16",
+            "endingExecutionId": "EX-USER-20261016-GDXU-SELL-078",
+            "endingSource": {
+              "type": "user_confirmed_broker_screenshot",
+              "reportedAt": "2026-10-16T21:43:35+08:00",
+              "confirmedAt": "2026-10-16T22:38:00+08:00",
+              "libraryFileId": "libfile_b1d8e84f2b0c8191849431237a56723f",
+              "filename": "IMG_5074.jpeg",
+              "evidence": "用户说明1号小账号操作；截图INTW买入77、18.47及GDXU卖出14、99.00均全部成交。用户随后确认两笔均为10/16，显示价格即实际成交均价，不只采用委托限价。"
+            },
+            "endingNote": "实际全部清仓结束该持有计划；具体变更理由未提供，原长期计划及生效时点不回写。"
           }
+        },
+        {
+          "sym": "INTW",
+          "name": "INTW",
+          "qty": 77,
+          "cost": 18.47,
+          "costDate": "10/16按18.47建仓",
+          "lastPrice": null,
+          "lastPriceDate": null,
+          "strategy": [],
+          "options": [],
+          "tags": [
+            "hold"
+          ],
+          "status": [
+            "持有"
+          ],
+          "setup": [],
+          "entrySetup": [],
+          "execStatus": "unknown",
+          "entryExecStatus": "unknown",
+          "actionExecStatus": "unknown",
+          "episodeId": "EP-INTW-SAT1-20261016",
+          "exitReason": null,
+          "alertSub": "持有",
+          "oneLiner": "10/16按18.47建仓。",
+          "actualCostBasis": {
+            "value": 18.47,
+            "status": "确认",
+            "sourceType": "user_confirmation",
+            "note": "用户确认的本笔实际成交均价。"
+          },
+          "netInvestedCost": {
+            "value": 18.47,
+            "status": "确认",
+            "scope": "episode",
+            "episodeId": "EP-INTW-SAT1-20261016",
+            "note": "本周期仅首次正股买入，与实际每股成本一致。"
+          },
+          "costDisplay": "实际成本"
         }
       ],
-      "holdingsAsOf": "2026-10-15"
+      "holdingsAsOf": "2026-10-16"
     },
     {
       "id": "sat2",
@@ -4446,6 +4493,74 @@
       "price": 90.09,
       "purpose": "建立用户确认的长期持有仓",
       "note": "按90.09建立1号账户GDXU独立新周期；用户定位为长期持仓，不套用账户旧快进快出角色。"
+    },
+    {
+      "account": "sat1",
+      "date": "2026-10-16",
+      "chinaDate": "2026-10-16",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-16T22:38:00+08:00",
+        "evidence": "助手核对两笔归属北京时间10/16及实际成交均价，用户回答“对的”；精确成交时刻未提供。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmed_broker_screenshot",
+        "reportedAt": "2026-10-16T21:43:35+08:00",
+        "confirmedAt": "2026-10-16T22:38:00+08:00",
+        "libraryFileId": "libfile_b1d8e84f2b0c8191849431237a56723f",
+        "filename": "IMG_5074.jpeg",
+        "evidence": "用户说明1号小账号操作；截图INTW买入77、18.47及GDXU卖出14、99.00均全部成交。用户随后确认两笔均为10/16，显示价格即实际成交均价，不只采用委托限价。"
+      },
+      "recordedAt": "2026-10-16T14:40:44.716Z",
+      "actionExecStatus": "unknown",
+      "executionId": "EX-USER-20261016-GDXU-SELL-078",
+      "episodeId": "EP-GDXU-SAT1-20261015",
+      "sym": "GDXU",
+      "side": "sell",
+      "qty": 14,
+      "price": 99,
+      "purpose": "全部清仓",
+      "note": "按99.00全部卖出，结束本账户原GDXU周期；退出原因未提供，不追溯改写原长期持有计划。"
+    },
+    {
+      "account": "sat1",
+      "date": "2026-10-16",
+      "chinaDate": "2026-10-16",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "confirmedAt": "2026-10-16T22:38:00+08:00",
+        "evidence": "助手核对两笔归属北京时间10/16及实际成交均价，用户回答“对的”；精确成交时刻未提供。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmed_broker_screenshot",
+        "reportedAt": "2026-10-16T21:43:35+08:00",
+        "confirmedAt": "2026-10-16T22:38:00+08:00",
+        "libraryFileId": "libfile_b1d8e84f2b0c8191849431237a56723f",
+        "filename": "IMG_5074.jpeg",
+        "evidence": "用户说明1号小账号操作；截图INTW买入77、18.47及GDXU卖出14、99.00均全部成交。用户随后确认两笔均为10/16，显示价格即实际成交均价，不只采用委托限价。"
+      },
+      "recordedAt": "2026-10-16T14:40:44.716Z",
+      "actionExecStatus": "unknown",
+      "executionId": "EX-USER-20261016-INTW-BUY-079",
+      "episodeId": "EP-INTW-SAT1-20261016",
+      "sym": "INTW",
+      "side": "buy",
+      "qty": 77,
+      "price": 18.47,
+      "purpose": "建立新持仓",
+      "note": "按18.47建立本账户INTW独立新周期；入场理由、持有期限及退出预案未提供，不自动继承此前GDXU的长期持有定位。"
     }
   ],
   "episodes": [
@@ -4906,15 +5021,27 @@
       "episodeId": "EP-GDXU-SAT1-20261015",
       "sym": "GDXU",
       "account": "sat1",
-      "status": "open",
+      "status": "closed",
       "entryDate": "2026-10-15",
       "entrySetup": [],
       "entryExecStatus": "adhoc",
-      "currentQty": 14,
-      "exitDate": null,
-      "exitReason": null,
+      "currentQty": 0,
+      "exitDate": "2026-10-16",
+      "exitReason": "用户确认按99.00全部卖出，具体退出原因未提供。",
       "holdingRole": "长期持仓",
       "note": "用户本次确认长期定位，不因小账号默认套用短线退出方式。"
+    },
+    {
+      "episodeId": "EP-INTW-SAT1-20261016",
+      "sym": "INTW",
+      "account": "sat1",
+      "status": "open",
+      "entryDate": "2026-10-16",
+      "entrySetup": [],
+      "entryExecStatus": "unknown",
+      "currentQty": 77,
+      "exitDate": null,
+      "exitReason": null
     }
   ],
   "closedTrades": [
@@ -6586,6 +6713,88 @@
           "url": "https://www.direxion.com/product/daily-semiconductor-bull-bear-3x-etfs",
           "checkedAt": "2026-10-16T03:19:32.673Z",
           "supports": "SOXL目标为每日3倍半导体指数收益，不保证跨日3倍。"
+        }
+      ]
+    },
+    {
+      "reviewId": "RV-20261016",
+      "date": "2026-10-16",
+      "reviewDate": "2026-10-16",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-16 复盘",
+      "title": "1号GDXU清仓 · 新开INTW",
+      "executionIds": [
+        "EX-USER-20261016-GDXU-SELL-078",
+        "EX-USER-20261016-INTW-BUY-079"
+      ],
+      "plan": [
+        "GDXU此前明确定位长期持有，原计划保留；INTW的事前入场理由、期限与退出预案未提供，不自动套用原定位。"
+      ],
+      "execution": [
+        "1号账户GDXU：按99.00全部清仓，原周期结束。",
+        "1号账户INTW：按18.47建仓，建立独立新周期。"
+      ],
+      "good": [
+        "GDXU按已确认实际买卖价核算，本轮正股收益约+9.9%，已完整兑现；这是资金结果，不自动等同于执行质量良好。收益核算置信度：高。"
+      ],
+      "issues": [],
+      "todo": [],
+      "execStatus": "unknown",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-16T14:40:44.716Z",
+      "updatedAt": "2026-10-16T14:40:44.716Z",
+      "reviewDateBasis": "用户确认截图两笔均归属10/16，日期与实际成交均价已核实；不以消息时间制造成交时刻。",
+      "internalObservation": [
+        "GDXU原长期持有定位转为全清，但用户未报告变更理由，暂不判断是否计划内或情绪交易。",
+        "INTW未取得独立行情快照，lastPrice及lastPriceDate保留null，不将成交均价当收盘行情。",
+        "截图不提供精确成交时刻或先后，流水排列仅为登记顺序，不主张GDXU卖出资金直接全部投入INTW，也不推算现金或净资产。",
+        "当前美股盘中，仅同步事实及可核算结果；收盘任务仍须核对完整有效计划、必要评价与后续观察。"
+      ],
+      "planAmendments": [
+        {
+          "amendmentId": "PA-GDXU-SAT1-20261016-CLOSE",
+          "recordedAt": "2026-10-16T14:40:44.716Z",
+          "effectiveFrom": "2026-10-16T22:38:00+08:00",
+          "source": {
+            "type": "user_confirmed_broker_screenshot",
+            "reportedAt": "2026-10-16T21:43:35+08:00",
+            "confirmedAt": "2026-10-16T22:38:00+08:00",
+            "libraryFileId": "libfile_b1d8e84f2b0c8191849431237a56723f",
+            "filename": "IMG_5074.jpeg",
+            "evidence": "用户说明1号小账号操作；截图INTW买入77、18.47及GDXU卖出14、99.00均全部成交。用户随后确认两笔均为10/16，显示价格即实际成交均价，不只采用委托限价。"
+          },
+          "priorPlanId": "PLAN-GDXU-SAT1-20261015-LONG",
+          "priorPlan": {
+            "planId": "PLAN-GDXU-SAT1-20261015-LONG",
+            "status": "active",
+            "createdAt": "2026-10-15T16:05:46+08:00",
+            "effectiveFrom": "2026-10-15T16:05:46+08:00",
+            "recordedAt": "2026-10-15T16:18:54.193Z",
+            "source": {
+              "type": "user_confirmation",
+              "reportedAt": "2026-10-15T16:05:46+08:00",
+              "evidence": "1号小账号9.9卖出所有RKLX，中子号延期负面不再等待；90.09买入14股gdxu，作为长期持仓",
+              "dateConfirmation": {
+                "type": "explicit_user_confirmation",
+                "confirmedAt": "2026-10-16T00:17:05+08:00",
+                "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+              }
+            },
+            "scope": {
+              "account": "sat1",
+              "sym": "GDXU",
+              "episodeId": "EP-GDXU-SAT1-20261015"
+            },
+            "holdingRole": "长期持仓",
+            "horizonEnd": null,
+            "targetPrice": null,
+            "stopPrice": null,
+            "note": "长期持有为用户本次确认的定位；未提供具体期限、增减仓额度或退出价格，不自行增加约束，也不追溯包装为事前计划。"
+          },
+          "executionIds": [
+            "EX-USER-20261016-GDXU-SELL-078"
+          ],
+          "text": "实际全清结束GDXU原长期持有计划；具体变更原因未知，不追溯改写原计划，INTW另开周期。"
         }
       ]
     }
@@ -8449,6 +8658,83 @@
         },
         "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）"
       }
+    },
+    {
+      "account": "sat1",
+      "sym": "GDXU",
+      "date": "2026-10-16",
+      "recordedAt": "2026-10-16T14:40:44.716Z",
+      "executionId": "EX-USER-20261016-GDXU-SELL-078",
+      "before": {
+        "sym": "GDXU",
+        "name": "GDXU",
+        "qty": 14,
+        "cost": 90.09,
+        "costDate": "10/15按90.09建仓",
+        "lastPrice": null,
+        "lastPriceDate": null,
+        "strategy": [
+          "长期持仓"
+        ],
+        "options": [],
+        "tags": [
+          "hold"
+        ],
+        "status": [
+          "持有"
+        ],
+        "setup": [],
+        "entrySetup": [],
+        "execStatus": "adhoc",
+        "entryExecStatus": "adhoc",
+        "actionExecStatus": "adhoc",
+        "episodeId": "EP-GDXU-SAT1-20261015",
+        "exitReason": null,
+        "alertSub": "用户定位：长期持有",
+        "oneLiner": "10/15按90.09建仓，用户确认作为长期持仓。",
+        "actualCostBasis": {
+          "value": 90.09,
+          "status": "确认",
+          "sourceType": "user_confirmation",
+          "note": "本周期首次买入的实际每股成交价。"
+        },
+        "netInvestedCost": {
+          "value": 90.09,
+          "status": "确认",
+          "scope": "episode",
+          "episodeId": "EP-GDXU-SAT1-20261015",
+          "note": "当前仅本笔正股买入，每股净投入与实际均价一致；与此前主账号GDXU周期分开。"
+        },
+        "costDisplay": "实际成本",
+        "activePlan": {
+          "planId": "PLAN-GDXU-SAT1-20261015-LONG",
+          "status": "active",
+          "createdAt": "2026-10-15T16:05:46+08:00",
+          "effectiveFrom": "2026-10-15T16:05:46+08:00",
+          "recordedAt": "2026-10-15T16:18:54.193Z",
+          "source": {
+            "type": "user_confirmation",
+            "reportedAt": "2026-10-15T16:05:46+08:00",
+            "evidence": "1号小账号9.9卖出所有RKLX，中子号延期负面不再等待；90.09买入14股gdxu，作为长期持仓",
+            "dateConfirmation": {
+              "type": "explicit_user_confirmation",
+              "confirmedAt": "2026-10-16T00:17:05+08:00",
+              "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+            }
+          },
+          "scope": {
+            "account": "sat1",
+            "sym": "GDXU",
+            "episodeId": "EP-GDXU-SAT1-20261015"
+          },
+          "holdingRole": "长期持仓",
+          "horizonEnd": null,
+          "targetPrice": null,
+          "stopPrice": null,
+          "note": "长期持有为用户本次确认的定位；未提供具体期限、增减仓额度或退出价格，不自行增加约束，也不追溯包装为事前计划。"
+        }
+      },
+      "reason": "按用户确认的实际成交均价全部清仓，原长期持有计划保留历史；不因盈利倒推执行标签。"
     }
   ],
   "stockConcentration": {

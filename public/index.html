@@ -602,7 +602,7 @@
         <h1>持仓监测与交易复盘</h1>
         <p class="motto-compact">Fundamental Truth is not Alpha.</p>
       </div>
-      <span class="stamp">记录更新至 2026-10-15</span>
+      <span class="stamp">记录更新至 2026-10-16</span>
     </div>
   </div>
 </header>
@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交更新至10/15：SOXL继续回补、1号RKLX清仓转GDXU、主号CRDU解除备兑；行情见各持仓快照。",
-  asOfLabel: "成交：10月15日 · SOXL回补 / 1号换仓 / CRDU解除备兑；行情：见各持仓日期",
+  asOf: "成交更新至10/16：1号GDXU清仓并新开INTW；各账户行情保留原快照。",
+  asOfLabel: "成交：10月16日 · 1号GDXU清仓 / INTW建仓；行情：见各持仓日期",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1710,21 +1710,19 @@
       navNote: "USD · 满仓",
       holdings: [
         {
-          sym: "GDXU",
-          name: "GDXU",
-          cost: 90.09,
+          sym: "INTW",
+          name: "INTW",
+          cost: 18.47,
           costNote: "实际成本",
-          strategy: [
-            "长期持仓"
-          ],
+          strategy: [],
           options: [],
           tags: [
             "hold"
           ],
-          alertSub: "用户定位：长期持有",
+          alertSub: "持有",
           setup: [],
-          execStatus: "adhoc",
-          oneLiner: "10/15按90.09建仓，用户确认作为长期持仓。",
+          execStatus: "unknown",
+          oneLiner: "10/16按18.47建仓。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1863,6 +1861,52 @@
     }
   ],
   closedTrades: [
+    {
+      date: "2026-10-16",
+      dateStart: "2026-10-16",
+      dateEnd: "2026-10-16",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-16",
+      trades: [
+        {
+          tradeId: "EP-GDXU-SAT1-20261015:2026-10-16",
+          episodeId: "EP-GDXU-SAT1-20261015",
+          sym: "GDXU",
+          name: "GDXU",
+          acct: "1号小账号",
+          cost: 90.09,
+          soldDate: "2026-10-16",
+          dateStart: "2026-10-16",
+          dateEnd: "2026-10-16",
+          isPartial: false,
+          closesEpisode: true,
+          totalRetPct: 9.89011,
+          result: "win",
+          cycleRetPct: 9.89011,
+          cycleResult: "win",
+          performanceEligible: true,
+          reason: "用户确认按99.00全部卖出，具体退出原因未提供。",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261016-GDXU-SELL-078",
+              date: "2026-10-16",
+              dateEnd: "2026-10-16",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 99,
+              cost: 90.09,
+              costBasisType: "actual",
+              retPct: 9.89011,
+              note: "按99.00全部卖出，结束本账户原GDXU周期；退出原因未提供，不追溯改写原长期持有计划。"
+            }
+          ]
+        }
+      ]
+    },
     {
       date: "2026-10-15",
       dateStart: "2026-10-15",
@@ -3567,6 +3611,37 @@
     }
   ],
   reviews: [
+    {
+      reviewId: "RV-20261016",
+      date: "2026-10-16",
+      reviewDate: "2026-10-16",
+      reviewTimezone: "Asia/Shanghai",
+      dateLabel: "2026-10-16 复盘",
+      title: "1号GDXU清仓 · 新开INTW",
+      plan: [
+        "GDXU此前明确定位长期持有，原计划保留；INTW的事前入场理由、期限与退出预案未提供，不自动套用原定位。"
+      ],
+      execution: [
+        "1号账户GDXU：按99.00全部清仓，原周期结束。",
+        "1号账户INTW：按18.47建仓，建立独立新周期。"
+      ],
+      good: [
+        "GDXU按已确认实际买卖价核算，本轮正股收益约+9.9%，已完整兑现；这是资金结果，不自动等同于执行质量良好。收益核算置信度：高。"
+      ],
+      issues: [],
+      todo: [],
+      execStatus: "unknown",
+      symbols: [
+        "GDXU",
+        "INTW"
+      ],
+      accounts: [
+        "1号小账号"
+      ],
+      saleExecutionIds: [
+        "EX-USER-20261016-GDXU-SELL-078"
+      ]
+    },
     {
       reviewId: "RV-20261015",
       date: "2026-10-15",
