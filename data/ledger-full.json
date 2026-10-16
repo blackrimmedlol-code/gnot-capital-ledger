@@ -9343,7 +9343,7 @@
     "calendarCheckedDate": "2026-10-08",
     "calendarCoverageThrough": "2028-12-31",
     "calendarSource": "https://www.nyse.com/trade/hours-calendars",
-    "lastSuccessfulCutoff": "2026-10-12T20:30:00Z",
+    "lastSuccessfulCutoff": "2026-10-15T20:30:00Z",
     "executionFingerprints": {
       "EX-STMT-20260930-RAM-BUY-P030-080": "ce56709480891cba43e6a8923cf8cdd49794f9e1ff76ecdcf6b78b33f3ac115c",
       "EX-20260917-CRDU-BUY-011": "2a4f90fabd62d4ffb2bb36805c7a4c086d4778c5f5dd58ff91c50664b0bef17c",
@@ -9442,26 +9442,46 @@
       "EX-USER-20261012-IRE-SELL-065": "2a6fdc5b37fd3c8564b432232aa0a8b19874ec51aac2543f34a9dbc3fd45eaca",
       "EX-USER-20261012-SNXX2-BUY-066": "f3f4bbd939ee72f187aef3bc9a29eba2e805e49fad5d8916587c2bb4495c84b0",
       "OX-USER-20261008-RAM-BTC-16C-001": "c3fffb42c522370496b7da0b5c4f5ff367e74895623eaff17570e7bcec94c78f",
-      "OX-USER-20261008-RAM-BTC-17C-002": "7f24147c91ef7470c9f9a28569fb32cd0aac66b5f2f8254595c73a5bd76adbae"
+      "OX-USER-20261008-RAM-BTC-17C-002": "7f24147c91ef7470c9f9a28569fb32cd0aac66b5f2f8254595c73a5bd76adbae",
+      "EX-USER-20261013-RAM-BUY-067": "fee62d3412b5b4aa69e6c5650cf277dda5528eac86b497ccea971e7d0b8159f0",
+      "EX-USER-20261013-RAM-SELL-068": "27314ef0f06115a6337604e42d3b2628e6379197ed922d55280d0d817af11fcb",
+      "EX-USER-20261013-RAM-BUY-069": "b12bf99d163347a539609bb450271d1c43a5dba7098516144bd084a875614e16",
+      "EX-USER-20261013-STXL-SELL-070": "6915496fbc362eecbbd6a167971ecb42310112bf68b86b8b203c5b38cbe187d2",
+      "EX-USER-20261014-RAM-SELL-071": "6b5cc890810de3bfe4277b000922ff0c1646274fff7bdd0f8ba5f573f92b5f3d",
+      "EX-USER-20261014-SOXL-BUY-072": "3309de73e98d13f5314abcf1d7f3f1c2ad4c547dfe248fc74c0f3a63f325e13c",
+      "EX-USER-20261014-SOXL-BUY-073": "1f38378d16f69da8ea5535eb15e01bf920618f47e1971a2999a1e38b25a14178",
+      "EX-USER-20261014-SOXL-BUY-074": "fb2eed11dd9d3740dd1cdace3122cb670bb50c2be1e731c8f9cdb540fd1f5fe7",
+      "EX-USER-20261015-SOXL-BUY-075": "7b8264ffe99aa8daa4015fffaa567b4e6268b6a6bc3e2bee09bec8e7c4f033ab",
+      "EX-USER-20261015-RKLX-SELL-076": "390eba386b75573f17a0e5cd551e5bbd76f7343d360806ad907a3d1617a5f090",
+      "EX-USER-20261015-GDXU-BUY-077": "be53dac1ae8c089bef8bd275de577d00024aa736fa6c0965a4f8c889f3fb923b",
+      "OX-USER-20261013-RAM-BTC-14C-003": "765acb354dcd6bd11711a3f99a3adfff8d83919d47d5ec58e9987fa5a51dcd76",
+      "OX-USER-20261015-CRDU-BTC-7C-004": "94ddd817e0081c5c630f1200260f4b6d5c879db99a055a06dab0cf4c1c5705f8"
     },
-    "note": "本轮处理10/12两笔新增正股成交，完成对应收盘复盘、相关收盘价更新、公开脱敏构建及真实线上运行验证；后续继续核对新ID及指纹变化。",
-    "lastSuccessfulMarketDate": "2026-10-12",
+    "note": "已补齐10/13—10/15原计划、优势、代价/风险、后续观察与置信度；校验、部署和真实线上逐项验证通过。自动任务已恢复，下一排程10/17 04:30。",
+    "lastSuccessfulMarketDate": "2026-10-15",
     "lastSuccessfulReviewDates": [
-      "2026-10-12"
+      "2026-10-13",
+      "2026-10-14",
+      "2026-10-15"
     ],
-    "lastSuccessfulAt": "2026-10-13T08:44:31Z",
+    "lastSuccessfulAt": "2026-10-16T03:21:46.383Z",
     "optionExecutionFingerprints": {
       "OX-USER-20261008-RAM-BTC-16C-001": "c3fffb42c522370496b7da0b5c4f5ff367e74895623eaff17570e7bcec94c78f",
-      "OX-USER-20261008-RAM-BTC-17C-002": "7f24147c91ef7470c9f9a28569fb32cd0aac66b5f2f8254595c73a5bd76adbae"
+      "OX-USER-20261008-RAM-BTC-17C-002": "7f24147c91ef7470c9f9a28569fb32cd0aac66b5f2f8254595c73a5bd76adbae",
+      "OX-USER-20261013-RAM-BTC-14C-003": "765acb354dcd6bd11711a3f99a3adfff8d83919d47d5ec58e9987fa5a51dcd76",
+      "OX-USER-20261015-CRDU-BTC-7C-004": "94ddd817e0081c5c630f1200260f4b6d5c879db99a055a06dab0cf4c1c5705f8"
     },
     "fingerprintAlgorithm": "SHA-256 of JSON.stringify recursively key-sorted full execution object; array order preserved; stock and option IDs share executionFingerprints",
     "reviewContentFingerprints": {
-      "RV-20261005": "d12a338c9ca8f7c83deca6e6457d617b7265814842b7dd66eb709305dc96a886",
-      "RV-RECONCILE-20261006": "80523c9956b51b628b146456b8422f2d4e9a6882493cade61b011c230559d8e1",
-      "RV-20261006": "3757c356ee209f00d5633b3090d6be25570de8534b3b15b15cf16da4eb054e4a",
-      "RV-20261007": "ec80d91ca5d8157645045551809e77c3f6f624830b9f3c9291ed132ff4b24555",
-      "RV-20261008": "cf7ed3063094d8a92f97cccca7dc0ebbc11e88fcab85c75be0cf6dd9efdb1edc",
-      "RV-20261012": "65a23ba792eed4e1158a325e8c65f58678cc580d7689a1b0007b3cad5b4d0659"
+      "RV-20261015": "5bc4b006634a9f1e41bf6a8510a688eee752eab292f32d475e30cf438c7b69f9",
+      "RV-20261005": "f52afb0ac1809de660d5d20905b5ce4488de1601f5a94b366a354028639e1e53",
+      "RV-RECONCILE-20261006": "2baee2549e3b598d66f2e3f4f86f2791033b63d03e8771a0e8048d4e9a36aa9d",
+      "RV-20261006": "b5c281d7f00975f1b3fbb8837d35af047eaf3f161c569e01d004cb4e5d467a8f",
+      "RV-20261007": "8d2291fe3b118a78c58d5d849ca6eada0aa7cfa35ca16a174c7935e937dd25d3",
+      "RV-20261008": "ca0fd05ffd1ac4b00b4be058e4babb0e40b5d59c3ba9e959029c97f9bc4eb5da",
+      "RV-20261012": "65a23ba792eed4e1158a325e8c65f58678cc580d7689a1b0007b3cad5b4d0659",
+      "RV-20261013": "025217d66e98eca3c8252c77953d4ea73270bc0d33422354ddc43a5ad9fc0303",
+      "RV-20261014": "bf8689002919336825d93c64150b0fe7d28661c6694a777dc5c3c4a26a9c6546"
     },
     "initialBaseline": {
       "createdAt": "2026-10-09T02:58:27.662Z",
@@ -9571,38 +9591,51 @@
       "note": "首轮核对当前最近美股交易时段和截至截止点的仓库记录；10/8补收盘评价。既有历史流水仅核对引用并初始化内容基准，未重跑历史迁移或重写旧复盘。历史基准任一成交更正仍须按内容指纹复核。"
     },
     "lastVerifiedPublication": {
-      "commit": "0d2be7db11ce7d4af349b8e4eede86fe1ae0727c",
-      "workflowRunId": 38370921953,
-      "verifiedAt": "2026-10-13T08:44:31Z",
+      "commit": "e1da422051316c0fe5387a50a0b3869271854ed2",
+      "workflowRunId": 38845023976,
+      "verifiedAt": "2026-10-16T03:21:46.383Z",
       "url": "https://blackrimmedlol-code.github.io/gnot-capital-ledger/",
       "checks": [
         "Actions success",
         "真实线上HTML test_render.js",
-        "10/12复盘全文与仓库一致",
-        "关联卖出",
-        "最新复盘默认展开"
+        "10/13—10/15复盘plan/execution/good/issues/todo逐项一致",
+        "最新复盘默认展开",
+        "既有成交、持仓、周期未改写"
       ]
     },
     "nextSchedule": "BEGIN:VEVENT\nDTSTART;TZID=America/New_York:20261016T163000\nRRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=16;BYMINUTE=30;BYSECOND=0\nEND:VEVENT",
     "nextScheduleVerifiedAt": "2026-10-16T03:19:32.673Z",
     "lastCompletedRun": {
-      "marketDate": "2026-10-12",
-      "cutoff": "2026-10-12T20:30:00Z",
-      "checkedAt": "2026-10-13T08:44:31Z",
-      "previousCutoff": "2026-10-09T20:30:00Z",
+      "marketDate": "2026-10-15",
+      "cutoff": "2026-10-15T20:30:00Z",
+      "checkedAt": "2026-10-16T03:21:46.383Z",
+      "previousCutoff": "2026-10-12T20:30:00Z",
       "addedExecutionIds": [
-        "EX-USER-20261012-IRE-SELL-065",
-        "EX-USER-20261012-SNXX2-BUY-066"
+        "EX-USER-20261013-RAM-BUY-067",
+        "EX-USER-20261013-RAM-SELL-068",
+        "EX-USER-20261013-RAM-BUY-069",
+        "EX-USER-20261013-STXL-SELL-070",
+        "EX-USER-20261014-RAM-SELL-071",
+        "EX-USER-20261014-SOXL-BUY-072",
+        "EX-USER-20261014-SOXL-BUY-073",
+        "EX-USER-20261014-SOXL-BUY-074",
+        "EX-USER-20261015-SOXL-BUY-075",
+        "EX-USER-20261015-RKLX-SELL-076",
+        "EX-USER-20261015-GDXU-BUY-077"
       ],
       "changedExecutionIds": [],
+      "addedOptionExecutionIds": [
+        "OX-USER-20261013-RAM-BTC-14C-003",
+        "OX-USER-20261015-CRDU-BTC-7C-004"
+      ],
       "removedExecutionIds": [],
       "reviewDates": [
-        "2026-10-12"
+        "2026-10-13",
+        "2026-10-14",
+        "2026-10-15"
       ],
-      "updatedHoldingPrices": [
-        "sat2:SNXX"
-      ],
-      "note": "已完成10/12新增成交收盘评价；IRE周期保持关闭，2号SNXX保持最后补仓后只观望约束。"
+      "updatedHoldingPrices": [],
+      "note": "人工恢复漏评：按中国日期补齐10/13—10/15已登记成交的执行过程评价；只核实产品结构，不使用旧行情推断当日表现，未新增行情快照。"
     },
     "lastNoChangeRun": {
       "marketDate": "2026-10-09",
@@ -9629,8 +9662,21 @@
         "RV-20261014",
         "RV-20261015"
       ],
-      "publicationStatus": "awaiting_verification",
-      "noteOnCursor": "本次发布并核验真实线上评价后才更新成功截止与指纹；失败不推进。"
+      "publicationStatus": "verified",
+      "noteOnCursor": "本次发布并核验真实线上评价后才更新成功截止与指纹；失败不推进。",
+      "verifiedPublication": {
+        "commit": "e1da422051316c0fe5387a50a0b3869271854ed2",
+        "workflowRunId": 38845023976,
+        "verifiedAt": "2026-10-16T03:21:46.383Z",
+        "url": "https://blackrimmedlol-code.github.io/gnot-capital-ledger/",
+        "checks": [
+          "Actions success",
+          "真实线上HTML test_render.js",
+          "10/13—10/15复盘plan/execution/good/issues/todo逐项一致",
+          "最新复盘默认展开",
+          "既有成交、持仓、周期未改写"
+        ]
+      }
     }
   },
   "optionExecutions": [
