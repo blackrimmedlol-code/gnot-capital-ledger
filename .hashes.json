@@ -1,12 +1,12 @@
 {
-  "ledger": "ceb803f32b329eac",
+  "ledger": "af66966cb7414410",
   "template": "dfa0d2bd52559de3",
-  "rules": "5ed666e1767d9313",
+  "rules": "8563b38878b9c267",
   "build_public": "6c84ec5a8f6552d0",
   "derive": "b7c2fdbe5d8898c5",
   "presentation": "086991297dc9f5f8",
   "review_dates": "5e3bdd913b029de9",
   "render_test": "0803692e3b6c89ac",
   "agents": "8b06ec3e0a9a44bb",
-  "generatedAt": "2026-10-15T16:18:54.386Z"
+  "generatedAt": "2026-10-16T03:20:15.262Z"
 }
