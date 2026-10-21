@@ -117,6 +117,14 @@ function check(html, ledger) {
   assert.equal(JSON.stringify(dates), JSON.stringify(expected.groups.map(d => d.date)), '兑现日期未倒序');
   const reviewIds = [...nodes.reviewsBox.innerHTML.matchAll(/data-review-id="([^"]+)"/g)].map(m => m[1]);
   const publicReviews = (ledger.reviews || []).filter(r => r.visibility !== 'internal');
+  if (ledger.methodology?.reviewPresentation?.mode === 'facts_and_user_plans') {
+    for (const r of api.DATA.reviews) {
+      assert.ok(!('good' in r) && !('issues' in r) && !('todo' in r), '内部AI评价进入公开复盘数据');
+      const prose = [...(r.plan || []), ...(r.execution || [])].join(' ');
+      assert.ok(!/置信度|不追溯|不补写|不回写|不虚构|未提供|尚未报告|不提前计入|原周期继续/.test(prose), '公开复盘仍有解释性尾句');
+    }
+    assert.ok(!nodes.reviewsBox.innerHTML.includes('依成交记录自动同步'), '无成交的计划卡片仍显示占位文案');
+  }
   assert.deepEqual(reviewIds.slice().sort(), publicReviews.map(r => r.reviewId).sort(), '公开复盘缺失或内部核对泄漏');
   const expectedReviewOrder = publicReviews.slice().sort((a, b) => (b.reviewDate || b.date).localeCompare(a.reviewDate || a.date));
   assert.deepEqual(reviewIds, expectedReviewOrder.map(r => r.reviewId), '复盘未按归属日倒序');
@@ -183,3 +191,4 @@ if (require.main === module) {
   console.log('✅ 实际渲染通过：' + result.sales + ' 条卖出 / ' + result.days + ' 个交易日 / ' + result.reviews + ' 条结构化复盘；空值与持平验证通过');
 }
 module.exports = { runPage, check };
+

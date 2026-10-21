@@ -19,6 +19,7 @@ console.log('输出:', OUT_PATH);
 
 // ---- 1. 读取 ledger-full.json ----
 const ledger = JSON.parse(fs.readFileSync(LEDGER_PATH, 'utf8'));
+const factsOnlyReviews = ledger.methodology?.reviewPresentation?.mode === 'facts_and_user_plans';
 console.log(`✅ ledger-full.json: ${ledger.accounts.length} accounts, ${ledger.executions.length} executions, ${ledger.episodes.length} episodes`);
 
 // ---- 2. 生成脱敏数据 ----
@@ -136,6 +137,7 @@ function publicClosedTrade(t) {
 const mainAccount = ledger.accounts.find(a => a.id === 'main');
 const mainWeight = mainAccount ? summarizeHoldings(mainAccount) : { available: false, topSym: null, level: null };
 const publicData = {
+  reviewPresentationMode: factsOnlyReviews ? 'facts_and_user_plans' : 'full',
   optionsAnalysisScope: (ledger.methodology.optionsAnalysis || {}).scope || 'full',
   asOf: ledger.asOf,
   asOfLabel: ledger.asOfLabel,
@@ -162,7 +164,9 @@ const publicData = {
   // 结构化复盘（结构化记录），按真实日期倒序，最新置顶
   reviews: (ledger.reviews || []).filter(r => r.visibility !== 'internal').map(r => {
     const out = {};
-    for (const k of ['reviewId', 'date', 'reviewDate', 'reviewTimezone', 'dateLabel', 'title', 'plan', 'execution', 'good', 'issues', 'todo', 'execStatus']) {
+    const keys = ['reviewId', 'date', 'reviewDate', 'reviewTimezone', 'dateLabel', 'title', 'plan', 'execution', 'execStatus'];
+    if (!factsOnlyReviews) keys.push('good', 'issues', 'todo');
+    for (const k of keys) {
       if (r[k] !== undefined) out[k] = r[k];
     }
     const events = (r.executionIds || []).map(id => ledger.executions.find(e => e.executionId === id)).filter(Boolean);
@@ -302,3 +306,4 @@ console.log('✅ PUBLISH OK →', OUT_PATH);
 console.log('   统计:', stats);
 console.log('   渲染层零泄露自检: 通过');
 console.log('   qty 剥离: 通过');
+

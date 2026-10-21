@@ -661,7 +661,7 @@
     <div class="sec-head">
       <span class="n">02</span>
       <h2>交易复盘</h2>
-      <span class="note">原计划 → 实际执行 → 偏差 → 下次调整</span>
+      <span class="note">交易计划 · 实际执行</span>
     </div>
     <div class="journal">
 
@@ -1697,13 +1697,12 @@
       html += '<article class="entry" data-review-id="' + htmlText(r.reviewId) + '" data-record-date="' + htmlText(r.reviewDate || r.date) + '" data-record-symbols="' + htmlText((r.symbols || []).join(',')) + '" data-record-accounts="' + htmlText((r.accounts || []).join(',')) + '"><details' + (idx === 0 ? " open" : "") + '>' +
         '<summary><span class="date">' + htmlText(r.dateLabel || r.date) + '</span><span class="title">' + htmlText(r.title) + '</span></summary>' +
         '<div class="entry-body">';
-      html += '<div class="plan-exec">' +
-        '<div class="plan-col"><h4>📋 原计划</h4><ul>' +
-          (r.plan && r.plan.length ? r.plan.map(function(x){ return "<li>" + x + "</li>"; }).join("") : "<li>未记录</li>") +
-        '</ul></div>' +
-        '<div class="exec-col"><h4>✅ 实际执行</h4><ul>' +
-          (r.execution && r.execution.length ? r.execution.map(function(x){ return "<li>" + x + "</li>"; }).join("") : "<li>依成交记录自动同步</li>") +
-        '</ul></div></div>';
+      html += '<div class="plan-exec">';
+      if (r.plan && r.plan.length) html += '<div class="plan-col"><h4>📋 原计划</h4><ul>' +
+        r.plan.map(function(x){ return "<li>" + x + "</li>"; }).join("") + '</ul></div>';
+      if (r.execution && r.execution.length) html += '<div class="exec-col"><h4>✅ 实际执行</h4><ul>' +
+        r.execution.map(function(x){ return "<li>" + x + "</li>"; }).join("") + '</ul></div>';
+      html += '</div>';
       if (r.good && r.good.length) html += '<h3 class="good"><span>✅</span>做对的</h3><ul>' + r.good.map(function(x){ return "<li>" + x + "</li>"; }).join("") + '</ul>';
       if (r.issues && r.issues.length) html += '<h3 class="bad"><span>⚠️</span>偏差与问题</h3><ul>' + r.issues.map(function(x){ return "<li>" + x + "</li>"; }).join("") + '</ul>';
       if (r.todo && r.todo.length) html += '<h3><span>🔄</span>下次调整</h3><ul>' + r.todo.map(function(x){ return "<li>" + x + "</li>"; }).join("") + '</ul>';
@@ -1898,3 +1897,4 @@
 </script>
 </body>
 </html>
+
