@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/21：CRDU清仓；补录10/16 RAM全清、15C到期未行权并关联SOXL买入；行情保留原快照。",
-  "asOfLabel": "成交：10月21日 · CRDU清仓；补录10月16日RAM转SOXL；行情：见各持仓日期",
+  "asOf": "成交更新至10/21；RAM/CRDU已清仓，CRWG17C按0.03买回已确认；日期未提供的期权事件单独留存，行情保留原快照。",
+  "asOfLabel": "正股记录至10月21日 · CRWG已解除备兑；行情：见各持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -415,28 +415,9 @@
           "wtPct": 7,
           "strategy": [
             "核心仓",
-            "CC收租"
+            "正股持有"
           ],
-          "options": [
-            {
-              "exp": "2026-10-16",
-              "legs": [
-                {
-                  "mult": 1,
-                  "strike": 17,
-                  "type": "C",
-                  "premium": 2,
-                  "note": "9/19加卖"
-                }
-              ],
-              "settlementStatus": "unconfirmed",
-              "settlementReview": {
-                "checkedAt": "2026-10-21T06:24:19.671227+00:00",
-                "evidence": "本次核对时已过合约到期日，台账未登记买回、到期或指派结果；RAM本人确认未行权仅适用RAM，不能复制到CRWG。",
-                "note": "保留原合约及最后确认正股持仓；不自动删除合约、视为作废、生成指派或减少正股。"
-              }
-            }
-          ],
+          "options": [],
           "tags": [
             "hold"
           ],
@@ -465,7 +446,9 @@
             "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
           "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
-          "alertSub": "10/16到期结果待确认；正股沿用最后确认记录"
+          "alertSub": "已买回17C，正股解除备兑",
+          "oneLiner": "已按0.03买回原17C，继续持有正股；数量与实际成本不变。",
+          "strategyNote": "原17C已按本人确认买回，当前无开放卖call；未提供新的持有期限或退出目标，不自行添加。"
         },
         {
           "sym": "CRDU",
@@ -7172,6 +7155,36 @@
         ],
         "source": "用户要求补齐交易复盘；事实与判断分开，保留原计划，不以盈亏倒推质量。"
       }
+    },
+    {
+      "reviewId": "RV-UNDATED-CRWG-BTC",
+      "date": "2026-10-21",
+      "reviewDate": "2026-10-21",
+      "reviewTimezone": "Asia/Shanghai",
+      "visibility": "internal",
+      "title": "CRWG买回17C，成交日期待确认",
+      "executionIds": [],
+      "optionExecutionIds": [
+        "OX-USER-UNDATED-CRWG-BTC-17C-006"
+      ],
+      "plan": [],
+      "execution": [
+        "主账号CRWG原17C已按0.03买回，正股数量及成本不变。"
+      ],
+      "good": [
+        "解除该合约的上涨封顶及交股义务；状态判断依据本人确认，置信度高。"
+      ],
+      "issues": [
+        "买回需要支付成本，正股下跌敞口继续存在；没有成交日期及当时行情，不评价择时。"
+      ],
+      "todo": [],
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-21T06:27:33.922356+00:00",
+      "internalObservation": [
+        "保留已确认事实，日期未明不拼入10/16或10/21公开复盘。日期确认后按同一optionExecutionId归属实际复盘，不能重复减少合约。",
+        "本内部草稿date/reviewDate仅为2026-10-21登记日，不代表买回成交日；optionExecution.date仍保留null，不对外按日归档。"
+      ],
+      "dateBasis": "internal_recording_day_only"
     }
   ],
   "openingPositions": [
@@ -10637,6 +10650,70 @@
       },
       "recordedAt": "2026-10-21T02:59:08.937308+00:00",
       "note": "用户确认到期未行权；date为合约美东到期日，未报告实际结算时刻/日期，不伪造上海日历日，不生成期权买回或正股指派流水。卖出正股与到期的盘中先后未知，不据当前状态推断曾裸卖。"
+    },
+    {
+      "executionId": "OX-USER-UNDATED-CRWG-BTC-17C-006",
+      "account": "main",
+      "sym": "CRWG",
+      "instrumentType": "option",
+      "action": "buy_to_close",
+      "side": "buy",
+      "positionEffect": "close",
+      "contracts": 1,
+      "contractMultiplier": 100,
+      "strike": 17,
+      "optionType": "C",
+      "exp": "2026-10-16",
+      "price": 0.03,
+      "priceUnit": "USD per underlying share",
+      "currency": "USD",
+      "date": null,
+      "chinaDate": null,
+      "time": null,
+      "timestamp": null,
+      "timezone": null,
+      "dateStatus": "unconfirmed",
+      "status": "confirmed",
+      "includeInStockPerformance": false,
+      "stockEpisodeId": "EP-CRWG-2026Q3",
+      "fee": null,
+      "closedLegs": [
+        {
+          "mult": 1,
+          "strike": 17,
+          "type": "C",
+          "premium": 2,
+          "note": "9/19加卖"
+        }
+      ],
+      "priorContractGroups": [
+        {
+          "exp": "2026-10-16",
+          "legs": [
+            {
+              "mult": 1,
+              "strike": 17,
+              "type": "C",
+              "premium": 2,
+              "note": "9/19加卖"
+            }
+          ],
+          "settlementStatus": "unconfirmed",
+          "settlementReview": {
+            "checkedAt": "2026-10-21T06:24:19.671227+00:00",
+            "evidence": "本次核对时已过合约到期日，台账未登记买回、到期或指派结果；RAM本人确认未行权仅适用RAM，不能复制到CRWG。",
+            "note": "保留原合约及最后确认正股持仓；不自动删除合约、视为作废、生成指派或减少正股。"
+          }
+        }
+      ],
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-21T06:27:33.922356+00:00",
+        "evidence": "CRWG 的 17c 我已经买回了 0.03",
+        "contractMatch": "匹配主账号唯一CRWG开放记录：1张2026-10-16到期17C；用户确认买回，实际成交日期未报告。"
+      },
+      "recordedAt": "2026-10-21T06:27:33.922356+00:00",
+      "note": "买回事实与报价已由本人确认，当前备兑解除；成交日期未知，不能按报告日回填，不视为到期作废或指派。"
     }
   ],
   "reviewAssessmentHistory": [
@@ -11233,6 +11310,21 @@
         "CRWG周期101修正为100，与最后确认实股及完整交易链同步。",
         "CRWG10/16到期17C结果未报告；标为未确认，保持正股及历史合约，不推断指派。",
         "新成交日期及复盘引用均通过校验；旧来源不明的中国日期区间保留，不擅自迁移。"
+      ]
+    },
+    {
+      "auditId": "AUDIT-20261021-CRWG-RESOLVED",
+      "checkedAt": "2026-10-21T06:27:33.922356+00:00",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-21T06:27:33.922356+00:00",
+        "evidence": "CRWG 的 17c 我已经买回了 0.03",
+        "contractMatch": "匹配主账号唯一CRWG开放记录：1张2026-10-16到期17C；用户确认买回，实际成交日期未报告。"
+      },
+      "resolvedExecutionId": "OX-USER-UNDATED-CRWG-BTC-17C-006",
+      "findings": [
+        "用户确认CRWG17C已按0.03买回，已撤下到期结果待确认；实际买回日期未知，留内部复盘草稿。",
+        "正股保持100与实际均价15.75，正股胜率样本不因买回call增加。"
       ]
     }
   ]

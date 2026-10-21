@@ -1351,8 +1351,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交更新至10/21：CRDU清仓；补录10/16 RAM全清、15C到期未行权并关联SOXL买入；行情保留原快照。",
-  asOfLabel: "成交：10月21日 · CRDU清仓；补录10月16日RAM转SOXL；行情：见各持仓日期",
+  asOf: "成交更新至10/21；RAM/CRDU已清仓，CRWG17C按0.03买回已确认；日期未提供的期权事件单独留存，行情保留原快照。",
+  asOfLabel: "正股记录至10月21日 · CRWG已解除备兑；行情：见各持仓日期",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1564,33 +1564,21 @@
           costNote: "实际成本",
           strategy: [
             "核心仓",
-            "CC收租"
+            "正股持有"
           ],
-          options: [
-            {
-              exp: "2026-10-16",
-              settlementStatus: "unconfirmed",
-              legs: [
-                {
-                  mult: 1,
-                  strike: 17,
-                  type: "C",
-                  premium: 2
-                }
-              ]
-            }
-          ],
+          options: [],
           tags: [
             "hold"
           ],
-          alertSub: "10/16到期结果待确认；正股沿用最后确认记录",
+          alertSub: "已买回17C，正股解除备兑",
           setup: [],
           execStatus: "unknown",
+          oneLiner: "已按0.03买回原17C，继续持有正股；数量与实际成本不变。",
           coverage: {
-            status: "unknown",
-            statusText: "到期结果待确认",
-            isFullyBacked: null,
-            expiryUnconfirmed: true,
+            status: "none",
+            statusText: "无备兑",
+            isFullyBacked: false,
+            expiryUnconfirmed: false,
             sharesUnknown: false
           },
           weightRank: 2,
