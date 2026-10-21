@@ -1308,6 +1308,7 @@
     </div>
 
     <div class="closed-summary" id="closedSummary"></div>
+    <div class="subcell" id="closedScope"></div>
     <div class="subcell">日期与时刻为归属展示；仅有原日期时保留可能的日期区间。收益按成交前正股成本核算，加权合计仅对应本组卖出；— 表示暂无可核算值。</div>
     <div class="closed-days" id="closedDays"></div>
   </section>
@@ -1446,9 +1447,10 @@
       totalHoldings: totalHoldings, uniqueHoldings: symbols.size, usCount: usSymbols.size, cnCount: cnSymbols.size,
       activeAccounts: activeAccounts, usAccounts: usAccounts, cnAccounts: cnAccounts,
       winTrades: winTrades, lossTrades: lossTrades, flatTrades: flatTrades,
-      winRate: clearedTrades > 0 ? Math.round(winTrades / clearedTrades * 100) : null,
+      winRate: clearedTrades > 0 ? Math.round(winTrades / clearedTrades * 1000) / 10 : null,
       registeredEntries: registeredEntries, clearedTrades: clearedTrades,
       partialEntries: partialEntries, completedEpisodes: completedEpisodes, unknownEntries: unknownEntries,
+      excludedEpisodes: completedEpisodes - clearedTrades,
       totalFills: totalFills, sampleNote: sampleNote
     };
   }
@@ -1488,6 +1490,7 @@
     var m = computeMetrics();
     var wrDisplay = m.winRate !== null ? m.winRate + "%" : "—";
     var wrSub = m.clearedTrades + ' 个可核算完整周期 · ' + m.winTrades + ' 盈 / ' + m.lossTrades + ' 亏' + (m.flatTrades ? ' / ' + m.flatTrades + ' 平' : '');
+    wrSub += '<br>已清仓 ' + m.completedEpisodes + ' 个 · 另 ' + m.excludedEpisodes + ' 个未纳入';
     var c = DATA.mainConcentration || {}, cSub = c.available ? '最大持仓 ' + c.topSym + ' · 主账号正股' : '暂无完整估值';
     if (c.holdingsAsOf) cSub += '<br>持仓 ' + htmlText(c.holdingsAsOf);
     if (c.priceAsOf) cSub += ' · 行情 ' + htmlText(c.priceAsOf);
@@ -1559,7 +1562,7 @@
           if (h.options && h.options.length > 0) {
             optCell += '<div class="opt-chain">';
             h.options.forEach(function(g) {
-              var label = g.settled ? (g.exp + " 已结算") : (g.exp + " 到期");
+              var label = g.settled ? (g.exp + " 已结算") : (g.exp + (g.settlementStatus === 'unconfirmed' ? ' 到期结果待确认' : ' 到期'));
               optCell += '<div class="opt-row"><span class="opt-group-label">' + label + '</span>';
               g.legs.forEach(function(leg) {
                 var pCls = leg.naked ? " naked-opt" : "";
@@ -1614,6 +1617,13 @@
       '<span>清仓登记：<strong>' + m.completedEpisodes + '</strong> 个周期 · 可核算 <strong>' + m.clearedTrades + '</strong> 个</span>' +
       '<span>完整周期胜率：<strong>' + winPct + '</strong></span>' +
       '<span>样本：中国日期 <strong>' + m.sampleNote + '</strong></span>';
+    var exclusions = DATA.closedTrades.reduce(function(rows, day) {
+      return rows.concat(day.trades.filter(function(t) { return t.closesEpisode && !t.performanceEligible; }));
+    }, []);
+    document.getElementById('closedScope').innerHTML = exclusions.length ?
+      '<details><summary>未纳入胜率的 ' + exclusions.length + ' 个已清仓周期（查看原因）</summary><ul>' +
+      exclusions.map(function(t) { return '<li>' + htmlText(t.sym) + ' · ' + htmlText(t.acct) + '：' + htmlText(t.performanceExclusionReason || '周期资料不完整') + '</li>'; }).join('') +
+      '</ul><p>可核算单笔卖出不等于可核算整轮。部分减仓不单独计为完整周期；未纳入不表示亏损。样本有限，不代表账户收益。</p></details>' : '';
 
     var html = "";
     DATA.closedTrades.forEach(function(day, idx) {

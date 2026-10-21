@@ -115,6 +115,11 @@ function pendingBalance(acct, sym, calculated, reported) {
 j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const acctId = acctIdOf(a);
   const holdingQty = holdingTradingQty(h);
+  const activeEp = j.episodes.find(e => e.episodeId === h.episodeId && e.status === 'open');
+  if (activeEp && Number.isFinite(activeEp.currentQty) && Number.isFinite(holdingQty) &&
+      activeEp.currentQty !== holdingQty && !pendingBalance(acctId, h.sym, activeEp.currentQty, holdingQty)) {
+    errors++; console.error('❌ 持仓与当前周期余额不一致: ' + h.sym + '(' + acctId + ')');
+  }
   if (h.analysisQty !== undefined && (!Number.isFinite(h.qty) || !Number.isFinite(h.analysisQty) ||
       !Number.isFinite(h.observationQty) || h.analysisQty < 0 || h.observationQty < 0 ||
       h.analysisQty + h.observationQty !== h.qty || !h.allocationSource)) {

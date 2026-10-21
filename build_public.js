@@ -86,12 +86,14 @@ function computeCoverageFromFull(h) {
 // 给完整 holding 附加预计算的覆盖结果（脱敏字段），供公开页面直接读取
 function attachCoverage(h) {
   const c = computeCoverageFromFull(h);
+  const pendingExpiry = (h.options || []).some(g => !g.settled && g.settlementStatus === 'unconfirmed');
   // Public call counts are allowed, but precise coverage or equality would reveal shares.
   // Publish collateral sufficiency only; keep stock coverage/free-share ratios internal.
   return { ...h, coverage: {
-    status: c.isFullyBacked ? 'covered' : c.status,
-    statusText: c.isFullyBacked ? '足额备兑' : c.statusText,
-    isFullyBacked: c.isFullyBacked,
+    status: pendingExpiry ? 'unknown' : c.isFullyBacked ? 'covered' : c.status,
+    statusText: pendingExpiry ? '到期结果待确认' : c.isFullyBacked ? '足额备兑' : c.statusText,
+    isFullyBacked: pendingExpiry ? null : c.isFullyBacked,
+    expiryUnconfirmed: pendingExpiry,
     sharesUnknown: c.sharesUnknown
   } };
 }
@@ -102,7 +104,7 @@ function mapFields(holding, weight) {
   delete h.strategyNote; // Keep strategy notes in the full ledger only.
   delete h.wtPct; // Old estimated/NAV weights are not the current account-stock denominator.
   Object.assign(h, weight || {});
-  h.options = (h.options || []).map(g => ({ ...pick(g, ['exp', 'settled']),
+  h.options = (h.options || []).map(g => ({ ...pick(g, ['exp', 'settled', 'settlementStatus']),
     legs: (g.legs || []).map(l => pick(l, ['mult', 'strike', 'type', 'premium', 'naked'])) }));
   // entrySetup → setup, entryExecStatus → execStatus（向后兼容）
   if (h.entrySetup && !h.setup) h.setup = h.entrySetup;
@@ -120,7 +122,7 @@ function pick(obj, keys) {
 }
 function publicClosedTrade(t) {
   const out = pick(t, ['tradeId', 'episodeId', 'sym', 'name', 'acct', 'cost', 'soldDate', 'dateStart', 'dateEnd',
-    'isPartial', 'closesEpisode', 'totalRetPct', 'result', 'cycleRetPct', 'cycleResult', 'performanceEligible',
+    'isPartial', 'closesEpisode', 'totalRetPct', 'result', 'cycleRetPct', 'cycleResult', 'performanceEligible', 'performanceExclusionReason',
     'reason', 'setup', 'execStatus', 'oneLiner']);
   out.legs = t.legs.map(l => ({
     ...pick(l, ['executionId', 'date', 'dateEnd', 'datePrecision', 'timezone', 'time', 'price', 'cost', 'costBasisType', 'retPct']),

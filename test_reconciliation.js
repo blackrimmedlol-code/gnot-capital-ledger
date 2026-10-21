@@ -43,6 +43,16 @@ try {
   fs.mkdirSync(path.join(temp, 'data'));
   for (const f of ['verify.js', 'derive.js', 'presentation.js', 'review_dates.js', 'template.html', 'RULES_日常更新.md']) fs.copyFileSync(path.join(__dirname, f), path.join(temp, f));
   const baseline = JSON.parse(JSON.stringify(ledger));
+  const mismatchedEpisode = JSON.parse(JSON.stringify(ledger));
+  const activeCrwg = mismatchedEpisode.episodes.find(e => e.episodeId === 'EP-CRWG-2026Q3');
+  const crwgHolding = mismatchedEpisode.accounts.find(a => a.id === 'main').holdings.find(h => h.sym === 'CRWG');
+  if (activeCrwg.status === 'open') {
+    activeCrwg.currentQty = (crwgHolding.analysisQty ?? crwgHolding.qty) + 1;
+    fs.writeFileSync(path.join(temp, 'data/ledger-full.json'), JSON.stringify(mismatchedEpisode));
+    const mismatch = spawnSync(process.execPath, ['verify.js'], { cwd: temp, encoding: 'utf8' });
+    assert.notStrictEqual(mismatch.status, 0, 'Stale episode balance passed');
+    assert((mismatch.stdout + mismatch.stderr).includes('持仓与当前周期余额不一致'));
+  }
   // RAM's confirmed observation share is real collateral, not a fictitious trade.
   const allocated = JSON.parse(JSON.stringify(ledger));
   const ram = allocated.accounts.find(a => a.id === 'main').holdings.find(h => h.sym === 'RAM');

@@ -64,7 +64,10 @@ function check(html, ledger) {
       const full = fullAccount.holdings.find(item => item.sym === h.sym);
       const contracts = (full.options || []).filter(g => !g.settled).reduce((n, g) =>
         n + (g.legs || []).filter(l => l.type === 'C').reduce((n, l) => n + (l.mult || 0), 0), 0);
-      if (contracts && Number.isFinite(full.qty))
+      if ((full.options || []).some(g => !g.settled && g.settlementStatus === 'unconfirmed')) {
+        assert.equal(h.coverage.isFullyBacked, null, '未确认到期结果不能继续宣称当前足额备兑');
+        assert.equal(h.coverage.statusText, '到期结果待确认');
+      } else if (contracts && Number.isFinite(full.qty))
         assert.equal(h.coverage.isFullyBacked, full.qty >= contracts * 100,
           '备兑担保必须按实股数量，不能排除仍持有的观察股');
       assert.equal(h.analysisQty, undefined, '交易股数进入公开数据');
@@ -126,6 +129,15 @@ function check(html, ledger) {
   assert.ok(!/数量待核实|时刻未记录|待复盘|后续处理待核实/.test(nodes.closedDays.innerHTML + nodes.reviewsBox.innerHTML), '旧状态或内部核对提示仍出现');
   assert.ok(!/券商结单补录|结单仍有观察仓|后者仍待核实/.test(nodes.closedDays.innerHTML + nodes.reviewsBox.innerHTML), '内部来源核对提示仍出现');
   assert.ok(!nodes.closedSummary.innerHTML.includes('待核实'), '摘要仍重复显示内部缺项任务');
+  const eligible = new Set(expected.trades.filter(t => t.performanceEligible).map(t => t.episodeId));
+  const closed = new Set(expected.trades.filter(t => t.closesEpisode).map(t => t.episodeId));
+  assert.equal(api.computeMetrics().clearedTrades, eligible.size, '胜率样本漏算或重复');
+  assert.equal(api.computeMetrics().completedEpisodes, closed.size, '清仓登记漏算或重复');
+  assert.equal(api.computeMetrics().excludedEpisodes, closed.size - eligible.size, '未纳入周期数不一致');
+  for (const t of expected.trades.filter(t => t.closesEpisode && !t.performanceEligible)) {
+    assert.ok(t.performanceExclusionReason, '未纳入周期缺可解释原因');
+    assert.ok(nodes.closedScope.innerHTML.includes(t.sym) && nodes.closedScope.innerHTML.includes(t.performanceExclusionReason), '未纳入周期未展示原因');
+  }
   for (const r of api.DATA.reviews) assert.ok(!r.observation && !r.internalObservation && !r.internalExecution, '内部字段进入页面数据');
   if (reviewIds.length) {
     const latest = publicReviews.slice().sort((a, b) => (b.reviewDate || b.date).localeCompare(a.reviewDate || a.date))[0];

@@ -428,7 +428,13 @@
                   "premium": 2,
                   "note": "9/19加卖"
                 }
-              ]
+              ],
+              "settlementStatus": "unconfirmed",
+              "settlementReview": {
+                "checkedAt": "2026-10-21T06:24:19.671227+00:00",
+                "evidence": "本次核对时已过合约到期日，台账未登记买回、到期或指派结果；RAM本人确认未行权仅适用RAM，不能复制到CRWG。",
+                "note": "保留原合约及最后确认正股持仓；不自动删除合约、视为作废、生成指派或减少正股。"
+              }
             }
           ],
           "tags": [
@@ -458,7 +464,8 @@
             "status": "本轮不核算",
             "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
-          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）"
+          "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
+          "alertSub": "10/16到期结果待确认；正股沿用最后确认记录"
         },
         {
           "sym": "CRDU",
@@ -4723,7 +4730,7 @@
       "entryDate": "2026-09-17",
       "entrySetup": [],
       "entryExecStatus": "unknown",
-      "currentQty": 101,
+      "currentQty": 100,
       "exitReason": null,
       "exitDate": null
     },
@@ -6043,6 +6050,31 @@
       "date": "2026-10-08",
       "item": "RAM@13.7减仓登记",
       "detail": "主号RAM按13.7卖250（预设限价、有序撤出、降单一仓位占比），交易仓1449→1199；续EP-RAM-2026Q3，移动加权实际均价13.64814不变，正股净投入13.37752→13.31028。执行状态plan。精确时刻未提供，按美东10/7盘后近似归属。"
+    },
+    {
+      "type": "episode_holding_alignment",
+      "recordedAt": "2026-10-21T06:24:19.671227+00:00",
+      "episodeId": "EP-CRWG-2026Q3",
+      "previousEpisode": {
+        "episodeId": "EP-CRWG-2026Q3",
+        "sym": "CRWG",
+        "account": "main",
+        "status": "open",
+        "entryDate": "2026-09-17",
+        "entrySetup": [],
+        "entryExecStatus": "unknown",
+        "currentQty": 101,
+        "exitReason": null,
+        "exitDate": null
+      },
+      "correctedCurrentQty": 100,
+      "sourceExecutionIds": [
+        "EX-20260917-CRWG-BUY-009",
+        "EX-STMT-20260930-CRWG-BUY-P033-012",
+        "EX-20260922-CRWG-SELL-010",
+        "EX-STMT-20260930-CRWG-SELL-P039-014"
+      ],
+      "reason": "CRWG交易仓买卖链为100，与最新持仓一致；原周期101误含已卖出的1股观察份额。只修正周期缓存，不新增成交。"
     }
   ],
   "reviews": [
@@ -11177,6 +11209,31 @@
           "source": "用户要求补齐交易复盘；事实与判断分开，保留原计划，不以盈亏倒推质量。"
         }
       }
+    }
+  ],
+  "auditHistory": [
+    {
+      "auditId": "AUDIT-20261021-CYCLE-COUNT",
+      "checkedAt": "2026-10-21T06:24:19.671227+00:00",
+      "closedEpisodes": 25,
+      "performanceEligibleEpisodes": 19,
+      "wins": 15,
+      "losses": 4,
+      "excludedEpisodeIds": [
+        "EP-RAM-2026Q3",
+        "EP-ASTX-CLOSED-20260922",
+        "EP-SNDK-CLOSED-20260919",
+        "EP-LITX-CLOSED-20260919",
+        "EP-CRDU-CLOSED-20260919",
+        "EP-RKLX-CLOSED-20260918"
+      ],
+      "evidence": "逐一核对最新executions/episodes、复盘引用、可核算完整周期及已提供操作记录导出_20260923.md。该导出仅列相关历史退出和均价，不能补造缺失买入。",
+      "findings": [
+        "19个样本是完整买卖链，不是所有清仓登记；25个已清仓中有6个资料不完整。",
+        "CRWG周期101修正为100，与最后确认实股及完整交易链同步。",
+        "CRWG10/16到期17C结果未报告；标为未确认，保持正股及历史合约，不推断指派。",
+        "新成交日期及复盘引用均通过校验；旧来源不明的中国日期区间保留，不擅自迁移。"
+      ]
     }
   ]
 }

@@ -71,6 +71,11 @@ function derive(ledger) {
     const lastDate = sells.map(e => e.date).sort().pop();
     const closed = !!ep && ep.status === 'closed';
     const cycleKnown = closed && complete && known && balance === 0 && legs.every(l => positive(l.cost) && l.costBasisType === 'actual');
+    const performanceExclusionReason = !closed || cycleKnown ? null :
+      checkpoints.length ? '缺完整期初买入记录' :
+      !buys.length ? '缺买入记录' :
+      events.some(e => !positive(e.qty) || !positive(e.price)) ? '成交数量或价格不完整' :
+      balance !== 0 ? '买卖数量链未闭合' : '成本链未完整核实';
     const cycleCapital = cycleKnown ? legs.reduce((s, l) => s + l.qty * l.cost, 0) : null;
     const cyclePnl = cycleKnown ? legs.reduce((s, l) => s + l.qty * (l.price - l.cost), 0) : null;
     const cycleResult = cycleKnown ? resultOf(cyclePnl) : null;
@@ -96,6 +101,7 @@ function derive(ledger) {
         cycleRetPct: closesEpisode && positive(cycleCapital) ? round(cyclePnl / cycleCapital * 100) : null,
         cycleResult: closesEpisode ? cycleResult : null,
         performanceEligible: closesEpisode && cycleKnown,
+        performanceExclusionReason: closesEpisode ? performanceExclusionReason : null,
         reason: closesEpisode ? legacy.reason || ep.exitReason || '清仓登记' : '部分减仓兑现',
         setup: legacy.setup || [], execStatus: legacy.execStatus || 'unknown', oneLiner: legacy.oneLiner || ''
       });

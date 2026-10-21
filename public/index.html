@@ -1308,6 +1308,7 @@
     </div>
 
     <div class="closed-summary" id="closedSummary"></div>
+    <div class="subcell" id="closedScope"></div>
     <div class="subcell">日期与时刻为归属展示；仅有原日期时保留可能的日期区间。收益按成交前正股成本核算，加权合计仅对应本组卖出；— 表示暂无可核算值。</div>
     <div class="closed-days" id="closedDays"></div>
   </section>
@@ -1568,6 +1569,7 @@
           options: [
             {
               exp: "2026-10-16",
+              settlementStatus: "unconfirmed",
               legs: [
                 {
                   mult: 1,
@@ -1581,12 +1583,14 @@
           tags: [
             "hold"
           ],
+          alertSub: "10/16到期结果待确认；正股沿用最后确认记录",
           setup: [],
           execStatus: "unknown",
           coverage: {
-            status: "covered",
-            statusText: "足额备兑",
-            isFullyBacked: true,
+            status: "unknown",
+            statusText: "到期结果待确认",
+            isFullyBacked: null,
+            expiryUnconfirmed: true,
             sharesUnknown: false
           },
           weightRank: 2,
@@ -1616,6 +1620,7 @@
             status: "none",
             statusText: "无备兑",
             isFullyBacked: false,
+            expiryUnconfirmed: false,
             sharesUnknown: false
           },
           weightRank: 1,
@@ -1652,6 +1657,7 @@
             status: "none",
             statusText: "无备兑",
             isFullyBacked: false,
+            expiryUnconfirmed: false,
             sharesUnknown: false
           },
           stockWeightPct: null
@@ -1690,6 +1696,7 @@
             status: "none",
             statusText: "无备兑",
             isFullyBacked: false,
+            expiryUnconfirmed: false,
             sharesUnknown: false
           },
           weightRank: 1,
@@ -1726,6 +1733,7 @@
             status: "none",
             statusText: "无备兑",
             isFullyBacked: false,
+            expiryUnconfirmed: false,
             sharesUnknown: false
           },
           weightRank: 1,
@@ -1751,6 +1759,7 @@
             status: "none",
             statusText: "无备兑",
             isFullyBacked: false,
+            expiryUnconfirmed: false,
             sharesUnknown: false
           },
           weightRank: 2,
@@ -1776,6 +1785,7 @@
             status: "none",
             statusText: "无备兑",
             isFullyBacked: false,
+            expiryUnconfirmed: false,
             sharesUnknown: false
           },
           weightRank: 3,
@@ -1810,6 +1820,7 @@
           cycleRetPct: 4.93982,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "用户报告按计划7.40全部清仓",
           setup: [],
           execStatus: "unknown",
@@ -1856,6 +1867,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: "缺完整期初买入记录",
           reason: "按8.00清仓剩余正股，回笼资金转入SOXL",
           setup: [],
           execStatus: "unknown",
@@ -1893,6 +1905,7 @@
           cycleRetPct: 9.89011,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "用户确认按99.00全部卖出，具体退出原因未提供。",
           setup: [],
           execStatus: "unknown",
@@ -1939,6 +1952,7 @@
           cycleRetPct: -43.75,
           cycleResult: "loss",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "用户报告中子号延期负面，不再等待，按9.90全部清仓。",
           setup: [],
           execStatus: "unknown",
@@ -1985,6 +1999,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -2031,6 +2046,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -2068,6 +2084,7 @@
           cycleRetPct: -24.40454,
           cycleResult: "loss",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "触及用户所述20.63止损位并伴有情绪波动，全部清仓",
           setup: [],
           execStatus: "unknown",
@@ -2114,6 +2131,7 @@
           cycleRetPct: 4.76465,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "盘前开盘快速回落后按7.40清仓；用户认为原7.82卖出目标偏高",
           setup: [],
           execStatus: "unknown",
@@ -2160,6 +2178,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -2197,6 +2216,7 @@
           cycleRetPct: 1.66831,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "清仓回笼后转投IRE/RAM低吸",
           setup: [],
           execStatus: "unknown",
@@ -2243,6 +2263,7 @@
           cycleRetPct: 2.58044,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "清仓兑现（快进快出博弈到验证位落袋）",
           setup: [],
           execStatus: "unknown",
@@ -2289,6 +2310,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -2335,6 +2357,7 @@
           cycleRetPct: 2.18228,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "1号小账户缩量上涨日离场：AVGX @39.8 全清，当日转空仓观望",
           setup: [
             "超跌反弹",
@@ -2375,6 +2398,7 @@
           cycleRetPct: 4.31294,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "主号 10/5 当日建仓 GDXU（99.7）、盘中 @104 高抛了结，日内波段落袋",
           setup: [
             "日内高抛"
@@ -2414,6 +2438,7 @@
           cycleRetPct: 5.96302,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "1号小账户日内快进快出：LABU 240.65 建、255 全清，缩量上涨日轻仓博弈后离场",
           setup: [
             "快进快出"
@@ -2462,6 +2487,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -2512,6 +2538,7 @@
           cycleRetPct: 3.53546,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "分批止盈，交易仓已清仓",
           setup: [
             "趋势波段",
@@ -2552,6 +2579,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -2611,6 +2639,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [
             "趋势波段",
@@ -2660,6 +2689,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [
             "趋势波段",
@@ -2709,6 +2739,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -2755,6 +2786,7 @@
           cycleRetPct: -0.41068,
           cycleResult: "loss",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "UGL 小仓资金利用率过低，48.5 清仓回笼换网投 MSTU",
           setup: [
             "仓位管理"
@@ -2803,6 +2835,7 @@
           cycleRetPct: 3.38983,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "原止盈目标12.30；实际成交12.20，交易仓已清仓",
           setup: [
             "支撑低吸",
@@ -2843,6 +2876,7 @@
           cycleRetPct: 6.02266,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "按原目标退出交易仓",
           setup: [
             "超跌反弹",
@@ -2883,6 +2917,7 @@
           cycleRetPct: 3.42114,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "观察冲高失败，9.855 清仓并转身补 RAM",
           setup: [
             "支撑低吸",
@@ -2932,6 +2967,7 @@
           cycleRetPct: -3.3936,
           cycleResult: "loss",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "原定 36.2 兑现未及·跟随观察认错离场",
           setup: [
             "对冲 / 逆向博弈"
@@ -2980,6 +3016,7 @@
           cycleRetPct: 3.24779,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "反弹兑现·识别上涨乏力后果断全清",
           setup: [
             "支撑低吸",
@@ -3042,6 +3079,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: "缺买入记录",
           reason: "接飞刀反弹止盈清仓",
           setup: [
             "超跌反弹"
@@ -3103,6 +3141,7 @@
           cycleRetPct: 2.77591,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "伊朗海峡消息不及预期·scalp减仓落袋",
           setup: [
             "日内 Scalp"
@@ -3151,6 +3190,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [
             "趋势波段",
@@ -3191,6 +3231,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -3237,6 +3278,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: "缺买入记录",
           reason: "AI 硬件链冲高，释放集中度",
           setup: [
             "趋势波段",
@@ -3303,6 +3345,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: "缺买入记录",
           reason: "卫星仓止盈，光通信板块冲高",
           setup: [
             "趋势波段"
@@ -3342,6 +3385,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: "缺买入记录",
           reason: "冲高止盈，账号清空",
           setup: [
             "趋势波段",
@@ -3391,6 +3435,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: "缺买入记录",
           reason: "冲高分批止盈",
           setup: [
             "趋势波段",
@@ -3453,6 +3498,7 @@
           cycleRetPct: 5.2146,
           cycleResult: "win",
           performanceEligible: true,
+          performanceExclusionReason: null,
           reason: "短线止盈，交易仓已清仓",
           setup: [],
           execStatus: "unknown",
@@ -3490,6 +3536,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -3536,6 +3583,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -3582,6 +3630,7 @@
           cycleRetPct: null,
           cycleResult: null,
           performanceEligible: false,
+          performanceExclusionReason: null,
           reason: "部分减仓兑现",
           setup: [],
           execStatus: "unknown",
@@ -4154,9 +4203,10 @@
       totalHoldings: totalHoldings, uniqueHoldings: symbols.size, usCount: usSymbols.size, cnCount: cnSymbols.size,
       activeAccounts: activeAccounts, usAccounts: usAccounts, cnAccounts: cnAccounts,
       winTrades: winTrades, lossTrades: lossTrades, flatTrades: flatTrades,
-      winRate: clearedTrades > 0 ? Math.round(winTrades / clearedTrades * 100) : null,
+      winRate: clearedTrades > 0 ? Math.round(winTrades / clearedTrades * 1000) / 10 : null,
       registeredEntries: registeredEntries, clearedTrades: clearedTrades,
       partialEntries: partialEntries, completedEpisodes: completedEpisodes, unknownEntries: unknownEntries,
+      excludedEpisodes: completedEpisodes - clearedTrades,
       totalFills: totalFills, sampleNote: sampleNote
     };
   }
@@ -4196,6 +4246,7 @@
     var m = computeMetrics();
     var wrDisplay = m.winRate !== null ? m.winRate + "%" : "—";
     var wrSub = m.clearedTrades + ' 个可核算完整周期 · ' + m.winTrades + ' 盈 / ' + m.lossTrades + ' 亏' + (m.flatTrades ? ' / ' + m.flatTrades + ' 平' : '');
+    wrSub += '<br>已清仓 ' + m.completedEpisodes + ' 个 · 另 ' + m.excludedEpisodes + ' 个未纳入';
     var c = DATA.mainConcentration || {}, cSub = c.available ? '最大持仓 ' + c.topSym + ' · 主账号正股' : '暂无完整估值';
     if (c.holdingsAsOf) cSub += '<br>持仓 ' + htmlText(c.holdingsAsOf);
     if (c.priceAsOf) cSub += ' · 行情 ' + htmlText(c.priceAsOf);
@@ -4267,7 +4318,7 @@
           if (h.options && h.options.length > 0) {
             optCell += '<div class="opt-chain">';
             h.options.forEach(function(g) {
-              var label = g.settled ? (g.exp + " 已结算") : (g.exp + " 到期");
+              var label = g.settled ? (g.exp + " 已结算") : (g.exp + (g.settlementStatus === 'unconfirmed' ? ' 到期结果待确认' : ' 到期'));
               optCell += '<div class="opt-row"><span class="opt-group-label">' + label + '</span>';
               g.legs.forEach(function(leg) {
                 var pCls = leg.naked ? " naked-opt" : "";
@@ -4322,6 +4373,13 @@
       '<span>清仓登记：<strong>' + m.completedEpisodes + '</strong> 个周期 · 可核算 <strong>' + m.clearedTrades + '</strong> 个</span>' +
       '<span>完整周期胜率：<strong>' + winPct + '</strong></span>' +
       '<span>样本：中国日期 <strong>' + m.sampleNote + '</strong></span>';
+    var exclusions = DATA.closedTrades.reduce(function(rows, day) {
+      return rows.concat(day.trades.filter(function(t) { return t.closesEpisode && !t.performanceEligible; }));
+    }, []);
+    document.getElementById('closedScope').innerHTML = exclusions.length ?
+      '<details><summary>未纳入胜率的 ' + exclusions.length + ' 个已清仓周期（查看原因）</summary><ul>' +
+      exclusions.map(function(t) { return '<li>' + htmlText(t.sym) + ' · ' + htmlText(t.acct) + '：' + htmlText(t.performanceExclusionReason || '周期资料不完整') + '</li>'; }).join('') +
+      '</ul><p>可核算单笔卖出不等于可核算整轮。部分减仓不单独计为完整周期；未纳入不表示亏损。样本有限，不代表账户收益。</p></details>' : '';
 
     var html = "";
     DATA.closedTrades.forEach(function(day, idx) {
