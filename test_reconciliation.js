@@ -72,11 +72,20 @@ try {
     assert((result.stdout + result.stderr).includes('持仓实股对账失败'));
   }
   const baselineHolding = baseline.accounts.find(a => a.id === 'main').holdings.find(h => h.sym === 'CRWG');
-  baselineHolding.qty = 101;
+  // Build an isolated evidence fixture from the current balance; future real fills
+  // must not invalidate the historical unresolved-balance regression.
+  const knownQuantity = baselineHolding.analysisQty ?? baselineHolding.qty;
+  const reportedQuantity = knownQuantity + 1;
+  const sourceId = 'test-current-crwg-balance';
+  const statementAsOf = baseline.accounts.find(a => a.id === 'main').holdingsAsOf;
+  baseline.sourceDocuments.push({ sourceId, note: 'Synthetic evidence used only by this regression' });
+  baseline.statementPositions.push({ sourceId, asOf: statementAsOf, account: 'main', holdings: { CRWG: knownQuantity } });
+  baselineHolding.qty += 1;
+  if (baselineHolding.analysisQty !== undefined) baselineHolding.analysisQty += 1;
   baselineHolding.actualCostBasis = { value: null, status: '待核实' };
   baselineHolding.netInvestedCost.status = '待核实';
-  baseline.reconciliations.push({ account: 'main', sym: 'CRWG', status: 'pending', knownQuantity: 100,
-    reportedQuantity: 101, statementAsOf: '2026-09-30', sourceId: 'futu-main-20260930', note: 'test: later balance not reconciled' });
+  baseline.reconciliations.push({ account: 'main', sym: 'CRWG', status: 'pending', knownQuantity,
+    reportedQuantity, statementAsOf, sourceId, note: 'test: later balance not reconciled' });
   fs.writeFileSync(path.join(temp, 'data/ledger-full.json'), JSON.stringify(baseline));
   let r = spawnSync(process.execPath, ['verify.js'], { cwd: temp, encoding: 'utf8' });
   assert.strictEqual(r.status, 0, r.stdout + r.stderr);
@@ -91,3 +100,4 @@ try {
   assert.notStrictEqual(r.status, 0); assert((r.stdout + r.stderr).includes('余额差异未解决'));
 } finally { fs.rmSync(temp, { recursive: true, force: true }); }
 console.log('✅ 结单证据、香港/美东时间、观察仓清仓、未知值和未解决差异回归通过');
+
