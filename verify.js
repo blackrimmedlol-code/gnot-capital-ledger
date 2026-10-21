@@ -120,6 +120,18 @@ j.accounts.forEach(a => (a.holdings || []).forEach(h => {
       h.analysisQty + h.observationQty !== h.qty || !h.allocationSource)) {
     errors++; console.error('❌ 持仓观察份额分配无效: ' + h.sym + '(' + acctId + ')');
   }
+  // 实股对账包含已关闭周期；清仓后同样不能凭空增加观察份额。
+  if (h.analysisQty !== undefined) {
+    const physicalEvents = j.executions.filter(e => e.sym === h.sym && e.account === acctId);
+    const physicalOpenings = (j.openingPositions || []).filter(o => o.account === acctId && o.sym === h.sym);
+    if (physicalEvents.every(e => Number.isFinite(e.qty)) && physicalOpenings.every(o => Number.isFinite(o.qty))) {
+      const physicalQty = physicalOpenings.reduce((s, o) => s + o.qty, 0) +
+        physicalEvents.reduce((s, e) => s + (e.side === 'buy' ? 1 : -1) * e.qty, 0);
+      if (physicalQty !== h.qty) {
+        errors++; console.error('❌ 持仓实股对账失败: ' + h.sym + '(' + acctId + ')');
+      }
+    }
+  }
   const closedEpIds = new Set((j.episodes || []).filter(e => e.status === 'closed').map(e => e.episodeId));
   const ex = j.executions.filter(e => e.sym === h.sym && e.account === acctId && !closedEpIds.has(e.episodeId));
   if (ex.length === 0) {
@@ -137,13 +149,6 @@ j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const openings = (j.openingPositions || []).filter(o => o.account === acctId && o.sym === h.sym);
   const openingQty = openings.reduce((s, o) => s + analysisQty(o), 0);
   const calculated = openingQty + buys - sells;
-  if (h.analysisQty !== undefined) {
-    const physicalQty = openings.reduce((s, o) => s + o.qty, 0) +
-      ex.reduce((s, e) => s + (e.side === 'buy' ? 1 : -1) * e.qty, 0);
-    if (physicalQty !== h.qty) {
-      errors++; console.error('❌ 持仓实股对账失败: ' + h.sym + '(' + acctId + ')');
-    }
-  }
   if (calculated !== holdingQty) {
     if (pendingBalance(acctId, h.sym, calculated, holdingQty)) {
       warnings++; console.warn(`⚠️ ${h.sym}(${acctId}) 已留痕的余额差异: 结单/已知流水${calculated}，较新记录${h.qty}；后续成交待补`);

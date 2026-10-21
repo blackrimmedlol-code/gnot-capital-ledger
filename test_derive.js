@@ -44,6 +44,12 @@ assert.equal(core.find(t => t.soldDate === '2026-09-21').totalRetPct, 7.26924);
 assert.equal(core.find(t => t.soldDate === '2026-10-02').totalRetPct, 5.51317);
 const withoutFutureBuy = structuredClone(ledger);
 withoutFutureBuy.executions = withoutFutureBuy.executions.filter(e => e.date < '2026-10-06');
+// 截止日快照不能携带未来的清仓状态，否则最后一条历史卖出会被误作清仓腿。
+for (const ep of withoutFutureBuy.episodes) {
+  if (ep.exitDate && ep.exitDate >= '2026-10-06') {
+    ep.status = 'open'; ep.exitDate = null; ep.exitReason = null;
+  }
+}
 // 历史卖出收益必须稳定：其后任何加仓/卖出不得回溯改变 <10/6 的已结算成本与收益。
 // 10/6 之后的新成交只允许作为当日新增条目（partial/close 卖出），不参与历史一致性比较。
 const histOnly = t => t.soldDate < '2026-10-06';

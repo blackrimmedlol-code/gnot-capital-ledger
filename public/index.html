@@ -1350,8 +1350,8 @@
   // ============================================================
   var DATA = {
   optionsAnalysisScope: "coverage_only",
-  asOf: "成交更新至10/21：CRDU清仓；补录10/16 SOXL按95.19回补，并补齐对应执行复盘；行情保留原快照。",
-  asOfLabel: "成交：10月21日 · CRDU清仓；补录10月16日SOXL；行情：见各持仓日期",
+  asOf: "成交更新至10/21：CRDU清仓；补录10/16 RAM全清、15C到期未行权并关联SOXL买入；行情保留原快照。",
+  asOfLabel: "成交：10月21日 · CRDU清仓；补录10月16日RAM转SOXL；行情：见各持仓日期",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1557,54 +1557,6 @@
       navNote: "USD · 重仓（10/6仓位估算）",
       holdings: [
         {
-          sym: "RAM",
-          name: "2x DRAM (Roundhill T-Rex)",
-          cost: 12.83872,
-          costNote: "历史均价基准滚动",
-          strategy: [
-            "核心仓",
-            "CC收租"
-          ],
-          options: [
-            {
-              exp: "2026-10-16",
-              legs: [
-                {
-                  mult: 2,
-                  strike: 15,
-                  type: "C",
-                  premium: 0.95
-                },
-                {
-                  mult: 1,
-                  strike: 15,
-                  type: "C",
-                  premium: 1.1
-                }
-              ]
-            }
-          ],
-          tags: [
-            "hold"
-          ],
-          alerts: [],
-          alertSub: "仅保留15C备兑担保仓",
-          setup: [
-            "趋势波段"
-          ],
-          execStatus: "plan",
-          oneLiner: "10/14按10.45减仓，剩余正股担保3张10/16到期15C；非备兑敞口转向SOXL，保留现金应对CPI。",
-          coverage: {
-            status: "covered",
-            statusText: "足额备兑",
-            isFullyBacked: true,
-            sharesUnknown: false
-          },
-          weightRank: 2,
-          weightLevel: "低",
-          stockWeightPct: 12.5
-        },
-        {
           sym: "CRWG",
           name: "2x CoreWeave (Leverage Shares)",
           cost: 15.75,
@@ -1637,9 +1589,9 @@
             isFullyBacked: true,
             sharesUnknown: false
           },
-          weightRank: 3,
+          weightRank: 2,
           weightLevel: "低",
-          stockWeightPct: 7.5
+          stockWeightPct: 8.6
         },
         {
           sym: "SOXL",
@@ -1659,7 +1611,7 @@
             "板块杠杆交易"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/16按95.19回补，用户确认已投入此前预留的最后一笔现金；112.35新增部分的反弹退出预案保留。",
+          oneLiner: "10/16按95.19回补，用户确认与RAM剩余仓位退出回笼资金对应；112.35新增部分的反弹退出预案保留。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1668,7 +1620,7 @@
           },
           weightRank: 1,
           weightLevel: "高",
-          stockWeightPct: 80
+          stockWeightPct: 91.4
         }
       ]
     },
@@ -1887,6 +1839,43 @@
       timezone: "Asia/Shanghai",
       dateLabel: "2026-10-16",
       trades: [
+        {
+          tradeId: "EP-RAM-2026Q3:2026-10-16",
+          episodeId: "EP-RAM-2026Q3",
+          sym: "RAM",
+          name: "2x DRAM (Roundhill T-Rex)",
+          acct: "主账号",
+          cost: 12.83872,
+          soldDate: "2026-10-16",
+          dateStart: "2026-10-16",
+          dateEnd: "2026-10-16",
+          isPartial: false,
+          closesEpisode: true,
+          totalRetPct: -37.68849,
+          result: "loss",
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
+          reason: "按8.00清仓剩余正股，回笼资金转入SOXL",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261016-RAM-SELL-082",
+              date: "2026-10-16",
+              dateEnd: "2026-10-16",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 8,
+              cost: 12.83872,
+              costBasisType: "actual",
+              retPct: -37.6885,
+              note: "按8.00全部清仓，回笼资金转入已登记的SOXL买入；期权到期未行权单独记录，不新增重复SOXL成交。"
+            }
+          ]
+        },
         {
           tradeId: "EP-GDXU-SAT1-20261015:2026-10-16",
           episodeId: "EP-GDXU-SAT1-20261015",
@@ -3670,40 +3659,48 @@
       reviewDate: "2026-10-16",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-16 复盘",
-      title: "SOXL投入原预留资金 · 1号GDXU清仓并新开INTW",
+      title: "RAM全清转入SOXL · 1号GDXU清仓并新开INTW",
       plan: [
         "GDXU此前明确定位长期持有，原计划保留；INTW的事前入场理由、期限与退出预案未提供，不自动套用原定位。",
-        "SOXL此前预留部分资金等待PPI后机会；本次确认10/16投入该笔最后预留资金，具体PPI触发条件是否满足未确认，不追溯补写。112.35新增部分的独立反弹退出预案继续保留。"
+        "SOXL此前预留部分资金等待PPI后机会；本次确认10/16投入该笔最后预留资金，具体PPI触发条件是否满足未确认，不追溯补写。112.35新增部分的独立反弹退出预案继续保留。",
+        "RAM原仅保留15C担保仓的安排随本次全部卖出结束；用户确认回笼资金转入同日已登记SOXL买入，原计划及后续变更均保留，不回写8.00事前退出目标。"
       ],
       execution: [
         "1号账户GDXU：按99.00全部清仓，原周期结束。",
         "1号账户INTW：按18.47建仓，建立独立新周期。",
-        "主账号SOXL：按95.19回补，使用此前预留的最后一笔现金；原持仓周期继续。"
+        "主账号SOXL：按95.19回补，使用此前预留的最后一笔现金；原持仓周期继续。",
+        "主账号RAM：按8.00全部清仓，原正股周期结束；资金转入同日已登记SOXL按95.19买入，不重复新增。",
+        "RAM剩余3张10/16到期15C：用户确认到期未行权，当前无开放卖call；不虚构提前买回或正股指派。"
       ],
       good: [
-        "SOXL：此前保留资金，后以95.19继续买入，使本轮移动加权均价由119.24198降至115.3875。优势是保留资金后可在更低价格投入；这仅是成交与成本结果，不证明买点或择时最优。置信度：高。",
-        "1号GDXU：按99.00完整清仓，原周期已结束，正股收益约+9.9%；INTW另开周期，不混算两者成本或收益。状态与收益核算置信度：高，不以盈利评价执行质量。"
+        "SOXL：本笔95.19买入与RAM退出回笼资金对应，沿用原独立SOXL周期，移动加权均价由119.24198降至115.3875。优势是结束RAM正股敞口后按明确方向换入，未重复记账；降低均价是核算结果，不证明买点最优。事实与成本核对置信度：高。",
+        "1号GDXU：按99.00完整清仓，原周期已结束，正股收益约+9.9%；INTW另开周期，不混算两者成本或收益。状态与收益核算置信度：高，不以盈利评价执行质量。",
+        "RAM：已结束剩余正股敞口，15C已由本人确认到期未行权，当前不存在该标的备兑义务。清仓腿与历史兑现分别展示，不因本笔亏损判定退出错误。当前状态置信度：高。"
       ],
       issues: [
-        "SOXL：原预留资金投入后，本轮预留现金的缓冲已被使用，同时持仓数量增加；均价降低不等于敞口降低。本次使用预留资金与此前分批思路方向一致，但PPI条件是否触发、总风险额度及退出边界仍缺证据，不据此判违规或情绪交易。现金安排依据本人报告，置信度：高；条件执行判断置信度：低。",
-        "1号GDXU由长期定位转为清仓，但变更原因未提供；INTW事前理由及持有退出方案未记录，因此不能判断换仓改善了风险收益，也不能把换仓频次本身判为错误。执行质量判断置信度：低。"
+        "SOXL：新增买入增加本标的数量，原预留资金已按本人报告投入；本次又确认与RAM退出资金对应。换仓结束RAM敞口，但不能仅凭均价降低认定总体风险下降。PPI条件是否触发、总风险额度与退出边界仍未完整记录，不据此判违规或情绪交易。条件执行评价置信度：低。",
+        "1号GDXU由长期定位转为清仓，但变更原因未提供；INTW事前理由及持有退出方案未记录，因此不能判断换仓改善了风险收益，也不能把换仓频次本身判为错误。执行质量判断置信度：低。",
+        "RAM：全清的代价是放弃此后反弹参与权，同时将资金集中到SOXL；本次卖出腿相对历史实际均价基准约-37.7%，是资金结果，不单独证明操作质量。正股卖出与15C到期的盘中先后未提供，不推断历史时段曾出现裸卖。过程评价置信度：中。"
       ],
       todo: [
-        "SOXL：当前提示改为原预留资金已投入；继续区分112.35新增部分与其余仓位的退出预案。下一步先明确现有持仓的退出边界与可承受损失，不把补录本身变成新的加仓信号。此为复盘建议，不自动新增禁止加仓规则。",
-        "1号账户：后续按INTW自身逻辑评价；保留GDXU原长期计划及实际退出的差异，不用后续价格回写本次决策质量。"
+        "SOXL：本笔与RAM退出回笼资金关联，原预留资金提示已更新；继续区分112.35新增部分与其余仓位的退出预案。后续先核对现有持仓的退出边界和可承受损失，此为复盘建议，不自动新增禁止加仓规则。",
+        "1号账户：后续按INTW自身逻辑评价；保留GDXU原长期计划及实际退出的差异，不用后续价格回写本次决策质量。",
+        "RAM：从当前持仓及到期提醒中移除；如未来重新买入，另开新周期。历史期初不完整，不将本次清仓腿收益冒充可核算的完整周期收益。"
       ],
       execStatus: "unknown",
       symbols: [
         "GDXU",
         "INTW",
-        "SOXL"
+        "SOXL",
+        "RAM"
       ],
       accounts: [
         "1号小账号",
         "主账号"
       ],
       saleExecutionIds: [
-        "EX-USER-20261016-GDXU-SELL-078"
+        "EX-USER-20261016-GDXU-SELL-078",
+        "EX-USER-20261016-RAM-SELL-082"
       ]
     },
     {

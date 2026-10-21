@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/21：CRDU清仓；补录10/16 SOXL按95.19回补，并补齐对应执行复盘；行情保留原快照。",
-  "asOfLabel": "成交：10月21日 · CRDU清仓；补录10月16日SOXL；行情：见各持仓日期",
+  "asOf": "成交更新至10/21：CRDU清仓；补录10/16 RAM全清、15C到期未行权并关联SOXL买入；行情保留原快照。",
+  "asOfLabel": "成交：10月21日 · CRDU清仓；补录10月16日RAM转SOXL；行情：见各持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -299,7 +299,7 @@
         {
           "sym": "RAM",
           "name": "2x DRAM (Roundhill T-Rex)",
-          "qty": 300,
+          "qty": 0,
           "cost": 12.83872,
           "costDate": "10/14按10.45减仓，剩余交易仓均价不变",
           "stop": null,
@@ -310,40 +310,20 @@
             "核心仓",
             "CC收租"
           ],
-          "options": [
-            {
-              "exp": "2026-10-16",
-              "legs": [
-                {
-                  "mult": 2,
-                  "strike": 15,
-                  "type": "C",
-                  "premium": 0.95,
-                  "note": ""
-                },
-                {
-                  "mult": 1,
-                  "strike": 15,
-                  "type": "C",
-                  "premium": 1.1,
-                  "note": "9/19加卖"
-                }
-              ]
-            }
-          ],
+          "options": [],
           "tags": [
-            "hold"
+            "closed"
           ],
           "status": [
-            "持有"
+            "已清仓"
           ],
           "alerts": [],
-          "alertSub": "仅保留15C备兑担保仓",
+          "alertSub": "10/16已清仓，15C到期未行权",
           "setup": [
             "趋势波段"
           ],
           "execStatus": "plan",
-          "oneLiner": "10/14按10.45减仓，剩余正股担保3张10/16到期15C；非备兑敞口转向SOXL，保留现金应对CPI。",
+          "oneLiner": "10/16按8.00全部清仓，回笼资金转入SOXL；原15C已确认到期未行权。",
           "strategyNote": "9/29 @14.27 止盈摊薄 13.57；9/30 @13.66 埋伏财报摊薄 13.58；10/1 @14.35 止盈摊薄 13.43；10/2 隔夜 @14.5 再止盈摊薄 13.31——财报冲高连续两日分批兑现；剩余持有观察，8 张 call 全不动，14C×2 接受 @14 行权出货，15C/16C/17C 保留收租。；10/6盘中13.70、夜盘13.85及13.55、13.42四档连续补仓（摊薄约13.71），10/7 13.2情绪加仓，突破周内停加纪律（用户已认知），后续回归周内不再加仓。；10/7 12.98再买49追跌",
           "actualCostBasis": {
             "value": 12.83872,
@@ -352,19 +332,19 @@
             "sourceType": "historical_actual_checkpoint"
           },
           "netInvestedCost": {
-            "value": 22.54823,
+            "value": 0,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-RAM-2026Q3",
-            "note": "同一周期正股净投入除以剩余交易仓数量，观察份额和期权不混入；亏损减仓会提高净投入每股口径，不等于实际买入均价。"
+            "note": "清仓后当前正股净投入归零，历史结果由正股流水派生，不将期权混入。"
           },
           "costDisplay": "历史均价基准滚动",
           "entrySetup": [
             "趋势波段"
           ],
           "entryExecStatus": "adhoc",
-          "actionExecStatus": "plan",
-          "exitReason": null,
+          "actionExecStatus": "adhoc",
+          "exitReason": "按8.00清仓剩余正股，回笼资金转入SOXL",
           "episodeId": "EP-RAM-2026Q3",
           "compositeNetInvested": {
             "value": null,
@@ -374,7 +354,7 @@
           "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
           "activePlan": {
             "planId": "PLAN-RAM-20261014-COVERED-RESIDUAL",
-            "status": "active",
+            "status": "completed",
             "createdAt": "2026-10-14T11:12:09+08:00",
             "effectiveFrom": "2026-10-14T11:12:09+08:00",
             "recordedAt": "2026-10-14T03:20:33.663Z",
@@ -393,7 +373,10 @@
               "EX-USER-20261014-RAM-SELL-071"
             ],
             "supersedesPlanId": "PLAN-RAM-20261008-REBOUND",
-            "note": "用户本次明确仅保留既有15C担保仓，取代约13.5反弹后二选一预案；未报告接受指派、再卖call或进一步卖出剩余担保股。"
+            "note": "用户本次明确仅保留既有15C担保仓，取代约13.5反弹后二选一预案；未报告接受指派、再卖call或进一步卖出剩余担保股。",
+            "completedDate": "2026-10-16",
+            "completionExecutionId": "EX-USER-20261016-RAM-SELL-082",
+            "completionNote": "原仅保留备兑担保仓安排已随本次全清结束；15C到期未行权按本人确认另记，旧计划保留。"
           },
           "lastPriceSource": {
             "url": "https://ycharts.com/companies/RAM/price",
@@ -402,8 +385,8 @@
             "confidence": "medium",
             "note": "YCharts明确Oct 13 16:00报价10.36；其他历史源为10.37，采用有时点的10.36快照，不宣称唯一官方成交收盘价、不用10.45成交价替代行情。"
           },
-          "analysisQty": 299,
-          "observationQty": 1,
+          "analysisQty": 0,
+          "observationQty": 0,
           "allocationSource": {
             "type": "confirmed_observation_and_reconciled_raw_flow",
             "confirmedObservationDate": "2026-10-06",
@@ -411,7 +394,14 @@
             "openingAsOf": "2026-09-21",
             "evidence": "RAM期初原始901股中已确认1股观察仓、900股交易仓；后续原始流水净增449股，本次卖1050后实股300、交易仓299、观察1，与用户报告剩余300一致。观察股保留历史用途，仅担保计算纳入实股，不虚构新增成交。",
             "reportedAt": "2026-10-14T11:12:09+08:00",
-            "recordedAt": "2026-10-14T03:20:33.663Z"
+            "recordedAt": "2026-10-14T03:20:33.663Z",
+            "closedAllocation": {
+              "executionId": "EX-USER-20261016-RAM-SELL-082",
+              "physicalQty": 300,
+              "analysisQty": 299,
+              "observationQty": 1,
+              "recordedAt": "2026-10-21T02:59:08.937308+00:00"
+            }
           }
         },
         {
@@ -679,7 +669,7 @@
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
           "alertSub": "原预留资金已投入，持有中",
-          "oneLiner": "10/16按95.19回补，用户确认已投入此前预留的最后一笔现金；112.35新增部分的反弹退出预案保留。",
+          "oneLiner": "10/16按95.19回补，用户确认与RAM剩余仓位退出回笼资金对应；112.35新增部分的反弹退出预案保留。",
           "actualCostBasis": {
             "value": 115.3875,
             "status": "确认",
@@ -796,7 +786,18 @@
                 "recordedAt": "2026-10-21T01:25:51.487224+00:00",
                 "evidence": "确定推送；1016 主账号还买了 25 股 soxl 95.19，好像漏记了，是之前的预留的最后的现金。交易复盘也记得帮我补上"
               },
-              "note": "仅表示本轮此前预留的最后一笔资金已投入，不等于账户现金余额为零，不推算NAV或禁止未来投入。"
+              "note": "仅表示本轮此前预留的最后一笔资金已投入，不等于账户现金余额为零，不推算NAV或禁止未来投入。",
+              "fundingClarification": {
+                "recordedAt": "2026-10-21T02:59:08.937308+00:00",
+                "sourceExecutionId": "EX-USER-20261016-RAM-SELL-082",
+                "source": {
+                  "type": "user_confirmation",
+                  "recordedAt": "2026-10-21T02:59:08.937308+00:00",
+                  "evidence": "用户报告上周五主账号备兑的300股按8卖出后投入SOXL，随后确认标的是RAM；追问是否为已登记25股SOXL@95.19以及3张RAM15C是否未行权，用户依序确认“1 是的；2 未行权”。",
+                  "relatedExecutionId": "EX-USER-20261016-SOXL-BUY-081"
+                },
+                "note": "本次明确该笔SOXL买入与RAM退出回笼资金对应；保留原报告，不扩展成账户现金余额或全部资金投入结论。"
+              }
             }
           }
         }
@@ -4641,7 +4642,61 @@
       "recordedAt": "2026-10-21T01:25:51.487224+00:00",
       "actionExecStatus": "adhoc",
       "purpose": "动用此前预留的最后一笔现金回补",
-      "note": "按95.19回补，用户确认动用此前预留的最后一笔现金；未明确确认PPI热度条件，不自动标为条件触发或新增限额。"
+      "note": "按95.19回补，用户确认动用此前预留的最后一笔现金；未明确确认PPI热度条件，不自动标为条件触发或新增限额。",
+      "fundingSource": {
+        "type": "user_confirmed_rotation",
+        "executionIds": [
+          "EX-USER-20261016-RAM-SELL-082"
+        ],
+        "source": {
+          "type": "user_confirmation",
+          "recordedAt": "2026-10-21T02:59:08.937308+00:00",
+          "evidence": "用户报告上周五主账号备兑的300股按8卖出后投入SOXL，随后确认标的是RAM；追问是否为已登记25股SOXL@95.19以及3张RAM15C是否未行权，用户依序确认“1 是的；2 未行权”。",
+          "relatedExecutionId": "EX-USER-20261016-SOXL-BUY-081"
+        },
+        "note": "用户确认即已登记25股@95.19的SOXL买入；只关联来源，不将300股卖出金额反推SOXL成交，不重复新增。"
+      }
+    },
+    {
+      "executionId": "EX-USER-20261016-RAM-SELL-082",
+      "episodeId": "EP-RAM-2026Q3",
+      "account": "main",
+      "sym": "RAM",
+      "side": "sell",
+      "qty": 300,
+      "analysisQty": 299,
+      "observationQty": 1,
+      "allocationSource": {
+        "type": "existing_confirmed_observation_allocation",
+        "evidence": "出售本账户全部300实股，包括299交易仓及已确认1股观察仓；观察份额仍不进入绩效。"
+      },
+      "price": 8,
+      "date": "2026-10-16",
+      "chinaDate": "2026-10-16",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-21T02:59:08.937308+00:00",
+        "evidence": "用户确认上周五RAM全清；本次日期为2026-10-21，上周五为2026-10-16。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-21T02:59:08.937308+00:00",
+        "evidence": "用户报告上周五主账号备兑的300股按8卖出后投入SOXL，随后确认标的是RAM；追问是否为已登记25股SOXL@95.19以及3张RAM15C是否未行权，用户依序确认“1 是的；2 未行权”。",
+        "relatedExecutionId": "EX-USER-20261016-SOXL-BUY-081"
+      },
+      "recordedAt": "2026-10-21T02:59:08.937308+00:00",
+      "actionExecStatus": "adhoc",
+      "purpose": "清仓剩余RAM，转向SOXL",
+      "note": "按8.00全部清仓，回笼资金转入已登记的SOXL买入；期权到期未行权单独记录，不新增重复SOXL成交。",
+      "relatedExecutionIds": [
+        "EX-USER-20261016-SOXL-BUY-081"
+      ]
     }
   ],
   "episodes": [
@@ -4649,15 +4704,15 @@
       "episodeId": "EP-RAM-2026Q3",
       "sym": "RAM",
       "account": "main",
-      "status": "open",
+      "status": "closed",
       "entryDate": null,
       "entrySetup": [
         "趋势波段"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 299,
-      "exitReason": null,
-      "exitDate": null,
+      "currentQty": 0,
+      "exitReason": "按8.00清仓剩余正股，回笼资金转入SOXL",
+      "exitDate": "2026-10-16",
       "entryDateNote": "期初已持有；真实首次建仓日未核实"
     },
     {
@@ -6803,44 +6858,52 @@
       "reviewDate": "2026-10-16",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-16 复盘",
-      "title": "SOXL投入原预留资金 · 1号GDXU清仓并新开INTW",
+      "title": "RAM全清转入SOXL · 1号GDXU清仓并新开INTW",
       "executionIds": [
         "EX-USER-20261016-GDXU-SELL-078",
         "EX-USER-20261016-INTW-BUY-079",
-        "EX-USER-20261016-SOXL-BUY-081"
+        "EX-USER-20261016-SOXL-BUY-081",
+        "EX-USER-20261016-RAM-SELL-082"
       ],
       "plan": [
         "GDXU此前明确定位长期持有，原计划保留；INTW的事前入场理由、期限与退出预案未提供，不自动套用原定位。",
-        "SOXL此前预留部分资金等待PPI后机会；本次确认10/16投入该笔最后预留资金，具体PPI触发条件是否满足未确认，不追溯补写。112.35新增部分的独立反弹退出预案继续保留。"
+        "SOXL此前预留部分资金等待PPI后机会；本次确认10/16投入该笔最后预留资金，具体PPI触发条件是否满足未确认，不追溯补写。112.35新增部分的独立反弹退出预案继续保留。",
+        "RAM原仅保留15C担保仓的安排随本次全部卖出结束；用户确认回笼资金转入同日已登记SOXL买入，原计划及后续变更均保留，不回写8.00事前退出目标。"
       ],
       "execution": [
         "1号账户GDXU：按99.00全部清仓，原周期结束。",
         "1号账户INTW：按18.47建仓，建立独立新周期。",
-        "主账号SOXL：按95.19回补，使用此前预留的最后一笔现金；原持仓周期继续。"
+        "主账号SOXL：按95.19回补，使用此前预留的最后一笔现金；原持仓周期继续。",
+        "主账号RAM：按8.00全部清仓，原正股周期结束；资金转入同日已登记SOXL按95.19买入，不重复新增。",
+        "RAM剩余3张10/16到期15C：用户确认到期未行权，当前无开放卖call；不虚构提前买回或正股指派。"
       ],
       "good": [
-        "SOXL：此前保留资金，后以95.19继续买入，使本轮移动加权均价由119.24198降至115.3875。优势是保留资金后可在更低价格投入；这仅是成交与成本结果，不证明买点或择时最优。置信度：高。",
-        "1号GDXU：按99.00完整清仓，原周期已结束，正股收益约+9.9%；INTW另开周期，不混算两者成本或收益。状态与收益核算置信度：高，不以盈利评价执行质量。"
+        "SOXL：本笔95.19买入与RAM退出回笼资金对应，沿用原独立SOXL周期，移动加权均价由119.24198降至115.3875。优势是结束RAM正股敞口后按明确方向换入，未重复记账；降低均价是核算结果，不证明买点最优。事实与成本核对置信度：高。",
+        "1号GDXU：按99.00完整清仓，原周期已结束，正股收益约+9.9%；INTW另开周期，不混算两者成本或收益。状态与收益核算置信度：高，不以盈利评价执行质量。",
+        "RAM：已结束剩余正股敞口，15C已由本人确认到期未行权，当前不存在该标的备兑义务。清仓腿与历史兑现分别展示，不因本笔亏损判定退出错误。当前状态置信度：高。"
       ],
       "issues": [
-        "SOXL：原预留资金投入后，本轮预留现金的缓冲已被使用，同时持仓数量增加；均价降低不等于敞口降低。本次使用预留资金与此前分批思路方向一致，但PPI条件是否触发、总风险额度及退出边界仍缺证据，不据此判违规或情绪交易。现金安排依据本人报告，置信度：高；条件执行判断置信度：低。",
-        "1号GDXU由长期定位转为清仓，但变更原因未提供；INTW事前理由及持有退出方案未记录，因此不能判断换仓改善了风险收益，也不能把换仓频次本身判为错误。执行质量判断置信度：低。"
+        "SOXL：新增买入增加本标的数量，原预留资金已按本人报告投入；本次又确认与RAM退出资金对应。换仓结束RAM敞口，但不能仅凭均价降低认定总体风险下降。PPI条件是否触发、总风险额度与退出边界仍未完整记录，不据此判违规或情绪交易。条件执行评价置信度：低。",
+        "1号GDXU由长期定位转为清仓，但变更原因未提供；INTW事前理由及持有退出方案未记录，因此不能判断换仓改善了风险收益，也不能把换仓频次本身判为错误。执行质量判断置信度：低。",
+        "RAM：全清的代价是放弃此后反弹参与权，同时将资金集中到SOXL；本次卖出腿相对历史实际均价基准约-37.7%，是资金结果，不单独证明操作质量。正股卖出与15C到期的盘中先后未提供，不推断历史时段曾出现裸卖。过程评价置信度：中。"
       ],
       "todo": [
-        "SOXL：当前提示改为原预留资金已投入；继续区分112.35新增部分与其余仓位的退出预案。下一步先明确现有持仓的退出边界与可承受损失，不把补录本身变成新的加仓信号。此为复盘建议，不自动新增禁止加仓规则。",
-        "1号账户：后续按INTW自身逻辑评价；保留GDXU原长期计划及实际退出的差异，不用后续价格回写本次决策质量。"
+        "SOXL：本笔与RAM退出回笼资金关联，原预留资金提示已更新；继续区分112.35新增部分与其余仓位的退出预案。后续先核对现有持仓的退出边界和可承受损失，此为复盘建议，不自动新增禁止加仓规则。",
+        "1号账户：后续按INTW自身逻辑评价；保留GDXU原长期计划及实际退出的差异，不用后续价格回写本次决策质量。",
+        "RAM：从当前持仓及到期提醒中移除；如未来重新买入，另开新周期。历史期初不完整，不将本次清仓腿收益冒充可核算的完整周期收益。"
       ],
       "execStatus": "unknown",
       "reviewStatus": "completed",
       "recordedAt": "2026-10-16T14:40:44.716Z",
-      "updatedAt": "2026-10-21T01:25:51.487224+00:00",
+      "updatedAt": "2026-10-21T02:59:08.937308+00:00",
       "reviewDateBasis": "用户确认截图两笔均归属10/16，日期与实际成交均价已核实；不以消息时间制造成交时刻。",
       "internalObservation": [
         "GDXU原长期持有定位转为全清，但用户未报告变更理由，暂不判断是否计划内或情绪交易。",
         "INTW未取得独立行情快照，lastPrice及lastPriceDate保留null，不将成交均价当收盘行情。",
         "截图不提供精确成交时刻或先后，流水排列仅为登记顺序，不主张GDXU卖出资金直接全部投入INTW，也不推算现金或净资产。",
         "当前美股盘中，仅同步事实及可核算结果；收盘任务仍须核对完整有效计划、必要评价与后续观察。",
-        "本次仅补录实际成交及执行过程评价，未取得10/16收盘数据，不以旧行情计算当日浮盈或评价买在低点。"
+        "本次仅补录实际成交及执行过程评价，未取得10/16收盘数据，不以旧行情计算当日浮盈或评价买在低点。",
+        "期权事件date按合约美东到期日保存，实际结算时刻未知；公开复盘归属本批RAM正股成交日，不借用报告时点伪造成交时间。"
       ],
       "planAmendments": [
         {
@@ -6993,20 +7056,45 @@
             ]
           },
           "text": "本次补录确认10/16原预留资金已投入，更新当前资金安排描述；原PPI条件及战术退出记录保留，不猜改条件完成次数、不将账户现金设为零。"
+        },
+        {
+          "amendmentId": "PA-RAM-20261016-FULL-EXIT",
+          "recordedAt": "2026-10-21T02:59:08.937308+00:00",
+          "source": {
+            "type": "user_confirmation",
+            "recordedAt": "2026-10-21T02:59:08.937308+00:00",
+            "evidence": "用户报告上周五主账号备兑的300股按8卖出后投入SOXL，随后确认标的是RAM；追问是否为已登记25股SOXL@95.19以及3张RAM15C是否未行权，用户依序确认“1 是的；2 未行权”。",
+            "relatedExecutionId": "EX-USER-20261016-SOXL-BUY-081"
+          },
+          "executionIds": [
+            "EX-USER-20261016-RAM-SELL-082",
+            "EX-USER-20261016-SOXL-BUY-081"
+          ],
+          "optionExecutionIds": [
+            "OX-USER-20261016-RAM-EXP-15C-005"
+          ],
+          "text": "补录RAM按8.00全清并转入已有SOXL买入；原仅保留备兑担保仓安排结束，合约到期未行权经本人确认，未提供事前8.00退出价，不追溯添加。"
         }
       ],
-      "reviewCompletedAt": "2026-10-21T01:25:51.487224+00:00",
+      "reviewCompletedAt": "2026-10-21T02:59:08.937308+00:00",
       "assessmentScope": "仅评价已登记成交、有效计划和执行过程；无本次对应收盘行情，不判断盘中择时、当日浮盈或宏观归因。",
       "reviewCompletion": {
         "type": "manual_user_requested",
-        "assessedAt": "2026-10-21T01:25:51.487224+00:00",
+        "assessedAt": "2026-10-21T02:59:08.937308+00:00",
         "stockExecutionIds": [
           "EX-USER-20261016-GDXU-SELL-078",
           "EX-USER-20261016-INTW-BUY-079",
-          "EX-USER-20261016-SOXL-BUY-081"
+          "EX-USER-20261016-SOXL-BUY-081",
+          "EX-USER-20261016-RAM-SELL-082"
         ],
-        "source": "用户要求补齐交易复盘；事实与判断分开，保留原计划，不以盈亏倒推质量。"
-      }
+        "source": "用户要求补齐交易复盘；事实与判断分开，保留原计划，不以盈亏倒推质量。",
+        "optionExecutionIds": [
+          "OX-USER-20261016-RAM-EXP-15C-005"
+        ]
+      },
+      "optionExecutionIds": [
+        "OX-USER-20261016-RAM-EXP-15C-005"
+      ]
     },
     {
       "reviewId": "RV-20261021",
@@ -10465,6 +10553,58 @@
         "evidence": "用户确认买回全部3张CRDU卖call；仓库唯一开放组为2026-10-16到期的3张7C，与全部买回数量一致。"
       },
       "recordedAt": "2026-10-15T16:18:54.193Z"
+    },
+    {
+      "executionId": "OX-USER-20261016-RAM-EXP-15C-005",
+      "account": "main",
+      "sym": "RAM",
+      "instrumentType": "option",
+      "action": "expire_unexercised",
+      "side": null,
+      "positionEffect": "expire",
+      "contracts": 3,
+      "contractMultiplier": 100,
+      "strike": 15,
+      "optionType": "C",
+      "exp": "2026-10-16",
+      "date": "2026-10-16",
+      "dateBasis": "contractual_expiry_date",
+      "timezone": "America/New_York",
+      "time": null,
+      "timestamp": null,
+      "settlementDate": null,
+      "price": null,
+      "priceUnit": "USD per underlying share",
+      "currency": "USD",
+      "fee": null,
+      "status": "confirmed",
+      "outcome": "expired_unexercised",
+      "includeInStockPerformance": false,
+      "stockEpisodeId": "EP-RAM-2026Q3",
+      "closedLegs": [
+        {
+          "mult": 2,
+          "strike": 15,
+          "type": "C",
+          "premium": 0.95,
+          "note": ""
+        },
+        {
+          "mult": 1,
+          "strike": 15,
+          "type": "C",
+          "premium": 1.1,
+          "note": "9/19加卖"
+        }
+      ],
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-21T02:59:08.937308+00:00",
+        "evidence": "用户报告上周五主账号备兑的300股按8卖出后投入SOXL，随后确认标的是RAM；追问是否为已登记25股SOXL@95.19以及3张RAM15C是否未行权，用户依序确认“1 是的；2 未行权”。",
+        "relatedExecutionId": "EX-USER-20261016-SOXL-BUY-081"
+      },
+      "recordedAt": "2026-10-21T02:59:08.937308+00:00",
+      "note": "用户确认到期未行权；date为合约美东到期日，未报告实际结算时刻/日期，不伪造上海日历日，不生成期权买回或正股指派流水。卖出正股与到期的盘中先后未知，不据当前状态推断曾裸卖。"
     }
   ],
   "reviewAssessmentHistory": [
@@ -10820,6 +10960,222 @@
             "text": "实际全清结束GDXU原长期持有计划；具体变更原因未知，不追溯改写原计划，INTW另开周期。"
           }
         ]
+      }
+    },
+    {
+      "reviewId": "RV-20261016",
+      "savedAt": "2026-10-21T02:59:08.937308+00:00",
+      "reason": "补录RAM全清和期权到期未行权，确认关联已有SOXL买入，保留此前评价。",
+      "priorReview": {
+        "reviewId": "RV-20261016",
+        "date": "2026-10-16",
+        "reviewDate": "2026-10-16",
+        "reviewTimezone": "Asia/Shanghai",
+        "dateLabel": "2026-10-16 复盘",
+        "title": "SOXL投入原预留资金 · 1号GDXU清仓并新开INTW",
+        "executionIds": [
+          "EX-USER-20261016-GDXU-SELL-078",
+          "EX-USER-20261016-INTW-BUY-079",
+          "EX-USER-20261016-SOXL-BUY-081"
+        ],
+        "plan": [
+          "GDXU此前明确定位长期持有，原计划保留；INTW的事前入场理由、期限与退出预案未提供，不自动套用原定位。",
+          "SOXL此前预留部分资金等待PPI后机会；本次确认10/16投入该笔最后预留资金，具体PPI触发条件是否满足未确认，不追溯补写。112.35新增部分的独立反弹退出预案继续保留。"
+        ],
+        "execution": [
+          "1号账户GDXU：按99.00全部清仓，原周期结束。",
+          "1号账户INTW：按18.47建仓，建立独立新周期。",
+          "主账号SOXL：按95.19回补，使用此前预留的最后一笔现金；原持仓周期继续。"
+        ],
+        "good": [
+          "SOXL：此前保留资金，后以95.19继续买入，使本轮移动加权均价由119.24198降至115.3875。优势是保留资金后可在更低价格投入；这仅是成交与成本结果，不证明买点或择时最优。置信度：高。",
+          "1号GDXU：按99.00完整清仓，原周期已结束，正股收益约+9.9%；INTW另开周期，不混算两者成本或收益。状态与收益核算置信度：高，不以盈利评价执行质量。"
+        ],
+        "issues": [
+          "SOXL：原预留资金投入后，本轮预留现金的缓冲已被使用，同时持仓数量增加；均价降低不等于敞口降低。本次使用预留资金与此前分批思路方向一致，但PPI条件是否触发、总风险额度及退出边界仍缺证据，不据此判违规或情绪交易。现金安排依据本人报告，置信度：高；条件执行判断置信度：低。",
+          "1号GDXU由长期定位转为清仓，但变更原因未提供；INTW事前理由及持有退出方案未记录，因此不能判断换仓改善了风险收益，也不能把换仓频次本身判为错误。执行质量判断置信度：低。"
+        ],
+        "todo": [
+          "SOXL：当前提示改为原预留资金已投入；继续区分112.35新增部分与其余仓位的退出预案。下一步先明确现有持仓的退出边界与可承受损失，不把补录本身变成新的加仓信号。此为复盘建议，不自动新增禁止加仓规则。",
+          "1号账户：后续按INTW自身逻辑评价；保留GDXU原长期计划及实际退出的差异，不用后续价格回写本次决策质量。"
+        ],
+        "execStatus": "unknown",
+        "reviewStatus": "completed",
+        "recordedAt": "2026-10-16T14:40:44.716Z",
+        "updatedAt": "2026-10-21T01:25:51.487224+00:00",
+        "reviewDateBasis": "用户确认截图两笔均归属10/16，日期与实际成交均价已核实；不以消息时间制造成交时刻。",
+        "internalObservation": [
+          "GDXU原长期持有定位转为全清，但用户未报告变更理由，暂不判断是否计划内或情绪交易。",
+          "INTW未取得独立行情快照，lastPrice及lastPriceDate保留null，不将成交均价当收盘行情。",
+          "截图不提供精确成交时刻或先后，流水排列仅为登记顺序，不主张GDXU卖出资金直接全部投入INTW，也不推算现金或净资产。",
+          "当前美股盘中，仅同步事实及可核算结果；收盘任务仍须核对完整有效计划、必要评价与后续观察。",
+          "本次仅补录实际成交及执行过程评价，未取得10/16收盘数据，不以旧行情计算当日浮盈或评价买在低点。"
+        ],
+        "planAmendments": [
+          {
+            "amendmentId": "PA-GDXU-SAT1-20261016-CLOSE",
+            "recordedAt": "2026-10-16T14:40:44.716Z",
+            "effectiveFrom": "2026-10-16T22:38:00+08:00",
+            "source": {
+              "type": "user_confirmed_broker_screenshot",
+              "reportedAt": "2026-10-16T21:43:35+08:00",
+              "confirmedAt": "2026-10-16T22:38:00+08:00",
+              "libraryFileId": "libfile_b1d8e84f2b0c8191849431237a56723f",
+              "filename": "IMG_5074.jpeg",
+              "evidence": "用户说明1号小账号操作；截图INTW买入77、18.47及GDXU卖出14、99.00均全部成交。用户随后确认两笔均为10/16，显示价格即实际成交均价，不只采用委托限价。"
+            },
+            "priorPlanId": "PLAN-GDXU-SAT1-20261015-LONG",
+            "priorPlan": {
+              "planId": "PLAN-GDXU-SAT1-20261015-LONG",
+              "status": "active",
+              "createdAt": "2026-10-15T16:05:46+08:00",
+              "effectiveFrom": "2026-10-15T16:05:46+08:00",
+              "recordedAt": "2026-10-15T16:18:54.193Z",
+              "source": {
+                "type": "user_confirmation",
+                "reportedAt": "2026-10-15T16:05:46+08:00",
+                "evidence": "1号小账号9.9卖出所有RKLX，中子号延期负面不再等待；90.09买入14股gdxu，作为长期持仓",
+                "dateConfirmation": {
+                  "type": "explicit_user_confirmation",
+                  "confirmedAt": "2026-10-16T00:17:05+08:00",
+                  "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+                }
+              },
+              "scope": {
+                "account": "sat1",
+                "sym": "GDXU",
+                "episodeId": "EP-GDXU-SAT1-20261015"
+              },
+              "holdingRole": "长期持仓",
+              "horizonEnd": null,
+              "targetPrice": null,
+              "stopPrice": null,
+              "note": "长期持有为用户本次确认的定位；未提供具体期限、增减仓额度或退出价格，不自行增加约束，也不追溯包装为事前计划。"
+            },
+            "executionIds": [
+              "EX-USER-20261016-GDXU-SELL-078"
+            ],
+            "text": "实际全清结束GDXU原长期持有计划；具体变更原因未知，不追溯改写原计划，INTW另开周期。"
+          },
+          {
+            "amendmentId": "PA-SOXL-20261016-RESERVE-DEPLOYED",
+            "recordedAt": "2026-10-21T01:25:51.487224+00:00",
+            "source": {
+              "type": "user_confirmation",
+              "recordedAt": "2026-10-21T01:25:51.487224+00:00",
+              "evidence": "确定推送；1016 主账号还买了 25 股 soxl 95.19，好像漏记了，是之前的预留的最后的现金。交易复盘也记得帮我补上"
+            },
+            "executionIds": [
+              "EX-USER-20261016-SOXL-BUY-081"
+            ],
+            "priorPlan": {
+              "planId": "PLAN-SOXL-20261014-CPI-PPI",
+              "status": "active",
+              "createdAt": "2026-10-14T11:12:09+08:00",
+              "effectiveFrom": "2026-10-14T11:12:09+08:00",
+              "recordedAt": "2026-10-14T03:20:33.663Z",
+              "source": {
+                "type": "user_confirmation",
+                "reportedAt": "2026-10-14T11:12:09+08:00",
+                "evidence": "1014操作：10.45卖出1050股RAM，仅保留备兑的300股。按原计划换仓位到soxl；在129.67买入50股soxl，其他保留现金应对CPI可能带来的冲击。本周计划：如果周三CPI超过0.25% MoM，导致大跌，在周三买入1次；如果周四PPI继续热，在周五买入1次。周四有Warsh在曼谷的讲话（美东23:30）。"
+              },
+              "scope": {
+                "account": "main",
+                "sym": "SOXL",
+                "episodeId": "EP-SOXL-MAIN-20261014",
+                "marketWeekStart": "2026-10-12",
+                "marketWeekEnd": "2026-10-16"
+              },
+              "preserveCash": true,
+              "placeOrdersAutomatically": false,
+              "branches": [
+                {
+                  "branchId": "CPI-WED",
+                  "releaseAt": "2026-10-14T08:30:00-04:00",
+                  "releaseAtShanghai": "2026-10-14T20:30:00+08:00",
+                  "indicator": "CPI",
+                  "measure": "MoM",
+                  "cpiVariant": null,
+                  "comparator": ">",
+                  "thresholdPct": 0.25,
+                  "marketCondition": "数据导致大跌（用户定性条件，未提供数值定义）",
+                  "buyMarketDate": "2026-10-14",
+                  "maxBuys": 1,
+                  "completedBuys": 0,
+                  "qty": null,
+                  "amount": null,
+                  "note": "须同时满足CPI环比超过0.25%与引发大跌，再在周三买入一次；整体/核心CPI口径未指定，不猜填。"
+                },
+                {
+                  "branchId": "PPI-FRI",
+                  "releaseAt": "2026-10-15T08:30:00-04:00",
+                  "releaseAtShanghai": "2026-10-15T20:30:00+08:00",
+                  "indicator": "PPI",
+                  "measure": null,
+                  "heatThresholdPct": null,
+                  "marketCondition": "周四PPI继续热（用户定性条件）",
+                  "buyMarketDate": "2026-10-16",
+                  "maxBuys": 1,
+                  "completedBuys": 0,
+                  "qty": null,
+                  "amount": null,
+                  "note": "周四PPI继续热时在周五买入一次；未擅自要求此前CPI分支先成交，具体PPI口径/热度数值/每次额度未提供。"
+                }
+              ],
+              "calendarEvidence": {
+                "source": "https://www.bls.gov/schedule/2026/10_sched_list.htm",
+                "verifiedAt": "2026-10-14T03:20:33.663Z",
+                "note": "BLS明确10/14 CPI、10/15 PPI均于美东08:30发布；只核实计划事件日，不将条件预案记为成交。"
+              },
+              "observedEvents": [
+                {
+                  "event": "Warsh曼谷对谈",
+                  "eventAt": "2026-10-15T23:30:00-04:00",
+                  "eventAtShanghai": "2026-10-16T11:30:00+08:00",
+                  "source": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+                  "verifiedAt": "2026-10-14T03:20:33.663Z",
+                  "note": "官方日历明确美东10/15 23:30；与IMF总裁的曼谷对谈。不是另一个自动买入条件。"
+                }
+              ],
+              "note": "本周CPI/PPI条件买入预案从用户本次确认后生效；当前50股建仓发生在事件发布前，不占用这两个条件次数，未确认每次买入额度或退出位。",
+              "lastExecutionUpdate": {
+                "executionId": "EX-USER-20261015-SOXL-BUY-075",
+                "recordedAt": "2026-10-15T01:41:21.645694+00:00",
+                "note": "新增实际买入已登记；用户未明确确认其对应CPI/PPI分支，不自动扣减原分支次数。"
+              },
+              "tacticalExits": [
+                {
+                  "executionId": "EX-USER-20261014-SOXL-BUY-074",
+                  "scope": "this_execution_only",
+                  "qty": 34,
+                  "trigger": "有反弹",
+                  "price": null,
+                  "isPlacedOrder": false,
+                  "note": "仅适用于本笔34股；未确认退出价，不扩大到全部SOXL持仓。",
+                  "source": {
+                    "type": "user_confirmation",
+                    "reportedAt": "2026-10-15T00:18:34+08:00",
+                    "evidence": "再买入34股soxl112.35，拉平均价，这部分有反弹就会出"
+                  },
+                  "recordedAt": "2026-10-15T01:41:21.645694+00:00"
+                }
+              ]
+            },
+            "text": "本次补录确认10/16原预留资金已投入，更新当前资金安排描述；原PPI条件及战术退出记录保留，不猜改条件完成次数、不将账户现金设为零。"
+          }
+        ],
+        "reviewCompletedAt": "2026-10-21T01:25:51.487224+00:00",
+        "assessmentScope": "仅评价已登记成交、有效计划和执行过程；无本次对应收盘行情，不判断盘中择时、当日浮盈或宏观归因。",
+        "reviewCompletion": {
+          "type": "manual_user_requested",
+          "assessedAt": "2026-10-21T01:25:51.487224+00:00",
+          "stockExecutionIds": [
+            "EX-USER-20261016-GDXU-SELL-078",
+            "EX-USER-20261016-INTW-BUY-079",
+            "EX-USER-20261016-SOXL-BUY-081"
+          ],
+          "source": "用户要求补齐交易复盘；事实与判断分开，保留原计划，不以盈亏倒推质量。"
+        }
       }
     }
   ]
