@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "成交更新至10/16：1号GDXU清仓并新开INTW；各账户行情保留原快照。",
-  "asOfLabel": "成交：10月16日 · 1号GDXU清仓 / INTW建仓；行情：见各持仓日期",
+  "asOf": "成交更新至10/21：CRDU清仓；补录10/16 SOXL按95.19回补，并补齐对应执行复盘；行情保留原快照。",
+  "asOfLabel": "成交：10月21日 · CRDU清仓；补录10月16日SOXL；行情：见各持仓日期",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -473,7 +473,7 @@
         {
           "sym": "CRDU",
           "name": "2x Credo (Tradr)",
-          "qty": 300,
+          "qty": 0,
           "cost": 6.71493,
           "lastPrice": 11.4,
           "lastPriceDate": "2026-10-07 收盘",
@@ -484,10 +484,10 @@
           ],
           "options": [],
           "tags": [
-            "hold"
+            "closed"
           ],
           "status": [
-            "持有"
+            "已清仓"
           ],
           "strategyNote": "原接受7C指派的安排已被用户确认的全部买回操作取代；当前无开放卖call，正股不再封顶。",
           "actualCostBasis": {
@@ -496,15 +496,17 @@
             "note": "结单正股移动加权均价，排除用户确认的观察份额，未计费用"
           },
           "netInvestedCost": {
-            "value": 6.506,
+            "value": 0,
             "status": "确认",
-            "note": "交易仓正股净投入摊薄，排除观察份额，未计费用、未含期权"
+            "scope": "episode",
+            "episodeId": "EP-CRDU-2026Q3",
+            "note": "清仓后当前正股净投入归零，历史收益由正股流水派生。"
           },
           "costDisplay": "实际成本",
           "entrySetup": [],
           "entryExecStatus": "unknown",
-          "actionExecStatus": "adhoc",
-          "exitReason": null,
+          "actionExecStatus": "plan",
+          "exitReason": "用户报告按计划7.40全部清仓",
           "episodeId": "EP-CRDU-2026Q3",
           "compositeNetInvested": {
             "value": null,
@@ -512,11 +514,11 @@
             "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
           "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
-          "alertSub": "已解除备兑，继续持有正股",
-          "oneLiner": "10/15按0.35买回全部3张10/16到期7C，解除备兑限制；用户长期仍看好上涨，继续持有正股。",
+          "alertSub": "10/21已清仓",
+          "oneLiner": "10/21按7.40全部清仓，用户说明按计划执行；原正股持有周期结束。",
           "activePlan": {
             "planId": "PLAN-CRDU-20261015-UNCAPPED-HOLD",
-            "status": "active",
+            "status": "completed",
             "createdAt": "2026-10-16T00:14:42+08:00",
             "effectiveFrom": "2026-10-16T00:14:42+08:00",
             "recordedAt": "2026-10-15T16:18:54.193Z",
@@ -539,7 +541,10 @@
             "relatedOptionExecutionIds": [
               "OX-USER-20261015-CRDU-BTC-7C-004"
             ],
-            "note": "替代原接受7C指派的安排；未确认具体持有期限、目标价、加仓或再次备兑计划，不自行添加。"
+            "note": "替代原接受7C指派的安排；未确认具体持有期限、目标价、加仓或再次备兑计划，不自行添加。",
+            "completedDate": "2026-10-21",
+            "completionExecutionId": "EX-USER-20261021-CRDU-SELL-080",
+            "completionNote": "用户报告按计划7.40全清；原长期看涨观点及计划来源保留，未追溯补写退出价。"
           }
         },
         {
@@ -639,9 +644,9 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 131,
-          "cost": 119.24198,
-          "costDate": "10/14建仓及回补，10/15按105.90继续买入",
+          "qty": 156,
+          "cost": 115.3875,
+          "costDate": "10/14建仓及回补，10/15继续买入，10/16按95.19投入原预留资金",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
           "lastPriceSource": {
@@ -673,20 +678,20 @@
           "actionExecStatus": "adhoc",
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
-          "alertSub": "留现金等待CPI / PPI条件机会",
-          "oneLiner": "10/14建仓并回补，10/15按105.90继续买入；112.35新增部分计划反弹后退出，原PPI条件预案留痕。",
+          "alertSub": "原预留资金已投入，持有中",
+          "oneLiner": "10/16按95.19回补，用户确认已投入此前预留的最后一笔现金；112.35新增部分的反弹退出预案保留。",
           "actualCostBasis": {
-            "value": 119.24198,
+            "value": 115.3875,
             "status": "确认",
-            "note": "本周期四笔已确认正股买入移动加权；无卖出，净投入每股成本与实际均价相同。",
+            "note": "本周期五笔已确认正股买入移动加权；无卖出，净投入每股成本与实际均价相同。",
             "sourceType": "user_confirmation"
           },
           "netInvestedCost": {
-            "value": 119.24198,
+            "value": 115.3875,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
-            "note": "本周期四笔已确认正股买入移动加权；无卖出，净投入每股成本与实际均价相同。"
+            "note": "本周期五笔已确认正股买入移动加权；无卖出，净投入每股成本与实际均价相同。"
           },
           "costDisplay": "实际成本",
           "activePlan": {
@@ -760,9 +765,9 @@
             ],
             "note": "本周CPI/PPI条件买入预案从用户本次确认后生效；当前50股建仓发生在事件发布前，不占用这两个条件次数，未确认每次买入额度或退出位。",
             "lastExecutionUpdate": {
-              "executionId": "EX-USER-20261015-SOXL-BUY-075",
-              "recordedAt": "2026-10-15T01:41:21.645694+00:00",
-              "note": "新增实际买入已登记；用户未明确确认其对应CPI/PPI分支，不自动扣减原分支次数。"
+              "executionId": "EX-USER-20261016-SOXL-BUY-081",
+              "recordedAt": "2026-10-21T01:25:51.487224+00:00",
+              "note": "补录10/16按95.19回补；原预留资金已投入，不再沿用尚留该笔现金的当前提示。PPI触发未核实，分支次数不猜改。"
             },
             "tacticalExits": [
               {
@@ -780,12 +785,24 @@
                 },
                 "recordedAt": "2026-10-15T01:41:21.645694+00:00"
               }
-            ]
+            ],
+            "reserveCashUpdate": {
+              "executionId": "EX-USER-20261016-SOXL-BUY-081",
+              "asOf": "2026-10-16",
+              "recordedAt": "2026-10-21T01:25:51.487224+00:00",
+              "reservedTrancheDeployed": true,
+              "source": {
+                "type": "user_confirmation",
+                "recordedAt": "2026-10-21T01:25:51.487224+00:00",
+                "evidence": "确定推送；1016 主账号还买了 25 股 soxl 95.19，好像漏记了，是之前的预留的最后的现金。交易复盘也记得帮我补上"
+              },
+              "note": "仅表示本轮此前预留的最后一笔资金已投入，不等于账户现金余额为零，不推算NAV或禁止未来投入。"
+            }
           }
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-15"
+      "holdingsAsOf": "2026-10-21"
     },
     {
       "id": "sat1",
@@ -4561,6 +4578,70 @@
       "price": 18.47,
       "purpose": "建立新持仓",
       "note": "按18.47建立本账户INTW独立新周期；入场理由、持有期限及退出预案未提供，不自动继承此前GDXU的长期持有定位。"
+    },
+    {
+      "executionId": "EX-USER-20261021-CRDU-SELL-080",
+      "episodeId": "EP-CRDU-2026Q3",
+      "account": "main",
+      "sym": "CRDU",
+      "side": "sell",
+      "qty": 300,
+      "price": 7.4,
+      "date": "2026-10-21",
+      "chinaDate": "2026-10-21",
+      "chinaDateSource": {
+        "type": "current_user_report",
+        "evidence": "本次消息未另指定历史日期，按本次北京时间2026-10-21当日操作登记；精确时刻未提供。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_report",
+        "evidence": "主账号 按计划7.4 卖了 300 股 crdu"
+      },
+      "recordedAt": "2026-10-21T01:22:03.778204+00:00",
+      "actionExecStatus": "plan",
+      "actionExecStatusSource": {
+        "type": "user_self_report",
+        "evidence": "用户明确说明按计划；仓库未找到7.40事前退出价，标签仅代表本人说明，不追溯建立事前计划。"
+      },
+      "purpose": "全部清仓",
+      "note": "按7.40全部清仓，用户说明按计划执行；原持有计划保留历史，不回写事前退出价。"
+    },
+    {
+      "executionId": "EX-USER-20261016-SOXL-BUY-081",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 25,
+      "price": 95.19,
+      "date": "2026-10-16",
+      "chinaDate": "2026-10-16",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-21T01:25:51.487224+00:00",
+        "evidence": "用户明确1016主账号买入，补录日期为2026-10-16；精确成交时刻未提供。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-21T01:25:51.487224+00:00",
+        "evidence": "确定推送；1016 主账号还买了 25 股 soxl 95.19，好像漏记了，是之前的预留的最后的现金。交易复盘也记得帮我补上"
+      },
+      "recordedAt": "2026-10-21T01:25:51.487224+00:00",
+      "actionExecStatus": "adhoc",
+      "purpose": "动用此前预留的最后一笔现金回补",
+      "note": "按95.19回补，用户确认动用此前预留的最后一笔现金；未明确确认PPI热度条件，不自动标为条件触发或新增限额。"
     }
   ],
   "episodes": [
@@ -4595,13 +4676,13 @@
       "episodeId": "EP-CRDU-2026Q3",
       "sym": "CRDU",
       "account": "main",
-      "status": "open",
+      "status": "closed",
       "entryDate": "2026-09-08",
       "entrySetup": [],
       "entryExecStatus": "unknown",
-      "currentQty": 300,
-      "exitReason": null,
-      "exitDate": null
+      "currentQty": 0,
+      "exitReason": "用户报告按计划7.40全部清仓",
+      "exitDate": "2026-10-21"
     },
     {
       "episodeId": "EP-IRE-2026Q3",
@@ -5012,7 +5093,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 131,
+      "currentQty": 156,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -6722,33 +6803,44 @@
       "reviewDate": "2026-10-16",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-16 复盘",
-      "title": "1号GDXU清仓 · 新开INTW",
+      "title": "SOXL投入原预留资金 · 1号GDXU清仓并新开INTW",
       "executionIds": [
         "EX-USER-20261016-GDXU-SELL-078",
-        "EX-USER-20261016-INTW-BUY-079"
+        "EX-USER-20261016-INTW-BUY-079",
+        "EX-USER-20261016-SOXL-BUY-081"
       ],
       "plan": [
-        "GDXU此前明确定位长期持有，原计划保留；INTW的事前入场理由、期限与退出预案未提供，不自动套用原定位。"
+        "GDXU此前明确定位长期持有，原计划保留；INTW的事前入场理由、期限与退出预案未提供，不自动套用原定位。",
+        "SOXL此前预留部分资金等待PPI后机会；本次确认10/16投入该笔最后预留资金，具体PPI触发条件是否满足未确认，不追溯补写。112.35新增部分的独立反弹退出预案继续保留。"
       ],
       "execution": [
         "1号账户GDXU：按99.00全部清仓，原周期结束。",
-        "1号账户INTW：按18.47建仓，建立独立新周期。"
+        "1号账户INTW：按18.47建仓，建立独立新周期。",
+        "主账号SOXL：按95.19回补，使用此前预留的最后一笔现金；原持仓周期继续。"
       ],
       "good": [
-        "GDXU按已确认实际买卖价核算，本轮正股收益约+9.9%，已完整兑现；这是资金结果，不自动等同于执行质量良好。收益核算置信度：高。"
+        "SOXL：此前保留资金，后以95.19继续买入，使本轮移动加权均价由119.24198降至115.3875。优势是保留资金后可在更低价格投入；这仅是成交与成本结果，不证明买点或择时最优。置信度：高。",
+        "1号GDXU：按99.00完整清仓，原周期已结束，正股收益约+9.9%；INTW另开周期，不混算两者成本或收益。状态与收益核算置信度：高，不以盈利评价执行质量。"
       ],
-      "issues": [],
-      "todo": [],
+      "issues": [
+        "SOXL：原预留资金投入后，本轮预留现金的缓冲已被使用，同时持仓数量增加；均价降低不等于敞口降低。本次使用预留资金与此前分批思路方向一致，但PPI条件是否触发、总风险额度及退出边界仍缺证据，不据此判违规或情绪交易。现金安排依据本人报告，置信度：高；条件执行判断置信度：低。",
+        "1号GDXU由长期定位转为清仓，但变更原因未提供；INTW事前理由及持有退出方案未记录，因此不能判断换仓改善了风险收益，也不能把换仓频次本身判为错误。执行质量判断置信度：低。"
+      ],
+      "todo": [
+        "SOXL：当前提示改为原预留资金已投入；继续区分112.35新增部分与其余仓位的退出预案。下一步先明确现有持仓的退出边界与可承受损失，不把补录本身变成新的加仓信号。此为复盘建议，不自动新增禁止加仓规则。",
+        "1号账户：后续按INTW自身逻辑评价；保留GDXU原长期计划及实际退出的差异，不用后续价格回写本次决策质量。"
+      ],
       "execStatus": "unknown",
-      "reviewStatus": "in_progress",
+      "reviewStatus": "completed",
       "recordedAt": "2026-10-16T14:40:44.716Z",
-      "updatedAt": "2026-10-16T14:40:44.716Z",
+      "updatedAt": "2026-10-21T01:25:51.487224+00:00",
       "reviewDateBasis": "用户确认截图两笔均归属10/16，日期与实际成交均价已核实；不以消息时间制造成交时刻。",
       "internalObservation": [
         "GDXU原长期持有定位转为全清，但用户未报告变更理由，暂不判断是否计划内或情绪交易。",
         "INTW未取得独立行情快照，lastPrice及lastPriceDate保留null，不将成交均价当收盘行情。",
         "截图不提供精确成交时刻或先后，流水排列仅为登记顺序，不主张GDXU卖出资金直接全部投入INTW，也不推算现金或净资产。",
-        "当前美股盘中，仅同步事实及可核算结果；收盘任务仍须核对完整有效计划、必要评价与后续观察。"
+        "当前美股盘中，仅同步事实及可核算结果；收盘任务仍须核对完整有效计划、必要评价与后续观察。",
+        "本次仅补录实际成交及执行过程评价，未取得10/16收盘数据，不以旧行情计算当日浮盈或评价买在低点。"
       ],
       "planAmendments": [
         {
@@ -6795,8 +6887,171 @@
             "EX-USER-20261016-GDXU-SELL-078"
           ],
           "text": "实际全清结束GDXU原长期持有计划；具体变更原因未知，不追溯改写原计划，INTW另开周期。"
+        },
+        {
+          "amendmentId": "PA-SOXL-20261016-RESERVE-DEPLOYED",
+          "recordedAt": "2026-10-21T01:25:51.487224+00:00",
+          "source": {
+            "type": "user_confirmation",
+            "recordedAt": "2026-10-21T01:25:51.487224+00:00",
+            "evidence": "确定推送；1016 主账号还买了 25 股 soxl 95.19，好像漏记了，是之前的预留的最后的现金。交易复盘也记得帮我补上"
+          },
+          "executionIds": [
+            "EX-USER-20261016-SOXL-BUY-081"
+          ],
+          "priorPlan": {
+            "planId": "PLAN-SOXL-20261014-CPI-PPI",
+            "status": "active",
+            "createdAt": "2026-10-14T11:12:09+08:00",
+            "effectiveFrom": "2026-10-14T11:12:09+08:00",
+            "recordedAt": "2026-10-14T03:20:33.663Z",
+            "source": {
+              "type": "user_confirmation",
+              "reportedAt": "2026-10-14T11:12:09+08:00",
+              "evidence": "1014操作：10.45卖出1050股RAM，仅保留备兑的300股。按原计划换仓位到soxl；在129.67买入50股soxl，其他保留现金应对CPI可能带来的冲击。本周计划：如果周三CPI超过0.25% MoM，导致大跌，在周三买入1次；如果周四PPI继续热，在周五买入1次。周四有Warsh在曼谷的讲话（美东23:30）。"
+            },
+            "scope": {
+              "account": "main",
+              "sym": "SOXL",
+              "episodeId": "EP-SOXL-MAIN-20261014",
+              "marketWeekStart": "2026-10-12",
+              "marketWeekEnd": "2026-10-16"
+            },
+            "preserveCash": true,
+            "placeOrdersAutomatically": false,
+            "branches": [
+              {
+                "branchId": "CPI-WED",
+                "releaseAt": "2026-10-14T08:30:00-04:00",
+                "releaseAtShanghai": "2026-10-14T20:30:00+08:00",
+                "indicator": "CPI",
+                "measure": "MoM",
+                "cpiVariant": null,
+                "comparator": ">",
+                "thresholdPct": 0.25,
+                "marketCondition": "数据导致大跌（用户定性条件，未提供数值定义）",
+                "buyMarketDate": "2026-10-14",
+                "maxBuys": 1,
+                "completedBuys": 0,
+                "qty": null,
+                "amount": null,
+                "note": "须同时满足CPI环比超过0.25%与引发大跌，再在周三买入一次；整体/核心CPI口径未指定，不猜填。"
+              },
+              {
+                "branchId": "PPI-FRI",
+                "releaseAt": "2026-10-15T08:30:00-04:00",
+                "releaseAtShanghai": "2026-10-15T20:30:00+08:00",
+                "indicator": "PPI",
+                "measure": null,
+                "heatThresholdPct": null,
+                "marketCondition": "周四PPI继续热（用户定性条件）",
+                "buyMarketDate": "2026-10-16",
+                "maxBuys": 1,
+                "completedBuys": 0,
+                "qty": null,
+                "amount": null,
+                "note": "周四PPI继续热时在周五买入一次；未擅自要求此前CPI分支先成交，具体PPI口径/热度数值/每次额度未提供。"
+              }
+            ],
+            "calendarEvidence": {
+              "source": "https://www.bls.gov/schedule/2026/10_sched_list.htm",
+              "verifiedAt": "2026-10-14T03:20:33.663Z",
+              "note": "BLS明确10/14 CPI、10/15 PPI均于美东08:30发布；只核实计划事件日，不将条件预案记为成交。"
+            },
+            "observedEvents": [
+              {
+                "event": "Warsh曼谷对谈",
+                "eventAt": "2026-10-15T23:30:00-04:00",
+                "eventAtShanghai": "2026-10-16T11:30:00+08:00",
+                "source": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+                "verifiedAt": "2026-10-14T03:20:33.663Z",
+                "note": "官方日历明确美东10/15 23:30；与IMF总裁的曼谷对谈。不是另一个自动买入条件。"
+              }
+            ],
+            "note": "本周CPI/PPI条件买入预案从用户本次确认后生效；当前50股建仓发生在事件发布前，不占用这两个条件次数，未确认每次买入额度或退出位。",
+            "lastExecutionUpdate": {
+              "executionId": "EX-USER-20261015-SOXL-BUY-075",
+              "recordedAt": "2026-10-15T01:41:21.645694+00:00",
+              "note": "新增实际买入已登记；用户未明确确认其对应CPI/PPI分支，不自动扣减原分支次数。"
+            },
+            "tacticalExits": [
+              {
+                "executionId": "EX-USER-20261014-SOXL-BUY-074",
+                "scope": "this_execution_only",
+                "qty": 34,
+                "trigger": "有反弹",
+                "price": null,
+                "isPlacedOrder": false,
+                "note": "仅适用于本笔34股；未确认退出价，不扩大到全部SOXL持仓。",
+                "source": {
+                  "type": "user_confirmation",
+                  "reportedAt": "2026-10-15T00:18:34+08:00",
+                  "evidence": "再买入34股soxl112.35，拉平均价，这部分有反弹就会出"
+                },
+                "recordedAt": "2026-10-15T01:41:21.645694+00:00"
+              }
+            ]
+          },
+          "text": "本次补录确认10/16原预留资金已投入，更新当前资金安排描述；原PPI条件及战术退出记录保留，不猜改条件完成次数、不将账户现金设为零。"
         }
-      ]
+      ],
+      "reviewCompletedAt": "2026-10-21T01:25:51.487224+00:00",
+      "assessmentScope": "仅评价已登记成交、有效计划和执行过程；无本次对应收盘行情，不判断盘中择时、当日浮盈或宏观归因。",
+      "reviewCompletion": {
+        "type": "manual_user_requested",
+        "assessedAt": "2026-10-21T01:25:51.487224+00:00",
+        "stockExecutionIds": [
+          "EX-USER-20261016-GDXU-SELL-078",
+          "EX-USER-20261016-INTW-BUY-079",
+          "EX-USER-20261016-SOXL-BUY-081"
+        ],
+        "source": "用户要求补齐交易复盘；事实与判断分开，保留原计划，不以盈亏倒推质量。"
+      }
+    },
+    {
+      "reviewId": "RV-20261021",
+      "date": "2026-10-21",
+      "reviewDate": "2026-10-21",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-21 复盘",
+      "title": "主账号CRDU按7.40清仓",
+      "executionIds": [
+        "EX-USER-20261021-CRDU-SELL-080"
+      ],
+      "plan": [
+        "用户本次说明按计划卖出；此前解除备兑并继续持有的计划保留历史，不追溯补写7.40退出目标。"
+      ],
+      "execution": [
+        "主账号CRDU：按7.40全部清仓，原正股持有周期结束。"
+      ],
+      "good": [
+        "CRDU：按7.40完整清仓，已解除本账户该正股敞口；开放卖call此前已全部买回，本次退出不产生裸卖义务。状态核对置信度：高。",
+        "本次卖出腿约+10.2%，含此前分批买卖的完整正股周期约+4.9%；两种口径分开，不纳入期权盈亏，不以盈利反推执行质量。核算置信度：高。"
+      ],
+      "issues": [
+        "全部退出的代价是后续若继续上涨，本账户将不再参与这轮持仓的上涨；是否保留底仓取决于原计划，不能因全清判卖早。用户说明按计划，但仓库未存7.40事前目标，不能独立验证该价位的计划一致性或择时优劣。计划一致性判断置信度：中，择时判断置信度：低。"
+      ],
+      "todo": [
+        "本周期已结束，撤下继续持有或接受指派的当前提示。后续若重新买入，另开独立周期，依据新的信号和额度评价，不为补偿卖后上涨而沿用旧周期。"
+      ],
+      "execStatus": "plan",
+      "reviewStatus": "completed",
+      "recordedAt": "2026-10-21T01:22:03.778204+00:00",
+      "updatedAt": "2026-10-21T01:25:51.487224+00:00",
+      "internalObservation": [
+        "精确成交时刻和费用未提供，不猜填。",
+        "按计划为用户本人报告，未发现7.40事前退出价依据，不以盈利证明计划质量。"
+      ],
+      "reviewCompletedAt": "2026-10-21T01:25:51.487224+00:00",
+      "assessmentScope": "仅评价已登记成交、有效计划和执行过程；无本次对应收盘行情，不判断盘中择时、当日浮盈或宏观归因。",
+      "reviewCompletion": {
+        "type": "manual_user_requested",
+        "assessedAt": "2026-10-21T01:25:51.487224+00:00",
+        "stockExecutionIds": [
+          "EX-USER-20261021-CRDU-SELL-080"
+        ],
+        "source": "用户要求补齐交易复盘；事实与判断分开，保留原计划，不以盈亏倒推质量。"
+      }
     }
   ],
   "openingPositions": [
@@ -10477,6 +10732,93 @@
           "CPI整体/核心、PPI具体热度阈值及两次买入额度未提供，内部保留null，不擅自指定；无需新增定时任务。",
           "未提供现金余额/NAV，不根据减仓回笼金额生成完整账户现金或仓位百分比。",
           "本次加仓按临时判断adhoc记录；用户未明确确认CPI条件触发，保留原分支次数，不追溯包装为plan。"
+        ]
+      }
+    },
+    {
+      "reviewId": "RV-20261016",
+      "savedAt": "2026-10-21T01:25:51.487224+00:00",
+      "reason": "补录SOXL并补齐当日执行过程复盘，保留原复盘。",
+      "priorReview": {
+        "reviewId": "RV-20261016",
+        "date": "2026-10-16",
+        "reviewDate": "2026-10-16",
+        "reviewTimezone": "Asia/Shanghai",
+        "dateLabel": "2026-10-16 复盘",
+        "title": "1号GDXU清仓 · 新开INTW",
+        "executionIds": [
+          "EX-USER-20261016-GDXU-SELL-078",
+          "EX-USER-20261016-INTW-BUY-079"
+        ],
+        "plan": [
+          "GDXU此前明确定位长期持有，原计划保留；INTW的事前入场理由、期限与退出预案未提供，不自动套用原定位。"
+        ],
+        "execution": [
+          "1号账户GDXU：按99.00全部清仓，原周期结束。",
+          "1号账户INTW：按18.47建仓，建立独立新周期。"
+        ],
+        "good": [
+          "GDXU按已确认实际买卖价核算，本轮正股收益约+9.9%，已完整兑现；这是资金结果，不自动等同于执行质量良好。收益核算置信度：高。"
+        ],
+        "issues": [],
+        "todo": [],
+        "execStatus": "unknown",
+        "reviewStatus": "in_progress",
+        "recordedAt": "2026-10-16T14:40:44.716Z",
+        "updatedAt": "2026-10-16T14:40:44.716Z",
+        "reviewDateBasis": "用户确认截图两笔均归属10/16，日期与实际成交均价已核实；不以消息时间制造成交时刻。",
+        "internalObservation": [
+          "GDXU原长期持有定位转为全清，但用户未报告变更理由，暂不判断是否计划内或情绪交易。",
+          "INTW未取得独立行情快照，lastPrice及lastPriceDate保留null，不将成交均价当收盘行情。",
+          "截图不提供精确成交时刻或先后，流水排列仅为登记顺序，不主张GDXU卖出资金直接全部投入INTW，也不推算现金或净资产。",
+          "当前美股盘中，仅同步事实及可核算结果；收盘任务仍须核对完整有效计划、必要评价与后续观察。"
+        ],
+        "planAmendments": [
+          {
+            "amendmentId": "PA-GDXU-SAT1-20261016-CLOSE",
+            "recordedAt": "2026-10-16T14:40:44.716Z",
+            "effectiveFrom": "2026-10-16T22:38:00+08:00",
+            "source": {
+              "type": "user_confirmed_broker_screenshot",
+              "reportedAt": "2026-10-16T21:43:35+08:00",
+              "confirmedAt": "2026-10-16T22:38:00+08:00",
+              "libraryFileId": "libfile_b1d8e84f2b0c8191849431237a56723f",
+              "filename": "IMG_5074.jpeg",
+              "evidence": "用户说明1号小账号操作；截图INTW买入77、18.47及GDXU卖出14、99.00均全部成交。用户随后确认两笔均为10/16，显示价格即实际成交均价，不只采用委托限价。"
+            },
+            "priorPlanId": "PLAN-GDXU-SAT1-20261015-LONG",
+            "priorPlan": {
+              "planId": "PLAN-GDXU-SAT1-20261015-LONG",
+              "status": "active",
+              "createdAt": "2026-10-15T16:05:46+08:00",
+              "effectiveFrom": "2026-10-15T16:05:46+08:00",
+              "recordedAt": "2026-10-15T16:18:54.193Z",
+              "source": {
+                "type": "user_confirmation",
+                "reportedAt": "2026-10-15T16:05:46+08:00",
+                "evidence": "1号小账号9.9卖出所有RKLX，中子号延期负面不再等待；90.09买入14股gdxu，作为长期持仓",
+                "dateConfirmation": {
+                  "type": "explicit_user_confirmation",
+                  "confirmedAt": "2026-10-16T00:17:05+08:00",
+                  "evidence": "针对CRDU买回及上一批RKLX清仓/GDXU买入的日期追问，用户依序确认“10/15；10/15”。具体成交时刻未提供。"
+                }
+              },
+              "scope": {
+                "account": "sat1",
+                "sym": "GDXU",
+                "episodeId": "EP-GDXU-SAT1-20261015"
+              },
+              "holdingRole": "长期持仓",
+              "horizonEnd": null,
+              "targetPrice": null,
+              "stopPrice": null,
+              "note": "长期持有为用户本次确认的定位；未提供具体期限、增减仓额度或退出价格，不自行增加约束，也不追溯包装为事前计划。"
+            },
+            "executionIds": [
+              "EX-USER-20261016-GDXU-SELL-078"
+            ],
+            "text": "实际全清结束GDXU原长期持有计划；具体变更原因未知，不追溯改写原计划，INTW另开周期。"
+          }
         ]
       }
     }
