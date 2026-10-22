@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "10/22更新：2号小账户SNXX按9.175加仓。",
-  "asOfLabel": "记录：10月22日 · 2号SNXX加仓",
+  "asOf": "10/22更新：主账号SOXL按85.27加仓，2号小账户SNXX按9.175加仓。",
+  "asOfLabel": "记录：10月22日 · SOXL与SNXX加仓",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -713,9 +713,9 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 201,
-          "cost": 111.92015,
-          "costDate": "10/14建仓及回补、10/15和10/16继续买入；10/21按99.90新增日内仓",
+          "qty": 216,
+          "cost": 110.06944,
+          "costDate": "2026-10-22",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
           "lastPriceSource": {
@@ -748,19 +748,19 @@
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
           "alertSub": "108.35压力位挂单 · 关注META财报",
-          "oneLiner": "原日内退出计划改为108.35部分卖单，结合低位买入部分做T。",
+          "oneLiner": "10/22按85.27加仓。",
           "actualCostBasis": {
-            "value": 111.92015,
+            "value": 110.06944,
             "status": "确认",
-            "note": "本周期六笔已确认正股买入移动加权；无卖出，净投入每股成本与实际均价相同。",
+            "note": "本周期七笔已确认正股买入的移动加权均价。",
             "sourceType": "user_confirmation"
           },
           "netInvestedCost": {
-            "value": 111.92015,
+            "value": 110.06944,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
-            "note": "本周期六笔已确认正股买入移动加权；无卖出，净投入每股成本与实际均价相同。"
+            "note": "本周期无卖出，正股净投入每股成本与移动加权均价一致。"
           },
           "costDisplay": "实际成本",
           "activePlan": {
@@ -5137,6 +5137,36 @@
       "recordedAt": "2026-10-22T14:43:40.362Z",
       "actionExecStatus": "adhoc",
       "note": "按9.175加仓。"
+    },
+    {
+      "executionId": "EX-USER-20261022-SOXL-BUY-087",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 15,
+      "price": 85.27,
+      "date": "2026-10-22",
+      "chinaDate": "2026-10-22",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-22T15:07:40.440Z",
+        "evidence": "用户明确本笔归属10/22。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-22T15:07:40.440Z",
+        "evidence": "主账号10/22 85.27买入15股soxl"
+      },
+      "recordedAt": "2026-10-22T15:07:40.440Z",
+      "actionExecStatus": "adhoc",
+      "note": "按85.27加仓。"
     }
   ],
   "episodes": [
@@ -5588,7 +5618,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 201,
+      "currentQty": 216,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -7792,16 +7822,18 @@
       "reviewDate": "2026-10-22",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-22 复盘",
-      "title": "SOXL卖单计划 · 2号SNXX加仓",
+      "title": "主账号SOXL加仓 · 2号SNXX加仓",
       "executionIds": [
-        "EX-USER-20261022-SNXX2-BUY-086"
+        "EX-USER-20261022-SNXX2-BUY-086",
+        "EX-USER-20261022-SOXL-BUY-087"
       ],
       "plan": [
         "SOXL：改挂108.35部分卖单，结合此前低位买入部分做T。",
         "108.35为观察到的压力位，另关注META财报。"
       ],
       "execution": [
-        "2号SNXX：按9.175加仓。"
+        "2号SNXX：按9.175加仓。",
+        "主账号SOXL：按85.27加仓。"
       ],
       "good": [
         "SOXL：本次明确了压力位卖价并保留原日内计划的变更历史。记录完整性判断置信度：高，不据此认定价位有效。"
@@ -7816,13 +7848,14 @@
       "execStatus": "unknown",
       "reviewStatus": "in_progress",
       "recordedAt": "2026-10-21T18:28:47.373Z",
-      "updatedAt": "2026-10-22T14:43:40.362Z",
+      "updatedAt": "2026-10-22T15:07:40.440Z",
       "reviewDateBasis": "本轮SOXL退出计划变更仍按10/22记录；CRWG已按本人明确指定移入10/21，不更改SOXL日期。",
-      "assessmentScope": "同步当日已确认实际成交及既有计划；内部记录SNXX与此前停加安排的差异，公开保留简洁操作。",
+      "assessmentScope": "同步本日已确认SOXL和SNXX实际买入；公开仅显示简洁操作与既有本人计划。",
       "internalObservation": [
         "用户随后明确澄清SOXL原买入45股，之前40股为口误，已解除数量差异；108.35卖60股挂单不变，未新增实际卖出。",
         "CRWG材料按本人明确指定移入RV-20261021；本卡只保留SOXL当前退出变更，未删除历史记录或新增流水。",
-        "本次SNXX加仓109股，原151股，现260股；按完整买入流水重算均价12.44429。原10/12停止加仓约定与本次动作不一致，保留历史，不补造加仓理由或沿用原建仓情绪标签。原行情日期不变。"
+        "本次SNXX加仓109股，原151股，现260股；按完整买入流水重算均价12.44429。原10/12停止加仓约定与本次动作不一致，保留历史，不补造加仓理由或沿用原建仓情绪标签。原行情日期不变。",
+        "本次SOXL15股@85.27，当前216股，移动均价110.06944。仅同步本人报告事实，未提供新增买入理由、退出或挂单变更，不猜填，不将此前108.35卖单视为成交。"
       ],
       "planAmendments": [
         {
