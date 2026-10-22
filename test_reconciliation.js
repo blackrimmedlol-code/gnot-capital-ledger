@@ -39,11 +39,35 @@ for (const e of brokerEvents) {
 }
 // An explicit pending item must have broker snapshot evidence. It never excuses an unexplained mismatch.
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'ledger-reconcile-'));
+// Use an isolated open position for balance-error cases. These checks must
+// still exercise missing evidence after the real CRWG position is closed.
+function openBalanceFixture() {
+  const sample = JSON.parse(JSON.stringify(ledger));
+  const episodeId = 'EP-CRWG-2026Q3';
+  sample.executions = sample.executions.filter(e => e.episodeId !== episodeId);
+  sample.executions.push({ executionId: 'TEST-CRWG-BALANCE-BUY', episodeId,
+    account: 'main', sym: 'CRWG', side: 'buy', qty: 200, price: 10,
+    date: '2026-09-01', timezone: 'America/New_York' });
+  const remainingIds = new Set(sample.executions.map(e => e.executionId));
+  for (const review of sample.reviews) review.executionIds = (review.executionIds || []).filter(id => remainingIds.has(id));
+  sample.openingPositions = (sample.openingPositions || []).filter(o => !(o.account === 'main' && o.sym === 'CRWG'));
+  sample.costCheckpoints = (sample.costCheckpoints || []).filter(c => c.episodeId !== episodeId);
+  sample.reconciliations = (sample.reconciliations || []).filter(r => !(r.account === 'main' && r.sym === 'CRWG'));
+  const account = sample.accounts.find(a => a.id === 'main');
+  account.holdings = account.holdings.filter(h => h.sym !== 'CRWG');
+  account.holdings.push({ sym: 'CRWG', qty: 200, cost: 10, episodeId, options: [],
+    actualCostBasis: { value: 10, status: '确认' },
+    netInvestedCost: { value: 10, status: '确认', scope: 'episode', episodeId } });
+  const ep = sample.episodes.find(e => e.episodeId === episodeId);
+  Object.assign(ep, { status: 'open', currentQty: 200, entryDate: '2026-09-01', exitDate: null, exitReason: null });
+  delete ep.closeDate; delete ep.closeReason;
+  return sample;
+}
 try {
   fs.mkdirSync(path.join(temp, 'data'));
   for (const f of ['verify.js', 'derive.js', 'presentation.js', 'review_dates.js', 'template.html', 'RULES_日常更新.md']) fs.copyFileSync(path.join(__dirname, f), path.join(temp, f));
-  const baseline = JSON.parse(JSON.stringify(ledger));
-  const mismatchedEpisode = JSON.parse(JSON.stringify(ledger));
+  const baseline = openBalanceFixture();
+  const mismatchedEpisode = openBalanceFixture();
   const activeCrwg = mismatchedEpisode.episodes.find(e => e.episodeId === 'EP-CRWG-2026Q3');
   const crwgHolding = mismatchedEpisode.accounts.find(a => a.id === 'main').holdings.find(h => h.sym === 'CRWG');
   if (activeCrwg.status === 'open') {

@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "10/22更新：主账号SOXL按85.27加仓，2号小账户SNXX按9.175加仓。",
-  "asOfLabel": "记录：10月22日 · SOXL与SNXX加仓",
+  "asOf": "10/22更新：CRWG清仓，资金转向SOXL并开始做T。",
+  "asOfLabel": "记录：10月22日 · CRWG清仓转SOXL",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -418,8 +418,8 @@
         {
           "sym": "CRWG",
           "name": "2x CoreWeave (Leverage Shares)",
-          "qty": 200,
-          "cost": 11.41,
+          "qty": 0,
+          "cost": 10.68966,
           "costDate": "2026-10-22",
           "lastPrice": 18.64,
           "lastPriceDate": "2026-10-07 收盘",
@@ -429,27 +429,25 @@
             "正股持有"
           ],
           "options": [],
-          "tags": [
-            "hold"
-          ],
+          "tags": [],
           "status": [
-            "持有"
+            "已清仓"
           ],
           "actualCostBasis": {
-            "value": 12.17,
+            "value": 10.68966,
             "status": "确认",
-            "note": "按已确认原交易仓均价15.75与本次8.59买入移动加权，正股真实均价12.17；不混入期权。"
+            "note": "本次清仓前交易仓移动加权均价。"
           },
           "netInvestedCost": {
-            "value": 11.415,
-            "status": "确认",
-            "note": "由已核实正股净投入加本次买入金额滚动，正股净投入摊薄11.415；不含期权。"
+            "value": null,
+            "status": "已清仓",
+            "note": "本账户CRWG已清仓。"
           },
-          "costDisplay": "券商摊薄成本",
+          "costDisplay": "实际成本",
           "entrySetup": [],
           "entryExecStatus": "unknown",
-          "actionExecStatus": "emo",
-          "exitReason": null,
+          "actionExecStatus": "adhoc",
+          "exitReason": "放弃弱势板块，资金转向SOXL。",
           "episodeId": "EP-CRWG-2026Q3",
           "compositeNetInvested": {
             "value": null,
@@ -457,12 +455,12 @@
             "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
           },
           "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
-          "alertSub": "挂7.40买单，成交后不再加仓。",
-          "oneLiner": "10/21按8.59加仓，券商摊薄成本11.41。",
-          "strategyNote": "已实际持有200股；新增100股@7.40为用户自挂未成交计划，若全部成交达300股，此后本周期不再加仓。不得提前计入持仓；11.41为券商摊薄成本，12.17为内部移动加权买入均价。",
+          "alertSub": "",
+          "oneLiner": "10/22按7.01清仓。",
+          "strategyNote": "本周期结束。",
           "brokerReportedCost": {
             "value": 11.41,
-            "status": "本人确认",
+            "status": "历史快照",
             "basis": "stock_net_invested_cost",
             "source": {
               "type": "user_confirmation_with_broker_screenshot",
@@ -476,59 +474,8 @@
               "value": 11.410949999999998,
               "qty": 200,
               "note": "按全部实股买卖回款核对，与显示值取两位小数一致；不含期权。"
-            }
-          },
-          "activePlan": {
-            "planId": "PLAN-CRWG-MAIN-20261022-FINAL-ADD",
-            "status": "active",
-            "createdAt": "2026-10-21T18:28:47.373Z",
-            "effectiveFrom": "2026-10-21T18:28:47.373Z",
-            "recordedAt": "2026-10-21T18:28:47.373Z",
-            "source": {
-              "type": "user_confirmation",
-              "recordedAt": "2026-10-21T18:28:47.373Z",
-              "evidence": "设置了订单在7.4再加100股；如果跌到那个位置，这会是最后一次加仓"
             },
-            "scope": {
-              "account": "main",
-              "sym": "CRWG",
-              "episodeId": "EP-CRWG-2026Q3"
-            },
-            "order": {
-              "side": "buy",
-              "orderType": "limit",
-              "qty": 100,
-              "limitPrice": 7.4,
-              "status": "user_reported_open",
-              "isPlacedOrder": true,
-              "placedAt": null,
-              "executedQty": 0,
-              "fillStatus": "not_reported",
-              "timeInForce": null,
-              "session": null
-            },
-            "isFinalAdd": true,
-            "remainingPlannedAddQty": 100,
-            "maximumQtyAfterFullFill": 300,
-            "afterFillPolicy": "本周期不再加仓",
-            "holdingPeriod": null,
-            "exitPrice": null,
-            "note": "用户已自行挂单，本Agent仅登记；挂单尚未报告成交，不提前增加持仓或改变成本。",
-            "conditionalCostProjection": {
-              "qtyAfterFill": 300,
-              "actualMovingAverageCost": 10.58,
-              "physicalNetInvestedCost": 10.073966666666665,
-              "brokerDisplayApprox": 10.07,
-              "status": "hypothetical_full_fill_only"
-            },
-            "attributionDate": "2026-10-21",
-            "attributionSource": {
-              "type": "user_confirmed_review_label",
-              "recordedAt": "2026-10-21T18:34:00.862Z",
-              "confirmedDate": "2026-10-22",
-              "evidence": "CRWG的口径归到10月21号",
-              "note": "本人明确指定本次CRWG记录及相关成本、计划归属10/21；保留原美东日期、截图下单时间、实际时区换算及录入时间，不更改其他标的归属。"
-            }
+            "asOf": "2026-10-21"
           },
           "recordAttributionDate": "2026-10-21",
           "recordAttributionSource": {
@@ -537,7 +484,72 @@
             "confirmedDate": "2026-10-22",
             "evidence": "CRWG的口径归到10月21号",
             "note": "本人明确指定本次CRWG记录及相关成本、计划归属10/21；保留原美东日期、截图下单时间、实际时区换算及录入时间，不更改其他标的归属。"
-          }
+          },
+          "planHistory": [
+            {
+              "recordedAt": "2026-10-22T15:22:34.811Z",
+              "previousPlan": {
+                "planId": "PLAN-CRWG-MAIN-20261022-FINAL-ADD",
+                "status": "active",
+                "createdAt": "2026-10-21T18:28:47.373Z",
+                "effectiveFrom": "2026-10-21T18:28:47.373Z",
+                "recordedAt": "2026-10-21T18:28:47.373Z",
+                "source": {
+                  "type": "user_confirmation",
+                  "recordedAt": "2026-10-21T18:28:47.373Z",
+                  "evidence": "设置了订单在7.4再加100股；如果跌到那个位置，这会是最后一次加仓"
+                },
+                "scope": {
+                  "account": "main",
+                  "sym": "CRWG",
+                  "episodeId": "EP-CRWG-2026Q3"
+                },
+                "order": {
+                  "side": "buy",
+                  "orderType": "limit",
+                  "qty": 100,
+                  "limitPrice": 7.4,
+                  "status": "user_reported_open",
+                  "isPlacedOrder": true,
+                  "placedAt": null,
+                  "executedQty": 0,
+                  "fillStatus": "not_reported",
+                  "timeInForce": null,
+                  "session": null
+                },
+                "isFinalAdd": true,
+                "remainingPlannedAddQty": 100,
+                "maximumQtyAfterFullFill": 300,
+                "afterFillPolicy": "本周期不再加仓",
+                "holdingPeriod": null,
+                "exitPrice": null,
+                "note": "用户已自行挂单，本Agent仅登记；挂单尚未报告成交，不提前增加持仓或改变成本。",
+                "conditionalCostProjection": {
+                  "qtyAfterFill": 300,
+                  "actualMovingAverageCost": 10.58,
+                  "physicalNetInvestedCost": 10.073966666666665,
+                  "brokerDisplayApprox": 10.07,
+                  "status": "hypothetical_full_fill_only"
+                },
+                "attributionDate": "2026-10-21",
+                "attributionSource": {
+                  "type": "user_confirmed_review_label",
+                  "recordedAt": "2026-10-21T18:34:00.862Z",
+                  "confirmedDate": "2026-10-22",
+                  "evidence": "CRWG的口径归到10月21号",
+                  "note": "本人明确指定本次CRWG记录及相关成本、计划归属10/21；保留原美东日期、截图下单时间、实际时区换算及录入时间，不更改其他标的归属。"
+                }
+              },
+              "executionIds": [
+                "EX-USER-20261022-CRWG-BUY-088",
+                "EX-USER-20261022-CRWG-SELL-089"
+              ],
+              "status": "closed_with_position",
+              "confirmedFillQty": 90,
+              "unconfirmedOriginalOrderRemainder": 10,
+              "note": "仅确认实际买入90股及全部正股卖出；原100股限价单是否改量或撤余单未知，不将余量推断为已成交或仍开放。"
+            }
+          ]
         },
         {
           "sym": "CRDU",
@@ -713,8 +725,8 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 216,
-          "cost": 110.06944,
+          "qty": 241,
+          "cost": 107.40664,
           "costDate": "2026-10-22",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
@@ -727,7 +739,7 @@
           },
           "strategy": [
             "半导体杠杆交易",
-            "事件条件买入"
+            "做T"
           ],
           "options": [],
           "tags": [
@@ -747,16 +759,16 @@
           "actionExecStatus": "adhoc",
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
-          "alertSub": "108.35压力位挂单 · 关注META财报",
-          "oneLiner": "10/22按85.27加仓。",
+          "alertSub": "108.35压力位卖单计划",
+          "oneLiner": "10/22按84.40买入，集中SOXL并开始做T。",
           "actualCostBasis": {
-            "value": 110.06944,
+            "value": 107.40664,
             "status": "确认",
-            "note": "本周期七笔已确认正股买入的移动加权均价。",
+            "note": "本周期八笔已确认正股买入的移动加权均价。",
             "sourceType": "user_confirmation"
           },
           "netInvestedCost": {
-            "value": 110.06944,
+            "value": 107.40664,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
@@ -839,6 +851,21 @@
               "correctedBuyQty": 45,
               "previousNarrativeQty": 40,
               "note": "用户确认原买入45股，原真实流水与持仓不变；本次108.35卖60股挂单不变。"
+            },
+            "mode": "t_trading",
+            "focusSym": "SOXL",
+            "focusUpdate": {
+              "recordedAt": "2026-10-22T15:22:34.811Z",
+              "source": {
+                "type": "user_confirmation",
+                "recordedAt": "2026-10-22T15:22:34.811Z",
+                "evidence": "10/22 7.01卖出290股CRWG清仓，放弃最弱势的板块，把资金买入SOXL25股，价格84.4。集中一个标的，同时开启做T计划。"
+              },
+              "executionIds": [
+                "EX-USER-20261022-CRWG-SELL-089",
+                "EX-USER-20261022-SOXL-BUY-090"
+              ],
+              "text": "退出CRWG，主动交易集中SOXL，开始做T。"
             }
           },
           "planHistory": [
@@ -1027,7 +1054,17 @@
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-22"
+      "holdingsAsOf": "2026-10-22",
+      "activeTradingFocus": {
+        "sym": "SOXL",
+        "mode": "t_trading",
+        "asOf": "2026-10-22",
+        "source": {
+          "type": "user_confirmation",
+          "recordedAt": "2026-10-22T15:22:34.811Z",
+          "evidence": "10/22 7.01卖出290股CRWG清仓，放弃最弱势的板块，把资金买入SOXL25股，价格84.4。集中一个标的，同时开启做T计划。"
+        }
+      }
     },
     {
       "id": "sat1",
@@ -5167,6 +5204,103 @@
       "recordedAt": "2026-10-22T15:07:40.440Z",
       "actionExecStatus": "adhoc",
       "note": "按85.27加仓。"
+    },
+    {
+      "executionId": "EX-USER-20261022-CRWG-BUY-088",
+      "episodeId": "EP-CRWG-2026Q3",
+      "account": "main",
+      "sym": "CRWG",
+      "side": "buy",
+      "qty": 90,
+      "price": 7.4,
+      "date": "2026-10-22",
+      "chinaDate": "2026-10-22",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-22T15:22:34.811Z",
+        "evidence": "用户明确本批操作归属10/22。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-22T15:22:34.811Z",
+        "evidence": "针对“是否为10/22按7.40补入了90股”的核对，用户选择“是，90股按7.40”。"
+      },
+      "recordedAt": "2026-10-22T15:22:34.811Z",
+      "actionExecStatus": "plan",
+      "note": "按7.40补仓。"
+    },
+    {
+      "executionId": "EX-USER-20261022-CRWG-SELL-089",
+      "episodeId": "EP-CRWG-2026Q3",
+      "account": "main",
+      "sym": "CRWG",
+      "side": "sell",
+      "qty": 290,
+      "price": 7.01,
+      "date": "2026-10-22",
+      "chinaDate": "2026-10-22",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-22T15:22:34.811Z",
+        "evidence": "用户明确本批操作归属10/22。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-22T15:22:34.811Z",
+        "evidence": "10/22 7.01卖出290股CRWG清仓，放弃最弱势的板块，把资金买入SOXL25股，价格84.4。集中一个标的，同时开启做T计划。"
+      },
+      "recordedAt": "2026-10-22T15:22:34.811Z",
+      "actionExecStatus": "adhoc",
+      "note": "放弃弱势板块，按7.01清仓，资金转向SOXL。",
+      "relatedExecutionIds": [
+        "EX-USER-20261022-CRWG-BUY-088",
+        "EX-USER-20261022-SOXL-BUY-090"
+      ]
+    },
+    {
+      "executionId": "EX-USER-20261022-SOXL-BUY-090",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 25,
+      "price": 84.4,
+      "date": "2026-10-22",
+      "chinaDate": "2026-10-22",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-22T15:22:34.811Z",
+        "evidence": "用户明确本批操作归属10/22。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-22T15:22:34.811Z",
+        "evidence": "10/22 7.01卖出290股CRWG清仓，放弃最弱势的板块，把资金买入SOXL25股，价格84.4。集中一个标的，同时开启做T计划。"
+      },
+      "recordedAt": "2026-10-22T15:22:34.811Z",
+      "actionExecStatus": "adhoc",
+      "note": "按84.40买入，集中SOXL并开始做T。",
+      "relatedExecutionIds": [
+        "EX-USER-20261022-CRWG-SELL-089"
+      ]
     }
   ],
   "episodes": [
@@ -5189,13 +5323,13 @@
       "episodeId": "EP-CRWG-2026Q3",
       "sym": "CRWG",
       "account": "main",
-      "status": "open",
+      "status": "closed",
       "entryDate": "2026-09-17",
       "entrySetup": [],
       "entryExecStatus": "unknown",
-      "currentQty": 200,
-      "exitReason": null,
-      "exitDate": null
+      "currentQty": 0,
+      "exitReason": "放弃弱势板块，资金转向SOXL。",
+      "exitDate": "2026-10-22"
     },
     {
       "episodeId": "EP-CRDU-2026Q3",
@@ -5618,7 +5752,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 216,
+      "currentQty": 241,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -6377,6 +6511,23 @@
           "exitReason": "10/5 当日高抛清仓",
           "costBasisType": "actual",
           "costNote": "当日建仓成本口径"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "dateLabel": "2026-10-22",
+      "trades": [
+        {
+          "tradeId": "CRWG-MAIN-CLOSE-20261022",
+          "episodeId": "EP-CRWG-2026Q3",
+          "sym": "CRWG",
+          "name": "2x CoreWeave (Leverage Shares)",
+          "acct": "主账号",
+          "reason": "放弃弱势板块，资金转向SOXL。",
+          "setup": [],
+          "execStatus": "adhoc",
+          "oneLiner": ""
         }
       ]
     }
@@ -7822,18 +7973,24 @@
       "reviewDate": "2026-10-22",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-22 复盘",
-      "title": "主账号SOXL加仓 · 2号SNXX加仓",
+      "title": "CRWG清仓转SOXL · 2号SNXX加仓",
       "executionIds": [
         "EX-USER-20261022-SNXX2-BUY-086",
-        "EX-USER-20261022-SOXL-BUY-087"
+        "EX-USER-20261022-SOXL-BUY-087",
+        "EX-USER-20261022-CRWG-BUY-088",
+        "EX-USER-20261022-CRWG-SELL-089",
+        "EX-USER-20261022-SOXL-BUY-090"
       ],
       "plan": [
         "SOXL：改挂108.35部分卖单，结合此前低位买入部分做T。",
-        "108.35为观察到的压力位，另关注META财报。"
+        "108.35为观察到的压力位，另关注META财报。",
+        "放弃弱势板块，主动交易集中SOXL，开始做T。"
       ],
       "execution": [
         "2号SNXX：按9.175加仓。",
-        "主账号SOXL：按85.27加仓。"
+        "主账号SOXL：按85.27加仓。",
+        "主账号CRWG：按7.40补仓，随后按7.01清仓。",
+        "主账号SOXL：按84.40买入。"
       ],
       "good": [
         "SOXL：本次明确了压力位卖价并保留原日内计划的变更历史。记录完整性判断置信度：高，不据此认定价位有效。"
@@ -7848,14 +8005,15 @@
       "execStatus": "unknown",
       "reviewStatus": "in_progress",
       "recordedAt": "2026-10-21T18:28:47.373Z",
-      "updatedAt": "2026-10-22T15:07:40.440Z",
+      "updatedAt": "2026-10-22T15:22:34.811Z",
       "reviewDateBasis": "本轮SOXL退出计划变更仍按10/22记录；CRWG已按本人明确指定移入10/21，不更改SOXL日期。",
-      "assessmentScope": "同步本日已确认SOXL和SNXX实际买入；公开仅显示简洁操作与既有本人计划。",
+      "assessmentScope": "同步本人确认的三笔实际成交和主动交易集中SOXL的计划。",
       "internalObservation": [
         "用户随后明确澄清SOXL原买入45股，之前40股为口误，已解除数量差异；108.35卖60股挂单不变，未新增实际卖出。",
         "CRWG材料按本人明确指定移入RV-20261021；本卡只保留SOXL当前退出变更，未删除历史记录或新增流水。",
         "本次SNXX加仓109股，原151股，现260股；按完整买入流水重算均价12.44429。原10/12停止加仓约定与本次动作不一致，保留历史，不补造加仓理由或沿用原建仓情绪标签。原行情日期不变。",
-        "本次SOXL15股@85.27，当前216股，移动均价110.06944。仅同步本人报告事实，未提供新增买入理由、退出或挂单变更，不猜填，不将此前108.35卖单视为成交。"
+        "本次SOXL15股@85.27，当前216股，移动均价110.06944。仅同步本人报告事实，未提供新增买入理由、退出或挂单变更，不猜填，不将此前108.35卖单视为成交。",
+        "本人确认缺失90股于10/22按7.40买入；200+90=290，现已按7.01全部卖出。原限价单100股与实际90股的差额只保留内部核对，不猜填剩余订单状态。SOXL216+25=241股，均价107.40664。GDXU未报告卖出，继续保留，不把主动交易集中SOXL解释为其他持仓已经全清。"
       ],
       "planAmendments": [
         {
@@ -8017,6 +8175,151 @@
             ]
           },
           "text": "已确认实际再次买入；此前只观望约定保留历史，未取得新的后续加仓或退出预案。"
+        },
+        {
+          "amendmentId": "PA-MAIN-20261022-SOXL-T-090",
+          "recordedAt": "2026-10-22T15:22:34.811Z",
+          "source": {
+            "type": "user_confirmation",
+            "recordedAt": "2026-10-22T15:22:34.811Z",
+            "evidence": "10/22 7.01卖出290股CRWG清仓，放弃最弱势的板块，把资金买入SOXL25股，价格84.4。集中一个标的，同时开启做T计划。"
+          },
+          "executionIds": [
+            "EX-USER-20261022-CRWG-BUY-088",
+            "EX-USER-20261022-CRWG-SELL-089",
+            "EX-USER-20261022-SOXL-BUY-090"
+          ],
+          "priorCrwgPlan": {
+            "planId": "PLAN-CRWG-MAIN-20261022-FINAL-ADD",
+            "status": "active",
+            "createdAt": "2026-10-21T18:28:47.373Z",
+            "effectiveFrom": "2026-10-21T18:28:47.373Z",
+            "recordedAt": "2026-10-21T18:28:47.373Z",
+            "source": {
+              "type": "user_confirmation",
+              "recordedAt": "2026-10-21T18:28:47.373Z",
+              "evidence": "设置了订单在7.4再加100股；如果跌到那个位置，这会是最后一次加仓"
+            },
+            "scope": {
+              "account": "main",
+              "sym": "CRWG",
+              "episodeId": "EP-CRWG-2026Q3"
+            },
+            "order": {
+              "side": "buy",
+              "orderType": "limit",
+              "qty": 100,
+              "limitPrice": 7.4,
+              "status": "user_reported_open",
+              "isPlacedOrder": true,
+              "placedAt": null,
+              "executedQty": 0,
+              "fillStatus": "not_reported",
+              "timeInForce": null,
+              "session": null
+            },
+            "isFinalAdd": true,
+            "remainingPlannedAddQty": 100,
+            "maximumQtyAfterFullFill": 300,
+            "afterFillPolicy": "本周期不再加仓",
+            "holdingPeriod": null,
+            "exitPrice": null,
+            "note": "用户已自行挂单，本Agent仅登记；挂单尚未报告成交，不提前增加持仓或改变成本。",
+            "conditionalCostProjection": {
+              "qtyAfterFill": 300,
+              "actualMovingAverageCost": 10.58,
+              "physicalNetInvestedCost": 10.073966666666665,
+              "brokerDisplayApprox": 10.07,
+              "status": "hypothetical_full_fill_only"
+            },
+            "attributionDate": "2026-10-21",
+            "attributionSource": {
+              "type": "user_confirmed_review_label",
+              "recordedAt": "2026-10-21T18:34:00.862Z",
+              "confirmedDate": "2026-10-22",
+              "evidence": "CRWG的口径归到10月21号",
+              "note": "本人明确指定本次CRWG记录及相关成本、计划归属10/21；保留原美东日期、截图下单时间、实际时区换算及录入时间，不更改其他标的归属。"
+            }
+          },
+          "priorSoxlPlan": {
+            "planId": "PLAN-SOXL-MAIN-20261022-10835-T",
+            "status": "active",
+            "createdAt": "2026-10-21T18:28:47.373Z",
+            "effectiveFrom": "2026-10-21T18:28:47.373Z",
+            "recordedAt": "2026-10-21T18:28:47.373Z",
+            "source": {
+              "type": "user_confirmation",
+              "recordedAt": "2026-10-21T18:28:47.373Z",
+              "evidence": "原本今天要日内卖出的40股SOXL，更改计划；设置108.35卖出60股，结合之前低位买的尝试做T，因为该价位为本人看到的压力位，估计较难突破，并观察META财报。",
+              "quantityClarification": {
+                "type": "explicit_user_correction",
+                "recordedAt": "2026-10-21T18:29:23.264Z",
+                "evidence": "SOXL 是45股，不好意思，刚刚说错了",
+                "correctedBuyQty": 45,
+                "previousNarrativeQty": 40,
+                "note": "用户确认原买入45股，原真实流水与持仓不变；本次108.35卖60股挂单不变。"
+              }
+            },
+            "scope": {
+              "account": "main",
+              "sym": "SOXL",
+              "episodeId": "EP-SOXL-MAIN-20261014",
+              "role": "部分仓位做T退出"
+            },
+            "order": {
+              "side": "sell",
+              "orderType": "limit",
+              "qty": 60,
+              "limitPrice": 108.35,
+              "status": "user_reported_open",
+              "isPlacedOrder": true,
+              "placedAt": null,
+              "executedQty": 0,
+              "fillStatus": "not_reported",
+              "timeInForce": null,
+              "session": null
+            },
+            "replacesExitPlanForExecutionId": "EX-USER-20261021-SOXL-BUY-083",
+            "relatedExecutionIds": [
+              "EX-USER-20261021-SOXL-BUY-083"
+            ],
+            "originalReportedIntradayQty": 45,
+            "ledgerConfirmedBuyQty": 45,
+            "lotAllocation": null,
+            "trigger": {
+              "price": 108.35,
+              "rationale": "用户识别的压力位，估计较难突破",
+              "evidenceType": "user_technical_judgment",
+              "independentlyValidated": false
+            },
+            "horizon": "replaces_original_intraday_exit",
+            "expiryTime": null,
+            "stopPrice": null,
+            "note": "本次卖出计划覆盖新增45股及此前低位买入的一部分，但具体批次分配未指定。不将60股视为已卖出，不把全仓均价改为某个低价批次成本。原45股与用户本次澄清一致，未新增或更正实际成交。",
+            "observedEvents": [
+              {
+                "event": "META第三季度财报",
+                "marketDate": "2026-10-21",
+                "releaseWindow": "after_market_close",
+                "releaseChinaDate": "2026-10-22",
+                "callAt": "2026-10-21T16:30:00-04:00",
+                "callAtShanghai": "2026-10-22T04:30:00+08:00",
+                "source": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-to-Announce-Third-Quarter-2026-Results/default.aspx",
+                "verifiedAt": "2026-10-21T18:28:47.373Z",
+                "note": "只确认日历，不把财报结果或利好利空当成已知事实，也不自动据此撤单或改价。"
+              }
+            ],
+            "originalNarrativeQty": 40,
+            "quantityClarification": {
+              "type": "explicit_user_correction",
+              "recordedAt": "2026-10-21T18:29:23.264Z",
+              "evidence": "SOXL 是45股，不好意思，刚刚说错了",
+              "correctedBuyQty": 45,
+              "previousNarrativeQty": 40,
+              "note": "用户确认原买入45股，原真实流水与持仓不变；本次108.35卖60股挂单不变。"
+            }
+          },
+          "text": "CRWG实际退出后主动交易集中SOXL，开始做T；原挂单仅保留已报告状态。"
         }
       ]
     }
@@ -10254,6 +10557,141 @@
         }
       },
       "reason": "按用户确认的实际成交均价全部清仓，原长期持有计划保留历史；不因盈利倒推执行标签。"
+    },
+    {
+      "account": "main",
+      "sym": "CRWG",
+      "recordedAt": "2026-10-22T15:22:34.811Z",
+      "previousHolding": {
+        "sym": "CRWG",
+        "name": "2x CoreWeave (Leverage Shares)",
+        "qty": 200,
+        "cost": 11.41,
+        "costDate": "2026-10-22",
+        "lastPrice": 18.64,
+        "lastPriceDate": "2026-10-07 收盘",
+        "wtPct": 7,
+        "strategy": [
+          "核心仓",
+          "正股持有"
+        ],
+        "options": [],
+        "tags": [
+          "hold"
+        ],
+        "status": [
+          "持有"
+        ],
+        "actualCostBasis": {
+          "value": 12.17,
+          "status": "确认",
+          "note": "按已确认原交易仓均价15.75与本次8.59买入移动加权，正股真实均价12.17；不混入期权。"
+        },
+        "netInvestedCost": {
+          "value": 11.415,
+          "status": "确认",
+          "note": "由已核实正股净投入加本次买入金额滚动，正股净投入摊薄11.415；不含期权。"
+        },
+        "costDisplay": "券商摊薄成本",
+        "entrySetup": [],
+        "entryExecStatus": "unknown",
+        "actionExecStatus": "emo",
+        "exitReason": null,
+        "episodeId": "EP-CRWG-2026Q3",
+        "compositeNetInvested": {
+          "value": null,
+          "status": "本轮不核算",
+          "note": "按用户要求，本轮仅复盘正股，期权仅保留足额备兑状态"
+        },
+        "weightNote": "10/7收盘价复算：RAM71/CRDU12/CRWG7/IRE3/STXL7（正股交易仓市值口径，不含观察股）",
+        "alertSub": "挂7.40买单，成交后不再加仓。",
+        "oneLiner": "10/21按8.59加仓，券商摊薄成本11.41。",
+        "strategyNote": "已实际持有200股；新增100股@7.40为用户自挂未成交计划，若全部成交达300股，此后本周期不再加仓。不得提前计入持仓；11.41为券商摊薄成本，12.17为内部移动加权买入均价。",
+        "brokerReportedCost": {
+          "value": 11.41,
+          "status": "本人确认",
+          "basis": "stock_net_invested_cost",
+          "source": {
+            "type": "user_confirmation_with_broker_screenshot",
+            "sourceId": "futu-main-crwg-order-history-20261022",
+            "recordedAt": "2026-10-21T18:28:47.373Z",
+            "libraryFileId": "libfile_6174bb5c1704819192da6ccf9899187c",
+            "filename": "IMG_5298.png",
+            "evidence": "用户报告CRWG券商显示成本11.41，并提供完整正股订单历史：101@16.40、100@15.10买入，100@17.26、1@17.21卖出，100@8.59买入。截图列名为下单时间；原始订单时间不自动替代成交时间。"
+          },
+          "fullPhysicalCashFlowCheck": {
+            "value": 11.410949999999998,
+            "qty": 200,
+            "note": "按全部实股买卖回款核对，与显示值取两位小数一致；不含期权。"
+          }
+        },
+        "activePlan": {
+          "planId": "PLAN-CRWG-MAIN-20261022-FINAL-ADD",
+          "status": "active",
+          "createdAt": "2026-10-21T18:28:47.373Z",
+          "effectiveFrom": "2026-10-21T18:28:47.373Z",
+          "recordedAt": "2026-10-21T18:28:47.373Z",
+          "source": {
+            "type": "user_confirmation",
+            "recordedAt": "2026-10-21T18:28:47.373Z",
+            "evidence": "设置了订单在7.4再加100股；如果跌到那个位置，这会是最后一次加仓"
+          },
+          "scope": {
+            "account": "main",
+            "sym": "CRWG",
+            "episodeId": "EP-CRWG-2026Q3"
+          },
+          "order": {
+            "side": "buy",
+            "orderType": "limit",
+            "qty": 100,
+            "limitPrice": 7.4,
+            "status": "user_reported_open",
+            "isPlacedOrder": true,
+            "placedAt": null,
+            "executedQty": 0,
+            "fillStatus": "not_reported",
+            "timeInForce": null,
+            "session": null
+          },
+          "isFinalAdd": true,
+          "remainingPlannedAddQty": 100,
+          "maximumQtyAfterFullFill": 300,
+          "afterFillPolicy": "本周期不再加仓",
+          "holdingPeriod": null,
+          "exitPrice": null,
+          "note": "用户已自行挂单，本Agent仅登记；挂单尚未报告成交，不提前增加持仓或改变成本。",
+          "conditionalCostProjection": {
+            "qtyAfterFill": 300,
+            "actualMovingAverageCost": 10.58,
+            "physicalNetInvestedCost": 10.073966666666665,
+            "brokerDisplayApprox": 10.07,
+            "status": "hypothetical_full_fill_only"
+          },
+          "attributionDate": "2026-10-21",
+          "attributionSource": {
+            "type": "user_confirmed_review_label",
+            "recordedAt": "2026-10-21T18:34:00.862Z",
+            "confirmedDate": "2026-10-22",
+            "evidence": "CRWG的口径归到10月21号",
+            "note": "本人明确指定本次CRWG记录及相关成本、计划归属10/21；保留原美东日期、截图下单时间、实际时区换算及录入时间，不更改其他标的归属。"
+          }
+        },
+        "recordAttributionDate": "2026-10-21",
+        "recordAttributionSource": {
+          "type": "user_confirmed_review_label",
+          "recordedAt": "2026-10-21T18:34:00.862Z",
+          "confirmedDate": "2026-10-22",
+          "evidence": "CRWG的口径归到10月21号",
+          "note": "本人明确指定本次CRWG记录及相关成本、计划归属10/21；保留原美东日期、截图下单时间、实际时区换算及录入时间，不更改其他标的归属。"
+        }
+      },
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-22T15:22:34.811Z",
+        "evidence": "10/22 7.01卖出290股CRWG清仓，放弃最弱势的板块，把资金买入SOXL25股，价格84.4。集中一个标的，同时开启做T计划。"
+      },
+      "reason": "补录本人确认的90股7.40买入后，按7.01清仓290股。"
     }
   ],
   "stockConcentration": {

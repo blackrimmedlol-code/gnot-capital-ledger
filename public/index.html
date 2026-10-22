@@ -1352,8 +1352,8 @@
   var DATA = {
   reviewPresentationMode: "facts_and_user_plans",
   optionsAnalysisScope: "coverage_only",
-  asOf: "10/22更新：主账号SOXL按85.27加仓，2号小账户SNXX按9.175加仓。",
-  asOfLabel: "记录：10月22日 · SOXL与SNXX加仓",
+  asOf: "10/22更新：CRWG清仓，资金转向SOXL并开始做T。",
+  asOfLabel: "记录：10月22日 · CRWG清仓转SOXL",
   fx: {
     USDCNY: null,
     fxNote: "美股/ A 股分开统计，不做汇率折算"
@@ -1559,50 +1559,24 @@
       navNote: "USD · 重仓（10/6仓位估算）",
       holdings: [
         {
-          sym: "CRWG",
-          name: "2x CoreWeave (Leverage Shares)",
-          cost: 11.41,
-          costNote: "券商摊薄成本",
-          strategy: [
-            "核心仓",
-            "正股持有"
-          ],
-          options: [],
-          tags: [
-            "hold"
-          ],
-          alertSub: "挂7.40买单，成交后不再加仓。",
-          setup: [],
-          execStatus: "unknown",
-          oneLiner: "10/21按8.59加仓，券商摊薄成本11.41。",
-          coverage: {
-            status: "none",
-            statusText: "无备兑",
-            isFullyBacked: false,
-            expiryUnconfirmed: false,
-            sharesUnknown: false
-          },
-          stockWeightPct: null
-        },
-        {
           sym: "SOXL",
           name: "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          cost: 110.06944,
+          cost: 107.40664,
           costNote: "实际成本",
           strategy: [
             "半导体杠杆交易",
-            "事件条件买入"
+            "做T"
           ],
           options: [],
           tags: [
             "hold"
           ],
-          alertSub: "108.35压力位挂单 · 关注META财报",
+          alertSub: "108.35压力位卖单计划",
           setup: [
             "板块杠杆交易"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/22按85.27加仓。",
+          oneLiner: "10/22按84.40买入，集中SOXL并开始做T。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1809,6 +1783,53 @@
     }
   ],
   closedTrades: [
+    {
+      date: "2026-10-22",
+      dateStart: "2026-10-22",
+      dateEnd: "2026-10-22",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-22",
+      trades: [
+        {
+          tradeId: "EP-CRWG-2026Q3:2026-10-22",
+          episodeId: "EP-CRWG-2026Q3",
+          sym: "CRWG",
+          name: "2x CoreWeave (Leverage Shares)",
+          acct: "主账号",
+          cost: 10.68966,
+          soldDate: "2026-10-22",
+          dateStart: "2026-10-22",
+          dateEnd: "2026-10-22",
+          isPartial: false,
+          closesEpisode: true,
+          totalRetPct: -34.42261,
+          result: "loss",
+          cycleRetPct: -19.59575,
+          cycleResult: "loss",
+          performanceEligible: true,
+          performanceExclusionReason: null,
+          reason: "放弃弱势板块，资金转向SOXL。",
+          setup: [],
+          execStatus: "adhoc",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261022-CRWG-SELL-089",
+              date: "2026-10-22",
+              dateEnd: "2026-10-22",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 7.01,
+              cost: 10.68966,
+              costBasisType: "actual",
+              retPct: -34.42258,
+              note: "放弃弱势板块，按7.01清仓，资金转向SOXL。"
+            }
+          ]
+        }
+      ]
+    },
     {
       date: "2026-10-21",
       dateStart: "2026-10-21",
@@ -3190,7 +3211,7 @@
           tradeId: "EP-CRWG-2026Q3:2026-09-21",
           episodeId: "EP-CRWG-2026Q3",
           sym: "CRWG",
-          name: "2x CoreWeave · AI云计算",
+          name: "2x CoreWeave (Leverage Shares)",
           acct: "主账号",
           cost: 15.75,
           soldDate: "2026-09-21",
@@ -3205,12 +3226,9 @@
           performanceEligible: false,
           performanceExclusionReason: null,
           reason: "部分减仓兑现",
-          setup: [
-            "趋势波段",
-            "仓位管理"
-          ],
-          execStatus: "plan",
-          oneLiner: "+9.6% 部分兑现合理，保留剩余仓位比一次性全清更符合趋势交易。",
+          setup: [],
+          execStatus: "adhoc",
+          oneLiner: "",
           legs: [
             {
               executionId: "EX-20260922-CRWG-SELL-010",
@@ -3687,25 +3705,31 @@
       reviewDate: "2026-10-22",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-22 复盘",
-      title: "主账号SOXL加仓 · 2号SNXX加仓",
+      title: "CRWG清仓转SOXL · 2号SNXX加仓",
       plan: [
         "SOXL：改挂108.35部分卖单，结合此前低位买入部分做T。",
-        "108.35为观察到的压力位，另关注META财报。"
+        "108.35为观察到的压力位，另关注META财报。",
+        "放弃弱势板块，主动交易集中SOXL，开始做T。"
       ],
       execution: [
         "2号SNXX：按9.175加仓。",
-        "主账号SOXL：按85.27加仓。"
+        "主账号SOXL：按85.27加仓。",
+        "主账号CRWG：按7.40补仓，随后按7.01清仓。",
+        "主账号SOXL：按84.40买入。"
       ],
       execStatus: "unknown",
       symbols: [
         "SNXX",
-        "SOXL"
+        "SOXL",
+        "CRWG"
       ],
       accounts: [
         "2号小账号",
         "主账号"
       ],
-      saleExecutionIds: []
+      saleExecutionIds: [
+        "EX-USER-20261022-CRWG-SELL-089"
+      ]
     },
     {
       reviewId: "RV-20261021",
