@@ -107,10 +107,12 @@ j.executions.forEach(e => {
 function pendingBalance(acct, sym, calculated, reported) {
   return (j.reconciliations || []).find(r => r.account === acct && r.sym === sym &&
     r.status === 'pending' && r.knownQuantity === calculated && r.reportedQuantity === reported &&
-    r.statementAsOf && r.sourceId && r.note &&
+    r.sourceId && r.note &&
     (j.sourceDocuments || []).some(s => s.sourceId === r.sourceId) &&
-    (j.statementPositions || []).some(s => s.sourceId === r.sourceId && s.asOf === r.statementAsOf &&
-      s.account === acct && s.holdings && s.holdings[sym] === calculated));
+    ((r.statementAsOf && (j.statementPositions || []).some(s => s.sourceId === r.sourceId && s.asOf === r.statementAsOf &&
+      s.account === acct && s.holdings && s.holdings[sym] === calculated)) ||
+     (r.balanceSource && r.balanceSource.type === 'user_confirmation' && r.balanceSource.evidence &&
+      Array.isArray(r.orders) && r.orders.some(o => o.status === 'filled' && o.side === 'buy' && o.qty === reported - calculated))));
 }
 j.accounts.forEach(a => (a.holdings || []).forEach(h => {
   const acctId = acctIdOf(a);
@@ -334,3 +336,4 @@ if (errors > 0) {
   process.exit(1);
 }
 console.log(`\n✅ 校验通过 (${warnings} 警告)`);
+

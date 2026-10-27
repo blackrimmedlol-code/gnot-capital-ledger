@@ -725,9 +725,9 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 196,
-          "cost": 107.40664,
-          "costDate": "2026-10-22",
+          "qty": 219,
+          "cost": null,
+          "costDate": null,
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
           "lastPriceSource": {
@@ -762,17 +762,14 @@
           "alertSub": "准备做T",
           "oneLiner": "10/26按94.00卖出，准备做T。",
           "actualCostBasis": {
-            "value": 107.40664,
-            "status": "确认",
-            "note": "本周期八笔已确认正股买入的移动加权均价。",
-            "sourceType": "user_confirmation"
+            "value": null,
+            "status": "待核实"
           },
           "netInvestedCost": {
-            "value": 110.48469,
-            "status": "确认",
+            "value": null,
+            "status": "待核实",
             "scope": "episode",
-            "episodeId": "EP-SOXL-MAIN-20261014",
-            "note": "本周期无卖出，正股净投入每股成本与移动加权均价一致。"
+            "episodeId": "EP-SOXL-MAIN-20261014"
           },
           "costDisplay": "实际成本",
           "activePlan": {
@@ -8528,6 +8525,78 @@
       "internalTradingNetInvestedCost": 11.415,
       "actualMovingAverageCost": 12.17,
       "note": "券商报告11.41与全部实股买卖现金流净投入摊薄11.41095对应；内部交易仓口径排除此前观察份额，净投入摊薄11.415。移动加权均价12.17与摊薄成本用途不同，不混算；截图未显示持仓成本字段，11.41来源为本人文字报告。期权不参与本次核对。"
+    },
+    {
+      "reconciliationId": "REC-SOXL-20261027-ORDER-HISTORY",
+      "account": "main",
+      "sym": "SOXL",
+      "status": "pending",
+      "knownQuantity": 196,
+      "reportedQuantity": 219,
+      "sourceId": "futu-main-soxl-order-history-20261027",
+      "balanceSource": {
+        "type": "user_confirmation",
+        "evidence": "soxl 我看我还有 219 股"
+      },
+      "note": "截图订单已全部成交，显示下单时间及订单价格，成交日期及均价待核实。",
+      "orders": [
+        {
+          "side": "buy",
+          "qty": 23,
+          "orderPrice": 96.48,
+          "orderDate": "2026-10-21",
+          "orderTime": "22:19:47",
+          "status": "filled"
+        },
+        {
+          "side": "buy",
+          "qty": 23,
+          "orderPrice": 136.5,
+          "orderDate": "2026-10-12",
+          "orderTime": "04:42:06",
+          "status": "filled"
+        },
+        {
+          "side": "sell",
+          "qty": 23,
+          "orderPrice": 129.6,
+          "orderDate": "2026-10-12",
+          "orderTime": "05:06:31",
+          "status": "filled"
+        },
+        {
+          "side": "buy",
+          "qty": 23,
+          "orderPrice": 131.47,
+          "orderDate": "2026-10-12",
+          "orderTime": "09:56:12",
+          "status": "filled"
+        },
+        {
+          "side": "sell",
+          "qty": 23,
+          "orderPrice": 124.83,
+          "orderDate": "2026-10-12",
+          "orderTime": "10:28:03",
+          "status": "filled"
+        },
+        {
+          "side": "buy",
+          "qty": 15,
+          "orderPrice": 122.2,
+          "orderDate": "2026-10-12",
+          "orderTime": "22:14:18",
+          "status": "filled"
+        },
+        {
+          "side": "sell",
+          "qty": 15,
+          "orderPrice": 123.0,
+          "orderDate": "2026-10-13",
+          "orderTime": "09:47:45",
+          "status": "filled"
+        }
+      ]
     }
   ],
   "sourceDocuments": [
@@ -8559,6 +8628,15 @@
       "sym": "CRWG",
       "timezone": "America/New_York",
       "note": "字段为订单历史及下单时间，非分笔成交回报；不根据历史下单日期覆盖已有结单实际成交日期。"
+    },
+    {
+      "sourceId": "futu-main-soxl-order-history-20261027",
+      "type": "broker_order_history_screenshot",
+      "label": "主账号SOXL订单历史截图",
+      "account": "main",
+      "sym": "SOXL",
+      "timezone": "America/New_York",
+      "note": "截图显示全部成交及下单时间、订单价格；成交时间和均价待核实。"
     }
   ],
   "statementPositions": [
