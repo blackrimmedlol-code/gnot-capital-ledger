@@ -725,7 +725,7 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 241,
+          "qty": 196,
           "cost": 107.40664,
           "costDate": "2026-10-22",
           "lastPrice": 127.58,
@@ -759,8 +759,8 @@
           "actionExecStatus": "adhoc",
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
-          "alertSub": "108.35压力位卖单计划",
-          "oneLiner": "10/22按84.40买入，集中SOXL并开始做T。",
+          "alertSub": "准备做T",
+          "oneLiner": "10/26按94.00卖出，准备做T。",
           "actualCostBasis": {
             "value": 107.40664,
             "status": "确认",
@@ -768,7 +768,7 @@
             "sourceType": "user_confirmation"
           },
           "netInvestedCost": {
-            "value": 107.40664,
+            "value": 110.48469,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
@@ -1013,13 +1013,13 @@
         {
           "sym": "GDXU",
           "name": "GDXU",
-          "qty": 30,
-          "cost": 92,
-          "costDate": "2026-10-21",
+          "qty": 75,
+          "cost": 82.1,
+          "costDate": "2026-10-26",
           "lastPrice": null,
           "lastPriceDate": null,
           "strategy": [
-            "黄金相关交易"
+            "长期持仓"
           ],
           "options": [],
           "tags": [
@@ -1036,25 +1036,25 @@
           "entryExecStatus": "adhoc",
           "actionExecStatus": "adhoc",
           "actualCostBasis": {
-            "value": 92,
+            "value": 82.1,
             "status": "确认",
             "note": "按本次已确认成交计算。"
           },
           "netInvestedCost": {
-            "value": 92,
+            "value": 82.1,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-GDXU-MAIN-20261021",
             "note": "本周期首笔正股买入。"
           },
           "costDisplay": "实际成本",
-          "oneLiner": "按92.00买入，新闻催化后急跌至理想买点。",
+          "oneLiner": "10/26按75.50加仓，长期持有。",
           "alertSub": "",
           "strategyNote": "主账号30股@92，10/21；新闻内容和精确时刻未提供。行情价格保留null，不拿成交价替代市场报价。"
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-22",
+      "holdingsAsOf": "2026-10-26",
       "activeTradingFocus": {
         "sym": "SOXL",
         "mode": "t_trading",
@@ -5301,6 +5301,66 @@
       "relatedExecutionIds": [
         "EX-USER-20261022-CRWG-SELL-089"
       ]
+    },
+    {
+      "executionId": "EX-USER-20261026-SOXL-SELL-091",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "sell",
+      "qty": 45,
+      "price": 94,
+      "date": "2026-10-26",
+      "chinaDate": "2026-10-26",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-27T03:28:17.812Z",
+        "evidence": "用户指定10/26"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-27T03:28:17.812Z",
+        "evidence": "1026: 94卖出45股soxl，准备做T，75.5买入45股gdxu，拉低均价长持"
+      },
+      "recordedAt": "2026-10-27T03:28:17.812Z",
+      "actionExecStatus": "adhoc",
+      "note": "按94.00卖出，准备做T。"
+    },
+    {
+      "executionId": "EX-USER-20261026-GDXU-BUY-092",
+      "episodeId": "EP-GDXU-MAIN-20261021",
+      "account": "main",
+      "sym": "GDXU",
+      "side": "buy",
+      "qty": 45,
+      "price": 75.5,
+      "date": "2026-10-26",
+      "chinaDate": "2026-10-26",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-27T03:28:17.812Z",
+        "evidence": "用户指定10/26"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-27T03:28:17.812Z",
+        "evidence": "1026: 94卖出45股soxl，准备做T，75.5买入45股gdxu，拉低均价长持"
+      },
+      "recordedAt": "2026-10-27T03:28:17.812Z",
+      "actionExecStatus": "adhoc",
+      "note": "按75.50买入，拉低均价长持。"
     }
   ],
   "episodes": [
@@ -5752,7 +5812,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 241,
+      "currentQty": 196,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -5794,7 +5854,7 @@
         "回落至理想买点"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 30,
+      "currentQty": 75,
       "exitDate": null,
       "exitReason": null
     }
@@ -8321,6 +8381,33 @@
           },
           "text": "CRWG实际退出后主动交易集中SOXL，开始做T；原挂单仅保留已报告状态。"
         }
+      ]
+    },
+    {
+      "reviewId": "RV-20261026",
+      "date": "2026-10-26",
+      "reviewDate": "2026-10-26",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-26 复盘",
+      "title": "SOXL做T · GDXU加仓长持",
+      "executionIds": [
+        "EX-USER-20261026-SOXL-SELL-091",
+        "EX-USER-20261026-GDXU-BUY-092"
+      ],
+      "plan": [
+        "SOXL：准备做T。",
+        "GDXU：拉低均价，长期持有。"
+      ],
+      "execution": [
+        "主账号SOXL：按94.00卖出。",
+        "主账号GDXU：按75.50买入。"
+      ],
+      "execStatus": "unknown",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-27T03:28:17.812Z",
+      "updatedAt": "2026-10-27T03:28:17.812Z",
+      "internalObservation": [
+        "账户按本对话此前主账号持仓记录归属；精确成交时刻未提供。"
       ]
     }
   ],

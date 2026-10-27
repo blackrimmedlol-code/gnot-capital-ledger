@@ -602,7 +602,7 @@
         <h1>持仓监测与交易复盘</h1>
         <p class="motto-compact">Fundamental Truth is not Alpha.</p>
       </div>
-      <span class="stamp">记录更新至 2026-10-22</span>
+      <span class="stamp">记录更新至 2026-10-26</span>
     </div>
   </div>
 </header>
@@ -1543,7 +1543,7 @@
     available: false,
     topSym: null,
     level: null,
-    holdingsAsOf: "2026-10-22",
+    holdingsAsOf: "2026-10-26",
     priceAsOf: null
   },
   accounts: [
@@ -1571,12 +1571,12 @@
           tags: [
             "hold"
           ],
-          alertSub: "108.35压力位卖单计划",
+          alertSub: "准备做T",
           setup: [
             "板块杠杆交易"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/22按84.40买入，集中SOXL并开始做T。",
+          oneLiner: "10/26按94.00卖出，准备做T。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1589,10 +1589,10 @@
         {
           sym: "GDXU",
           name: "GDXU",
-          cost: 92,
+          cost: 82.1,
           costNote: "实际成本",
           strategy: [
-            "黄金相关交易"
+            "长期持仓"
           ],
           options: [],
           tags: [
@@ -1604,7 +1604,7 @@
             "回落至理想买点"
           ],
           execStatus: "adhoc",
-          oneLiner: "按92.00买入，新闻催化后急跌至理想买点。",
+          oneLiner: "10/26按75.50加仓，长期持有。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1783,6 +1783,53 @@
     }
   ],
   closedTrades: [
+    {
+      date: "2026-10-26",
+      dateStart: "2026-10-26",
+      dateEnd: "2026-10-26",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-26",
+      trades: [
+        {
+          tradeId: "EP-SOXL-MAIN-20261014:2026-10-26",
+          episodeId: "EP-SOXL-MAIN-20261014",
+          sym: "SOXL",
+          name: "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
+          acct: "主账号",
+          cost: 107.40664,
+          soldDate: "2026-10-26",
+          dateStart: "2026-10-26",
+          dateEnd: "2026-10-26",
+          isPartial: true,
+          closesEpisode: false,
+          totalRetPct: -12.48213,
+          result: "loss",
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
+          performanceExclusionReason: null,
+          reason: "部分减仓兑现",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261026-SOXL-SELL-091",
+              date: "2026-10-26",
+              dateEnd: "2026-10-26",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 94,
+              cost: 107.40664,
+              costBasisType: "actual",
+              retPct: -12.48213,
+              note: "按94.00卖出，准备做T。"
+            }
+          ]
+        }
+      ]
+    },
     {
       date: "2026-10-22",
       dateStart: "2026-10-22",
@@ -3699,6 +3746,33 @@
     }
   ],
   reviews: [
+    {
+      reviewId: "RV-20261026",
+      date: "2026-10-26",
+      reviewDate: "2026-10-26",
+      reviewTimezone: "Asia/Shanghai",
+      dateLabel: "2026-10-26 复盘",
+      title: "SOXL做T · GDXU加仓长持",
+      plan: [
+        "SOXL：准备做T。",
+        "GDXU：拉低均价，长期持有。"
+      ],
+      execution: [
+        "主账号SOXL：按94.00卖出。",
+        "主账号GDXU：按75.50买入。"
+      ],
+      execStatus: "unknown",
+      symbols: [
+        "SOXL",
+        "GDXU"
+      ],
+      accounts: [
+        "主账号"
+      ],
+      saleExecutionIds: [
+        "EX-USER-20261026-SOXL-SELL-091"
+      ]
+    },
     {
       reviewId: "RV-20261022",
       date: "2026-10-22",
