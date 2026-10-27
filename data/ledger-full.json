@@ -726,8 +726,8 @@
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
           "qty": 219,
-          "cost": null,
-          "costDate": null,
+          "cost": 106.4547,
+          "costDate": "2026-10-22",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
           "lastPriceSource": {
@@ -762,14 +762,17 @@
           "alertSub": "准备做T",
           "oneLiner": "10/26按94.00卖出，准备做T。",
           "actualCostBasis": {
-            "value": null,
-            "status": "待核实"
+            "value": 106.4547,
+            "status": "确认",
+            "note": "本周期已确认买入的移动加权均价。",
+            "sourceType": "user_confirmation"
           },
           "netInvestedCost": {
-            "value": null,
-            "status": "待核实",
+            "value": 109.01388,
+            "status": "确认",
             "scope": "episode",
-            "episodeId": "EP-SOXL-MAIN-20261014"
+            "episodeId": "EP-SOXL-MAIN-20261014",
+            "note": "本周期正股买卖净投入摊薄成本。"
           },
           "costDisplay": "实际成本",
           "activePlan": {
@@ -5358,6 +5361,36 @@
       "recordedAt": "2026-10-27T03:28:17.812Z",
       "actionExecStatus": "adhoc",
       "note": "按75.50买入，拉低均价长持。"
+    },
+    {
+      "executionId": "EX-USER-20261022-SOXL-BUY-093",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 23,
+      "price": 96.48,
+      "date": "2026-10-22",
+      "chinaDate": "2026-10-22",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-27T03:35:30.058938+00:00",
+        "evidence": "用户确认成交日期10月22日。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-27T03:35:30.058938+00:00",
+        "evidence": "成交日期就是10月22号，均价96.48"
+      },
+      "recordedAt": "2026-10-27T03:35:30.058938+00:00",
+      "actionExecStatus": "unknown",
+      "note": "按96.48买入。"
     }
   ],
   "episodes": [
@@ -5809,7 +5842,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 196,
+      "currentQty": 219,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -8036,7 +8069,8 @@
         "EX-USER-20261022-SOXL-BUY-087",
         "EX-USER-20261022-CRWG-BUY-088",
         "EX-USER-20261022-CRWG-SELL-089",
-        "EX-USER-20261022-SOXL-BUY-090"
+        "EX-USER-20261022-SOXL-BUY-090",
+        "EX-USER-20261022-SOXL-BUY-093"
       ],
       "plan": [
         "SOXL：改挂108.35部分卖单，结合此前低位买入部分做T。",
@@ -8047,7 +8081,8 @@
         "2号SNXX：按9.175加仓。",
         "主账号SOXL：按85.27加仓。",
         "主账号CRWG：按7.40补仓，随后按7.01清仓。",
-        "主账号SOXL：按84.40买入。"
+        "主账号SOXL：按84.40买入。",
+        "主账号SOXL：按96.48买入。"
       ],
       "good": [
         "SOXL：本次明确了压力位卖价并保留原日内计划的变更历史。记录完整性判断置信度：高，不据此认定价位有效。"
@@ -8062,7 +8097,7 @@
       "execStatus": "unknown",
       "reviewStatus": "in_progress",
       "recordedAt": "2026-10-21T18:28:47.373Z",
-      "updatedAt": "2026-10-22T15:22:34.811Z",
+      "updatedAt": "2026-10-27T03:35:30.058938+00:00",
       "reviewDateBasis": "本轮SOXL退出计划变更仍按10/22记录；CRWG已按本人明确指定移入10/21，不更改SOXL日期。",
       "assessmentScope": "同步本人确认的三笔实际成交和主动交易集中SOXL的计划。",
       "internalObservation": [
@@ -8530,7 +8565,7 @@
       "reconciliationId": "REC-SOXL-20261027-ORDER-HISTORY",
       "account": "main",
       "sym": "SOXL",
-      "status": "pending",
+      "status": "resolved",
       "knownQuantity": 196,
       "reportedQuantity": 219,
       "sourceId": "futu-main-soxl-order-history-20261027",
@@ -8538,7 +8573,7 @@
         "type": "user_confirmation",
         "evidence": "soxl 我看我还有 219 股"
       },
-      "note": "截图订单已全部成交，显示下单时间及订单价格，成交日期及均价待核实。",
+      "note": "23股买入日期和均价已由用户确认；其余历史订单留待核对。",
       "orders": [
         {
           "side": "buy",
@@ -8596,7 +8631,13 @@
           "orderTime": "09:47:45",
           "status": "filled"
         }
-      ]
+      ],
+      "resolvedExecutionId": "EX-USER-20261022-SOXL-BUY-093",
+      "resolutionSource": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-27T03:35:30.058938+00:00",
+        "evidence": "成交日期就是10月22号，均价96.48"
+      }
     }
   ],
   "sourceDocuments": [
