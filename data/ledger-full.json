@@ -726,7 +726,7 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 134,
+          "qty": 130,
           "cost": 106.4547,
           "costDate": "2026-10-22",
           "lastPrice": 127.58,
@@ -769,7 +769,7 @@
             "sourceType": "user_confirmation"
           },
           "netInvestedCost": {
-            "value": 113.81373,
+            "value": 114.26954,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
@@ -5462,9 +5462,18 @@
       "episodeId": "EP-SOXL-MAIN-20261014",
       "sym": "SOXL",
       "side": "sell",
-      "qty": 45,
+      "qty": 49,
       "price": 99,
-      "note": "按99卖出，止损成交。"
+      "note": "按99卖出，止损成交。",
+      "quantityCorrection": {
+        "previousQty": 45,
+        "correctedQty": 49,
+        "source": {
+          "type": "explicit_user_correction",
+          "recordedAt": "2026-10-28T05:11:51.767569+00:00",
+          "evidence": "上一笔99卖的数量应该是49股"
+        }
+      }
     },
     {
       "account": "main",
@@ -5976,7 +5985,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 134,
+      "currentQty": 130,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -8708,7 +8717,7 @@
           "反T保留了低位接回的机会，也有价格继续上涨、难以按理想价格接回的风险。"
         ]
       },
-      "updatedAt": "2026-10-28T05:10:20.497214+00:00"
+      "updatedAt": "2026-10-28T05:11:51.767569+00:00"
     }
   ],
   "openingPositions": [
