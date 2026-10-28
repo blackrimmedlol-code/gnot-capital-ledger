@@ -125,6 +125,11 @@ function check(html, ledger) {
     }
     assert.ok(!nodes.reviewsBox.innerHTML.includes('依成交记录自动同步'), '无成交的计划卡片仍显示占位文案');
   }
+  if (ledger.methodology?.reviewPresentation?.mode === 'curated_assessment') {
+    const review = api.DATA.reviews.find(r => r.reviewId === 'RV-20261028');
+    assert.ok(review?.good?.length && review?.issues?.length && nodes.reviewsBox.innerHTML.includes(review.good[0]), '精选点评未显示');
+    assert.ok(!nodes.reviewsBox.innerHTML.includes('置信度：'), '内部评价细节泄漏');
+  }
   assert.deepEqual(reviewIds.slice().sort(), publicReviews.map(r => r.reviewId).sort(), '公开复盘缺失或内部核对泄漏');
   const expectedReviewOrder = publicReviews.slice().sort((a, b) => (b.reviewDate || b.date).localeCompare(a.reviewDate || a.date));
   assert.deepEqual(reviewIds, expectedReviewOrder.map(r => r.reviewId), '复盘未按归属日倒序');

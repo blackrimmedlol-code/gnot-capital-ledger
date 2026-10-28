@@ -19,7 +19,7 @@ console.log('输出:', OUT_PATH);
 
 // ---- 1. 读取 ledger-full.json ----
 const ledger = JSON.parse(fs.readFileSync(LEDGER_PATH, 'utf8'));
-const factsOnlyReviews = ledger.methodology?.reviewPresentation?.mode === 'facts_and_user_plans';
+const factsOnlyReviews = ledger.methodology?.reviewPresentation?.mode !== 'full';
 console.log(`✅ ledger-full.json: ${ledger.accounts.length} accounts, ${ledger.executions.length} executions, ${ledger.episodes.length} episodes`);
 
 // ---- 2. 生成脱敏数据 ----
@@ -137,7 +137,7 @@ function publicClosedTrade(t) {
 const mainAccount = ledger.accounts.find(a => a.id === 'main');
 const mainWeight = mainAccount ? summarizeHoldings(mainAccount) : { available: false, topSym: null, level: null };
 const publicData = {
-  reviewPresentationMode: factsOnlyReviews ? 'facts_and_user_plans' : 'full',
+  reviewPresentationMode: ledger.methodology?.reviewPresentation?.mode || 'full',
   optionsAnalysisScope: (ledger.methodology.optionsAnalysis || {}).scope || 'full',
   asOf: ledger.asOf,
   asOfLabel: ledger.asOfLabel,
@@ -168,6 +168,9 @@ const publicData = {
     if (!factsOnlyReviews) keys.push('good', 'issues', 'todo');
     for (const k of keys) {
       if (r[k] !== undefined) out[k] = r[k];
+    }
+    if (ledger.methodology?.reviewPresentation?.mode === 'curated_assessment') {
+      for (const k of ['good', 'issues', 'todo']) if (Array.isArray(r.publicAssessment?.[k])) out[k] = r.publicAssessment[k];
     }
     const events = (r.executionIds || []).map(id => ledger.executions.find(e => e.executionId === id)).filter(Boolean);
     out.symbols = [...new Set(events.map(e => e.sym))];

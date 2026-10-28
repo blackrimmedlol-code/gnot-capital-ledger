@@ -1350,7 +1350,7 @@
   // UNIFIED DATA SOURCE — 所有展示数据从这里生成，避免手写不同步
   // ============================================================
   var DATA = {
-  reviewPresentationMode: "facts_and_user_plans",
+  reviewPresentationMode: "curated_assessment",
   optionsAnalysisScope: "coverage_only",
   asOf: "10/22更新：CRWG清仓，资金转向SOXL并开始做T。",
   asOfLabel: "记录：10月22日 · CRWG清仓转SOXL",
@@ -3835,6 +3835,12 @@
         "SOXL：卖飞不伤心。"
       ],
       execStatus: "unknown",
+      good: [
+        "SOXL按预设止损执行，卖出后的价格变化不应反过来决定这次执行是否正确。"
+      ],
+      issues: [
+        "ROBN的买入依据是财报后被错杀的判断；后续应关注加密业务恢复是否支持这一判断。"
+      ],
       symbols: [
         "SOXL",
         "ROBN"
@@ -3862,6 +3868,12 @@
         "主账号GDXU：按75.50买入。"
       ],
       execStatus: "unknown",
+      good: [
+        "SOXL部分卖出并准备做T，保留了继续参与反弹的仓位。"
+      ],
+      issues: [
+        "做T需要同时考虑价格继续上涨时，卖出部分可能无法按理想价格接回。"
+      ],
       symbols: [
         "SOXL",
         "GDXU"
@@ -3893,6 +3905,9 @@
         "主账号SOXL：按96.48买入。"
       ],
       execStatus: "unknown",
+      issues: [
+        "SOXL以压力位作为卖出参考，有可能在达到目标前回落，也可能卖出后继续上涨。"
+      ],
       symbols: [
         "SNXX",
         "SOXL",
@@ -3927,6 +3942,12 @@
         "主账号GDXU：按92.00买入。"
       ],
       execStatus: "unknown",
+      good: [
+        "CRWG明确了最后一次加仓的边界。"
+      ],
+      issues: [
+        "CRWG加仓降低均价的同时增加了敞口，心理平衡与交易风险需要分开看。"
+      ],
       symbols: [
         "CRDU",
         "SOXL",
@@ -3959,6 +3980,9 @@
         "主账号CRWG：按0.00买回原17C。"
       ],
       execStatus: "unknown",
+      issues: [
+        "退出RAM后资金转向SOXL，减少了RAM敞口，但SOXL仓位更加集中。"
+      ],
       symbols: [
         "GDXU",
         "INTW",
@@ -3993,6 +4017,13 @@
         "主账号CRDU：按0.35买回全部3张7C。"
       ],
       execStatus: "adhoc",
+      good: [
+        "CRDU买回备兑看涨期权，与继续看涨的判断一致。"
+      ],
+      issues: [
+        "SOXL连续回补降低均价的同时也扩大了仓位。",
+        "GDXU是每日三倍杠杆产品，长期持有需要考虑路径与费用影响。"
+      ],
       symbols: [
         "SOXL",
         "RKLX",
@@ -4023,6 +4054,12 @@
         "保留部分现金等待PPI数据。"
       ],
       execStatus: "plan",
+      good: [
+        "减持RAM后保留部分现金，为事件波动留下选择空间。"
+      ],
+      issues: [
+        "转入SOXL降低了单一标的集中，但三倍杠杆仍会放大板块波动。"
+      ],
       symbols: [
         "RAM",
         "SOXL"
@@ -4052,6 +4089,12 @@
         "当日自评：“虽然等待回调到位，但过多情绪。”"
       ],
       execStatus: "emo",
+      good: [
+        "STXL触及退出边界后离场，亏损本身不代表执行错误。"
+      ],
+      issues: [
+        "RAM先加、后减、再加，最终仓位增加，需要留意情绪对仓位决定的影响。"
+      ],
       symbols: [
         "RAM",
         "STXL"
@@ -4080,6 +4123,12 @@
         "2号SNXX：按12.00加仓。"
       ],
       execStatus: "adhoc",
+      good: [
+        "IRE走势转弱后调整卖价，完成了原本明确的退出意图。"
+      ],
+      issues: [
+        "单一目标价在快速波动时可能错过成交，可提前考虑目标无法成交时的处理方式。"
+      ],
       symbols: [
         "IRE",
         "SNXX"
@@ -4109,6 +4158,12 @@
         "主账号RAM：按0.10买回2张16C，按0.05买回1张17C。"
       ],
       execStatus: "unknown",
+      good: [
+        "RAM按预设价格减仓，与降低集中度的目标一致。"
+      ],
+      issues: [
+        "更低价格接回RAM抵消了部分减仓效果，买价降低不代表风险敞口下降。"
+      ],
       symbols: [
         "RAM",
         "IRE",
@@ -4139,6 +4194,9 @@
         "1号RKLX：按17.60买入。"
       ],
       execStatus: "emo",
+      issues: [
+        "RAM继续加仓与此前周内停止加仓的约定不一致，值得复盘当时的触发原因。"
+      ],
       symbols: [
         "RAM",
         "SNXX",
@@ -4169,6 +4227,9 @@
         "主账号IRE：按9.55部分止盈。"
       ],
       execStatus: "unknown",
+      good: [
+        "IRE提前兑现部分利润，保留了剩余仓位的上涨机会。"
+      ],
       symbols: [
         "RAM",
         "STXL",
@@ -4200,6 +4261,9 @@
         "1号SNXX：按15.695买入，博弈支撑反弹。"
       ],
       execStatus: "plan",
+      good: [
+        "GDXU按日内波段思路兑现，避免了隔夜敞口。"
+      ],
       symbols: [
         "IRE",
         "GDXU",
