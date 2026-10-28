@@ -8912,7 +8912,8 @@
         "EX-USER-20261028-SPCH-SAT1-BUY-100"
       ],
       "plan": [
-        "SOXL：原设104止盈、99止损。"
+        "SOXL：原设104止盈、99止损。",
+        "接下来减少操作频次。"
       ],
       "execution": [
         "主账号SOXL：按99卖出，触发止损。",
@@ -8940,7 +8941,7 @@
           "反T保留了低位接回的机会，也有价格继续上涨、难以按理想价格接回的风险。"
         ]
       },
-      "updatedAt": "2026-10-28T14:57:58.702607+00:00"
+      "updatedAt": "2026-10-28T14:59:38.488810+00:00"
     }
   ],
   "openingPositions": [
@@ -14942,6 +14943,42 @@
       },
       "status": "resolved",
       "resolvedExecutionId": "EX-USER-20261028-SPCH-SAT1-BUY-100"
+    },
+    {
+      "id": "PENDING-20261028-MAIN-IMG5426",
+      "account": "main",
+      "chinaDate": "2026-10-28",
+      "source": {
+        "type": "broker_screenshot",
+        "filename": "IMG_5426.jpeg",
+        "libraryFileId": "libfile_637c15871ab4819188558982e24f55be",
+        "recordedAt": "2026-10-28T14:59:38.488810+00:00",
+        "evidence": "1028，主账号做了这些操作，接下来减少操作频次"
+      },
+      "orders": [
+        {
+          "sym": "SOXL",
+          "side": "sell",
+          "qty": 40,
+          "displayedPrice": 104.02,
+          "status": "filled"
+        },
+        {
+          "sym": "GDXU",
+          "side": "buy",
+          "qty": 30,
+          "displayedPrice": 79.6,
+          "status": "filled"
+        },
+        {
+          "sym": "SOXL",
+          "side": "buy",
+          "qty": 40,
+          "displayedPrice": 102.6,
+          "status": "filled"
+        }
+      ],
+      "note": "截图未包含价格字段标题，确认是否成交均价后进入正式流水。"
     }
   ]
 }
