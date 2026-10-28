@@ -725,7 +725,7 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 219,
+          "qty": 174,
           "cost": 106.4547,
           "costDate": "2026-10-22",
           "lastPrice": 127.58,
@@ -759,8 +759,8 @@
           "actionExecStatus": "adhoc",
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
-          "alertSub": "准备做T",
-          "oneLiner": "10/26按94.00卖出，准备做T。",
+          "alertSub": "执行止损",
+          "oneLiner": "10/28按99卖出，执行止损。",
           "actualCostBasis": {
             "value": 106.4547,
             "status": "确认",
@@ -768,7 +768,7 @@
             "sourceType": "user_confirmation"
           },
           "netInvestedCost": {
-            "value": 109.01388,
+            "value": 111.60368,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
@@ -1051,10 +1051,53 @@
           "oneLiner": "10/26按75.50加仓，长期持有。",
           "alertSub": "",
           "strategyNote": "主账号30股@92，10/21；新闻内容和精确时刻未提供。行情价格保留null，不拿成交价替代市场报价。"
+        },
+        {
+          "sym": "ROBN",
+          "name": "ROBN",
+          "qty": 200,
+          "cost": 18.85,
+          "costDate": "2026-10-28",
+          "lastPrice": null,
+          "lastPriceDate": null,
+          "strategy": [
+            "财报后买入"
+          ],
+          "options": [],
+          "tags": [
+            "hold"
+          ],
+          "status": [
+            "持有"
+          ],
+          "setup": [
+            "财报后买入"
+          ],
+          "entrySetup": [
+            "财报后买入"
+          ],
+          "execStatus": "unknown",
+          "entryExecStatus": "unknown",
+          "actionExecStatus": "unknown",
+          "episodeId": "EP-ROBN-MAIN-20261028",
+          "exitReason": null,
+          "alertSub": "财报后买入",
+          "oneLiner": "按18.85买入，认为财报后被错杀。",
+          "actualCostBasis": {
+            "value": 18.85,
+            "status": "确认",
+            "sourceType": "user_confirmation"
+          },
+          "netInvestedCost": {
+            "value": 18.85,
+            "status": "确认",
+            "scope": "episode",
+            "episodeId": "EP-ROBN-MAIN-20261028"
+          }
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-26",
+      "holdingsAsOf": "2026-10-28",
       "activeTradingFocus": {
         "sym": "SOXL",
         "mode": "t_trading",
@@ -5391,6 +5434,66 @@
       "recordedAt": "2026-10-27T03:35:30.058938+00:00",
       "actionExecStatus": "unknown",
       "note": "按96.48买入。"
+    },
+    {
+      "account": "main",
+      "date": "2026-10-28",
+      "chinaDate": "2026-10-28",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-28T02:00:42.518603+00:00",
+        "evidence": "用户指定10月28日。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-28T02:00:42.518603+00:00",
+        "evidence": "10月28号 主账号99卖45股SOXL，原本设104止盈、99止损，卖飞不伤心；18.85买入200股ROBN，认为财报后被错杀，之前加密货币表现疲软，所以财报自然不好。"
+      },
+      "recordedAt": "2026-10-28T02:00:42.518603+00:00",
+      "actionExecStatus": "unknown",
+      "executionId": "EX-USER-20261028-SOXL-SELL-094",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "sym": "SOXL",
+      "side": "sell",
+      "qty": 45,
+      "price": 99,
+      "note": "按99卖出，止损成交。"
+    },
+    {
+      "account": "main",
+      "date": "2026-10-28",
+      "chinaDate": "2026-10-28",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-28T02:00:42.518603+00:00",
+        "evidence": "用户指定10月28日。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-28T02:00:42.518603+00:00",
+        "evidence": "10月28号 主账号99卖45股SOXL，原本设104止盈、99止损，卖飞不伤心；18.85买入200股ROBN，认为财报后被错杀，之前加密货币表现疲软，所以财报自然不好。"
+      },
+      "recordedAt": "2026-10-28T02:00:42.518603+00:00",
+      "actionExecStatus": "unknown",
+      "executionId": "EX-USER-20261028-ROBN-BUY-095",
+      "episodeId": "EP-ROBN-MAIN-20261028",
+      "sym": "ROBN",
+      "side": "buy",
+      "qty": 200,
+      "price": 18.85,
+      "note": "认为财报后被错杀，之前加密货币表现疲软。"
     }
   ],
   "episodes": [
@@ -5842,7 +5945,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 219,
+      "currentQty": 174,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -5887,6 +5990,20 @@
       "currentQty": 75,
       "exitDate": null,
       "exitReason": null
+    },
+    {
+      "episodeId": "EP-ROBN-MAIN-20261028",
+      "sym": "ROBN",
+      "account": "main",
+      "status": "open",
+      "entryDate": "2026-10-28",
+      "entrySetup": [
+        "财报后买入"
+      ],
+      "entryExecStatus": "unknown",
+      "currentQty": 200,
+      "exitReason": null,
+      "exitDate": null
     }
   ],
   "closedTrades": [
@@ -8441,6 +8558,32 @@
       "internalObservation": [
         "账户按本对话此前主账号持仓记录归属；精确成交时刻未提供。"
       ]
+    },
+    {
+      "reviewId": "RV-20261028",
+      "date": "2026-10-28",
+      "reviewDate": "2026-10-28",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-28 复盘",
+      "title": "SOXL止损 · ROBN买入",
+      "executionIds": [
+        "EX-USER-20261028-SOXL-SELL-094",
+        "EX-USER-20261028-ROBN-BUY-095"
+      ],
+      "plan": [
+        "SOXL：原设104止盈、99止损。"
+      ],
+      "execution": [
+        "主账号SOXL：按99卖出，触发止损。",
+        "主账号ROBN：按18.85买入，认为财报后被错杀。",
+        "SOXL：卖飞不伤心。"
+      ],
+      "good": [],
+      "issues": [],
+      "todo": [],
+      "execStatus": "unknown",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-28T02:00:42.518603+00:00"
     }
   ],
   "openingPositions": [

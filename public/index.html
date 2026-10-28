@@ -602,7 +602,7 @@
         <h1>持仓监测与交易复盘</h1>
         <p class="motto-compact">Fundamental Truth is not Alpha.</p>
       </div>
-      <span class="stamp">记录更新至 2026-10-26</span>
+      <span class="stamp">记录更新至 2026-10-28</span>
     </div>
   </div>
 </header>
@@ -1543,7 +1543,7 @@
     available: false,
     topSym: null,
     level: null,
-    holdingsAsOf: "2026-10-26",
+    holdingsAsOf: "2026-10-28",
     priceAsOf: null
   },
   accounts: [
@@ -1571,12 +1571,12 @@
           tags: [
             "hold"
           ],
-          alertSub: "准备做T",
+          alertSub: "执行止损",
           setup: [
             "板块杠杆交易"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/26按94.00卖出，准备做T。",
+          oneLiner: "10/28按99卖出，执行止损。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1605,6 +1605,32 @@
           ],
           execStatus: "adhoc",
           oneLiner: "10/26按75.50加仓，长期持有。",
+          coverage: {
+            status: "none",
+            statusText: "无备兑",
+            isFullyBacked: false,
+            expiryUnconfirmed: false,
+            sharesUnknown: false
+          },
+          stockWeightPct: null
+        },
+        {
+          sym: "ROBN",
+          name: "ROBN",
+          cost: 18.85,
+          strategy: [
+            "财报后买入"
+          ],
+          options: [],
+          tags: [
+            "hold"
+          ],
+          alertSub: "财报后买入",
+          setup: [
+            "财报后买入"
+          ],
+          execStatus: "unknown",
+          oneLiner: "按18.85买入，认为财报后被错杀。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1783,6 +1809,53 @@
     }
   ],
   closedTrades: [
+    {
+      date: "2026-10-28",
+      dateStart: "2026-10-28",
+      dateEnd: "2026-10-28",
+      timezone: "Asia/Shanghai",
+      dateLabel: "2026-10-28",
+      trades: [
+        {
+          tradeId: "EP-SOXL-MAIN-20261014:2026-10-28",
+          episodeId: "EP-SOXL-MAIN-20261014",
+          sym: "SOXL",
+          name: "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
+          acct: "主账号",
+          cost: 106.4547,
+          soldDate: "2026-10-28",
+          dateStart: "2026-10-28",
+          dateEnd: "2026-10-28",
+          isPartial: true,
+          closesEpisode: false,
+          totalRetPct: -7.0027,
+          result: "loss",
+          cycleRetPct: null,
+          cycleResult: null,
+          performanceEligible: false,
+          performanceExclusionReason: null,
+          reason: "部分减仓兑现",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261028-SOXL-SELL-094",
+              date: "2026-10-28",
+              dateEnd: "2026-10-28",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 99,
+              cost: 106.4547,
+              costBasisType: "actual",
+              retPct: -7.00269,
+              note: "按99卖出，止损成交。"
+            }
+          ]
+        }
+      ]
+    },
     {
       date: "2026-10-26",
       dateStart: "2026-10-26",
@@ -3746,6 +3819,33 @@
     }
   ],
   reviews: [
+    {
+      reviewId: "RV-20261028",
+      date: "2026-10-28",
+      reviewDate: "2026-10-28",
+      reviewTimezone: "Asia/Shanghai",
+      dateLabel: "2026-10-28 复盘",
+      title: "SOXL止损 · ROBN买入",
+      plan: [
+        "SOXL：原设104止盈、99止损。"
+      ],
+      execution: [
+        "主账号SOXL：按99卖出，触发止损。",
+        "主账号ROBN：按18.85买入，认为财报后被错杀。",
+        "SOXL：卖飞不伤心。"
+      ],
+      execStatus: "unknown",
+      symbols: [
+        "SOXL",
+        "ROBN"
+      ],
+      accounts: [
+        "主账号"
+      ],
+      saleExecutionIds: [
+        "EX-USER-20261028-SOXL-SELL-094"
+      ]
+    },
     {
       reviewId: "RV-20261026",
       date: "2026-10-26",
