@@ -727,8 +727,8 @@
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
           "qty": 170,
-          "cost": 105.71242,
-          "costDate": "2026-10-28",
+          "cost": null,
+          "costDate": null,
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
           "lastPriceSource": {
@@ -760,16 +760,15 @@
           "actionExecStatus": "adhoc",
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
-          "alertSub": "反T买回",
-          "oneLiner": "10/28按103.30买回，发现价格没有继续下跌。",
+          "alertSub": "持有",
+          "oneLiner": "10/28按104.02卖出，按102.60买入。",
           "actualCostBasis": {
-            "value": 105.71242,
-            "status": "确认",
-            "note": "本周期已确认买入的移动加权均价。",
-            "sourceType": "user_confirmation"
+            "value": null,
+            "status": "待核实",
+            "note": "同日成交顺序待确认，无法精确计算移动均价。"
           },
           "netInvestedCost": {
-            "value": 111.68847,
+            "value": 111.35435,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
@@ -1014,9 +1013,9 @@
         {
           "sym": "GDXU",
           "name": "GDXU",
-          "qty": 75,
-          "cost": 82.1,
-          "costDate": "2026-10-26",
+          "qty": 105,
+          "cost": 81.38571,
+          "costDate": "2026-10-28",
           "lastPrice": null,
           "lastPriceDate": null,
           "strategy": [
@@ -1037,19 +1036,19 @@
           "entryExecStatus": "adhoc",
           "actionExecStatus": "adhoc",
           "actualCostBasis": {
-            "value": 82.1,
+            "value": 81.38571,
             "status": "确认",
             "note": "按本次已确认成交计算。"
           },
           "netInvestedCost": {
-            "value": 82.1,
+            "value": 81.38571,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-GDXU-MAIN-20261021",
             "note": "本周期首笔正股买入。"
           },
           "costDisplay": "实际成本",
-          "oneLiner": "10/26按75.50加仓，长期持有。",
+          "oneLiner": "10/28按79.60买入。",
           "alertSub": "",
           "strategyNote": "主账号30股@92，10/21；新闻内容和精确时刻未提供。行情价格保留null，不拿成交价替代市场报价。"
         },
@@ -5720,6 +5719,117 @@
       "recordedAt": "2026-10-28T14:57:58.702607+00:00",
       "actionExecStatus": "unknown",
       "note": "按8.80买入，准备长持。"
+    },
+    {
+      "executionId": "EX-USER-20261028-SOXL-SELL-101",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "sell",
+      "qty": 40,
+      "price": 104.02,
+      "date": "2026-10-28",
+      "chinaDate": "2026-10-28",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-28T15:00:51.537120+00:00",
+        "evidence": "用户指定10月28日。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmed_broker_screenshot",
+        "recordedAt": "2026-10-28T15:00:51.537120+00:00",
+        "evidence": "用户确认104.02、79.60、102.60均为成交均价。",
+        "original": {
+          "type": "broker_screenshot",
+          "filename": "IMG_5426.jpeg",
+          "libraryFileId": "libfile_637c15871ab4819188558982e24f55be",
+          "recordedAt": "2026-10-28T14:59:38.488810+00:00",
+          "evidence": "1028，主账号做了这些操作，接下来减少操作频次"
+        }
+      },
+      "recordedAt": "2026-10-28T15:00:51.537120+00:00",
+      "actionExecStatus": "unknown",
+      "note": "按104.02卖出。"
+    },
+    {
+      "executionId": "EX-USER-20261028-GDXU-BUY-102",
+      "episodeId": "EP-GDXU-MAIN-20261021",
+      "account": "main",
+      "sym": "GDXU",
+      "side": "buy",
+      "qty": 30,
+      "price": 79.6,
+      "date": "2026-10-28",
+      "chinaDate": "2026-10-28",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-28T15:00:51.537120+00:00",
+        "evidence": "用户指定10月28日。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmed_broker_screenshot",
+        "recordedAt": "2026-10-28T15:00:51.537120+00:00",
+        "evidence": "用户确认104.02、79.60、102.60均为成交均价。",
+        "original": {
+          "type": "broker_screenshot",
+          "filename": "IMG_5426.jpeg",
+          "libraryFileId": "libfile_637c15871ab4819188558982e24f55be",
+          "recordedAt": "2026-10-28T14:59:38.488810+00:00",
+          "evidence": "1028，主账号做了这些操作，接下来减少操作频次"
+        }
+      },
+      "recordedAt": "2026-10-28T15:00:51.537120+00:00",
+      "actionExecStatus": "unknown",
+      "note": "按79.60买入。"
+    },
+    {
+      "executionId": "EX-USER-20261028-SOXL-BUY-103",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 40,
+      "price": 102.6,
+      "date": "2026-10-28",
+      "chinaDate": "2026-10-28",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-28T15:00:51.537120+00:00",
+        "evidence": "用户指定10月28日。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmed_broker_screenshot",
+        "recordedAt": "2026-10-28T15:00:51.537120+00:00",
+        "evidence": "用户确认104.02、79.60、102.60均为成交均价。",
+        "original": {
+          "type": "broker_screenshot",
+          "filename": "IMG_5426.jpeg",
+          "libraryFileId": "libfile_637c15871ab4819188558982e24f55be",
+          "recordedAt": "2026-10-28T14:59:38.488810+00:00",
+          "evidence": "1028，主账号做了这些操作，接下来减少操作频次"
+        }
+      },
+      "recordedAt": "2026-10-28T15:00:51.537120+00:00",
+      "actionExecStatus": "unknown",
+      "note": "按102.60买入。"
     }
   ],
   "episodes": [
@@ -6213,7 +6323,7 @@
         "回落至理想买点"
       ],
       "entryExecStatus": "adhoc",
-      "currentQty": 75,
+      "currentQty": 105,
       "exitDate": null,
       "exitReason": null
     },
@@ -8909,7 +9019,10 @@
         "EX-USER-20261028-SOXL-BUY-097",
         "EX-USER-20261028-INTW-SELL-098",
         "EX-USER-20261028-SPCH-MAIN-BUY-099",
-        "EX-USER-20261028-SPCH-SAT1-BUY-100"
+        "EX-USER-20261028-SPCH-SAT1-BUY-100",
+        "EX-USER-20261028-SOXL-SELL-101",
+        "EX-USER-20261028-GDXU-BUY-102",
+        "EX-USER-20261028-SOXL-BUY-103"
       ],
       "plan": [
         "SOXL：原设104止盈、99止损。",
@@ -8923,7 +9036,9 @@
         "主账号SOXL：按103.30买回，发现价格没有继续下跌。",
         "1号小账号INTW：按19.10清仓。",
         "主账号SPCH：按8.75买入，准备日内进出。",
-        "1号小账号SPCH：按8.80买入，准备长持。"
+        "1号小账号SPCH：按8.80买入，准备长持。",
+        "主账号SOXL：按104.02卖出，按102.60买入。",
+        "主账号GDXU：按79.60买入。"
       ],
       "good": [],
       "issues": [],
@@ -8941,7 +9056,7 @@
           "反T保留了低位接回的机会，也有价格继续上涨、难以按理想价格接回的风险。"
         ]
       },
-      "updatedAt": "2026-10-28T14:59:38.488810+00:00"
+      "updatedAt": "2026-10-28T15:00:51.537120+00:00"
     }
   ],
   "openingPositions": [
@@ -14978,7 +15093,13 @@
           "status": "filled"
         }
       ],
-      "note": "截图未包含价格字段标题，确认是否成交均价后进入正式流水。"
+      "note": "截图未包含价格字段标题，确认是否成交均价后进入正式流水。",
+      "status": "resolved",
+      "resolvedExecutionIds": [
+        "EX-USER-20261028-SOXL-SELL-101",
+        "EX-USER-20261028-GDXU-BUY-102",
+        "EX-USER-20261028-SOXL-BUY-103"
+      ]
     }
   ]
 }

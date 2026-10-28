@@ -1561,7 +1561,7 @@
         {
           sym: "SOXL",
           name: "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          cost: 105.71242,
+          cost: null,
           costNote: "实际成本",
           strategy: [
             "半导体杠杆交易",
@@ -1571,12 +1571,12 @@
           tags: [
             "hold"
           ],
-          alertSub: "反T买回",
+          alertSub: "持有",
           setup: [
             "板块杠杆交易"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/28按103.30买回，发现价格没有继续下跌。",
+          oneLiner: "10/28按104.02卖出，按102.60买入。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1589,7 +1589,7 @@
         {
           sym: "GDXU",
           name: "GDXU",
-          cost: 82.1,
+          cost: 81.38571,
           costNote: "实际成本",
           strategy: [
             "长期持仓"
@@ -1604,7 +1604,7 @@
             "回落至理想买点"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/26按75.50加仓，长期持有。",
+          oneLiner: "10/28按79.60买入。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1851,13 +1851,13 @@
           sym: "SOXL",
           name: "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
           acct: "主账号",
-          cost: 106.4547,
+          cost: null,
           soldDate: "2026-10-28",
           dateStart: "2026-10-28",
           dateEnd: "2026-10-28",
           isPartial: true,
           closesEpisode: false,
-          totalRetPct: -4.80732,
+          totalRetPct: -3.8179,
           result: "loss",
           cycleRetPct: null,
           cycleResult: null,
@@ -1893,6 +1893,19 @@
               costBasisType: "actual",
               retPct: -2.11799,
               note: "按104.20卖出，打算做反T。"
+            },
+            {
+              executionId: "EX-USER-20261028-SOXL-SELL-101",
+              date: "2026-10-28",
+              dateEnd: "2026-10-28",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 104.02,
+              cost: 105.71242,
+              costBasisType: "actual",
+              retPct: -1.60096,
+              note: "按104.02卖出。"
             }
           ]
         },
@@ -3918,7 +3931,9 @@
         "主账号SOXL：按103.30买回，发现价格没有继续下跌。",
         "1号小账号INTW：按19.10清仓。",
         "主账号SPCH：按8.75买入，准备日内进出。",
-        "1号小账号SPCH：按8.80买入，准备长持。"
+        "1号小账号SPCH：按8.80买入，准备长持。",
+        "主账号SOXL：按104.02卖出，按102.60买入。",
+        "主账号GDXU：按79.60买入。"
       ],
       execStatus: "unknown",
       good: [
@@ -3933,7 +3948,8 @@
         "SOXL",
         "ROBN",
         "INTW",
-        "SPCH"
+        "SPCH",
+        "GDXU"
       ],
       accounts: [
         "主账号",
@@ -3942,7 +3958,8 @@
       saleExecutionIds: [
         "EX-USER-20261028-SOXL-SELL-094",
         "EX-USER-20261028-SOXL-SELL-096",
-        "EX-USER-20261028-INTW-SELL-098"
+        "EX-USER-20261028-INTW-SELL-098",
+        "EX-USER-20261028-SOXL-SELL-101"
       ]
     },
     {
