@@ -1095,6 +1095,49 @@
             "scope": "episode",
             "episodeId": "EP-ROBN-MAIN-20261028"
           }
+        },
+        {
+          "sym": "SPCH",
+          "name": "SPCH",
+          "qty": 400,
+          "cost": 8.75,
+          "costDate": "2026-10-28",
+          "lastPrice": null,
+          "lastPriceDate": null,
+          "strategy": [
+            "日内交易"
+          ],
+          "options": [],
+          "tags": [
+            "hold"
+          ],
+          "status": [
+            "持有"
+          ],
+          "setup": [
+            "日内交易"
+          ],
+          "entrySetup": [
+            "日内交易"
+          ],
+          "execStatus": "unknown",
+          "entryExecStatus": "unknown",
+          "actionExecStatus": "unknown",
+          "episodeId": "EP-SPCH-MAIN-20261028",
+          "exitReason": null,
+          "alertSub": "日内进出",
+          "oneLiner": "按8.75买入，准备日内进出。",
+          "actualCostBasis": {
+            "value": 8.75,
+            "status": "确认",
+            "sourceType": "user_confirmation"
+          },
+          "netInvestedCost": {
+            "value": 8.75,
+            "status": "确认",
+            "scope": "episode",
+            "episodeId": "EP-SPCH-MAIN-20261028"
+          }
         }
       ],
       "positionAsOf": "2026-10-07",
@@ -5557,6 +5600,48 @@
       "recordedAt": "2026-10-28T10:29:35.228480+00:00",
       "actionExecStatus": "unknown",
       "note": "按19.10清仓。"
+    },
+    {
+      "executionId": "EX-USER-20261028-SPCH-MAIN-BUY-099",
+      "episodeId": "EP-SPCH-MAIN-20261028",
+      "account": "main",
+      "sym": "SPCH",
+      "side": "buy",
+      "qty": 400,
+      "price": 8.75,
+      "date": "2026-10-28",
+      "chinaDate": "2026-10-28",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-28T13:47:45.645193+00:00",
+        "evidence": "用户明确10月28日。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-28T13:47:45.645193+00:00",
+        "evidence": "1028，主账号8.75买了400股spch，准备日内进出；小账号8.8买了168股spch准备长持"
+      },
+      "recordedAt": "2026-10-28T13:47:45.645193+00:00",
+      "actionExecStatus": "unknown",
+      "note": "按8.75买入，准备日内进出。",
+      "exitPlan": {
+        "scope": "this_execution_only",
+        "horizon": "intraday",
+        "trigger": "日内进出",
+        "price": null,
+        "isPlacedOrder": false,
+        "source": {
+          "type": "user_confirmation",
+          "recordedAt": "2026-10-28T13:47:45.645193+00:00",
+          "evidence": "1028，主账号8.75买了400股spch，准备日内进出；小账号8.8买了168股spch准备长持"
+        }
+      }
     }
   ],
   "episodes": [
@@ -6065,6 +6150,20 @@
       ],
       "entryExecStatus": "unknown",
       "currentQty": 200,
+      "exitReason": null,
+      "exitDate": null
+    },
+    {
+      "episodeId": "EP-SPCH-MAIN-20261028",
+      "sym": "SPCH",
+      "account": "main",
+      "status": "open",
+      "entryDate": "2026-10-28",
+      "entrySetup": [
+        "日内交易"
+      ],
+      "entryExecStatus": "unknown",
+      "currentQty": 400,
       "exitReason": null,
       "exitDate": null
     }
@@ -8710,13 +8809,14 @@
       "reviewDate": "2026-10-28",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-28 复盘",
-      "title": "SOXL做T · ROBN买入 · INTW清仓",
+      "title": "SOXL做T · ROBN与SPCH买入 · INTW清仓",
       "executionIds": [
         "EX-USER-20261028-SOXL-SELL-094",
         "EX-USER-20261028-ROBN-BUY-095",
         "EX-USER-20261028-SOXL-SELL-096",
         "EX-USER-20261028-SOXL-BUY-097",
-        "EX-USER-20261028-INTW-SELL-098"
+        "EX-USER-20261028-INTW-SELL-098",
+        "EX-USER-20261028-SPCH-MAIN-BUY-099"
       ],
       "plan": [
         "SOXL：原设104止盈、99止损。"
@@ -8727,7 +8827,8 @@
         "SOXL：卖飞不伤心。",
         "主账号SOXL：按104.20卖出，打算做反T。",
         "主账号SOXL：按103.30买回，发现价格没有继续下跌。",
-        "1号小账号INTW：按19.10清仓。"
+        "1号小账号INTW：按19.10清仓。",
+        "主账号SPCH：按8.75买入，准备日内进出。"
       ],
       "good": [],
       "issues": [],
@@ -8745,7 +8846,7 @@
           "反T保留了低位接回的机会，也有价格继续上涨、难以按理想价格接回的风险。"
         ]
       },
-      "updatedAt": "2026-10-28T10:29:35.228480+00:00"
+      "updatedAt": "2026-10-28T13:47:45.645193+00:00"
     }
   ],
   "openingPositions": [
@@ -14726,6 +14827,24 @@
         "execution": [
           "SOXL卖单为本次新增计划记录，尚未报告成交；原买入记录与持仓成本不变。"
         ]
+      }
+    }
+  ],
+  "internalPendingExecutions": [
+    {
+      "id": "PENDING-SPCH-20261028-SMALL",
+      "account": null,
+      "accountDescription": "小账号，具体编号待确认",
+      "sym": "SPCH",
+      "side": "buy",
+      "qty": 168,
+      "price": 8.8,
+      "chinaDate": "2026-10-28",
+      "purpose": "长持",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-28T13:47:45.645193+00:00",
+        "evidence": "1028，主账号8.75买了400股spch，准备日内进出；小账号8.8买了168股spch准备长持"
       }
     }
   ]

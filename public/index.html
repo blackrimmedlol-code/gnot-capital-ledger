@@ -1639,6 +1639,32 @@
             sharesUnknown: false
           },
           stockWeightPct: null
+        },
+        {
+          sym: "SPCH",
+          name: "SPCH",
+          cost: 8.75,
+          strategy: [
+            "日内交易"
+          ],
+          options: [],
+          tags: [
+            "hold"
+          ],
+          alertSub: "日内进出",
+          setup: [
+            "日内交易"
+          ],
+          execStatus: "unknown",
+          oneLiner: "按8.75买入，准备日内进出。",
+          coverage: {
+            status: "none",
+            statusText: "无备兑",
+            isFullyBacked: false,
+            expiryUnconfirmed: false,
+            sharesUnknown: false
+          },
+          stockWeightPct: null
         }
       ]
     },
@@ -3852,7 +3878,7 @@
       reviewDate: "2026-10-28",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-28 复盘",
-      title: "SOXL做T · ROBN买入 · INTW清仓",
+      title: "SOXL做T · ROBN与SPCH买入 · INTW清仓",
       plan: [
         "SOXL：原设104止盈、99止损。"
       ],
@@ -3862,7 +3888,8 @@
         "SOXL：卖飞不伤心。",
         "主账号SOXL：按104.20卖出，打算做反T。",
         "主账号SOXL：按103.30买回，发现价格没有继续下跌。",
-        "1号小账号INTW：按19.10清仓。"
+        "1号小账号INTW：按19.10清仓。",
+        "主账号SPCH：按8.75买入，准备日内进出。"
       ],
       execStatus: "unknown",
       good: [
@@ -3876,7 +3903,8 @@
       symbols: [
         "SOXL",
         "ROBN",
-        "INTW"
+        "INTW",
+        "SPCH"
       ],
       accounts: [
         "主账号",
