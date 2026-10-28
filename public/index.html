@@ -1651,31 +1651,7 @@
       role: "高风险卫星仓 · 快进快出博弈",
       tag: "卫星博弈",
       navNote: "USD · 满仓",
-      holdings: [
-        {
-          sym: "INTW",
-          name: "INTW",
-          cost: 18.47,
-          costNote: "实际成本",
-          strategy: [],
-          options: [],
-          tags: [
-            "hold"
-          ],
-          alertSub: "持有",
-          setup: [],
-          execStatus: "unknown",
-          oneLiner: "10/16按18.47建仓。",
-          coverage: {
-            status: "none",
-            statusText: "无备兑",
-            isFullyBacked: false,
-            expiryUnconfirmed: false,
-            sharesUnknown: false
-          },
-          stockWeightPct: null
-        }
-      ]
+      holdings: []
     },
     {
       id: "sat2",
@@ -1864,6 +1840,44 @@
               costBasisType: "actual",
               retPct: -2.11799,
               note: "按104.20卖出，打算做反T。"
+            }
+          ]
+        },
+        {
+          tradeId: "EP-INTW-SAT1-20261016:2026-10-28",
+          episodeId: "EP-INTW-SAT1-20261016",
+          sym: "INTW",
+          name: "INTW",
+          acct: "1号小账号",
+          cost: 18.47,
+          soldDate: "2026-10-28",
+          dateStart: "2026-10-28",
+          dateEnd: "2026-10-28",
+          isPartial: false,
+          closesEpisode: true,
+          totalRetPct: 3.41094,
+          result: "win",
+          cycleRetPct: 3.41094,
+          cycleResult: "win",
+          performanceEligible: true,
+          performanceExclusionReason: null,
+          reason: "清仓",
+          setup: [],
+          execStatus: "unknown",
+          oneLiner: "",
+          legs: [
+            {
+              executionId: "EX-USER-20261028-INTW-SELL-098",
+              date: "2026-10-28",
+              dateEnd: "2026-10-28",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 19.1,
+              cost: 18.47,
+              costBasisType: "actual",
+              retPct: 3.41094,
+              note: "按19.10清仓。"
             }
           ]
         }
@@ -3838,7 +3852,7 @@
       reviewDate: "2026-10-28",
       reviewTimezone: "Asia/Shanghai",
       dateLabel: "2026-10-28 复盘",
-      title: "SOXL止损 · ROBN买入",
+      title: "SOXL做T · ROBN买入 · INTW清仓",
       plan: [
         "SOXL：原设104止盈、99止损。"
       ],
@@ -3847,7 +3861,8 @@
         "主账号ROBN：按18.85买入，认为财报后被错杀。",
         "SOXL：卖飞不伤心。",
         "主账号SOXL：按104.20卖出，打算做反T。",
-        "主账号SOXL：按103.30买回，发现价格没有继续下跌。"
+        "主账号SOXL：按103.30买回，发现价格没有继续下跌。",
+        "1号小账号INTW：按19.10清仓。"
       ],
       execStatus: "unknown",
       good: [
@@ -3860,14 +3875,17 @@
       ],
       symbols: [
         "SOXL",
-        "ROBN"
+        "ROBN",
+        "INTW"
       ],
       accounts: [
-        "主账号"
+        "主账号",
+        "1号小账号"
       ],
       saleExecutionIds: [
         "EX-USER-20261028-SOXL-SELL-094",
-        "EX-USER-20261028-SOXL-SELL-096"
+        "EX-USER-20261028-SOXL-SELL-096",
+        "EX-USER-20261028-INTW-SELL-098"
       ]
     },
     {

@@ -1282,49 +1282,9 @@
             },
             "endingNote": "实际全部清仓结束该持有计划；具体变更理由未提供，原长期计划及生效时点不回写。"
           }
-        },
-        {
-          "sym": "INTW",
-          "name": "INTW",
-          "qty": 77,
-          "cost": 18.47,
-          "costDate": "10/16按18.47建仓",
-          "lastPrice": null,
-          "lastPriceDate": null,
-          "strategy": [],
-          "options": [],
-          "tags": [
-            "hold"
-          ],
-          "status": [
-            "持有"
-          ],
-          "setup": [],
-          "entrySetup": [],
-          "execStatus": "unknown",
-          "entryExecStatus": "unknown",
-          "actionExecStatus": "unknown",
-          "episodeId": "EP-INTW-SAT1-20261016",
-          "exitReason": null,
-          "alertSub": "持有",
-          "oneLiner": "10/16按18.47建仓。",
-          "actualCostBasis": {
-            "value": 18.47,
-            "status": "确认",
-            "sourceType": "user_confirmation",
-            "note": "用户确认的本笔实际成交均价。"
-          },
-          "netInvestedCost": {
-            "value": 18.47,
-            "status": "确认",
-            "scope": "episode",
-            "episodeId": "EP-INTW-SAT1-20261016",
-            "note": "本周期仅首次正股买入，与实际每股成本一致。"
-          },
-          "costDisplay": "实际成本"
         }
       ],
-      "holdingsAsOf": "2026-10-16"
+      "holdingsAsOf": "2026-10-28"
     },
     {
       "id": "sat2",
@@ -5567,6 +5527,36 @@
       "relatedExecutionIds": [
         "EX-USER-20261028-SOXL-SELL-096"
       ]
+    },
+    {
+      "executionId": "EX-USER-20261028-INTW-SELL-098",
+      "episodeId": "EP-INTW-SAT1-20261016",
+      "account": "sat1",
+      "sym": "INTW",
+      "side": "sell",
+      "qty": 77,
+      "price": 19.1,
+      "date": "2026-10-28",
+      "chinaDate": "2026-10-28",
+      "chinaDateSource": {
+        "type": "user_reported_same_day",
+        "recordedAt": "2026-10-28T10:29:35.228480+00:00",
+        "evidence": "在10月28日连续报告当日操作。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-28T10:29:35.228480+00:00",
+        "evidence": "小账号1号清仓INTW 77股，卖出价19.1"
+      },
+      "recordedAt": "2026-10-28T10:29:35.228480+00:00",
+      "actionExecStatus": "unknown",
+      "note": "按19.10清仓。"
     }
   ],
   "episodes": [
@@ -6041,13 +6031,13 @@
       "episodeId": "EP-INTW-SAT1-20261016",
       "sym": "INTW",
       "account": "sat1",
-      "status": "open",
+      "status": "closed",
       "entryDate": "2026-10-16",
       "entrySetup": [],
       "entryExecStatus": "unknown",
-      "currentQty": 77,
-      "exitDate": null,
-      "exitReason": null
+      "currentQty": 0,
+      "exitDate": "2026-10-28",
+      "exitReason": "清仓"
     },
     {
       "episodeId": "EP-GDXU-MAIN-20261021",
@@ -8720,12 +8710,13 @@
       "reviewDate": "2026-10-28",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-28 复盘",
-      "title": "SOXL止损 · ROBN买入",
+      "title": "SOXL做T · ROBN买入 · INTW清仓",
       "executionIds": [
         "EX-USER-20261028-SOXL-SELL-094",
         "EX-USER-20261028-ROBN-BUY-095",
         "EX-USER-20261028-SOXL-SELL-096",
-        "EX-USER-20261028-SOXL-BUY-097"
+        "EX-USER-20261028-SOXL-BUY-097",
+        "EX-USER-20261028-INTW-SELL-098"
       ],
       "plan": [
         "SOXL：原设104止盈、99止损。"
@@ -8735,7 +8726,8 @@
         "主账号ROBN：按18.85买入，认为财报后被错杀。",
         "SOXL：卖飞不伤心。",
         "主账号SOXL：按104.20卖出，打算做反T。",
-        "主账号SOXL：按103.30买回，发现价格没有继续下跌。"
+        "主账号SOXL：按103.30买回，发现价格没有继续下跌。",
+        "1号小账号INTW：按19.10清仓。"
       ],
       "good": [],
       "issues": [],
@@ -8753,7 +8745,7 @@
           "反T保留了低位接回的机会，也有价格继续上涨、难以按理想价格接回的风险。"
         ]
       },
-      "updatedAt": "2026-10-28T09:11:04.480671+00:00"
+      "updatedAt": "2026-10-28T10:29:35.228480+00:00"
     }
   ],
   "openingPositions": [
