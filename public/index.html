@@ -1561,7 +1561,7 @@
         {
           sym: "SOXL",
           name: "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          cost: 106.4547,
+          cost: 105.71242,
           costNote: "实际成本",
           strategy: [
             "半导体杠杆交易",
@@ -1571,12 +1571,12 @@
           tags: [
             "hold"
           ],
-          alertSub: "计划做反T",
+          alertSub: "反T买回",
           setup: [
             "板块杠杆交易"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/28按104.20卖出，打算做反T。",
+          oneLiner: "10/28按103.30买回，发现价格没有继续下跌。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -3846,11 +3846,13 @@
         "主账号SOXL：按99卖出，触发止损。",
         "主账号ROBN：按18.85买入，认为财报后被错杀。",
         "SOXL：卖飞不伤心。",
-        "主账号SOXL：按104.20卖出，打算做反T。"
+        "主账号SOXL：按104.20卖出，打算做反T。",
+        "主账号SOXL：按103.30买回，发现价格没有继续下跌。"
       ],
       execStatus: "unknown",
       good: [
-        "SOXL按预设止损执行，卖出后的价格变化不应反过来决定这次执行是否正确。"
+        "SOXL按预设止损执行，卖出后的价格变化不应反过来决定这次执行是否正确。",
+        "SOXL反T卖出后根据走势调整，完成买回。"
       ],
       issues: [
         "ROBN的买入依据是财报后被错杀的判断；后续应关注加密业务恢复是否支持这一判断。",

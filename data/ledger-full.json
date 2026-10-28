@@ -726,9 +726,9 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 130,
-          "cost": 106.4547,
-          "costDate": "2026-10-22",
+          "qty": 170,
+          "cost": 105.71242,
+          "costDate": "2026-10-28",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
           "lastPriceSource": {
@@ -760,16 +760,16 @@
           "actionExecStatus": "adhoc",
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
-          "alertSub": "计划做反T",
-          "oneLiner": "10/28按104.20卖出，打算做反T。",
+          "alertSub": "反T买回",
+          "oneLiner": "10/28按103.30买回，发现价格没有继续下跌。",
           "actualCostBasis": {
-            "value": 106.4547,
+            "value": 105.71242,
             "status": "确认",
             "note": "本周期已确认买入的移动加权均价。",
             "sourceType": "user_confirmation"
           },
           "netInvestedCost": {
-            "value": 114.26954,
+            "value": 111.68847,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
@@ -5534,6 +5534,39 @@
       "recordedAt": "2026-10-28T05:10:20.497214+00:00",
       "actionExecStatus": "unknown",
       "note": "按104.20卖出，打算做反T。"
+    },
+    {
+      "executionId": "EX-USER-20261028-SOXL-BUY-097",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 40,
+      "price": 103.3,
+      "date": "2026-10-28",
+      "chinaDate": "2026-10-28",
+      "chinaDateSource": {
+        "type": "user_reported_same_day",
+        "recordedAt": "2026-10-28T09:11:04.480671+00:00",
+        "evidence": "紧接10月28日卖出及更正后报告买回。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-28T09:11:04.480671+00:00",
+        "evidence": "主账号103.3买回40股soxl，发现没跌下去"
+      },
+      "recordedAt": "2026-10-28T09:11:04.480671+00:00",
+      "actionExecStatus": "unknown",
+      "note": "发现没有继续下跌，按103.30买回。",
+      "relatedExecutionIds": [
+        "EX-USER-20261028-SOXL-SELL-096"
+      ]
     }
   ],
   "episodes": [
@@ -5985,7 +6018,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 130,
+      "currentQty": 170,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -8691,7 +8724,8 @@
       "executionIds": [
         "EX-USER-20261028-SOXL-SELL-094",
         "EX-USER-20261028-ROBN-BUY-095",
-        "EX-USER-20261028-SOXL-SELL-096"
+        "EX-USER-20261028-SOXL-SELL-096",
+        "EX-USER-20261028-SOXL-BUY-097"
       ],
       "plan": [
         "SOXL：原设104止盈、99止损。"
@@ -8700,7 +8734,8 @@
         "主账号SOXL：按99卖出，触发止损。",
         "主账号ROBN：按18.85买入，认为财报后被错杀。",
         "SOXL：卖飞不伤心。",
-        "主账号SOXL：按104.20卖出，打算做反T。"
+        "主账号SOXL：按104.20卖出，打算做反T。",
+        "主账号SOXL：按103.30买回，发现价格没有继续下跌。"
       ],
       "good": [],
       "issues": [],
@@ -8710,14 +8745,15 @@
       "recordedAt": "2026-10-28T02:00:42.518603+00:00",
       "publicAssessment": {
         "good": [
-          "SOXL按预设止损执行，卖出后的价格变化不应反过来决定这次执行是否正确。"
+          "SOXL按预设止损执行，卖出后的价格变化不应反过来决定这次执行是否正确。",
+          "SOXL反T卖出后根据走势调整，完成买回。"
         ],
         "issues": [
           "ROBN的买入依据是财报后被错杀的判断；后续应关注加密业务恢复是否支持这一判断。",
           "反T保留了低位接回的机会，也有价格继续上涨、难以按理想价格接回的风险。"
         ]
       },
-      "updatedAt": "2026-10-28T05:11:51.767569+00:00"
+      "updatedAt": "2026-10-28T09:11:04.480671+00:00"
     }
   ],
   "openingPositions": [
