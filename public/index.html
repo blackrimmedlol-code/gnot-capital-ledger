@@ -1677,7 +1677,34 @@
       role: "高风险卫星仓 · 快进快出博弈",
       tag: "卫星博弈",
       navNote: "USD · 满仓",
-      holdings: []
+      holdings: [
+        {
+          sym: "SPCH",
+          name: "SPCH",
+          cost: 8.8,
+          strategy: [
+            "长持"
+          ],
+          options: [],
+          tags: [
+            "hold"
+          ],
+          alertSub: "准备长持",
+          setup: [
+            "长期持有"
+          ],
+          execStatus: "unknown",
+          oneLiner: "按8.80买入，准备长持。",
+          coverage: {
+            status: "none",
+            statusText: "无备兑",
+            isFullyBacked: false,
+            expiryUnconfirmed: false,
+            sharesUnknown: false
+          },
+          stockWeightPct: null
+        }
+      ]
     },
     {
       id: "sat2",
@@ -3889,7 +3916,8 @@
         "主账号SOXL：按104.20卖出，打算做反T。",
         "主账号SOXL：按103.30买回，发现价格没有继续下跌。",
         "1号小账号INTW：按19.10清仓。",
-        "主账号SPCH：按8.75买入，准备日内进出。"
+        "主账号SPCH：按8.75买入，准备日内进出。",
+        "1号小账号SPCH：按8.80买入，准备长持。"
       ],
       execStatus: "unknown",
       good: [

@@ -1325,6 +1325,49 @@
             },
             "endingNote": "实际全部清仓结束该持有计划；具体变更理由未提供，原长期计划及生效时点不回写。"
           }
+        },
+        {
+          "sym": "SPCH",
+          "name": "SPCH",
+          "qty": 168,
+          "cost": 8.8,
+          "costDate": "2026-10-28",
+          "lastPrice": null,
+          "lastPriceDate": null,
+          "strategy": [
+            "长持"
+          ],
+          "options": [],
+          "tags": [
+            "hold"
+          ],
+          "status": [
+            "持有"
+          ],
+          "setup": [
+            "长期持有"
+          ],
+          "entrySetup": [
+            "长期持有"
+          ],
+          "execStatus": "unknown",
+          "entryExecStatus": "unknown",
+          "actionExecStatus": "unknown",
+          "episodeId": "EP-SPCH-SAT1-20261028",
+          "exitReason": null,
+          "alertSub": "准备长持",
+          "oneLiner": "按8.80买入，准备长持。",
+          "actualCostBasis": {
+            "value": 8.8,
+            "status": "确认",
+            "sourceType": "user_confirmation"
+          },
+          "netInvestedCost": {
+            "value": 8.8,
+            "status": "确认",
+            "scope": "episode",
+            "episodeId": "EP-SPCH-SAT1-20261028"
+          }
         }
       ],
       "holdingsAsOf": "2026-10-28"
@@ -5642,6 +5685,41 @@
           "evidence": "1028，主账号8.75买了400股spch，准备日内进出；小账号8.8买了168股spch准备长持"
         }
       }
+    },
+    {
+      "executionId": "EX-USER-20261028-SPCH-SAT1-BUY-100",
+      "episodeId": "EP-SPCH-SAT1-20261028",
+      "account": "sat1",
+      "sym": "SPCH",
+      "side": "buy",
+      "qty": 168,
+      "price": 8.8,
+      "date": "2026-10-28",
+      "chinaDate": "2026-10-28",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-28T14:57:58.702607+00:00",
+        "evidence": "用户明确10月28日。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-28T14:57:58.702607+00:00",
+        "evidence": "小账号8.8买入168股SPCH准备长持；用户确认1号小账户。",
+        "original": {
+          "type": "user_confirmation",
+          "recordedAt": "2026-10-28T13:47:45.645193+00:00",
+          "evidence": "1028，主账号8.75买了400股spch，准备日内进出；小账号8.8买了168股spch准备长持"
+        }
+      },
+      "recordedAt": "2026-10-28T14:57:58.702607+00:00",
+      "actionExecStatus": "unknown",
+      "note": "按8.80买入，准备长持。"
     }
   ],
   "episodes": [
@@ -6164,6 +6242,20 @@
       ],
       "entryExecStatus": "unknown",
       "currentQty": 400,
+      "exitReason": null,
+      "exitDate": null
+    },
+    {
+      "episodeId": "EP-SPCH-SAT1-20261028",
+      "sym": "SPCH",
+      "account": "sat1",
+      "status": "open",
+      "entryDate": "2026-10-28",
+      "entrySetup": [
+        "长期持有"
+      ],
+      "entryExecStatus": "unknown",
+      "currentQty": 168,
       "exitReason": null,
       "exitDate": null
     }
@@ -8816,7 +8908,8 @@
         "EX-USER-20261028-SOXL-SELL-096",
         "EX-USER-20261028-SOXL-BUY-097",
         "EX-USER-20261028-INTW-SELL-098",
-        "EX-USER-20261028-SPCH-MAIN-BUY-099"
+        "EX-USER-20261028-SPCH-MAIN-BUY-099",
+        "EX-USER-20261028-SPCH-SAT1-BUY-100"
       ],
       "plan": [
         "SOXL：原设104止盈、99止损。"
@@ -8828,7 +8921,8 @@
         "主账号SOXL：按104.20卖出，打算做反T。",
         "主账号SOXL：按103.30买回，发现价格没有继续下跌。",
         "1号小账号INTW：按19.10清仓。",
-        "主账号SPCH：按8.75买入，准备日内进出。"
+        "主账号SPCH：按8.75买入，准备日内进出。",
+        "1号小账号SPCH：按8.80买入，准备长持。"
       ],
       "good": [],
       "issues": [],
@@ -8846,7 +8940,7 @@
           "反T保留了低位接回的机会，也有价格继续上涨、难以按理想价格接回的风险。"
         ]
       },
-      "updatedAt": "2026-10-28T13:47:45.645193+00:00"
+      "updatedAt": "2026-10-28T14:57:58.702607+00:00"
     }
   ],
   "openingPositions": [
@@ -14833,7 +14927,7 @@
   "internalPendingExecutions": [
     {
       "id": "PENDING-SPCH-20261028-SMALL",
-      "account": null,
+      "account": "sat1",
       "accountDescription": "小账号，具体编号待确认",
       "sym": "SPCH",
       "side": "buy",
@@ -14845,7 +14939,9 @@
         "type": "user_confirmation",
         "recordedAt": "2026-10-28T13:47:45.645193+00:00",
         "evidence": "1028，主账号8.75买了400股spch，准备日内进出；小账号8.8买了168股spch准备长持"
-      }
+      },
+      "status": "resolved",
+      "resolvedExecutionId": "EX-USER-20261028-SPCH-SAT1-BUY-100"
     }
   ]
 }
