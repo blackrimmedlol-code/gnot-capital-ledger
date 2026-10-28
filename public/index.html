@@ -1571,12 +1571,12 @@
           tags: [
             "hold"
           ],
-          alertSub: "执行止损",
+          alertSub: "计划做反T",
           setup: [
             "板块杠杆交易"
           ],
           execStatus: "adhoc",
-          oneLiner: "10/28按99卖出，执行止损。",
+          oneLiner: "10/28按104.20卖出，打算做反T。",
           coverage: {
             status: "none",
             statusText: "无备兑",
@@ -1828,7 +1828,7 @@
           dateEnd: "2026-10-28",
           isPartial: true,
           closesEpisode: false,
-          totalRetPct: -7.0027,
+          totalRetPct: -4.70401,
           result: "loss",
           cycleRetPct: null,
           cycleResult: null,
@@ -1851,6 +1851,19 @@
               costBasisType: "actual",
               retPct: -7.00269,
               note: "按99卖出，止损成交。"
+            },
+            {
+              executionId: "EX-USER-20261028-SOXL-SELL-096",
+              date: "2026-10-28",
+              dateEnd: "2026-10-28",
+              datePrecision: "day",
+              timezone: "Asia/Shanghai",
+              time: null,
+              price: 104.2,
+              cost: 106.4547,
+              costBasisType: "actual",
+              retPct: -2.11799,
+              note: "按104.20卖出，打算做反T。"
             }
           ]
         }
@@ -3832,14 +3845,16 @@
       execution: [
         "主账号SOXL：按99卖出，触发止损。",
         "主账号ROBN：按18.85买入，认为财报后被错杀。",
-        "SOXL：卖飞不伤心。"
+        "SOXL：卖飞不伤心。",
+        "主账号SOXL：按104.20卖出，打算做反T。"
       ],
       execStatus: "unknown",
       good: [
         "SOXL按预设止损执行，卖出后的价格变化不应反过来决定这次执行是否正确。"
       ],
       issues: [
-        "ROBN的买入依据是财报后被错杀的判断；后续应关注加密业务恢复是否支持这一判断。"
+        "ROBN的买入依据是财报后被错杀的判断；后续应关注加密业务恢复是否支持这一判断。",
+        "反T保留了低位接回的机会，也有价格继续上涨、难以按理想价格接回的风险。"
       ],
       symbols: [
         "SOXL",
@@ -3849,7 +3864,8 @@
         "主账号"
       ],
       saleExecutionIds: [
-        "EX-USER-20261028-SOXL-SELL-094"
+        "EX-USER-20261028-SOXL-SELL-094",
+        "EX-USER-20261028-SOXL-SELL-096"
       ]
     },
     {
