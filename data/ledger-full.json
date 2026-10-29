@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "10/29更新：主账号GGLL财报后建仓，SOXL继续买入。",
-  "asOfLabel": "记录：10月29日 · GGLL建仓、SOXL买入",
+  "asOf": "10/29更新：GGLL分批买入，SOXL增持，ROBN清仓。",
+  "asOfLabel": "记录：10月29日 · GGLL加仓、ROBN清仓",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -1065,7 +1065,7 @@
         {
           "sym": "ROBN",
           "name": "ROBN",
-          "qty": 200,
+          "qty": 0,
           "cost": 18.85,
           "costDate": "2026-10-28",
           "lastPrice": null,
@@ -1075,10 +1075,10 @@
           ],
           "options": [],
           "tags": [
-            "hold"
+            "closed"
           ],
           "status": [
-            "持有"
+            "已清仓"
           ],
           "setup": [
             "财报后买入"
@@ -1090,19 +1090,20 @@
           "entryExecStatus": "unknown",
           "actionExecStatus": "unknown",
           "episodeId": "EP-ROBN-MAIN-20261028",
-          "exitReason": null,
-          "alertSub": "财报后买入",
-          "oneLiner": "按18.85买入，认为财报后被错杀。",
+          "exitReason": "10/29按19.80全部卖出，具体退出动机未报告。",
+          "alertSub": "10/29已清仓",
+          "oneLiner": "10/29按19.80全部清仓。",
           "actualCostBasis": {
             "value": 18.85,
             "status": "确认",
             "sourceType": "user_confirmation"
           },
           "netInvestedCost": {
-            "value": 18.85,
+            "value": 0,
             "status": "确认",
             "scope": "episode",
-            "episodeId": "EP-ROBN-MAIN-20261028"
+            "episodeId": "EP-ROBN-MAIN-20261028",
+            "note": "清仓后正股净投入归零，兑现收益由历史成交派生。"
           }
         },
         {
@@ -1151,8 +1152,8 @@
         {
           "sym": "GGLL",
           "name": "GGLL",
-          "qty": 50,
-          "cost": 73,
+          "qty": 100,
+          "cost": 69.15,
           "costDate": "2026-10-29",
           "lastPrice": null,
           "lastPriceDate": null,
@@ -1178,14 +1179,15 @@
           "episodeId": "EP-GGLL-MAIN-20261029",
           "exitReason": null,
           "alertSub": "财报后建仓",
-          "oneLiner": "财报后认为处于低位，按73.00建仓。",
+          "oneLiner": "10/29财报后建仓，按65.30继续买入。",
           "actualCostBasis": {
-            "value": 73,
+            "value": 69.15,
             "status": "确认",
-            "sourceType": "user_confirmation"
+            "sourceType": "user_confirmed_broker_screenshot",
+            "note": "按10/29两笔已确认成交移动加权"
           },
           "netInvestedCost": {
-            "value": 73,
+            "value": 69.15,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-GGLL-MAIN-20261029"
@@ -5973,6 +5975,68 @@
       "recordedAt": "2026-10-29T02:16:26.914Z",
       "actionExecStatus": "unknown",
       "note": "按96.75继续买入。"
+    },
+    {
+      "account": "main",
+      "date": "2026-10-29",
+      "chinaDate": "2026-10-29",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-29T13:45:35.144Z",
+        "evidence": "用户注明1029主账号操作。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmed_broker_screenshot",
+        "recordedAt": "2026-10-29T13:45:35.144Z",
+        "evidence": "用户提供成交截图：GGLL 买入全部成交50股，成交价65.30；ROBN 卖出全部成交200股，成交价19.80；确认归属10月29日。",
+        "filename": "IMG_5483.jpeg"
+      },
+      "recordedAt": "2026-10-29T13:45:35.144Z",
+      "actionExecStatus": "unknown",
+      "executionId": "EX-USER-20261029-GGLL-BUY-107",
+      "episodeId": "EP-GGLL-MAIN-20261029",
+      "sym": "GGLL",
+      "side": "buy",
+      "qty": 50,
+      "price": 65.3,
+      "note": "按65.30追加买入。"
+    },
+    {
+      "account": "main",
+      "date": "2026-10-29",
+      "chinaDate": "2026-10-29",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-29T13:45:35.144Z",
+        "evidence": "用户注明1029主账号操作。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmed_broker_screenshot",
+        "recordedAt": "2026-10-29T13:45:35.144Z",
+        "evidence": "用户提供成交截图：GGLL 买入全部成交50股，成交价65.30；ROBN 卖出全部成交200股，成交价19.80；确认归属10月29日。",
+        "filename": "IMG_5483.jpeg"
+      },
+      "recordedAt": "2026-10-29T13:45:35.144Z",
+      "actionExecStatus": "unknown",
+      "executionId": "EX-USER-20261029-ROBN-SELL-108",
+      "episodeId": "EP-ROBN-MAIN-20261028",
+      "sym": "ROBN",
+      "side": "sell",
+      "qty": 200,
+      "price": 19.8,
+      "note": "按19.80全部卖出。"
     }
   ],
   "episodes": [
@@ -6474,15 +6538,16 @@
       "episodeId": "EP-ROBN-MAIN-20261028",
       "sym": "ROBN",
       "account": "main",
-      "status": "open",
+      "status": "closed",
       "entryDate": "2026-10-28",
       "entrySetup": [
         "财报后买入"
       ],
       "entryExecStatus": "unknown",
-      "currentQty": 200,
-      "exitReason": null,
-      "exitDate": null
+      "currentQty": 0,
+      "exitReason": "10/29按19.80全部清仓",
+      "exitDate": "2026-10-29",
+      "exitExecutionId": "EX-USER-20261029-ROBN-SELL-108"
     },
     {
       "episodeId": "EP-SPCH-MAIN-20261028",
@@ -6522,7 +6587,7 @@
         "财报后低位建仓"
       ],
       "entryExecStatus": "unknown",
-      "currentQty": 50,
+      "currentQty": 100,
       "exitDate": null,
       "exitReason": null
     }
@@ -9221,11 +9286,13 @@
       "reviewDate": "2026-10-29",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-29 复盘",
-      "title": "GGLL财报后建仓 · SOXL买入",
+      "title": "GGLL财报后分批买入 · SOXL增持 · ROBN清仓",
       "executionIds": [
         "EX-USER-20261029-GGLL-BUY-104",
         "EX-USER-20261029-SOXL-BUY-105",
-        "EX-USER-20261029-SOXL-BUY-106"
+        "EX-USER-20261029-SOXL-BUY-106",
+        "EX-USER-20261029-GGLL-BUY-107",
+        "EX-USER-20261029-ROBN-SELL-108"
       ],
       "plan": [
         "GGLL：财报后低位建仓。"
@@ -9233,7 +9300,9 @@
       "execution": [
         "主账号GGLL：按73.00买入，认为财报后处于相对低位。",
         "主账号SOXL：按97.40买入。",
-        "主账号SOXL：按96.75继续买入。"
+        "主账号SOXL：按96.75继续买入。",
+        "主账号GGLL：按65.30继续买入，摊低持仓均价。",
+        "主账号ROBN：按19.80全部卖出。"
       ],
       "good": [],
       "issues": [],
@@ -9243,13 +9312,15 @@
       "recordedAt": "2026-10-29T02:04:41.846Z",
       "publicAssessment": {
         "good": [
-          "GGLL建仓有明确的财报后价格判断作为依据。"
+          "GGLL建仓有明确的财报后价格判断作为依据。",
+          "ROBN财报后建仓，次日按19.80兑现，完整持有周期收益约+5.04%。"
         ],
         "issues": [
-          "GGLL与SOXL均为杠杆科技方向产品，新增仓位提高了同向波动敞口；财报后的低位判断仍需市场验证。"
+          "GGLL与SOXL均为杠杆科技方向产品，新增仓位提高了同向波动敞口；财报后的低位判断仍需市场验证。",
+          "GGLL加仓降低了持仓均价，也增加了同一杠杆标的的下行风险敞口。"
         ]
       },
-      "updatedAt": "2026-10-29T02:16:26.914Z"
+      "updatedAt": "2026-10-29T13:45:35.144Z"
     }
   ],
   "openingPositions": [
