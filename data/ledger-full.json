@@ -727,8 +727,8 @@
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
           "qty": 170,
-          "cost": null,
-          "costDate": null,
+          "cost": 111.387,
+          "costDate": "2026-10-29",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
           "lastPriceSource": {
@@ -774,7 +774,7 @@
             "episodeId": "EP-SOXL-MAIN-20261014",
             "note": "本周期正股买卖净投入摊薄成本。"
           },
-          "costDisplay": "实际成本",
+          "costDisplay": "本人报告成本",
           "activePlan": {
             "planId": "PLAN-SOXL-MAIN-20261022-10835-T",
             "status": "active",
@@ -1008,7 +1008,17 @@
               "note": "保留CPI/PPI原预案和本次变更前的独立日内退出意图。仅替换当前本次战术退出安排，不追溯改写原计划。"
             }
           ],
-          "strategyNote": "本次用户报告108.35卖60股的限价单，与此前低位买入部分合并做T；本人随后确认原买入为45股，原真实流水正确。未提供批次对应及订单有效期，不自行分配或推断成交。"
+          "strategyNote": "本次用户报告108.35卖60股的限价单，与此前低位买入部分合并做T；本人随后确认原买入为45股，原真实流水正确。未提供批次对应及订单有效期，不自行分配或推断成交。",
+          "brokerReportedCost": {
+            "value": 111.387,
+            "currency": "USD",
+            "reportedAt": "2026-10-28T17:32:17.193432+00:00",
+            "source": {
+              "type": "user_confirmation",
+              "evidence": "我soxl的成本是111.387"
+            },
+            "basis": "券商显示口径未确认"
+          }
         },
         {
           "sym": "GDXU",
@@ -9254,6 +9264,27 @@
         "recordedAt": "2026-10-27T03:35:30.058938+00:00",
         "evidence": "成交日期就是10月22号，均价96.48"
       }
+    },
+    {
+      "reconciliationId": "REC-SOXL-20261029-COST",
+      "account": "main",
+      "sym": "SOXL",
+      "status": "pending_cost_basis",
+      "recordedAt": "2026-10-28T17:32:17.193432+00:00",
+      "reportedQuantity": 170,
+      "brokerReportedCost": 111.387,
+      "cycleNetInvestedCost": 111.35435294117647,
+      "cycleCashFlowDifference": 5.55,
+      "source": {
+        "type": "user_confirmation_and_broker_order_history",
+        "evidence": "本人报告成本111.387；截图为订单历史，价格列及下单时间不能替代实际分笔成交信息。",
+        "libraryFileIds": [
+          "libfile_ecd309ede59481918c67106a5aaa1033",
+          "libfile_a444296466dc81918e7e617609b697c3",
+          "libfile_5f6f5dda28f08191819883459274acdd"
+        ]
+      },
+      "note": "截图中已成交订单与本周期股数一致；早期三组买卖已留待核对，买卖净数量为零。订单价格与成交均价可能不同，差异尚无充分证据归因。"
     }
   ],
   "sourceDocuments": [
