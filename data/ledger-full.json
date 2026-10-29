@@ -726,8 +726,8 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 207,
-          "cost": 108.88691,
+          "qty": 220,
+          "cost": 108.16973,
           "costDate": "2026-10-29",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
@@ -761,14 +761,14 @@
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
           "alertSub": "持有",
-          "oneLiner": "10/29按97.40买入，继续持有。",
+          "oneLiner": "10/29按97.40、96.75分批买入。",
           "actualCostBasis": {
             "value": null,
             "status": "待核实",
             "note": "10/28既有持仓的券商均价111.387已由本人报告；10/29新买入后展示成本为基于前次报告的加权估算，券商现值尚未确认。"
           },
           "netInvestedCost": {
-            "value": 108.8601,
+            "value": 108.1445,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
@@ -5943,6 +5943,36 @@
       "recordedAt": "2026-10-29T02:04:41.846Z",
       "actionExecStatus": "unknown",
       "note": "按97.40买入。"
+    },
+    {
+      "executionId": "EX-USER-20261029-SOXL-BUY-106",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 13,
+      "price": 96.75,
+      "date": "2026-10-29",
+      "chinaDate": "2026-10-29",
+      "chinaDateSource": {
+        "type": "user_reported_same_day",
+        "recordedAt": "2026-10-29T02:16:26.914Z",
+        "evidence": "延续10月29日操作"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-29T02:16:26.914Z",
+        "evidence": "主账号再买入13股SOXL，价格96.75"
+      },
+      "recordedAt": "2026-10-29T02:16:26.914Z",
+      "actionExecStatus": "unknown",
+      "note": "按96.75继续买入。"
     }
   ],
   "episodes": [
@@ -6394,7 +6424,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 207,
+      "currentQty": 220,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -9194,14 +9224,16 @@
       "title": "GGLL财报后建仓 · SOXL买入",
       "executionIds": [
         "EX-USER-20261029-GGLL-BUY-104",
-        "EX-USER-20261029-SOXL-BUY-105"
+        "EX-USER-20261029-SOXL-BUY-105",
+        "EX-USER-20261029-SOXL-BUY-106"
       ],
       "plan": [
         "GGLL：财报后低位建仓。"
       ],
       "execution": [
         "主账号GGLL：按73.00买入，认为财报后处于相对低位。",
-        "主账号SOXL：按97.40买入。"
+        "主账号SOXL：按97.40买入。",
+        "主账号SOXL：按96.75继续买入。"
       ],
       "good": [],
       "issues": [],
@@ -9216,7 +9248,8 @@
         "issues": [
           "GGLL与SOXL均为杠杆科技方向产品，新增仓位提高了同向波动敞口；财报后的低位判断仍需市场验证。"
         ]
-      }
+      },
+      "updatedAt": "2026-10-29T02:16:26.914Z"
     }
   ],
   "openingPositions": [
