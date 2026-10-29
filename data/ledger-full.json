@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "10/22更新：CRWG清仓，资金转向SOXL并开始做T。",
-  "asOfLabel": "记录：10月22日 · CRWG清仓转SOXL",
+  "asOf": "10/29更新：主账号GGLL财报后建仓，SOXL继续买入。",
+  "asOfLabel": "记录：10月29日 · GGLL建仓、SOXL买入",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -726,8 +726,8 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 170,
-          "cost": 111.387,
+          "qty": 207,
+          "cost": 108.88691,
           "costDate": "2026-10-29",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
@@ -761,20 +761,20 @@
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
           "alertSub": "持有",
-          "oneLiner": "10/28按104.02卖出，按102.60买入。",
+          "oneLiner": "10/29按97.40买入，继续持有。",
           "actualCostBasis": {
             "value": null,
             "status": "待核实",
-            "note": "同日成交顺序待确认，无法精确计算移动均价。"
+            "note": "10/28既有持仓的券商均价111.387已由本人报告；10/29新买入后展示成本为基于前次报告的加权估算，券商现值尚未确认。"
           },
           "netInvestedCost": {
-            "value": 111.35435,
+            "value": 108.8601,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
             "note": "本周期正股买卖净投入摊薄成本。"
           },
-          "costDisplay": "本人报告成本",
+          "costDisplay": "依据10/28本人报告均价加权估算",
           "activePlan": {
             "planId": "PLAN-SOXL-MAIN-20261022-10835-T",
             "status": "active",
@@ -1147,10 +1147,53 @@
             "scope": "episode",
             "episodeId": "EP-SPCH-MAIN-20261028"
           }
+        },
+        {
+          "sym": "GGLL",
+          "name": "GGLL",
+          "qty": 50,
+          "cost": 73,
+          "costDate": "2026-10-29",
+          "lastPrice": null,
+          "lastPriceDate": null,
+          "strategy": [
+            "财报后低位建仓"
+          ],
+          "options": [],
+          "tags": [
+            "hold"
+          ],
+          "status": [
+            "持有"
+          ],
+          "setup": [
+            "财报后低位建仓"
+          ],
+          "entrySetup": [
+            "财报后低位建仓"
+          ],
+          "execStatus": "unknown",
+          "entryExecStatus": "unknown",
+          "actionExecStatus": "unknown",
+          "episodeId": "EP-GGLL-MAIN-20261029",
+          "exitReason": null,
+          "alertSub": "财报后建仓",
+          "oneLiner": "财报后认为处于低位，按73.00建仓。",
+          "actualCostBasis": {
+            "value": 73,
+            "status": "确认",
+            "sourceType": "user_confirmation"
+          },
+          "netInvestedCost": {
+            "value": 73,
+            "status": "确认",
+            "scope": "episode",
+            "episodeId": "EP-GGLL-MAIN-20261029"
+          }
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-28",
+      "holdingsAsOf": "2026-10-29",
       "activeTradingFocus": {
         "sym": "SOXL",
         "mode": "t_trading",
@@ -5840,6 +5883,66 @@
       "recordedAt": "2026-10-28T15:00:51.537120+00:00",
       "actionExecStatus": "unknown",
       "note": "按102.60买入。"
+    },
+    {
+      "executionId": "EX-USER-20261029-GGLL-BUY-104",
+      "episodeId": "EP-GGLL-MAIN-20261029",
+      "account": "main",
+      "sym": "GGLL",
+      "side": "buy",
+      "qty": 50,
+      "price": 73,
+      "date": "2026-10-29",
+      "chinaDate": "2026-10-29",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-29T02:04:41.846Z",
+        "evidence": "用户明确指定成交日期为10月29日。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-29T02:04:41.846Z",
+        "evidence": "1029，主账号在73买了50股GGLL，财报后低位建个仓；97.4买了37股soxl"
+      },
+      "recordedAt": "2026-10-29T02:04:41.846Z",
+      "actionExecStatus": "unknown",
+      "note": "财报后认为价格处于低位，按73.00建仓。"
+    },
+    {
+      "executionId": "EX-USER-20261029-SOXL-BUY-105",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 37,
+      "price": 97.4,
+      "date": "2026-10-29",
+      "chinaDate": "2026-10-29",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-29T02:04:41.846Z",
+        "evidence": "用户明确指定成交日期为10月29日。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-29T02:04:41.846Z",
+        "evidence": "1029，主账号在73买了50股GGLL，财报后低位建个仓；97.4买了37股soxl"
+      },
+      "recordedAt": "2026-10-29T02:04:41.846Z",
+      "actionExecStatus": "unknown",
+      "note": "按97.40买入。"
     }
   ],
   "episodes": [
@@ -6291,7 +6394,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 170,
+      "currentQty": 207,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -6378,6 +6481,20 @@
       "currentQty": 168,
       "exitReason": null,
       "exitDate": null
+    },
+    {
+      "episodeId": "EP-GGLL-MAIN-20261029",
+      "sym": "GGLL",
+      "account": "main",
+      "status": "open",
+      "entryDate": "2026-10-29",
+      "entrySetup": [
+        "财报后低位建仓"
+      ],
+      "entryExecStatus": "unknown",
+      "currentQty": 50,
+      "exitDate": null,
+      "exitReason": null
     }
   ],
   "closedTrades": [
@@ -9067,6 +9184,39 @@
         ]
       },
       "updatedAt": "2026-10-28T15:00:51.537120+00:00"
+    },
+    {
+      "reviewId": "RV-20261029",
+      "date": "2026-10-29",
+      "reviewDate": "2026-10-29",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-29 复盘",
+      "title": "GGLL财报后建仓 · SOXL买入",
+      "executionIds": [
+        "EX-USER-20261029-GGLL-BUY-104",
+        "EX-USER-20261029-SOXL-BUY-105"
+      ],
+      "plan": [
+        "GGLL：财报后低位建仓。"
+      ],
+      "execution": [
+        "主账号GGLL：按73.00买入，认为财报后处于相对低位。",
+        "主账号SOXL：按97.40买入。"
+      ],
+      "good": [],
+      "issues": [],
+      "todo": [],
+      "execStatus": "unknown",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-29T02:04:41.846Z",
+      "publicAssessment": {
+        "good": [
+          "GGLL建仓有明确的财报后价格判断作为依据。"
+        ],
+        "issues": [
+          "GGLL与SOXL均为杠杆科技方向产品，新增仓位提高了同向波动敞口；财报后的低位判断仍需市场验证。"
+        ]
+      }
     }
   ],
   "openingPositions": [
@@ -9252,7 +9402,7 @@
         {
           "side": "sell",
           "qty": 15,
-          "orderPrice": 123.0,
+          "orderPrice": 123,
           "orderDate": "2026-10-13",
           "orderTime": "09:47:45",
           "status": "filled"
