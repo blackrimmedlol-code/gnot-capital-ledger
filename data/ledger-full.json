@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "10/29更新：GGLL分批买入，SOXL增持，ROBN清仓。",
-  "asOfLabel": "记录：10月29日 · GGLL加仓、ROBN清仓",
+  "asOf": "10/30更新：主账号SOXL按84.70继续买入。",
+  "asOfLabel": "记录：10月30日 · SOXL加仓",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -71,11 +71,13 @@
     },
     "reviewPresentation": {
       "mode": "curated_assessment",
-      "confirmedAt": "2026-10-21T19:18:00.245Z",
-      "source": "用户要求：红圈和红括号中的解释性尾句不要写，自己的思考不放页面，避免文字密集。",
+      "confirmedAt": "2026-10-30T02:29:59.211Z",
+      "source": "用户2026-10-30确认：交易复盘仍应给出简单、有价值的判断；不能只保留成交流水，也不能堆砌内部思考。",
       "publicFields": [
         "plan",
-        "execution"
+        "execution",
+        "publicAssessment.good",
+        "publicAssessment.issues"
       ],
       "internalAssessmentFields": [
         "good",
@@ -83,8 +85,8 @@
         "todo",
         "internalObservation"
       ],
-      "style": "一句一项事实或本人计划；不加过程说明、来源辩解、缺项提醒、AI评价或置信度。",
-      "note": "公开有依据、简洁的交易点评，内部对账过程不展示。"
+      "style": "公开每个有实际成交的复盘日保留精炼点评：指出有证据的合理之处、风险或代价，必要时提示下一次关注条件；通常2–3条短句，不照搬操作事实，不猜测市场或用户心理。",
+      "note": "公开保留客观、有依据的简短分析；内部对账和冗余过程剥离。先记录事实，未取得行情时只评价持仓与执行，不伪称确认盘面信号。"
     },
     "displayReturns": {
       "fees": "ignore_in_display",
@@ -726,9 +728,9 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 220,
-          "cost": 108.16973,
-          "costDate": "2026-10-29",
+          "qty": 280,
+          "cost": 103.1405,
+          "costDate": "2026-10-30",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
           "lastPriceSource": {
@@ -761,20 +763,20 @@
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
           "alertSub": "持有",
-          "oneLiner": "10/29按97.40、96.75分批买入。",
+          "oneLiner": "10/30按84.70加仓。",
           "actualCostBasis": {
             "value": null,
             "status": "待核实",
-            "note": "10/28既有持仓的券商均价111.387已由本人报告；10/29新买入后展示成本为基于前次报告的加权估算，券商现值尚未确认。"
+            "note": "10/28由用户报告券商均价111.387，后续10/29、10/30买入滚动加权估算；未确认最新券商成本口径。"
           },
           "netInvestedCost": {
-            "value": 108.1445,
+            "value": 103.12068,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
             "note": "本周期正股买卖净投入摊薄成本。"
           },
-          "costDisplay": "依据10/28本人报告均价加权估算",
+          "costDisplay": "依据10/28本人报告成本滚动加权估算",
           "activePlan": {
             "planId": "PLAN-SOXL-MAIN-20261022-10835-T",
             "status": "active",
@@ -1195,7 +1197,7 @@
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-29",
+      "holdingsAsOf": "2026-10-30",
       "activeTradingFocus": {
         "sym": "SOXL",
         "mode": "t_trading",
@@ -6037,6 +6039,36 @@
       "qty": 200,
       "price": 19.8,
       "note": "按19.80全部卖出。"
+    },
+    {
+      "executionId": "EX-USER-20261030-SOXL-BUY-109",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 60,
+      "price": 84.7,
+      "date": "2026-10-30",
+      "chinaDate": "2026-10-30",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-30T02:29:59.211Z",
+        "evidence": "用户明确报告10月30日主账号成交。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-30T02:29:59.211Z",
+        "evidence": "1030 主账号 84.7 买入 60 股 soxl"
+      },
+      "recordedAt": "2026-10-30T02:29:59.211Z",
+      "actionExecStatus": "unknown",
+      "note": "按84.70继续买入。"
     }
   ],
   "episodes": [
@@ -6488,7 +6520,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 220,
+      "currentQty": 280,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -9321,6 +9353,36 @@
         ]
       },
       "updatedAt": "2026-10-29T13:45:35.144Z"
+    },
+    {
+      "reviewId": "RV-20261030",
+      "date": "2026-10-30",
+      "reviewDate": "2026-10-30",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-10-30 复盘",
+      "title": "SOXL继续加仓 · 关注风险边界",
+      "executionIds": [
+        "EX-USER-20261030-SOXL-BUY-109"
+      ],
+      "plan": [],
+      "execution": [
+        "主账号SOXL：按84.70继续买入。"
+      ],
+      "good": [],
+      "issues": [],
+      "todo": [],
+      "execStatus": "unknown",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-10-30T02:29:59.211Z",
+      "publicAssessment": {
+        "good": [
+          "本次买入价明显低于10/29的分批买点，降低了持仓估算均价；分批投入保留了调整买入节奏的空间。"
+        ],
+        "issues": [
+          "SOXL是三倍杠杆产品，连续下跌中加仓会扩大同向风险敞口；成本下降不代表趋势已企稳。",
+          "此前提出减少操作频次；后续加仓更值得核对独立入场依据、仓位边界及退出条件，而非只看价格是否更低。"
+        ]
+      }
     }
   ],
   "openingPositions": [
