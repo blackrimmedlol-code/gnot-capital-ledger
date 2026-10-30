@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "10/30更新：主账号SOXL按84.70继续买入。",
-  "asOfLabel": "记录：10月30日 · SOXL加仓",
+  "asOf": "10/30更新：主账号SOXL买入，2号小账号SNXX加仓。",
+  "asOfLabel": "记录：10月30日 · SOXL、SNXX加仓",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -1442,9 +1442,9 @@
         {
           "sym": "SNXX",
           "name": "Tradr 2X Long SNDK · 2x 闪迪",
-          "qty": 260,
-          "cost": 12.44429,
-          "costDate": "2026-10-22",
+          "qty": 390,
+          "cost": 10.86286,
+          "costDate": "2026-10-30",
           "lastPrice": 12.06,
           "lastPriceDate": "2026-10-12 收盘",
           "wtPct": 100,
@@ -1464,18 +1464,18 @@
             "其他"
           ],
           "execStatus": "unknown",
-          "oneLiner": "10/22按9.175加仓。",
+          "oneLiner": "10/30按7.70继续买入。",
           "actualCostBasis": {
-            "value": 12.44429,
+            "value": 10.86286,
             "status": "确认",
-            "note": "本周期三笔已确认正股买入的移动加权均价。"
+            "note": "按本周期四笔已确认买入的移动加权均价。"
           },
           "netInvestedCost": {
-            "value": 12.44429,
+            "value": 10.86286,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SNXX-2026Q3",
-            "note": "本周期无卖出，正股净投入每股成本与移动加权均价一致。"
+            "note": "本周期尚无卖出，正股净投入成本等于移动加权均价。"
           },
           "costDisplay": "实际成本",
           "entrySetup": [
@@ -1517,10 +1517,10 @@
               "note": "此前10/12最后补仓、之后只观望的约定保留历史；10/22再次买入为已确认实际动作，不把实际动作追溯包装成计划内。"
             }
           ],
-          "strategyNote": "本次买入109股9.175，当前260股；原停止加仓约定与本次实际操作的差异留内部，未取得新的后续计划。"
+          "strategyNote": "10/30按7.70继续买入；10/12用户曾设最后一次加仓后只观望，10/22与10/30均有后续实际买入，原计划变更依据尚未明确。"
         }
       ],
-      "holdingsAsOf": "2026-10-22"
+      "holdingsAsOf": "2026-10-30"
     },
     {
       "id": "cn",
@@ -6069,6 +6069,36 @@
       "recordedAt": "2026-10-30T02:29:59.211Z",
       "actionExecStatus": "unknown",
       "note": "按84.70继续买入。"
+    },
+    {
+      "executionId": "EX-USER-20261030-SNXX2-BUY-110",
+      "episodeId": "EP-SNXX-2026Q3",
+      "account": "sat2",
+      "sym": "SNXX",
+      "side": "buy",
+      "qty": 130,
+      "price": 7.7,
+      "date": "2026-10-30",
+      "chinaDate": "2026-10-30",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-30T13:33:30.585Z",
+        "evidence": "用户确认1030 2号小账号买入130股SNXX，价7.7。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-30T13:33:30.585Z",
+        "evidence": "1030 2 号小账号买入 130snxx 价格 7.7"
+      },
+      "recordedAt": "2026-10-30T13:33:30.585Z",
+      "actionExecStatus": "adhoc",
+      "note": "按7.70继续买入。"
     }
   ],
   "episodes": [
@@ -6151,7 +6181,7 @@
         "其他"
       ],
       "entryExecStatus": "emo",
-      "currentQty": 260,
+      "currentQty": 390,
       "exitReason": null,
       "exitDate": null
     },
@@ -9360,13 +9390,15 @@
       "reviewDate": "2026-10-30",
       "reviewTimezone": "Asia/Shanghai",
       "dateLabel": "2026-10-30 复盘",
-      "title": "SOXL继续加仓 · 关注风险边界",
+      "title": "SOXL与SNXX加仓 · 关注仓位边界",
       "executionIds": [
-        "EX-USER-20261030-SOXL-BUY-109"
+        "EX-USER-20261030-SOXL-BUY-109",
+        "EX-USER-20261030-SNXX2-BUY-110"
       ],
       "plan": [],
       "execution": [
-        "主账号SOXL：按84.70继续买入。"
+        "主账号SOXL：按84.70继续买入。",
+        "2号小账号SNXX：按7.70继续买入。"
       ],
       "good": [],
       "issues": [],
@@ -9380,9 +9412,11 @@
         ],
         "issues": [
           "SOXL是三倍杠杆产品，连续下跌中加仓会扩大同向风险敞口；成本下降不代表趋势已企稳。",
-          "此前提出减少操作频次；后续加仓更值得核对独立入场依据、仓位边界及退出条件，而非只看价格是否更低。"
+          "此前提出减少操作频次；后续加仓更值得核对独立入场依据、仓位边界及退出条件，而非只看价格是否更低。",
+          "2号小账号SNXX再度加仓，降低了持仓均价，但与10/12提出的最后一次补仓后只观望的计划有差异；下一步应明确是否已调整仓位边界。"
         ]
-      }
+      },
+      "updatedAt": "2026-10-30T13:33:30.585Z"
     }
   ],
   "openingPositions": [
