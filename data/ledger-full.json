@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "10/30更新：主账号SOXL买入，2号小账号SNXX加仓。",
-  "asOfLabel": "记录：10月30日 · SOXL、SNXX加仓",
+  "asOf": "10/30更新：主账号SOXL两次买入，2号小账号SNXX加仓。",
+  "asOfLabel": "记录：10月30日 · SOXL分批买入、SNXX加仓",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -728,8 +728,8 @@
         {
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
-          "qty": 280,
-          "cost": 103.1405,
+          "qty": 310,
+          "cost": 100.83529,
           "costDate": "2026-10-30",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
@@ -763,14 +763,14 @@
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
           "alertSub": "持有",
-          "oneLiner": "10/30按84.70加仓。",
+          "oneLiner": "10/30按84.70、79.32分批买入。",
           "actualCostBasis": {
             "value": null,
             "status": "待核实",
-            "note": "10/28由用户报告券商均价111.387，后续10/29、10/30买入滚动加权估算；未确认最新券商成本口径。"
+            "note": "10/28本人报告券商均价111.387，后续买入按成交数量滚动加权估算；未确认最新券商实际成本。"
           },
           "netInvestedCost": {
-            "value": 103.12068,
+            "value": 100.81739,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
@@ -6099,6 +6099,36 @@
       "recordedAt": "2026-10-30T13:33:30.585Z",
       "actionExecStatus": "adhoc",
       "note": "按7.70继续买入。"
+    },
+    {
+      "executionId": "EX-USER-20261030-SOXL-BUY-111",
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "side": "buy",
+      "qty": 30,
+      "price": 79.32,
+      "date": "2026-10-30",
+      "chinaDate": "2026-10-30",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-10-30T14:32:29.144Z",
+        "evidence": "用户明确确认10月30日主账号操作"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-10-30T14:32:29.144Z",
+        "evidence": "1030 主账号买了 30 股 soxl 79.32"
+      },
+      "recordedAt": "2026-10-30T14:32:29.144Z",
+      "actionExecStatus": "unknown",
+      "note": "按79.32继续买入。"
     }
   ],
   "episodes": [
@@ -6550,7 +6580,7 @@
         "板块杠杆交易"
       ],
       "entryExecStatus": "plan",
-      "currentQty": 280,
+      "currentQty": 310,
       "exitReason": null,
       "exitDate": null,
       "note": "本次为主账号SOXL独立新周期，不能与其他网站执行记录自动合并。"
@@ -9393,12 +9423,14 @@
       "title": "SOXL与SNXX加仓 · 关注仓位边界",
       "executionIds": [
         "EX-USER-20261030-SOXL-BUY-109",
-        "EX-USER-20261030-SNXX2-BUY-110"
+        "EX-USER-20261030-SNXX2-BUY-110",
+        "EX-USER-20261030-SOXL-BUY-111"
       ],
       "plan": [],
       "execution": [
         "主账号SOXL：按84.70继续买入。",
-        "2号小账号SNXX：按7.70继续买入。"
+        "2号小账号SNXX：按7.70继续买入。",
+        "主账号SOXL：按79.32继续买入。"
       ],
       "good": [],
       "issues": [],
@@ -9408,15 +9440,14 @@
       "recordedAt": "2026-10-30T02:29:59.211Z",
       "publicAssessment": {
         "good": [
-          "本次买入价明显低于10/29的分批买点，降低了持仓估算均价；分批投入保留了调整买入节奏的空间。"
+          "主账号SOXL在84.70及79.32分批买入，按既有成本口径降低了持仓均价；但更低成本不代表已确认底部。"
         ],
         "issues": [
-          "SOXL是三倍杠杆产品，连续下跌中加仓会扩大同向风险敞口；成本下降不代表趋势已企稳。",
-          "此前提出减少操作频次；后续加仓更值得核对独立入场依据、仓位边界及退出条件，而非只看价格是否更低。",
-          "2号小账号SNXX再度加仓，降低了持仓均价，但与10/12提出的最后一次补仓后只观望的计划有差异；下一步应明确是否已调整仓位边界。"
+          "SOXL为三倍杠杆产品，短期连续加仓提高了风险敞口；结合此前减少操作频次的想法，后续应明确每次加仓的触发条件、仓位边界和退出情景。",
+          "2号小账号SNXX再次加仓，偏离了10/12最后一次补仓后只观望的原计划；应明确是否调整该账户的风险额度。"
         ]
       },
-      "updatedAt": "2026-10-30T13:33:30.585Z"
+      "updatedAt": "2026-10-30T14:32:29.144Z"
     }
   ],
   "openingPositions": [
