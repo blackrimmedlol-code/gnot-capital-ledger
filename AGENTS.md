@@ -1,3 +1,5 @@
+> 2026-10-30 用户新增复盘偏好：交易复盘不能只列成交流水。公开保留2–3条基于证据的简短点评，覆盖执行合理点、风险或代价，以及必要的后续观察；不冗长、不重复事实、不代替用户补造理由。此要求优先于旧的“只显示事实”表述。
+
 > 2026-10-28 用户更正：公开复盘保留有依据的交易判断和简短建议；去除内部对账、记录过程与冗余解释。以 `curated_assessment` 和每篇 `publicAssessment` 为准；旧的全部隐藏点评要求已被本条取代。
 
 # 交易台账 Agent 入口
@@ -5,6 +7,7 @@
 - 每次任务先读本文件及 `RULES_日常更新.md`，再读取最新台账中本次涉及的账户、标的、周期和有效计划。脚本可读完整 JSON，模型不必全量复盘。
 - 唯一事实来源：`data/ledger-full.json` 的 executions / episodes / accounts / reviews。`closedTrades` 是历史补充来源；网站兑现卡片由 `derive.js` 派生。
 - 新成交必须同步持仓、周期和当日 reviews，引用 executionId；不得只改持仓或聊天回复。
+- 同步交易复盘时，除操作与本人明确计划外，应有简短但有判断价值的 publicAssessment：通常2–3条，评价交易合理处、风险/代价及必要观察；证据不够只做可核实的成本、仓位、流程判断。不要让“精简”变成删除所有分析。
 - 用户2026-10-22明确要求公开页面精简：操作、本人理由、计划和有依据的简短点评均可公开。删去来源辩解、缺项提醒、内部核对过程及冗余解释。采用 `curated_assessment`，精选点评写入 `publicAssessment`。以后新增记录和自动复盘同样遵守，不重新写回这些话。
 - 已清仓登记与可核算完整周期分别计数；未纳入胜率的周期按派生performanceExclusionReason集中说明，不补造买入来扩大分母。持仓与open周期currentQty必须一致。已过到期日但结果未报告的合约保留settlementStatus=unconfirmed，不能自动视为作废或继续宣称当前足额备兑。
 - 已全清必须统一关闭本账户episode（status=closed/currentQty=0/exitDate/exitReason）；不得只填closeDate而仍open。跨账户同标的持仓不妨碍本周期清仓；verify拦截清仓状态矛盾。公开成交备注的裸写股数同样须脱敏。
