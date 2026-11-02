@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "10/30更新：主账号SOXL两次买入，2号小账号SNXX加仓。",
-  "asOfLabel": "记录：10月30日 · SOXL分批买入、SNXX加仓",
+  "asOf": "11/2更新：主账号SOXL按80卖出、79买回，完成日内做T。",
+  "asOfLabel": "记录：11月2日 · SOXL做T",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -729,8 +729,8 @@
           "sym": "SOXL",
           "name": "Direxion Daily Semiconductor Bull 3X ETF · 3x 半导体",
           "qty": 310,
-          "cost": 100.83529,
-          "costDate": "2026-10-30",
+          "cost": 96.6091,
+          "costDate": "2026-11-02",
           "lastPrice": 127.58,
           "lastPriceDate": "2026-10-13 收盘",
           "lastPriceSource": {
@@ -763,20 +763,20 @@
           "episodeId": "EP-SOXL-MAIN-20261014",
           "exitReason": null,
           "alertSub": "持有",
-          "oneLiner": "10/30按84.70、79.32分批买入。",
+          "oneLiner": "11/2按80.00卖出后按79.00买回，完成做T。",
           "actualCostBasis": {
             "value": null,
             "status": "待核实",
-            "note": "10/28本人报告券商均价111.387，后续买入按成交数量滚动加权估算；未确认最新券商实际成本。"
+            "note": "10/28用户报告券商均价111.387；之后多笔买卖依移动加权法估算（卖出不改剩余成本，回补按新成本加权），最新券商成本口径未核实。"
           },
           "netInvestedCost": {
-            "value": 100.81739,
+            "value": 100.62384,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SOXL-MAIN-20261014",
             "note": "本周期正股买卖净投入摊薄成本。"
           },
-          "costDisplay": "依据10/28本人报告成本滚动加权估算",
+          "costDisplay": "基于10/28用户报告券商成本与后续成交估算",
           "activePlan": {
             "planId": "PLAN-SOXL-MAIN-20261022-10835-T",
             "status": "active",
@@ -1197,7 +1197,7 @@
         }
       ],
       "positionAsOf": "2026-10-07",
-      "holdingsAsOf": "2026-10-30",
+      "holdingsAsOf": "2026-11-02",
       "activeTradingFocus": {
         "sym": "SOXL",
         "mode": "t_trading",
@@ -6129,6 +6129,69 @@
       "recordedAt": "2026-10-30T14:32:29.144Z",
       "actionExecStatus": "unknown",
       "note": "按79.32继续买入。"
+    },
+    {
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "date": "2026-11-02",
+      "chinaDate": "2026-11-02",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-11-02T13:31:28.228Z",
+        "evidence": "用户明确指定11/2操作日期及卖出后买回顺序"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-11-02T13:31:28.228Z",
+        "evidence": "用户澄清：11/2主账号SOXL先在80卖出60股，再按79买回60股；初始消息把卖出打错为买入。"
+      },
+      "recordedAt": "2026-11-02T13:31:28.228Z",
+      "actionExecStatus": "unknown",
+      "executionId": "EX-USER-20261102-SOXL-SELL-112",
+      "side": "sell",
+      "qty": 60,
+      "price": 80,
+      "note": "按80.00部分卖出，计划做T。"
+    },
+    {
+      "episodeId": "EP-SOXL-MAIN-20261014",
+      "account": "main",
+      "sym": "SOXL",
+      "date": "2026-11-02",
+      "chinaDate": "2026-11-02",
+      "chinaDateSource": {
+        "type": "explicit_user_confirmation",
+        "recordedAt": "2026-11-02T13:31:28.228Z",
+        "evidence": "用户明确指定11/2操作日期及卖出后买回顺序"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-11-02T13:31:28.228Z",
+        "evidence": "用户澄清：11/2主账号SOXL先在80卖出60股，再按79买回60股；初始消息把卖出打错为买入。"
+      },
+      "recordedAt": "2026-11-02T13:31:28.228Z",
+      "actionExecStatus": "unknown",
+      "executionId": "EX-USER-20261102-SOXL-BUY-113",
+      "side": "buy",
+      "qty": 60,
+      "price": 79,
+      "note": "按79.00买回，完成本轮日内做T。",
+      "relatedExecutionIds": [
+        "EX-USER-20261102-SOXL-SELL-112"
+      ]
     }
   ],
   "episodes": [
@@ -9448,6 +9511,36 @@
         ]
       },
       "updatedAt": "2026-10-30T14:32:29.144Z"
+    },
+    {
+      "reviewId": "RV-20261102",
+      "date": "2026-11-02",
+      "reviewDate": "2026-11-02",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-11-02 复盘",
+      "title": "SOXL日内做T · 卖出后买回",
+      "executionIds": [
+        "EX-USER-20261102-SOXL-SELL-112",
+        "EX-USER-20261102-SOXL-BUY-113"
+      ],
+      "plan": [],
+      "execution": [
+        "主账号SOXL：按80.00卖出，按79.00买回，完成一次做T。"
+      ],
+      "good": [],
+      "issues": [],
+      "todo": [],
+      "execStatus": "unknown",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-11-02T13:31:28.228Z",
+      "publicAssessment": {
+        "good": [
+          "SOXL卖出后在更低价买回，回补价较卖价低1美元；持股数量不变，改善了持仓净投入。"
+        ],
+        "issues": [
+          "本轮价差为每股1美元，需与交易成本和继续上涨、无法接回的风险一起评估；不因成功一笔做T提高交易频次。"
+        ]
+      }
     }
   ],
   "openingPositions": [
