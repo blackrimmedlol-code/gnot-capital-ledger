@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "asOf": "11/2更新：主账号SOXL按80卖出、79买回，完成日内做T。",
-  "asOfLabel": "记录：11月2日 · SOXL做T",
+  "asOf": "11/3更新：2号小账户SNXX按6.43继续加仓。",
+  "asOfLabel": "记录：11月3日 · SNXX加仓",
   "timezone": "America/New_York",
   "fx": {
     "USDCNY": null,
@@ -1442,9 +1442,9 @@
         {
           "sym": "SNXX",
           "name": "Tradr 2X Long SNDK · 2x 闪迪",
-          "qty": 390,
-          "cost": 10.86286,
-          "costDate": "2026-10-30",
+          "qty": 546,
+          "cost": 9.59633,
+          "costDate": "2026-11-03",
           "lastPrice": 12.06,
           "lastPriceDate": "2026-10-12 收盘",
           "wtPct": 100,
@@ -1464,18 +1464,18 @@
             "其他"
           ],
           "execStatus": "unknown",
-          "oneLiner": "10/30按7.70继续买入。",
+          "oneLiner": "11/3按6.43继续加仓。",
           "actualCostBasis": {
-            "value": 10.86286,
+            "value": 9.59633,
             "status": "确认",
-            "note": "按本周期四笔已确认买入的移动加权均价。"
+            "note": "本周期五笔已确认买入的移动加权均价。"
           },
           "netInvestedCost": {
-            "value": 10.86286,
+            "value": 9.59633,
             "status": "确认",
             "scope": "episode",
             "episodeId": "EP-SNXX-2026Q3",
-            "note": "本周期尚无卖出，正股净投入成本等于移动加权均价。"
+            "note": "本周期尚无卖出，正股净投入摊薄成本与移动加权均价一致。"
           },
           "costDisplay": "实际成本",
           "entrySetup": [
@@ -1517,10 +1517,10 @@
               "note": "此前10/12最后补仓、之后只观望的约定保留历史；10/22再次买入为已确认实际动作，不把实际动作追溯包装成计划内。"
             }
           ],
-          "strategyNote": "10/30按7.70继续买入；10/12用户曾设最后一次加仓后只观望，10/22与10/30均有后续实际买入，原计划变更依据尚未明确。"
+          "strategyNote": "11/3新增买入。10/12曾明确补仓后只观望，后续多次追加买入；原计划历史保留，尚无新的仓位上限与停止加仓条件确认。"
         }
       ],
-      "holdingsAsOf": "2026-10-30"
+      "holdingsAsOf": "2026-11-03"
     },
     {
       "id": "cn",
@@ -6192,6 +6192,36 @@
       "relatedExecutionIds": [
         "EX-USER-20261102-SOXL-SELL-112"
       ]
+    },
+    {
+      "executionId": "EX-USER-20261103-SNXX2-BUY-114",
+      "episodeId": "EP-SNXX-2026Q3",
+      "account": "sat2",
+      "sym": "SNXX",
+      "side": "buy",
+      "qty": 156,
+      "price": 6.43,
+      "date": "2026-11-03",
+      "chinaDate": "2026-11-03",
+      "chinaDateSource": {
+        "type": "contemporaneous_user_report",
+        "recordedAt": "2026-11-03T15:01:51.477Z",
+        "evidence": "用户在2026-11-03本次对话当日报告2号小账户买入SNXX；未提供其他历史成交日或精确时刻。"
+      },
+      "time": null,
+      "timestamp": null,
+      "timezone": "Asia/Shanghai",
+      "fee": null,
+      "currency": "USD",
+      "status": "confirmed",
+      "source": {
+        "type": "user_confirmation",
+        "recordedAt": "2026-11-03T15:01:51.477Z",
+        "evidence": "2 号小账户 6.43 买入 156 股 snxx"
+      },
+      "recordedAt": "2026-11-03T15:01:51.477Z",
+      "actionExecStatus": "adhoc",
+      "note": "按6.43继续买入。"
     }
   ],
   "episodes": [
@@ -6274,7 +6304,7 @@
         "其他"
       ],
       "entryExecStatus": "emo",
-      "currentQty": 390,
+      "currentQty": 546,
       "exitReason": null,
       "exitDate": null
     },
@@ -9539,6 +9569,36 @@
         ],
         "issues": [
           "价差空间有限，需综合考虑交易成本及卖出后无法按理想价格接回的风险；不因单笔成功而提高操作频次。"
+        ]
+      }
+    },
+    {
+      "reviewId": "RV-20261103",
+      "date": "2026-11-03",
+      "reviewDate": "2026-11-03",
+      "reviewTimezone": "Asia/Shanghai",
+      "dateLabel": "2026-11-03 复盘",
+      "title": "SNXX继续加仓 · 审视风险边界",
+      "executionIds": [
+        "EX-USER-20261103-SNXX2-BUY-114"
+      ],
+      "plan": [],
+      "execution": [
+        "2号小账号SNXX：按6.43继续买入。"
+      ],
+      "good": [],
+      "issues": [],
+      "todo": [],
+      "execStatus": "unknown",
+      "reviewStatus": "in_progress",
+      "recordedAt": "2026-11-03T15:01:51.477Z",
+      "publicAssessment": {
+        "good": [
+          "本次加仓价格低于此前买点，持仓均价进一步下降；但成本改善本身不能证明入场位置合适。"
+        ],
+        "issues": [
+          "SNXX属于两倍杠杆存储方向产品，连续下跌中加仓扩大了同向风险敞口。",
+          "此前提出最后一次补仓后观望，但之后又多次买入；后续应先明确该账户的资金上限与停止加仓条件。"
         ]
       }
     }
